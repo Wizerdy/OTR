@@ -31,12 +31,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _Attack(InputAction.CallbackContext cc) {
-        if (_setupThrow) { return; }
+        //if (_setupThrow) { return; }
         _player.Attack(Vector2.right);
     }
 
     private void _Throw(InputAction.CallbackContext cc) {
-        if (!_setupThrow) { return; }
+        //if (!_setupThrow) { return; }
         _player.Throw(_player.Orientation);
     }
 

@@ -1,46 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using ToolsBoxEngine;
 
 public class EntityHolding : MonoBehaviour {
-    [SerializeField] Animator _animator;
-    [SerializeField] Weapon _weapon;
+    GameObject _holding;
+    IHoldable _iholding;
+
+    [SerializeField, HideInInspector] BetterEvent<GameObject> _onPickup = new BetterEvent<GameObject>();
+    [SerializeField, HideInInspector] BetterEvent<GameObject> _onDrop = new BetterEvent<GameObject>();
+    [SerializeField, HideInInspector] BetterEvent<GameObject, Vector2> _onThrow = new BetterEvent<GameObject, Vector2>();
 
     #region Properties
 
-    public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
-    public Animator Animator => _animator;
-    public bool HasWeapon => _weapon != null;
+    public GameObject Holding { get => _holding; set => _holding = value; }
+    public bool IsHolding => _holding != null;
+    public IHoldable IHolding => _iholding;
+
+    public event UnityAction<GameObject> OnPickup { add => _onPickup.AddListener(value); remove => _onPickup.RemoveListener(value); }
+    public event UnityAction<GameObject> OnDrop { add => _onDrop.AddListener(value); remove => _onDrop.RemoveListener(value); }
+    public event UnityAction<GameObject, Vector2> OnThrow { add => _onThrow.AddListener(value); remove => _onThrow.RemoveListener(value); }
 
     #endregion
 
     private void Start() {
-        if (_weapon != null) {
-            _weapon.Pickup(this);
+        if (_holding != null) {
+            if (_holding.GetComponent<IHoldable>() != null) {
+                Pickup(_holding);
+            } else {
+                _holding = null;
+            }
         }
     }
 
-    public void Pickup(Weapon weapon) {
-        if (weapon == _weapon) { return; }
+    public void Pickup(GameObject target) {
+        if (target == _holding) { return; }
         Drop();
-        weapon.Pickup(this);
+        _iholding = target.GetComponent<IHoldable>();
+        if (_iholding == null) { Debug.LogWarning("Trying to pickup a not holdable item; " + target.name); return; }
+        _iholding.Pickup(this);
+        _holding = target;
     }
 
     public void Drop() {
-        if (!HasWeapon) { return; }
-        _weapon.Drop(transform.position);
-        _weapon = null;
+        if (!IsHolding) { return; }
+        _iholding.Drop(transform.position);
+        _holding = null;
+        _iholding = null;
     }
 
-    public void Attack(Vector2 direction) {
-        if (!HasWeapon || !_weapon.CanAttack) { return; }
-        StartCoroutine(_weapon.Attack(direction));
-    }
-
-    public void Throw(Vector2 direction, Collider2D collider = null) {
-        if (!HasWeapon) { return; }
-        Weapon weapon = _weapon;
+    public void Throw(Vector2 direction, Collider2D thrower = null) {
+        if (!IsHolding) { return; }
+        IHoldable item = _iholding;
         Drop();
-        weapon.Throw(direction, collider);
+        item.Throw(direction, thrower);
+    }
+
+    public void Throw(Vector2 direction, GameObject thrower) {
+        if (!IsHolding) { return; }
+        IHoldable item = _iholding;
+        Drop();
+        item.Throw(direction, thrower);
     }
 }

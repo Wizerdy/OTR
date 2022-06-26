@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEntity : MonoBehaviour {
-    [SerializeField] ColliderDelegate _colliderDelegate;
-    [SerializeField] Collider2D _collider;
+    [SerializeField] Transform _root;
+    [SerializeField] ColliderDelegate _interactCollider;
     [SerializeField] EntityMovement _movements;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
+    [SerializeField] EntityWeaponry _weaponry;
 
     public Vector2 Orientation => _oriention.Orientation;
 
     private void OnEnable() {
-        _colliderDelegate.OnCollisionEnter += _Pickup;
+        _interactCollider.OnCollisionEnter += _Pickup;
+        _interactCollider.OnTriggerEnter += _Pickup;
     }
 
     public void Move(Vector2 direction) {
@@ -23,26 +25,36 @@ public class PlayerEntity : MonoBehaviour {
         _oriention.LookAt(direction);
     }
 
-    public void Pickup(Weapon weapon) {
-        _holding.Pickup(weapon);
+    public void Pickup(GameObject obj) {
+        _holding.Pickup(obj);
+        Weapon weapon = obj.GetComponentInRoot<Weapon>();
+        if (weapon != null) {
+            _weaponry.Pickup(weapon);
+        }
     }
 
     public void Drop() {
         _holding.Drop();
+        _weaponry.Drop();
     }
 
     public void Attack(Vector2 direction) {
-        _holding.Attack(direction);
+        _weaponry.Attack(direction);
     }
 
     public void Throw(Vector2 direction) {
-        _holding.Throw(direction, _collider);
+        _holding.Throw(direction, _root.gameObject);
+        _weaponry.Drop();
     }
 
     private void _Pickup(Collision2D collision) {
-        Weapon weapon = collision.gameObject.GetComponent<Weapon>();
-        if (weapon != null) {
-            Pickup(weapon);
+        _Pickup(collision.collider);
+    }
+
+    private void _Pickup(Collider2D collision) {
+        GameObject root;
+        if (collision.gameObject.GetComponentInRoot<IHoldable>(out root) != null) {
+            Pickup(root);
         }
     }
 }

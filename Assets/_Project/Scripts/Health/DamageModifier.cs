@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ToolsBoxEngine;
 
-public class DamageModifier : MonoBehaviour {
+public abstract class DamageModifier : MonoBehaviour {
     public enum ResistanceType {
         RESISTANCE,
         WEAKNESS,
@@ -12,53 +13,40 @@ public class DamageModifier : MonoBehaviour {
         NOMODIFIER
     }
 
-    [SerializeField] ResistanceType type;
-    [SerializeField] string damageType;
-    [SerializeField] int value;
+    [SerializeField] ResistanceType _type;
+    [SerializeField] int _value;
 
     [Space]
-    [SerializeField] UnityEvent<DamageModifier, int> _onUse;
+    [SerializeField, HideInInspector] BetterEvent<int, GameObject> _onUse = new BetterEvent<int, GameObject>();
 
-    public event UnityAction<DamageModifier, int> OnUse { add => _onUse.AddListener(value); remove => _onUse.RemoveListener(value); }
+    public ResistanceType Resistance { get => _type; set => _type = value; }
 
-    public string DamageType { get { return damageType; } }
-    public ResistanceType Resistance { get => type; set => type = value; }
+    public event UnityAction<int, GameObject> OnUse { add => _onUse += value; remove => _onUse -= value; }
 
-    public int Modify(int amount) {
-        switch (type) {
+    public int Use(int value, GameObject source) {
+        if (!Usable(value, source)) { return value; }
+
+        _onUse.Invoke(value, source);
+        return Modify(value);
+    }
+
+    protected int Modify(int amount) {
+        switch (_type) {
             case ResistanceType.WEAKNESS:
-                amount += value;
+                amount += _value;
                 break;
             case ResistanceType.FIX:
-                amount = value;
+                amount = _value;
                 break;
             case ResistanceType.RESISTANCE:
-                amount = Mathf.Min(0, amount - value);
+                amount = Mathf.Min(0, amount - _value);
                 break;
             case ResistanceType.IMMUNITY:
                 amount = 0;
                 break;
         }
-        _onUse?.Invoke(this, amount);
         return amount;
     }
-}
 
-public static class DMMethod {
-    public static DamageModifier Get(this IEnumerable<DamageModifier> dms, string damageType) {
-        foreach (var dm in dms) {
-            if (dm.DamageType == damageType) {
-                return dm;
-            }
-        }
-        return null;
-    }
-    public static bool Contains(this IEnumerable<DamageModifier> dms, string damageType) {
-        foreach (var dm in dms) {
-            if (dm.DamageType == damageType) {
-                return true;
-            }
-        }
-        return false;
-    }
+    protected abstract bool Usable(int value, GameObject source);
 }

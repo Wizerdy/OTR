@@ -11,7 +11,6 @@ public class DamageHealth : MonoBehaviour {
     [SerializeField] MultipleTagSelector _damageables;
     [SerializeField] bool _destroyOnHit;
     [SerializeField] bool _onlyDamageOnceEach = false;
-    [SerializeField] string _damageType;
     [SerializeField] MultipleTagSelector _ignoreTag;
 
     [SerializeField, HideInInspector] BetterEvent<Collision2D> _onCollide = new BetterEvent<Collision2D>();
@@ -23,7 +22,6 @@ public class DamageHealth : MonoBehaviour {
     #region Properties
 
     public int Damage { get { return _damage; } set { _damage = value; } }
-    public string DamageType { get { return _damageType; } set { _damageType = value; } }
     public MultipleTagSelector Damageables { get { return _damageables; } set { _damageables = value; } }
 
     public event UnityAction<Collision2D> OnCollide { add { _onCollide.AddListener(value); } remove { _onCollide.RemoveListener(value); } }
@@ -67,7 +65,7 @@ public class DamageHealth : MonoBehaviour {
             _hitted.Add(root);
             IHealth health = obj.GetComponent<IHealth>();
             if (health != null && health.CanTakeDamage) {
-                health.TakeDamage(_damage, _damageType);
+                health.TakeDamage(_damage, gameObject);
                 _onDamage?.Invoke(health, _damage);
             }
             if (_destroyOnHit) {

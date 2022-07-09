@@ -7,7 +7,7 @@ public class HealthProxy : MonoBehaviour, IHealth {
     [SerializeField] Health health;
 
     public bool CanTakeDamage { get => health.CanTakeDamage; set => health.CanTakeDamage = value; }
-    public int CurrentHealth { get => health.CurrentHealth; set => health.CurrentHealth = value; }
+    public int CurrentHealth { get => health.CurrentHealth; }
 
     public event UnityAction<int> OnHit { add => health.OnHit += value; remove => health.OnHit -= value; }
     public event UnityAction<int> OnHeal { add => health.OnHeal += value; remove => health.OnHeal -= value; }
@@ -17,8 +17,8 @@ public class HealthProxy : MonoBehaviour, IHealth {
         health.Die();
     }
 
-    public void TakeDamage(int damage, string damageType = "") {
-        health.TakeDamage(damage, damageType);
+    public void TakeDamage(int damage, GameObject source) {
+        health.TakeDamage(damage, source);
     }
 
     public void TakeHeal(int damage) {

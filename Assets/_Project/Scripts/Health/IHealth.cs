@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public interface IHealth {
     bool CanTakeDamage { get; set; }
-    int CurrentHealth { get; set; }
+    int CurrentHealth { get; }
     event UnityAction<int> OnHit;
     event UnityAction<int> OnHeal;
     event UnityAction OnDeath;
 
-    void TakeDamage(int damage, string damageType = "");
+    void TakeDamage(int damage, GameObject source);
     void TakeHeal(int damage);
     void Die();
 }

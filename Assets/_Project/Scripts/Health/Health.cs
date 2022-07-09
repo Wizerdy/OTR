@@ -11,7 +11,7 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField] UnityEvent<int> _onHeal;
     [SerializeField] UnityEvent _onDeath;
     [SerializeField] bool _destroyOnDeath = true;
-    [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
+    [SerializeField] List<ResistanceModifier> _damageModifiers = new List<ResistanceModifier>();
 
     [SerializeField, HideInInspector] UnityEvent<int> _onMaxHealthChange;
     [SerializeField, HideInInspector] UnityEvent _onInvicible;
@@ -24,8 +24,8 @@ public class Health : MonoBehaviour, IHealth {
     #region Properties
 
     public int MaxHealth { get => _maxHealth; set => SetMaxHealth(value); }
-    public int CurrentHealth { get { return _currentHealth; } set { ChangeHealth(value - _currentHealth); } }
-    public float Percentage { get { return MaxHealth == 0 ? _currentHealth / MaxHealth : 1f; } set { CurrentHealth = Mathf.RoundToInt(_maxHealth * value); } }
+    public int CurrentHealth { get { return _currentHealth; } }
+    public float Percentage { get { return MaxHealth == 0 ? _currentHealth / MaxHealth : 1f; } }
     public bool CanTakeDamage {
         get { return !_invicibilityToken.HasToken; }
         set { _invicibilityToken.AddToken(!value); }
@@ -55,15 +55,6 @@ public class Health : MonoBehaviour, IHealth {
 
     #endregion
 
-    private void ChangeHealth(int amount) {
-        if (amount == 0) { return; }
-        if (amount < 0) {
-            TakeDamage(amount);
-        } else {
-            TakeHeal(amount);
-        }
-    }
-
     public HealthData Save() {
         return new HealthData().Set(_maxHealth, _currentHealth);
     }
@@ -72,26 +63,17 @@ public class Health : MonoBehaviour, IHealth {
         if (data == null) { return; }
         _currentHealth = data.currentHealth;
         _maxHealth = data.maxHealth;
-    } 
-
-    public void TakeDamage(int amount, string damageType = "") {
-        if (!CanTakeDamage) { return; }
-            if (_damageModifiers.Contains(damageType)) {
-                amount = _damageModifiers.Get(damageType).Modify(amount);
-            }
-
-            if (amount <= 0) { return; }
-
-            _currentHealth -= amount;
-            _currentHealth = Mathf.Max(0, _currentHealth);
-            _onHit?.Invoke(amount);
-
-            if (_currentHealth <= 0) {
-                Die();
-            }
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount, GameObject source = null) {
+        if (!CanTakeDamage) { return; }
+        for (int i = 0; i < _damageModifiers.Count; i++) {
+            if (!_damageModifiers[i].enabled) { continue; }
+            amount = _damageModifiers[i].Use(amount, source);
+        }
+
+        if (amount <= 0) { return; }
+
         _currentHealth -= amount;
         _currentHealth = Mathf.Max(0, _currentHealth);
         _onHit?.Invoke(amount);
@@ -115,11 +97,11 @@ public class Health : MonoBehaviour, IHealth {
         }
     }
 
-    public void AddDamageModifier(DamageModifier dm) {
+    public void AddDamageModifier(ResistanceModifier dm) {
         _damageModifiers.Add(dm);
     }
 
-    public void RemoveDamageModifier(DamageModifier dm) {
+    public void RemoveDamageModifier(ResistanceModifier dm) {
         if (_damageModifiers.Contains(dm)) {
             _damageModifiers.Remove(dm);
         }

@@ -9,6 +9,7 @@ public class EntityOrientation : MonoBehaviour {
     public Vector2 Orientation => _orientation;
 
     public void LookAt(Vector2 direction) {
+        if (direction == Vector2.zero) { return; }
         direction.Normalize();
         _root.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         _orientation = direction;

@@ -45,7 +45,7 @@ public class EntityHolding : MonoBehaviour {
 
     public void Drop() {
         if (!IsHolding) { return; }
-        _iholding.Drop(transform.position);
+        _iholding.Drop(this, transform.position);
         _holding = null;
         _iholding = null;
     }
@@ -54,13 +54,13 @@ public class EntityHolding : MonoBehaviour {
         if (!IsHolding) { return; }
         IHoldable item = _iholding;
         Drop();
-        item.Throw(direction, thrower);
+        item.Throw(this, direction, thrower);
     }
 
     public void Throw(Vector2 direction, GameObject thrower) {
         if (!IsHolding) { return; }
         IHoldable item = _iholding;
         Drop();
-        item.Throw(direction, thrower);
+        item.Throw(this, direction, thrower);
     }
 }

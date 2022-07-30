@@ -21,9 +21,16 @@ public class PlayerEntity : MonoBehaviour {
         _movements.Move(direction);
     }
 
-    public void LookAt(Vector2 direction) {
+    public void Aim(Vector2 direction) {
         _oriention.LookAt(direction);
+        _weaponry.Aim(direction);
     }
+
+    public void Attack(Vector2 direction) {
+        _weaponry.Attack(direction);
+    }
+
+    #region Item interaction
 
     public void Pickup(GameObject obj) {
         _holding.Pickup(obj);
@@ -38,23 +45,26 @@ public class PlayerEntity : MonoBehaviour {
         _weaponry.Drop();
     }
 
-    public void Attack(Vector2 direction) {
-        _weaponry.Attack(direction);
-    }
-
     public void Throw(Vector2 direction) {
         _holding.Throw(direction, _root.gameObject);
         _weaponry.Drop();
     }
+
+    #endregion
+
+    #region Callbacks
 
     private void _Pickup(Collision2D collision) {
         _Pickup(collision.collider);
     }
 
     private void _Pickup(Collider2D collision) {
+        if (_holding.IsHolding) { return; }
         GameObject root;
         if (collision.gameObject.GetComponentInRoot<IHoldable>(out root) != null) {
             Pickup(root);
         }
     }
+
+    #endregion
 }

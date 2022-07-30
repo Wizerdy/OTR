@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolsBoxEngine;
 
 public class DirectionalModifier : DamageModifier {
     [SerializeField] Transform _root;
@@ -14,6 +15,7 @@ public class DirectionalModifier : DamageModifier {
     }
 
     protected override bool Usable(int value, GameObject source) {
+        if (_direction == Vector2.zero) { return false; }
         if (_root == null) { _root = transform; }
         if (source == null) { return false; }
 
@@ -22,5 +24,17 @@ public class DirectionalModifier : DamageModifier {
             return true;
         }
         return false;
+    }
+
+    private void OnDrawGizmosSelected() {
+        if (_direction == Vector2.zero) { return; }
+        if (_root == null) { return; }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(_root.position.To2D(), _root.position.To2D() + _direction);
+        Gizmos.color = Color.blue;
+        Quaternion angle = Quaternion.Euler(0f, 0f, _angle / 2f);
+        Gizmos.DrawLine(_root.position.To2D(), _root.position + angle * _direction);
+        Gizmos.DrawLine(_root.position.To2D(), _root.position + Quaternion.Inverse(angle) * _direction);
     }
 }

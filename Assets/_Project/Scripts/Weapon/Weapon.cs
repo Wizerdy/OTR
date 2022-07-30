@@ -27,25 +27,51 @@ public abstract class Weapon : MonoBehaviour, IHoldable {
 
     #endregion
 
+    #region Legacy
+
+    protected virtual void _OnPickedUpdate() { }
+    protected virtual void _OnAim(Vector2 direction) { }
+    protected virtual void _OnPickup(EntityHolding holding) { }
+    protected virtual void _OnPickup(EntityWeaponry weaponry) { }
+    protected virtual void _OnDrop(EntityHolding holding) { }
+    protected virtual void _OnDrop(EntityWeaponry weaponry) { }
+    protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, Collider2D collider = null) { }
+    protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, GameObject obj) { }
+
+    #endregion
+
+    #region Unity Callbacks
+
     private void Awake() {
         _colliders = GetComponentsInChildren<Collider2D>();
     }
 
-    public IEnumerator Attack(Vector2 direction) {
-        if (!CanAttack) { return null; }
-        return ILaunchAttack(direction);
+    public void PickedUpdate() {
+        _OnPickedUpdate();
     }
 
-    IEnumerator ILaunchAttack(Vector2 direction) {
+    #endregion
+
+    public void Aim(Vector2 direction) {
+        _OnAim(direction);
+    }
+
+    public IEnumerator Attack(Vector2 direction) {
+        if (!CanAttack) { yield return null; }
         _attacking = true;
         yield return IAttack(direction);
         _attacking = false;
         _onAttackEnd.Invoke();
     }
 
+    //IEnumerator ILaunchAttack(Vector2 direction) { }
+
     protected abstract IEnumerator IAttack(Vector2 direction);
 
-    public void Drop(Vector2 position) {
+    #region IHoldable
+
+    public void Drop(EntityHolding holding, Vector2 position) {
+        _OnDrop(holding);
         transform.parent = null;
         _targetAnimator = null;
         transform.position = position;
@@ -55,29 +81,36 @@ public abstract class Weapon : MonoBehaviour, IHoldable {
     public void Pickup(EntityHolding holding) {
         transform.parent = holding.transform;
         gameObject.SetActive(false);
+        _OnPickup(holding);
     }
 
-    public void Pickup(EntityWeaponry entityWeapon) {
-        _targetAnimator = entityWeapon.Animator;
-    }
-
-    public void Drop(EntityWeaponry entityWeapon) {
+    public void Drop(EntityWeaponry weaponry) {
+        _OnDrop(weaponry);
         _targetAnimator = null;
     }
 
-    public void Throw(Vector2 direction, Collider2D collider = null) {
+    public void Pickup(EntityWeaponry weaponry) {
+        _targetAnimator = weaponry.Animator;
+        _OnPickup(weaponry);
+    }
+
+    public void Throw(EntityHolding entityHolding, Vector2 direction, Collider2D collider = null) {
         direction.Normalize();
+        _OnThrow(entityHolding, direction, collider);
         _rb.velocity = direction * _throwPower;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         IgnoreCollider(collider, true, 0.5f);
     }
 
-    public void Throw(Vector2 direction, GameObject obj) {
+    public void Throw(EntityHolding entityHolding, Vector2 direction, GameObject obj) {
         direction.Normalize();
+        _OnThrow(entityHolding, direction, obj);
         _rb.velocity = direction * _throwPower;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         IgnoreCollider(obj, true, 0.5f);
     }
+
+    #endregion
 
     #region IgnoreCollider
 

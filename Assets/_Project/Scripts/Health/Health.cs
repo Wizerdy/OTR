@@ -11,7 +11,7 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField] UnityEvent<int> _onHeal;
     [SerializeField] UnityEvent _onDeath;
     [SerializeField] bool _destroyOnDeath = true;
-    [SerializeField] List<ResistanceModifier> _damageModifiers = new List<ResistanceModifier>();
+    [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
 
     [SerializeField, HideInInspector] UnityEvent<int> _onMaxHealthChange;
     [SerializeField, HideInInspector] UnityEvent _onInvicible;
@@ -97,11 +97,13 @@ public class Health : MonoBehaviour, IHealth {
         }
     }
 
-    public void AddDamageModifier(ResistanceModifier dm) {
+    public void AddDamageModifier(DamageModifier dm) {
+        if (dm == null) { return; }
         _damageModifiers.Add(dm);
     }
 
-    public void RemoveDamageModifier(ResistanceModifier dm) {
+    public void RemoveDamageModifier(DamageModifier dm) {
+        if (dm == null) { return; }
         if (_damageModifiers.Contains(dm)) {
             _damageModifiers.Remove(dm);
         }
@@ -114,17 +116,6 @@ public class Health : MonoBehaviour, IHealth {
         _maxHealth = amount;
         _onMaxHealthChange?.Invoke(delta);
     }
-
-    //private void AddInvicibilityToken(int amount) {
-    //    if (_invicibilityToken == 0 && amount > 0) {
-    //        _onInvicible?.Invoke();
-    //    } else if (_invicibilityToken > 0 && _invicibilityToken - amount <= 0) {
-    //        _onVulnerable?.Invoke();
-    //    }
-    //    this.Hurl(_invicibilityToken.ToString());
-    //    _invicibilityToken += amount;
-    //    _invicibilityToken = Mathf.Max(0, _invicibilityToken);
-    //}
 }
 
 public class HealthData {

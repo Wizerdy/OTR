@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityWeaponry : MonoBehaviour {
+    [SerializeField] EntityMovement _entityMovement;
     [SerializeField] Animator _attackAnimator;
     [SerializeField] DamageHealth _damageHealth;
     [SerializeField] Health _health;
     Weapon _weapon;
+    EntityMovement.SpeedModifier _movementSlow;
 
     #region Properties
 
@@ -17,6 +19,10 @@ public class EntityWeaponry : MonoBehaviour {
 
     #endregion
 
+    private void Start() {
+        _movementSlow = _entityMovement.Slow(1f, 0f);
+    }
+
     private void Update() {
         _weapon?.PickedUpdate();
     }
@@ -25,6 +31,7 @@ public class EntityWeaponry : MonoBehaviour {
         if (weapon == null) { return; }
         Drop();
         weapon.Pickup(this);
+        weapon.OnMovespeedSet += SetMovementSlow;
         _weapon = weapon;
         _damageHealth.Damage = _weapon.Damage;
     }
@@ -32,6 +39,8 @@ public class EntityWeaponry : MonoBehaviour {
     public void Drop() {
         if (_weapon == null) { return; }
         _weapon.Drop(this);
+        _weapon.OnMovespeedSet -= SetMovementSlow;
+        SetMovementSlow(1f);
         _weapon = null;
     }
 
@@ -45,5 +54,9 @@ public class EntityWeaponry : MonoBehaviour {
         if (_weapon == null) { return; }
 
         _weapon.Aim(direction);
+    }
+
+    public void SetMovementSlow(float slow) {
+        _entityMovement.SetSlow(_movementSlow, slow);
     }
 }

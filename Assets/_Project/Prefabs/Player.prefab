@@ -29,6 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1515176502077426959}
+  - {fileID: 6443265103858021647}
   m_Father: {fileID: 1495124393804255812}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -652,6 +653,10 @@ MonoBehaviour:
   _oriention: {fileID: 7488032526107593726}
   _holding: {fileID: 4819328008194156798}
   _weaponry: {fileID: 3867635824926218261}
+  _onAim:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3113471518096874172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,6 +933,61 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _turnAroundAngle: 360
+  _dash:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.002822876
+        value: 1
+        inSlope: -7.617541
+        outSlope: -7.617541
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.11098411
+      - serializedVersion: 3
+        time: 0.9
+        value: 0
+        inSlope: -0.1604773
+        outSlope: -0.1604773
+        tangentMode: 0
+        weightedMode: 1
+        inWeight: 0.6248087
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    duration: 0.3
+    amplitude: 50
+  _onRun:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAcceleration:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDeceleration:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTurnAround:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTurn:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDashStart:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDashEnd:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &7488032526107593726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb6334d3e0b06742bec9608319f4021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entityMovement: {fileID: 6862933262211988682}
   _attackAnimator: {fileID: 5925994806173688309}
   _damageHealth: {fileID: 7460772279012484888}
   _health: {fileID: 147940007823276091}
@@ -1025,7 +1086,7 @@ GameObject:
   - component: {fileID: 8156597257131487935}
   - component: {fileID: 4767744863725628319}
   - component: {fileID: 7352506418497988158}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,6 +1175,95 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 3905317884828674427}
+--- !u!1 &6905930932080263169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8470977344433985825}
+  - component: {fileID: 9173737571912781023}
+  - component: {fileID: 9045096297075060414}
+  - component: {fileID: 688195700584301401}
+  m_Layer: 7
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8470977344433985825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905930932080263169}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6443265103858021647}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &9173737571912781023
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905930932080263169}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.67, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.9}
+  m_EdgeRadius: 0
+--- !u!114 &9045096297075060414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905930932080263169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3fae1ade58250419eadb0c4fec5a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _launchIt: 0
+  _force: 30
+  _aimingDirection: {x: 0, y: 1}
+--- !u!114 &688195700584301401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905930932080263169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f379b1ce4361fad4e880171a946d1973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerEntity: {fileID: 1367052518068913686}
+  _reflectiveCollider: {fileID: 9045096297075060414}
 --- !u!1 &8012462175785580666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1355,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 3905317884828674427}
+--- !u!1 &8074690074810529660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6443265103858021647}
+  m_Layer: 0
+  m_Name: Collisions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6443265103858021647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074690074810529660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8470977344433985825}
+  m_Father: {fileID: 7881652080676257308}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8383615359515561997
 GameObject:
   m_ObjectHideFlags: 0

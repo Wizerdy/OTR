@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using ToolsBoxEngine;
 
 public class PlayerEntity : MonoBehaviour {
     [SerializeField] Transform _root;
@@ -10,11 +12,21 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
 
+    [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
+
+    Token _canLookAround = new Token();
+
     public Vector2 Orientation => _oriention.Orientation;
+    public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }
+
+    public event UnityAction<Vector2> OnAim { add => _onAim.AddListener(value); remove => _onAim.RemoveListener(value); }
 
     private void OnEnable() {
         _interactCollider.OnCollisionEnter += _Pickup;
         _interactCollider.OnTriggerEnter += _Pickup;
+
+        _movements.OnDashStart += _OnDash;
+        _movements.OnDashEnd += _OnStopDash;
     }
 
     public void Move(Vector2 direction) {
@@ -22,12 +34,18 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void Aim(Vector2 direction) {
+        if (!CanLookAround) { return; }
         _oriention.LookAt(direction);
         _weaponry.Aim(direction);
+        _onAim.Invoke(direction);
     }
 
     public void Attack(Vector2 direction) {
-        _weaponry.Attack(direction);
+        if (_weaponry.HasWeapon) {
+            _weaponry.Attack(direction);
+        } else {
+            _movements.Dash(Orientation);
+        }
     }
 
     #region Item interaction
@@ -64,6 +82,15 @@ public class PlayerEntity : MonoBehaviour {
         if (collision.gameObject.GetComponentInRoot<IHoldable>(out root) != null) {
             Pickup(root);
         }
+    }
+
+    private void _OnDash(Vector2 direction) {
+        CanLookAround = false;
+
+    }
+
+    private void _OnStopDash() {
+        CanLookAround = true;
     }
 
     #endregion

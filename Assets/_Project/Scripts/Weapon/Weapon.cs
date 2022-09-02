@@ -11,6 +11,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected float _throwPower = 50f;
     [SerializeField, Range(0f, 1f)] private float _movespeed = 1f;
 
+    [SerializeField] protected BetterEvent<Vector2> _onAttackStart = new BetterEvent<Vector2>();
     [SerializeField] protected BetterEvent _onAttackEnd = new BetterEvent();
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
@@ -26,6 +27,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     #region Properties
 
+    public event UnityAction<Vector2> OnAttackStart { add => _onAttackStart += value; remove => _onAttackStart -= value; }
     public event UnityAction OnAttackEnd { add => _onAttackEnd.AddListener(value); remove => _onAttackEnd.RemoveListener(value); }
     public event UnityAction OnFall { add => _onFall.AddListener(value); remove => _onFall.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
@@ -82,6 +84,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public IEnumerator Attack(Vector2 direction) {
         if (!CanAttack) { yield return null; }
         _attacking = true;
+        _onAttackStart.Invoke(direction);
         yield return IAttack(direction);
         _attacking = false;
         _onAttackEnd.Invoke();

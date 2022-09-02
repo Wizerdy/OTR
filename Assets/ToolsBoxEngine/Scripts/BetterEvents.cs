@@ -61,6 +61,16 @@ namespace ToolsBoxEngine {
         public void RemoveListener(UnityAction<T> action) {
             _event.RemoveListener(action);
         }
+
+        public static BetterEvent<T> operator +(BetterEvent<T> e, UnityAction<T> action) {
+            e.AddListener(action);
+            return e;
+        }
+
+        public static BetterEvent<T> operator -(BetterEvent<T> e, UnityAction<T> action) {
+            e.RemoveListener(action);
+            return e;
+        }
     }
 
     [Serializable]
@@ -85,6 +95,15 @@ namespace ToolsBoxEngine {
         public void RemoveListener(UnityAction action) {
             _event.RemoveListener(action);
         }
-    }
 
+        public static BetterEvent operator +(BetterEvent e, UnityAction action) {
+            e.AddListener(action);
+            return e;
+        }
+
+        public static BetterEvent operator -(BetterEvent e, UnityAction action) {
+            e.RemoveListener(action);
+            return e;
+        }
+    }
 }

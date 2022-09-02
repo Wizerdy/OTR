@@ -141,32 +141,6 @@ public class EntityMovement : MonoBehaviour {
         }
     }
 
-    #endregion
-
-    #region Movements
-
-    public void Move(Vector2 direction) {
-        _direction = direction.normalized;
-    }
-
-    public Coroutine MoveTo(Vector2 position, float speedFactor = 1f) {
-        return StartCoroutine(IMoveTo(position, speedFactor));
-    }
-
-    IEnumerator IMoveTo(Vector2 position, float speedFactor) {
-        _moveToSlow = Slow(speedFactor, 50f);
-        while (transform.Position2D() != position) {
-            Vector2 direction = (position - transform.Position2D());
-            if (direction.sqrMagnitude < 1f) {
-                Move(Vector2.zero);
-                break;
-            }
-            Move(direction.normalized);
-            yield return new WaitForEndOfFrame();
-        }
-        RemoveSlow(_moveToSlow);
-    }
-
     private void StartAcceleration() {
         _acceleration.Reset();
         _acceleration.SetPercentage(_speed / _currentMaxSpeed);
@@ -233,6 +207,37 @@ public class EntityMovement : MonoBehaviour {
                 return _turnFactor.Evaluate(_turnPerc) * _currentMaxSpeed;
         }
         return 0f;
+    }
+
+    #endregion
+
+    #region Movements
+
+    public void Move(Vector2 direction) {
+        _direction = direction.normalized;
+    }
+
+    public void Stop() {
+        Move(Vector2.zero);
+        SetSpeed(0f);
+    }
+
+    public Coroutine MoveTo(Vector2 position, float speedFactor = 1f) {
+        return StartCoroutine(IMoveTo(position, speedFactor));
+    }
+
+    IEnumerator IMoveTo(Vector2 position, float speedFactor) {
+        _moveToSlow = Slow(speedFactor, 50f);
+        while (transform.Position2D() != position) {
+            Vector2 direction = (position - transform.Position2D());
+            if (direction.sqrMagnitude < 1f) {
+                Move(Vector2.zero);
+                break;
+            }
+            Move(direction.normalized);
+            yield return new WaitForEndOfFrame();
+        }
+        RemoveSlow(_moveToSlow);
     }
 
     #endregion

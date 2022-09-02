@@ -19,7 +19,7 @@ public class PlayerEntity : MonoBehaviour {
     public Vector2 Orientation => _oriention.Orientation;
     public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }
 
-    public event UnityAction<Vector2> OnAim { add => _onAim.AddListener(value); remove => _onAim.RemoveListener(value); }
+    public event UnityAction<Vector2> OnAim { add => _onAim += value; remove => _onAim -= value; }
 
     private void OnEnable() {
         _interactCollider.OnCollisionEnter += _Pickup;
@@ -27,6 +27,9 @@ public class PlayerEntity : MonoBehaviour {
 
         _movements.OnDashStart += _OnDash;
         _movements.OnDashEnd += _OnStopDash;
+
+        _weaponry.OnAttackStart += _OnAttackStart;
+        _weaponry.OnAttackEnd += _OnAttackEnd;
     }
 
     public void Move(Vector2 direction) {
@@ -91,6 +94,15 @@ public class PlayerEntity : MonoBehaviour {
 
     private void _OnStopDash() {
         CanLookAround = true;
+    }
+
+    private void _OnAttackStart(Vector2 direction) {
+        _movements.Stop();
+        _movements.CanMove = false;
+    }
+
+    private void _OnAttackEnd() {
+        _movements.CanMove = true;
     }
 
     #endregion

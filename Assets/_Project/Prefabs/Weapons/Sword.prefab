@@ -292,6 +292,10 @@ MonoBehaviour:
   _damage: 10
   _throwPower: 50
   _movespeed: 0.8
+  _onAttackStart:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onAttackEnd:
     _event:
       m_PersistentCalls:
@@ -304,7 +308,8 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _attackTime: 0.2
+  _attackTime: 0.3
+  _comboTimer: 0.2
 --- !u!50 &3353173922691043133
 Rigidbody2D:
   serializedVersion: 4

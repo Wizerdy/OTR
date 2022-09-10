@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using ToolsBoxEngine;
 
 public class EntityMovement : MonoBehaviour {
-    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND }
+    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING }
 
     public class SpeedModifier {
         float _percentage;
         float _time;
         Coroutine _routine;
 
-        public float Percentage => _percentage;
+        public float Percentage { get => _percentage; set => _percentage = value; }
+        public Coroutine Routine => _routine;
 
         public SpeedModifier(float percentage, float time, Coroutine routine = null) {
             _percentage = percentage;
@@ -32,11 +34,15 @@ public class EntityMovement : MonoBehaviour {
     [SerializeField] AnimationCurve _turnFactor;
     [SerializeField, Range(0, 360f)] float _turnAroundAngle = 181f;
 
-    public Tools.BasicDelegate OnRun;
-    public Tools.BasicDelegate<Vector2> OnAcceleration;
-    public Tools.BasicDelegate<Vector2> OnDeceleration;
-    public Tools.BasicDelegate<Vector2> OnTurnAround;
-    public Tools.BasicDelegate<Vector2> OnTurn;
+    [SerializeField] AmplitudeCurve _dash;
+
+    [SerializeField, HideInInspector] BetterEvent _onRun = new BetterEvent();
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onAcceleration = new BetterEvent<Vector2>();
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onDeceleration = new BetterEvent<Vector2>();
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onTurnAround = new BetterEvent<Vector2>();
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onTurn = new BetterEvent<Vector2>();
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onDashStart = new BetterEvent<Vector2>();
+    [SerializeField, HideInInspector] BetterEvent _onDashEnd = new BetterEvent();
 
     float _currentMaxSpeed = 5f;
     Vector2 _direction = Vector2.zero;
@@ -68,6 +74,14 @@ public class EntityMovement : MonoBehaviour {
     public Vector2 Orientation => _orientation;
     public Vector2 Direction => _direction;
 
+    public event UnityAction OnRun { add => _onRun.AddListener(value); remove => _onRun.RemoveListener(value); }
+    public event UnityAction<Vector2> OnAcceleration { add => _onAcceleration.AddListener(value); remove => _onAcceleration.RemoveListener(value); }
+    public event UnityAction<Vector2> OnDeceleration { add => _onDeceleration.AddListener(value); remove => _onDeceleration.RemoveListener(value); }
+    public event UnityAction<Vector2> OnTurnAround { add => _onTurnAround.AddListener(value); remove => _onTurnAround.RemoveListener(value); }
+    public event UnityAction<Vector2> OnTurn { add => _onTurn.AddListener(value); remove => _onTurn.RemoveListener(value); }
+    public event UnityAction<Vector2> OnDashStart { add => _onDashStart.AddListener(value); remove => _onDashStart.RemoveListener(value); }
+    public event UnityAction OnDashEnd { add => _onDashEnd.AddListener(value); remove => _onDashEnd.RemoveListener(value); }
+
     #endregion
 
     #region UnityCallbacks
@@ -87,6 +101,7 @@ public class EntityMovement : MonoBehaviour {
     }
 
     private void UpdateMove() {
+        if (_state == State.DASHING) { UpdateDash(); return; }
         if (!CanMove) { return; }
         if (_currentMaxSpeed <= 0f) { SetSpeed(0f); return; }
 
@@ -115,44 +130,29 @@ public class EntityMovement : MonoBehaviour {
         _lastDirection = _direction;
     }
 
-    #endregion
+    void UpdateDash() {
+        _dash.UpdateTimer(Time.deltaTime);
+        float speed = _dash.Evaluate() * _dash.amplitude;
 
-    #region Movements
+        _rb.velocity = speed * _orientation;
 
-    public void Move(Vector2 direction) {
-        _direction = direction.normalized;
-    }
-
-    public Coroutine MoveTo(Vector2 position, float speedFactor = 1f) {
-        return StartCoroutine(IMoveTo(position, speedFactor));
-    }
-
-    IEnumerator IMoveTo(Vector2 position, float speedFactor) {
-        _moveToSlow = Slow(speedFactor, 50f);
-        while (transform.Position2D() != position) {
-            Vector2 direction = (position - transform.Position2D());
-            if (direction.sqrMagnitude < 1f) {
-                Move(Vector2.zero);
-                break;
-            }
-            Move(direction.normalized);
-            yield return new WaitForEndOfFrame();
+        if (_dash.Percentage >= 1f) {
+            StopDash();
         }
-        RemoveSlow(_moveToSlow);
     }
 
     private void StartAcceleration() {
         _acceleration.Reset();
         _acceleration.SetPercentage(_speed / _currentMaxSpeed);
         _state = State.ACCELERATING;
-        OnAcceleration?.Invoke(_orientation);
+        _onAcceleration.Invoke(_orientation);
     }
 
     private void StartDecelerating() {
         _deceleration.Reset();
         _deceleration.SetPercentage(1f - _speed / _currentMaxSpeed);
         _state = State.DECELERATING;
-        OnDeceleration?.Invoke(_orientation);
+        _onDeceleration.Invoke(_orientation);
     }
 
     private void StartTurn() {
@@ -161,7 +161,7 @@ public class EntityMovement : MonoBehaviour {
         //StartDecelerating();
         _turnPerc = Mathf.Clamp01(_speed / _currentMaxSpeed);
         _state = State.TURNING;
-        OnTurn?.Invoke(_orientation);
+        _onTurn.Invoke(_orientation);
     }
 
     private void StartTurnAround() {
@@ -169,12 +169,12 @@ public class EntityMovement : MonoBehaviour {
         _acceleration.Reset();
         StartDecelerating();
         _state = State.TURNING_AROUND;
-        OnTurnAround?.Invoke(_orientation);
+        _onTurnAround.Invoke(_orientation);
     }
 
     private void SetSpeed(float speed) {
         if (_rb == null) { return; }
-        if (_currentMaxSpeed > 0f && speed >= _currentMaxSpeed) { OnRun?.Invoke(); }
+        if (_currentMaxSpeed > 0f && speed >= _currentMaxSpeed) { _onRun?.Invoke(); }
         _speed = speed;
         _rb.velocity = speed * _orientation;
     }
@@ -211,6 +211,62 @@ public class EntityMovement : MonoBehaviour {
 
     #endregion
 
+    #region Movements
+
+    public void Move(Vector2 direction) {
+        _direction = direction.normalized;
+    }
+
+    public void Stop() {
+        Move(Vector2.zero);
+        SetSpeed(0f);
+    }
+
+    public Coroutine MoveTo(Vector2 position, float speedFactor = 1f) {
+        return StartCoroutine(IMoveTo(position, speedFactor));
+    }
+
+    IEnumerator IMoveTo(Vector2 position, float speedFactor) {
+        _moveToSlow = Slow(speedFactor, 50f);
+        while (transform.Position2D() != position) {
+            Vector2 direction = (position - transform.Position2D());
+            if (direction.sqrMagnitude < 1f) {
+                Move(Vector2.zero);
+                break;
+            }
+            Move(direction.normalized);
+            yield return new WaitForEndOfFrame();
+        }
+        RemoveSlow(_moveToSlow);
+    }
+
+    #endregion
+
+    #region Dash
+
+    public void Dash(Vector2 direction) {
+        if (!CanMove) { return; }
+
+        CanMove = false;
+        _orientation = direction;
+        _dash.Reset();
+        _state = State.DASHING;
+        _speed = 0f;
+
+        _onDashStart.Invoke(direction);
+    }
+
+    public void StopDash() {
+        if (_state != State.DASHING) { return; }
+        CanMove = true;
+        _state = State.DECELERATING;
+        _speed = 0f;
+
+        _onDashEnd.Invoke();
+    }
+
+    #endregion
+
     #region Slow
 
     public SpeedModifier Slow(float percentage, float time) {
@@ -228,25 +284,36 @@ public class EntityMovement : MonoBehaviour {
         return speedModifier;
     }
 
+    public SpeedModifier SetSlow(SpeedModifier modifier, float percentage) {
+        modifier.Percentage = percentage;
+        RefreshSlows();
+        return modifier;
+    }
+
     public void RemoveSlow(SpeedModifier modifier) {
+        if (modifier.Routine != null) { StopCoroutine(modifier.Routine); }
         _slows.Remove(modifier);
 
         if (_currentSlow == modifier) {
-            _currentSlow = null;
-            if (_slows.Count > 0) {
-                if (_slows.Count == 1) {
-                    _currentSlow = _slows[0];
-                } else {
-                    for (int i = 0; i < _slows.Count; i++) {
-                        if (_slows[i].Percentage < (_currentSlow?.Percentage ?? 1f)) {
-                            _currentSlow = _slows[i];
-                        }
+            RefreshSlows();
+        }
+    }
+
+    private void RefreshSlows() {
+        _currentSlow = null;
+        if (_slows.Count > 0) {
+            if (_slows.Count == 1) {
+                _currentSlow = _slows[0];
+            } else {
+                for (int i = 0; i < _slows.Count; i++) {
+                    if (_slows[i].Percentage < (_currentSlow?.Percentage ?? 1f)) {
+                        _currentSlow = _slows[i];
                     }
                 }
             }
-
-            _currentMaxSpeed = _maxSpeed * (_currentSlow?.Percentage ?? 1f);
         }
+
+        _currentMaxSpeed = _maxSpeed * (_currentSlow?.Percentage ?? 1f);
     }
 
     #endregion

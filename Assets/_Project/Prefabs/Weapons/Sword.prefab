@@ -288,13 +288,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 3353173922691043133}
+  _isOnFloor: 1
   _damage: 10
   _throwPower: 50
+  _movespeed: 0.8
+  _onAttackStart:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onAttackEnd:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _attackTime: 0.2
+  _onFall:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMovespeedSet:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _attackTime: 0.3
+  _comboTimer: 0.2
 --- !u!50 &3353173922691043133
 Rigidbody2D:
   serializedVersion: 4
@@ -307,7 +322,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 4
   m_AngularDrag: 0.05
   m_GravityScale: 0

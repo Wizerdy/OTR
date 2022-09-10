@@ -15,6 +15,8 @@ namespace ToolsBoxEngine {
 
     public enum LogicGate { AND, OR, NOR, XOR, NOT }
 
+    public enum ColliderGate { ANY, HARD, TRIGGER_HARD, TRIGGER_TRIGGER, TRIGGER }
+
     #endregion
 
     #region Nullable vector
@@ -157,6 +159,8 @@ namespace ToolsBoxEngine {
         UnityEvent<int> _onEarn = new UnityEvent<int>();
         UnityEvent<int> _onLose = new UnityEvent<int>();
 
+        public int Tokens => _token;
+
         #region Events
 
         public event UnityAction OnEmpty { add => _onEmpty.AddListener(value); remove => _onEmpty.RemoveListener(value); }
@@ -167,6 +171,12 @@ namespace ToolsBoxEngine {
         #endregion
 
         public bool HasToken => _token > 0;
+
+        public Token() { }
+
+        public Token(int number) {
+            _token = number;
+        }
 
         /// <summary>
         /// Add Token (True++ / False--)

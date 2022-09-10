@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         _playerInput.actions["Aim"].performed += _Aim;
+        _playerInput.actions["Aim"].canceled += _StopAim;
         _playerInput.actions["Attack"].performed += _Attack;
         _playerInput.actions["Throw"].performed += _Throw;
 
@@ -27,16 +28,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _Aim(InputAction.CallbackContext cc) {
-        _player.LookAt(cc.ReadValue<Vector2>());
+        _player.Aim(cc.ReadValue<Vector2>());
+    }
+
+    private void _StopAim(InputAction.CallbackContext cc) {
+        _player.Aim(Vector2.zero);
     }
 
     private void _Attack(InputAction.CallbackContext cc) {
-        //if (_setupThrow) { return; }
+        if (_setupThrow) { return; }
         _player.Attack(Vector2.right);
     }
 
     private void _Throw(InputAction.CallbackContext cc) {
-        //if (!_setupThrow) { return; }
+        if (!_setupThrow) { return; }
         _player.Throw(_player.Orientation);
     }
 

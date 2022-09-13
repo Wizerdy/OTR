@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="ColliderDelegate" Collapsed="true">
+    <Position X="8" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQCAAAAAAhAQAAAAAAAAAEAAAIAMQAQgAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Colliders\ColliderDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColliderRoot" Collapsed="true">
+    <Position X="19.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Colliders\ColliderRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="8.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BASAAAAAACAABAAAAgAACAAAAAAEICAAAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Controller\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerEntity" Collapsed="true">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <AssociationLine Name="_holding" Type="EntityHolding" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="7.941" />
+        <Point X="9.438" Y="9.142" />
+        <Point X="10" Y="9.142" />
+        <Point X="10" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_interactCollider" Type="ColliderDelegate" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="7.941" />
+        <Point X="9.438" Y="9.131" />
+        <Point X="8.75" Y="9.131" />
+        <Point X="8.75" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_movements" Type="EntityMovement" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="7.941" />
+        <Point X="9.438" Y="9.132" />
+        <Point X="12.047" Y="9.132" />
+        <Point X="12.047" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_oriention" Type="EntityOrientation" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="7.941" />
+        <Point X="9.438" Y="9.081" />
+        <Point X="14.266" Y="9.081" />
+        <Point X="14.266" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_weaponry" Type="EntityWeaponry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.438" Y="7.941" />
+        <Point X="9.438" Y="9.127" />
+        <Point X="7.75" Y="9.127" />
+        <Point X="7.75" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIWAAAAcAQAAAAgQDQACAAAIAAAAAAoQAAAAIACAg=</HashCode>
+      <FileName>Assets\_Project\Scripts\Controller\PlayerEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_holding" />
+      <Field Name="_interactCollider" />
+      <Field Name="_movements" />
+      <Field Name="_oriention" />
+      <Field Name="_weaponry" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CrawlerController" Collapsed="true">
+    <Position X="13.75" Y="6.25" Width="1.5" />
+    <AssociationLine Name="_attackArea" Type="EntityCollisionArea" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="6.596" />
+        <Point X="17.25" Y="6.596" />
+        <Point X="17.25" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_detectionArea" Type="EntityCollisionArea" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="6.625" />
+        <Point X="16.344" Y="6.625" />
+        <Point X="16.344" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAACAAEAAIAAAEAAAAQAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Enemy\CrawlerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_attackArea" />
+      <Field Name="_crawlerEntity" />
+      <Field Name="_detectionArea" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CrawlerEntity" Collapsed="true">
+    <Position X="13.75" Y="7.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CrawlerEntity.State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Project\Scripts\Enemy\CrawlerEntity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="_entityMovements" Type="EntityMovement" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.562" Y="8.191" />
+        <Point X="14.562" Y="9.839" />
+        <Point X="14.349" Y="9.839" Type="JumpStart" />
+        <Point X="14.182" Y="9.839" Type="JumpEnd" />
+        <Point X="12.375" Y="9.839" />
+        <Point X="12.375" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_entityOrientation" Type="EntityOrientation" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.562" Y="8.191" />
+        <Point X="14.562" Y="9.802" />
+        <Point X="14.656" Y="9.802" />
+        <Point X="14.656" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>GAIAAgAAACAIBEAgAAAAAAAABAAAAAAEAAAASQAEECA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Enemy\CrawlerEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_entityMovements" />
+      <Field Name="_entityOrientation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EntityCollisionArea" Collapsed="true">
+    <Position X="16" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGAABEAACBBAMAACAAAAAAAIEAAAEAAAAAABAAAFAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityCollisionArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityFieldOfView" Collapsed="true">
+    <Position X="23.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAIAAEAgAWgIAAAgAAAAAAAAAAAIAAAACAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityFieldOfView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityHolding" Collapsed="true">
+    <Position X="9.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAAGAQBAAEBAACACgAAAAAAAAAAQAQAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityHolding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityMovement" Collapsed="true">
+    <Position X="11.25" Y="10.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="EntityMovement.State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Project\Scripts\Entity\EntityMovement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="EntityMovement.SpeedModifier" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Project\Scripts\Entity\EntityMovement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QhAARioEB7AAJEBIACAAWBgBAAENCDUwPCJIIwIABFA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityOrientation" Collapsed="true">
+    <Position X="13.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityOrientation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityWeaponry" Collapsed="true">
+    <Position X="7" Y="10.75" Width="1.5" />
+    <AssociationLine Name="_damageHealth" Type="DamageHealth" FixedFromPoint="true">
+      <Path>
+        <Point X="7.688" Y="11.441" />
+        <Point X="7.688" Y="14.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_entityMovement" Type="EntityMovement" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.062" Y="10.75" />
+        <Point X="8.062" Y="9.966" />
+        <Point X="8.667" Y="9.966" Type="JumpStart" />
+        <Point X="8.833" Y="9.966" Type="JumpEnd" />
+        <Point X="9.917" Y="9.966" Type="JumpStart" />
+        <Point X="10.083" Y="9.966" Type="JumpEnd" />
+        <Point X="11.594" Y="9.966" />
+        <Point X="11.594" Y="10.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_weapon" Type="Weapon" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="11.062" />
+        <Point X="4.938" Y="11.062" />
+        <Point X="4.938" Y="16" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAUSKAAAACEQAAAAQYAhACIAAIAABAhCAAACAAQAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Entity\EntityWeaponry.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_damageHealth" />
+      <Field Name="_entityMovement" />
+      <Field Name="_health" />
+      <Field Name="_weapon" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DamageModifier" Collapsed="true">
+    <Position X="14.75" Y="12.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DamageModifier.ResistanceType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Project\Scripts\Health\Damage Modifiers\DamageModifier.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABAAoAAAEAAAAAQAAAAAAAAAAAAEAAAAAAAQAAAIAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Damage Modifiers\DamageModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageType" Collapsed="true">
+    <Position X="21.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAAAABA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Damage Modifiers\DamageType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DirectionalModifier" Collapsed="true">
+    <Position X="13.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAEAIQBAAAACAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Damage Modifiers\DirectionalModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResistanceModifier" Collapsed="true">
+    <Position X="15.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Damage Modifiers\ResistanceModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageHealth" Collapsed="true">
+    <Position X="7" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAADAAIiQAlAgBAIRAARCAEAAAAAABAEkCAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\DamageHealth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Health" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAgJQEACAACCIgAIAAiJUAEAgAIgDCAAgAgACAAEA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Health.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HealthData" Collapsed="true">
+    <Position X="19.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\Health.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthProxy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAgAAAAgIQAAAAAAADAAAAAgAAAAAg=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\HealthProxy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="health" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Right" Position="0.272" />
+  </Class>
+  <Class Name="InvulnerableFrame" Collapsed="true">
+    <Position X="10" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACEgBAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\InvulnerableFrame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_health" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="InterfaceDefaultMethods" Collapsed="true">
+    <Position X="21.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\InterfaceDefaultMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectTools" Collapsed="true">
+    <Position X="23.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\ProjectTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bow" Collapsed="true">
+    <Position X="4.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAIAAEAAAAAAQAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\Bow\Bow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReflectiveCollider" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAASAAAQAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\Shield\ReflectiveCollider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shield" Collapsed="true">
+    <Position X="2" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UQBAAABACAQAAAAAAAAAEAAAkAAAAQAAAAICAACAEAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\Shield\Shield.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sword" Collapsed="true">
+    <Position X="6.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAAAAAAAAAAAAAAAAAEAACAAAQAAEAAAAAEAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\Sword\Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="4.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QARQIAvASGoQFBAAYQQAACABEIIAAARAAaAGAABaEMA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.156" />
+  </Class>
+  <Interface Name="IHealth" Collapsed="true">
+    <Position X="19.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAgAAAAgIQAAAAAAADAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Health\IHealth.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IHoldable" Collapsed="true">
+    <Position X="21.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\IHoldable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IReflectable" Collapsed="true">
+    <Position X="23.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Project\Scripts\Weapon\IReflectable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

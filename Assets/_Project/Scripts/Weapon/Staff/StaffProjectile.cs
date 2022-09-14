@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StaffProjectile : MonoBehaviour
 {
+    [SerializeField] private ScriptableStatusEffect buff;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,10 @@ public class StaffProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Player") {
-            Destroy(this);
-        }
+        var target = collision.GetComponent<IBuffable>();
+        if (target) 
+            target.ApplyBuff(buff);
+
+        Destroy(this);
     }
 }

@@ -19,6 +19,7 @@ public class Staff : Weapon
         yield return new WaitForSeconds(chargeTime);
         GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
         //coroutineCharge = CoroutinesManager.Start(Tools.Delay(() => proj.ReturnSpriteRenderer().color.r -= 0.1f , chargeTime));
+        Debug.Log(direction);
         proj.GetComponent<Rigidbody2D>().velocity = direction * _projectileSpeed;
 
         yield return new WaitForSeconds(_attackTime);

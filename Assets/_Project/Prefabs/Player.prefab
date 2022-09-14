@@ -213,11 +213,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8959884304683693497}
   - {fileID: 6978608865329521451}
   - {fileID: 1134471264887242511}
   m_Father: {fileID: 887048020161268641}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100673382046815783
 GameObject:
@@ -252,7 +251,7 @@ Transform:
   m_Children:
   - {fileID: 1495124393804255812}
   m_Father: {fileID: 7441481123279926725}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5925994806173688309
 Animator:
@@ -510,6 +509,7 @@ Transform:
   - {fileID: 147204253848364275}
   - {fileID: 4395526148452863028}
   - {fileID: 5580260731250044172}
+  - {fileID: 8959884304683693497}
   - {fileID: 7441481123279926725}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -566,7 +566,7 @@ Transform:
   - {fileID: 7942970899223770037}
   - {fileID: 3278416648652313666}
   m_Father: {fileID: 7441481123279926725}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4965306818286853420
 GameObject:
@@ -653,6 +653,7 @@ MonoBehaviour:
   _oriention: {fileID: 7488032526107593726}
   _holding: {fileID: 4819328008194156798}
   _weaponry: {fileID: 3867635824926218261}
+  _directionnalSprite: {fileID: 3645087357924411892}
   _onAim:
     _event:
       m_PersistentCalls:
@@ -750,8 +751,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7441481123279926725}
-  m_RootOrder: 0
+  m_Father: {fileID: 887048020161268641}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8200047283684627640
 SpriteRenderer:
@@ -818,6 +819,7 @@ GameObject:
   - component: {fileID: 7488032526107593726}
   - component: {fileID: 4819328008194156798}
   - component: {fileID: 3867635824926218261}
+  - component: {fileID: 3645087357924411892}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1049,6 +1051,32 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &3645087357924411892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985431924503224253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a572bacc5cb24499ef84fad928c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprites:
+  - direction: {x: 0, y: 1}
+    sprite: {fileID: -1534803999, guid: a64eb9d4c298af9488d692d4860f3017, type: 3}
+    flipped: 0
+  - direction: {x: 1, y: 0}
+    sprite: {fileID: 105323957, guid: a64eb9d4c298af9488d692d4860f3017, type: 3}
+    flipped: 0
+  - direction: {x: 0, y: -1}
+    sprite: {fileID: 389044581, guid: a64eb9d4c298af9488d692d4860f3017, type: 3}
+    flipped: 0
+  - direction: {x: -1, y: 0}
+    sprite: {fileID: 105323957, guid: a64eb9d4c298af9488d692d4860f3017, type: 3}
+    flipped: 1
+  _renderer: {fileID: 8200047283684627640}
 --- !u!1 &6055268961327354095
 GameObject:
   m_ObjectHideFlags: 0

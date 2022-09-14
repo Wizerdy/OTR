@@ -11,6 +11,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
+    [SerializeField] EntityDirectionnalSprite _directionnalSprite;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
 
@@ -33,11 +34,14 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void Move(Vector2 direction) {
+        if (!_movements.CanMove) { return; }
         _movements.Move(direction);
+        if (direction != Vector2.zero) { _directionnalSprite?.ChangeSprite(direction); }
     }
 
     public void Aim(Vector2 direction) {
         if (!CanLookAround) { return; }
+        //if (direction == Vector2.zero) { direction = _movements.Orientation; }
         _oriention.LookAt(direction);
         _weaponry.Aim(direction);
         _onAim.Invoke(direction);
@@ -99,10 +103,12 @@ public class PlayerEntity : MonoBehaviour {
     private void _OnAttackStart(Vector2 direction) {
         _movements.Stop();
         _movements.CanMove = false;
+        CanLookAround = false;
     }
 
     private void _OnAttackEnd() {
         _movements.CanMove = true;
+        CanLookAround = true;
     }
 
     #endregion

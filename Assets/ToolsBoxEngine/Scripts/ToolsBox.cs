@@ -152,6 +152,17 @@ namespace ToolsBoxEngine {
         }
     }
 
+    [Serializable]
+    public struct Named<T> {
+        public string name;
+        public T value;
+
+        public Named(T value, string name) {
+            this.value = value;
+            this.name = name;
+        }
+    }
+
     public class Token {
         int _token = 0;
         UnityEvent _onEmpty = new UnityEvent();

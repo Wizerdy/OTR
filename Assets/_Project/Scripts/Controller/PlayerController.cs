@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour {
         _playerInput.actions["Attack"].performed += _Attack;
         _playerInput.actions["Throw"].performed += _Throw;
 
-        _playerInput.actions["SetupThrow"].performed += _SetupThrow;
-        _playerInput.actions["SetupThrow"].canceled += _SetupThrow;
+        //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
+        //_playerInput.actions["SetupThrow"].canceled += _SetupThrow;
     }
 
     private void Update() {
@@ -37,15 +37,15 @@ public class PlayerController : MonoBehaviour {
 
     private void _Attack(InputAction.CallbackContext cc) {
         if (_setupThrow) { return; }
-        _player.Attack(Vector2.right);
+        _player.Attack(_player.Orientation);
     }
 
     private void _Throw(InputAction.CallbackContext cc) {
-        if (!_setupThrow) { return; }
+        //if (!_setupThrow) { return; }
         _player.Throw(_player.Orientation);
     }
 
-    private void _SetupThrow(InputAction.CallbackContext cc) {
-        _setupThrow = cc.ReadValue<float>() != 0f;
-    }
+    //private void _SetupThrow(InputAction.CallbackContext cc) {
+    //    _setupThrow = cc.ReadValue<float>() != 0f;
+    //}
 }

@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.0141509175, g: 0.9724546, b: 1, a: 1}
+  m_Sprite: {fileID: 312594206, guid: 41f8981ed24ad7e48a2c53a74f50ff1c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a833a614e70f2540b8f7d862652a320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 6772281400249699784}
   _isOnFloor: 1
   _damage: 10
   _throwPower: 50
@@ -122,8 +122,17 @@ MonoBehaviour:
         m_Calls: []
   _shockwave: {fileID: -2733569397128265110, guid: 872474b6f6e5d4a4a968aab1a36fb3cb, type: 3}
   _attackTime: 0.2
-  Stack: 1
+  maxStack: 5
   sr: {fileID: 5689851770425452610}
+  ps: {fileID: 3171328523806224652, guid: 07a119cb8d4e99e418bddcf683a0f723, type: 3}
+  useChosenColor: 1
+  chosenColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.98486185, b: 0, a: 1}
+  - {r: 1, g: 0.61947197, b: 0, a: 1}
+  - {r: 1, g: 0.16484332, b: 0, a: 1}
+  - {r: 1, g: 0.02352941, b: 0.7437735, a: 1}
+  scaleAddedToEachStack: 0.1
 --- !u!50 &6772281400249699784
 Rigidbody2D:
   serializedVersion: 4
@@ -137,8 +146,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 4
+  m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0

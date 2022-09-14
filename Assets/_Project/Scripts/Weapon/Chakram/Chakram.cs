@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chakram : Weapon {
+    int stack;
     [SerializeField] ChakramShockwave _shockwave;
     [SerializeField] float _attackTime = 0.2f;
-    [SerializeField] public int Stack;
+    [SerializeField] int maxStack;
     [SerializeField] SpriteRenderer sr;
+    [Header("Particles")]
+    [SerializeField] GameObject ps;
+    [Header("Chose colors")]
+    [SerializeField] bool useChosenColor;
+    [SerializeField] Color[] chosenColors;
+    [Header("Chakram scale")]
+    [SerializeField] float scaleAddedToEachStack = 0.1f;
 
-    private void Start() {
+    private void Reset() {
+        chosenColors = new Color[maxStack];
+    }
+
+    protected override void _OnStart() {
         sr = GetComponentInChildren<SpriteRenderer>();
+        stack = 1;
         ColorUpdate();
     }
     protected override IEnumerator IAttack(Vector2 direction) {
@@ -18,23 +31,39 @@ public class Chakram : Weapon {
         Debug.Log(direction);
         ChakramShockwave newShockwave =  Instantiate(_shockwave, transform.position, Quaternion.identity);
         newShockwave._direction = direction;
-        newShockwave._stack = Stack;
-        Stack = 1;
+        newShockwave._stack = stack;
+        stack = 1;
         ColorUpdate();
         yield return new WaitForSeconds(_attackTime);
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
-        Stack++;
+        if (stack < maxStack) {
+            stack++;
+        }
         ColorUpdate();
     }
 
+    protected void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag != "Player") {
+            ParticleSystem.MainModule settings = ps.GetComponent<ParticleSystem>().main;
+            settings.startColor = sr.color;
+            GameObject obj = Instantiate(ps.gameObject, transform.position, Quaternion.identity);
+            Destroy(obj, ps.GetComponent<ParticleSystem>().main.duration + 0.1f);
+        }
+    }
+
     void ColorUpdate() {
-        sr.color = new Color(0,0, 1f / 5 * Stack);
-        if(Stack >= 5) {
-            transform.localScale = new Vector3(2, 2, 2);
+        if (!useChosenColor) {
+            sr.color = new Color(1 - (1f / 5 * stack), 1 - (1f / 5 * stack), 1 - (1f / 5 * stack));
         } else {
+            sr.color = chosenColors[stack - 1];
+        }
+
+        if(stack == 1) {
             transform.localScale = new Vector3(1, 1, 1);
+        } else if (stack < maxStack) {
+            transform.localScale = new Vector3(transform.localScale.x + scaleAddedToEachStack, transform.localScale.y + scaleAddedToEachStack, transform.localScale.z + scaleAddedToEachStack);
         }
     }
 }

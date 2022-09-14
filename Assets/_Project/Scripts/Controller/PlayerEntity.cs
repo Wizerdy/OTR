@@ -55,6 +55,12 @@ public class PlayerEntity : MonoBehaviour {
         }
     }
 
+    public void AttackEnd() {
+        if (_weaponry.HasWeapon) {
+            _weaponry.AttackEnd();
+        }
+    }
+
     #region Item interaction
 
     public void Pickup(GameObject obj) {

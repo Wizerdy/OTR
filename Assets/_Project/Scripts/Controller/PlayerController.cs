@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
         _playerInput.actions["Aim"].performed += _Aim;
         _playerInput.actions["Aim"].canceled += _StopAim;
         _playerInput.actions["Attack"].performed += _Attack;
+        _playerInput.actions["Attack"].canceled += _AttackEnd;
         _playerInput.actions["Throw"].performed += _Throw;
 
         //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour {
     private void _Attack(InputAction.CallbackContext cc) {
         if (_setupThrow) { return; }
         _player.Attack(_player.Orientation);
+    }
+
+    private void _AttackEnd(InputAction.CallbackContext cc) {
+        _player.AttackEnd();
     }
 
     private void _Throw(InputAction.CallbackContext cc) {

@@ -211,7 +211,7 @@ VisualEffect:
       - m_Value: {x: 1.2841258, y: 0.7653389, z: 0}
         m_Name: New Position_position
         m_Overridden: 1
-      - m_Value: {x: -1.0356684, y: 0.59610194, z: 0}
+      - m_Value: {x: 0.66897964, y: 1.7614672, z: 0}
         m_Name: Destination Point_position
         m_Overridden: 1
     m_Vector4f:

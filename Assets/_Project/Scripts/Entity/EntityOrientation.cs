@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolsBoxEngine;
 
-public class EntityOrientation : MonoBehaviour {
+public class EntityOrientation : MonoBehaviour, IEntityAbility {
     [SerializeField] Transform _root;
     Vector2 _orientation = Vector2.up;
 

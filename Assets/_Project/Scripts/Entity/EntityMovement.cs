@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
-public class EntityMovement : MonoBehaviour {
+public class EntityMovement : MonoBehaviour, IEntityAbility {
     private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING }
 
     public class SpeedModifier {
@@ -70,6 +70,7 @@ public class EntityMovement : MonoBehaviour {
             if (!value) { _cantMoveToken++; } else { _cantMoveToken = Mathf.Max(--_cantMoveToken, 0); }
         }
     }
+    public Rigidbody2D Rigidbody => _rb;
     public bool IsMoving => _speed >= 0.01f;
     public Vector2 Orientation => _orientation;
     public Vector2 Direction => _direction;
@@ -256,7 +257,7 @@ public class EntityMovement : MonoBehaviour {
         _onDashStart.Invoke(direction);
     }
 
-    public void StopDash() {
+    private void StopDash() {
         if (_state != State.DASHING) { return; }
         CanMove = true;
         _state = State.DECELERATING;

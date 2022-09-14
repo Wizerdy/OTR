@@ -12,8 +12,13 @@ public class CrawlerController : MonoBehaviour {
     [SerializeField] string _targetTag = "Player";
 
     void Start() {
-        _detectionArea.OnAreaEnter += _ChaseNearestPlayer;
-        _detectionArea.OnAreaExit += _StopNearestChase;
+        if (_detectionArea != null) {
+            _detectionArea.OnAreaEnter += _ChaseNearestPlayer;
+            _detectionArea.OnAreaExit += _StopNearestChase;
+        }
+        if (_attackArea != null) {
+            _attackArea.OnAreaEnter += _Attack;
+        }
     }
 
     private void _ChaseNearestPlayer(GameObject obj) {
@@ -26,8 +31,14 @@ public class CrawlerController : MonoBehaviour {
     private void _StopNearestChase(GameObject obj) {
         if (obj.CompareTag(_targetTag)) {
             GameObject nearest = _detectionArea.Nearest(pair => pair.Key.CompareTag(_targetTag));
-            if (nearest != null) { _crawlerEntity.Chase(nearest.transform); }
-            else { _crawlerEntity.Partol(); }
+            if (nearest != null) { _crawlerEntity.Chase(nearest.transform); } else { _crawlerEntity.Partol(); }
+        }
+    }
+
+    private void _Attack(GameObject obj) {
+        if (obj.CompareTag(_targetTag)) {
+            Vector2 direction = (obj.transform.Position2D() - transform.Position2D()).normalized;
+            _crawlerEntity.Attack(obj, direction);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
-public class EntityFieldOfView : MonoBehaviour {
+public class EntityFieldOfView : MonoBehaviour, IEntityAbility {
     [SerializeField] bool _blind = false;
     [SerializeField] Vector2 _direction = Vector2.up;
     [SerializeField, Range(1f, 360f)] float _angle = 65f;

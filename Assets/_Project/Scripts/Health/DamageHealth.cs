@@ -63,7 +63,7 @@ public class DamageHealth : MonoBehaviour {
             GameObject root = obj.GetComponent<ColliderRoot>()?.Root ?? obj;
             if (_onlyDamageOnceEach && _hitted.Contains(root)) { return; }
             _hitted.Add(root);
-            IHealth health = obj.GetComponent<IHealth>();
+            IHealth health = root.GetComponent<IHealth>();
             if (health != null && health.CanTakeDamage) {
                 health.TakeDamage(_damage, gameObject);
                 _onDamage?.Invoke(health, _damage);

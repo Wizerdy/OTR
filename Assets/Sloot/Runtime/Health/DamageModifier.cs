@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Sloot {
     public class DamageModifier : MonoBehaviour {
-        public enum ResistanceType {
+        public enum ModifierType {
             RESISTANCE,
             WEAKNESS,
             FIX,
@@ -13,30 +13,30 @@ namespace Sloot {
             NOMODIFIER
         }
 
-        [SerializeField] ResistanceType type;
-        [SerializeField] string damageType;
-        [SerializeField] int value;
+        [SerializeField] ModifierType _modifier;
+        [SerializeField] string _modifierName;
+        [SerializeField] int _value;
 
         [Space]
         [SerializeField] UnityEvent<DamageModifier, int> _onUse;
 
         public event UnityAction<DamageModifier, int> OnUse { add => _onUse.AddListener(value); remove => _onUse.RemoveListener(value); }
 
-        public string DamageType { get { return damageType; } }
-        public ResistanceType Resistance { get => type; set => type = value; }
+        public string DamageType { get { return _modifierName; } }
+        public ModifierType Modifier { get => _modifier; set => _modifier = value; }
 
         public int Modify(int amount) {
-            switch (type) {
-                case ResistanceType.WEAKNESS:
-                    amount += value;
+            switch (_modifier) {
+                case ModifierType.WEAKNESS:
+                    amount += _value;
                     break;
-                case ResistanceType.FIX:
-                    amount = value;
+                case ModifierType.FIX:
+                    amount = _value;
                     break;
-                case ResistanceType.RESISTANCE:
-                    amount = Mathf.Min(0, amount - value);
+                case ModifierType.RESISTANCE:
+                    amount = Mathf.Min(0, amount - _value);
                     break;
-                case ResistanceType.IMMUNITY:
+                case ModifierType.IMMUNITY:
                     amount = 0;
                     break;
             }
@@ -45,7 +45,7 @@ namespace Sloot {
         }
     }
 
-    public static class DMMethod {
+    public static class DamageModifierMethod {
         public static DamageModifier Get(this IEnumerable<DamageModifier> dms, string damageType) {
             foreach (var dm in dms) {
                 if (dm.DamageType == damageType) {

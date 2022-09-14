@@ -45,7 +45,6 @@ namespace Sloot {
                     break;
                 default:
                     throw new ArgumentException("Vector not recognise", nameof(origin));
-                    break;
 
             }
             return origin;

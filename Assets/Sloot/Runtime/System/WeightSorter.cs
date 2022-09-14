@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 namespace Sloot {
     public class WeightSorter<T> {
         public enum SortMode {
@@ -19,7 +17,6 @@ namespace Sloot {
         public T this[int index] {
             get {
                 return sorter[index].GetInstance();
-
             }
         }
 
@@ -27,8 +24,7 @@ namespace Sloot {
             this.sortMode = sortMode;
         }
 
-        public WeightSorter() {
-        }
+        public WeightSorter() { }
 
         public void NewSortMode(SortMode sortMode) {
             this.sortMode = sortMode;
@@ -65,7 +61,6 @@ namespace Sloot {
 
         public void Remove(WeightInstance<T> toRemove) {
             sorter.Remove(toRemove);
-            Update?.Invoke();
         }
 
         public void Remove(T toRemove) {
@@ -74,6 +69,7 @@ namespace Sloot {
                     sorter.RemoveAt(i);
                 }
             }
+            Update?.Invoke();
         }
 
         public void AddListener(Action toAdd) {
@@ -89,6 +85,14 @@ namespace Sloot {
                 return default(T);
 
             return sorter[0].GetInstance();
+        }
+
+        public List<T> GetInstances() {
+            List<T> instances = new List<T>();
+            for (int i = 0; i < sorter.Count; i++) {
+                instances.Add(sorter[i].GetInstance());
+            }
+            return instances;
         }
 
         public class WeightInstance<U> {

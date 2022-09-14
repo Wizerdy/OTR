@@ -31,9 +31,9 @@ namespace Sloot {
 
         #endregion
 
-        public void TakeDamage(int amount, string damageType = "") {
-            if (_damageModifiers.Contains(damageType)) {
-                amount = _damageModifiers.Get(damageType).Modify(amount);
+        public void TakeDamage(int amount, string modifierName = "") {
+            if (_damageModifiers.Contains(modifierName)) {
+                amount = _damageModifiers.Get(modifierName).Modify(amount);
             }
 
             if (amount <= 0) { return; }
@@ -44,6 +44,7 @@ namespace Sloot {
         }
 
         public void TakeHeal(int amount) {
+            if(amount <= 0) { return; }
             _currentHealth += amount;
             _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
             _onHeal?.Invoke(amount);

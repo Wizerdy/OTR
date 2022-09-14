@@ -41,6 +41,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     #region Legacy
 
     protected virtual void _OnStart() { }
+    protected virtual void _OnAttackEnd() { }
     protected virtual void _OnPickedUpdate() { }
     protected virtual void _OnAim(Vector2 direction) { }
     protected virtual void _OnPickup(EntityHolding holding) { }
@@ -88,6 +89,10 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         yield return IAttack(direction);
         _attacking = false;
         _onAttackEnd.Invoke();
+    }
+
+    public void AttackEnd() {
+        _OnAttackEnd();
     }
 
     //IEnumerator ILaunchAttack(Vector2 direction) { }

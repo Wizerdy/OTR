@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
-public class PlayerEntity : MonoBehaviour {
+public class SendBackEntity : MonoBehaviour {
     [SerializeField] Transform _root;
     [SerializeField] ColliderDelegate _interactCollider;
     [SerializeField] EntityMovement _movements;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
-    [SerializeField] EntityDirectionnalSprite _directionnalSprite;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
 
@@ -25,23 +24,10 @@ public class PlayerEntity : MonoBehaviour {
     private void OnEnable() {
         _interactCollider.OnCollisionEnter += _Pickup;
         _interactCollider.OnTriggerEnter += _Pickup;
-
-        _movements.OnDashStart += _OnDash;
-        _movements.OnDashEnd += _OnStopDash;
-
-        _weaponry.OnAttackStart += _OnAttackStart;
-        _weaponry.OnAttackEnd += _OnAttackEnd;
-    }
-
-    public void Move(Vector2 direction) {
-        if (!_movements.CanMove) { return; }
-        _movements.Move(direction);
-        if (direction != Vector2.zero) { _directionnalSprite?.ChangeSprite(direction); }
     }
 
     public void Aim(Vector2 direction) {
         if (!CanLookAround) { return; }
-        //if (direction == Vector2.zero) { direction = _movements.Orientation; }
         _oriention.LookAt(direction);
         _weaponry.Aim(direction);
         _onAim.Invoke(direction);
@@ -55,12 +41,6 @@ public class PlayerEntity : MonoBehaviour {
         }
     }
 
-    public void AttackEnd() {
-        if (_weaponry.HasWeapon) {
-            _weaponry.AttackEnd();
-        }
-    }
-
     #region Item interaction
 
     public void Pickup(GameObject obj) {
@@ -68,12 +48,8 @@ public class PlayerEntity : MonoBehaviour {
         Weapon weapon = obj.GetComponentInRoot<Weapon>();
         if (weapon != null) {
             _weaponry.Pickup(weapon);
+            Throw(FindObjectOfType<PlayerEntity>().transform.position - transform.position);
         }
-    }
-
-    public void Drop() {
-        _holding.Drop();
-        _weaponry.Drop();
     }
 
     public void Throw(Vector2 direction) {
@@ -96,26 +72,5 @@ public class PlayerEntity : MonoBehaviour {
             Pickup(root);
         }
     }
-
-    private void _OnDash(Vector2 direction) {
-        CanLookAround = false;
-
-    }
-
-    private void _OnStopDash() {
-        CanLookAround = true;
-    }
-
-    private void _OnAttackStart(Vector2 direction) {
-        _movements.Stop();
-        _movements.CanMove = false;
-        CanLookAround = false;
-    }
-
-    private void _OnAttackEnd() {
-        _movements.CanMove = true;
-        CanLookAround = true;
-    }
-
     #endregion
 }

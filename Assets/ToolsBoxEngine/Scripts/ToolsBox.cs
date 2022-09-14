@@ -163,12 +163,13 @@ namespace ToolsBoxEngine {
         }
     }
 
+    [Serializable]
     public class Token {
         int _token = 0;
-        UnityEvent _onEmpty = new UnityEvent();
-        UnityEvent _onFill = new UnityEvent();
-        UnityEvent<int> _onEarn = new UnityEvent<int>();
-        UnityEvent<int> _onLose = new UnityEvent<int>();
+        [HideInInspector] UnityEvent _onEmpty = new UnityEvent();
+        [HideInInspector] UnityEvent _onFill = new UnityEvent();
+        [HideInInspector] UnityEvent<int> _onEarn = new UnityEvent<int>();
+        [HideInInspector] UnityEvent<int> _onLose = new UnityEvent<int>();
 
         public int Tokens => _token;
 

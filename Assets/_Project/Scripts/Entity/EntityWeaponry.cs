@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
-public class EntityWeaponry : MonoBehaviour {
+public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityMovement _entityMovement;
     [SerializeField] Animator _attackAnimator;
     [SerializeField] DamageHealth _damageHealth;
@@ -61,6 +61,11 @@ public class EntityWeaponry : MonoBehaviour {
         if (!HasWeapon || !_weapon.CanAttack) { return; }
         _damageHealth.ResetHitted();
         StartCoroutine(_weapon.Attack(direction));
+    }
+
+    public void AttackEnd() {
+        if (!HasWeapon || _weapon.CanAttack) { return; }
+        _weapon.AttackEnd();
     }
 
     public void Aim(Vector2 direction) {

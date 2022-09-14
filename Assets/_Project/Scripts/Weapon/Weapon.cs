@@ -106,6 +106,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     public void Pickup(EntityHolding holding) {
         transform.parent = holding.transform;
+        transform.localPosition = Vector2.zero;
         gameObject.SetActive(false);
         _OnPickup(holding);
     }

@@ -57,7 +57,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _destroyOnDeath: 1
+  _destroyOnDeath: 0
   _damageModifiers: []
   _onMaxHealthChange:
     _event:
@@ -227,7 +227,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.5
+  m_Radius: 4
 --- !u!114 &6203473350654433266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +816,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crawlerEntity: {fileID: 6203473351533937133}
-  _detectionArea: {fileID: 6203473350829178253}
-  _attackArea: {fileID: 0}
+  _detectionArea: {fileID: 0}
+  _attackArea: {fileID: 6203473350829178253}
   _targetTag: Player

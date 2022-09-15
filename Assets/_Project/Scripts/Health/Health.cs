@@ -7,16 +7,16 @@ using ToolsBoxEngine;
 public class Health : MonoBehaviour, IHealth {
     [SerializeField] int _maxHealth = 50;
     [Space]
-    [SerializeField] UnityEvent<int> _onHit;
-    [SerializeField] UnityEvent<int> _onHeal;
-    [SerializeField] UnityEvent _onDeath;
+    [SerializeField] BetterEvent<int> _onHit = new BetterEvent<int>();
+    [SerializeField] BetterEvent<int> _onHeal = new BetterEvent<int>();
+    [SerializeField] BetterEvent _onDeath = new BetterEvent();
     [SerializeField] bool _destroyOnDeath = true;
     [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
 
-    [SerializeField, HideInInspector] UnityEvent<int> _onMaxHealthChange;
-    [SerializeField, HideInInspector] UnityEvent _onInvicible;
-    [SerializeField, HideInInspector] UnityEvent _onVulnerable;
-    [SerializeField, HideInInspector] UnityEvent _onLateStart;
+    [SerializeField, HideInInspector] BetterEvent<int> _onMaxHealthChange = new BetterEvent<int>();
+    [SerializeField, HideInInspector] BetterEvent _onInvicible = new BetterEvent();
+    [SerializeField, HideInInspector] BetterEvent _onVulnerable = new BetterEvent();
+    [SerializeField, HideInInspector] BetterEvent _onLateStart = new BetterEvent();
 
     Token _invicibilityToken = new Token();
     int _currentHealth;

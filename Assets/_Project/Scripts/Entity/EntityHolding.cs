@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
-public class EntityHolding : MonoBehaviour {
+public class EntityHolding : MonoBehaviour, IEntityAbility {
     GameObject _holding;
     IHoldable _iholding;
 

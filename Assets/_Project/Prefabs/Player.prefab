@@ -163,28 +163,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 50
   _onHit:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onHeal:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onDeath:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _destroyOnDeath: 1
   _damageModifiers: []
   _onMaxHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onInvicible:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onVulnerable:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onLateStart:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1559343441684857439
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +494,9 @@ GameObject:
   m_Component:
   - component: {fileID: 887048020161268641}
   - component: {fileID: 8205320720882076262}
+  - component: {fileID: 2062017968}
+  - component: {fileID: 7752909231506326022}
+  - component: {fileID: 4459767335104591702}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -535,6 +545,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &2062017968
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78069b1ccf7c8d24c9f482ab71724167, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7752909231506326022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df8980d5eb972e4a948373e2adc934a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2062017968}
+  entityMovement: {fileID: 6862933262211988682}
+--- !u!114 &4459767335104591702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d366b257db70900408565d7246f7bc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 147940007823276091}
 --- !u!1 &4845077738687642125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,7 +1180,7 @@ GameObject:
   - component: {fileID: 7352506418497988158}
   m_Layer: 6
   m_Name: PlayerCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

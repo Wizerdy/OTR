@@ -5,10 +5,12 @@ using UnityEngine.Events;
 using ToolsBoxEngine;
 
 public class CrawlerEntity : MonoBehaviour {
-    enum State { NONE, PATROLLING, CHASE }
+    enum State { NONE, PATROLLING, CHASING, ATTACKING }
 
     [SerializeField] EntityMovement _entityMovements;
     [SerializeField] EntityOrientation _entityOrientation;
+    [SerializeField] EntityAbilities _entityAbilities;
+    [SerializeField] EntityAttacks _entityAttacks;
 
     [SerializeField] float _timeBewteenPatrol = 1f;
     [SerializeField] float _attackTime = 1f;
@@ -31,11 +33,18 @@ public class CrawlerEntity : MonoBehaviour {
 
     public void Chase(Transform obj) {
         _chaseTarget = obj.transform;
-        ChangeState(State.CHASE);
+        ChangeState(State.CHASING);
     }
 
     public void Partol() {
         ChangeState(State.PATROLLING);
+    }
+
+    public void Attack(GameObject target, Vector2 direction) {
+        if (State.ATTACKING == state) { return; }
+        ChangeState(State.ATTACKING);
+        _entityOrientation.LookAt(direction);
+        StartCoroutine(AttackRoutine(target, direction));
     }
 
     private void ChangeState(State newState) {
@@ -44,23 +53,26 @@ public class CrawlerEntity : MonoBehaviour {
         if (_movementRoutine != null) { StopCoroutine(_movementRoutine); }
 
         state = newState;
-        if (newState != State.CHASE) { _chaseTarget = null; }
+        if (newState != State.CHASING) { _chaseTarget = null; }
         IEnumerator routine;
         switch (newState) {
-            default:
             case State.PATROLLING:
                 routine = PatrolRoutine();
                 break;
-            case State.CHASE:
+            case State.CHASING:
                 routine = ChaseRoutine();
                 break;
+            default:
+                routine = null;
+                break;
         }
+        if (routine == null) { return; }
         _movementRoutine = StartCoroutine(routine);
     }
 
     IEnumerator ChaseRoutine() {
         Vector2 direction;
-        while (state == State.CHASE) {
+        while (state == State.CHASING) {
             if (_chaseTarget == null) {
                 ChangeState(State.PATROLLING);
                 yield break;
@@ -84,8 +96,11 @@ public class CrawlerEntity : MonoBehaviour {
         }
     }
 
-    IEnumerator AttackRoutine(Vector2 direction) {
-        yield return new WaitForSeconds(_attackTime);
+    IEnumerator AttackRoutine(GameObject target, Vector2 direction) {
+        Debug.Log("ATTACK MONKEY !");
+        yield return _entityAttacks.Use("Test", target, direction);
+        ChangeState(State.PATROLLING);
+        //yield return new WaitForSeconds(_attackTime);
     }
 
     private void MoveToward(Vector2 direction) {

@@ -14,7 +14,7 @@ public class LaserCoda : MonoBehaviour {
             collision.gameObject.GetComponent<ColliderRoot>().Root.GetComponent<Rigidbody2D>().velocity = (transform.position - FindObjectOfType<Coda>().transform.position).normalized * laserPower;
             Debug.Log(collision.gameObject.GetComponent<ColliderRoot>().Root.GetComponent<Rigidbody2D>().velocity);
             Debug.Log((transform.position - FindObjectOfType<Coda>().transform.position).normalized * laserPower);
-            CoroutinesManager.Start(Too ls.Delay(() => tamer.CanMove = true, 0.2f));
+            CoroutinesManager.Start(Tools.Delay(() => tamer.CanMove = true, 0.2f));
         }
     }
 }

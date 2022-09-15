@@ -1,0 +1,320 @@
+fileFormatVersion: 2
+guid: 38e895268f5e0544595f1395fa3f29f9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 266.6667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05c62e8ede7dfc64a91903b39ee6e253
+      internalID: -1413837170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 266.6667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baa22f53ba115b6438bcfdd67181a83e
+      internalID: -551559588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 266.6667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48bf6e386716f9443a1f373e1f1b9296
+      internalID: 1441341268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 133.66667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b68e08b05e8c0bd46bd19b79614092ed
+      internalID: -305341006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 133.66667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6dfd1c6d39c2de47acc043aed7eee9f
+      internalID: -454678797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_5
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 133.66667
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09be9c0930fa254ba0ae3985556ef7b
+      internalID: 183552196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.66667175
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506024ec016f8f64d8ca9384ca91387c
+      internalID: -325794820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_7
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 0.66667175
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3103ae4263432a44a4293b26418ba1e
+      internalID: 1835478476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_8
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 0.66667175
+        width: 133.33333
+        height: 133.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96e99f3b13657f4f81c1e8e74770860
+      internalID: -1535192522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_7: 1835478476
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_8: -1535192522
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_0: -1413837170
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_1: -551559588
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_3: -305341006
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_2: 1441341268
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_4: -454678797
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_6: -325794820
+      different-texture-tile-seamless-pattern-set-for-pixel-art-style-game-ground-or-stone-wood-glass-and-brick-wall-isolated-vector-illustration-8-bit-design-for-stickers-logo-mobile-app-400-174941664_5: 183552196
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

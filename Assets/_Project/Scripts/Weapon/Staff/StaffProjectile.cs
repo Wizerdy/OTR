@@ -18,9 +18,9 @@ public class StaffProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        var target = collision.GetComponent<IBuffable>();
-        if (target) 
-            target.ApplyBuff(buff);
+        //var target = collision.GetComponent<IBuffable>();
+        if (collision.tag == "Player") 
+            //target.ApplyBuff(buff);
 
         Destroy(this);
     }

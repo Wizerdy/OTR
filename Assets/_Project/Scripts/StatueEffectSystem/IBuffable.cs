@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IBuffable : MonoBehaviour
+public interface IBuffable
 {
-    public void ApplyBuff(ScriptableStatusEffect effect) {
+    public void ApplyBuff(ScriptableStatusEffect effect);
 
-    }
+    public void RemoveBuff(ScriptableStatusEffect effect);
 
-    public void RemoveBuff() {
-
-    }
-
-    public void Effect() {
-
-    }
+    public void DoEffect(float time, int index);
 }

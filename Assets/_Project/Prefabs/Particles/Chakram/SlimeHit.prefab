@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 68362456150843017}
   - component: {fileID: 7278831774395860698}
   m_Layer: 0
-  m_Name: ChakramHit
+  m_Name: SlimeHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
-      maxColor: {r: 1, g: 0.61947197, b: 0, a: 1}
+      maxColor: {r: 0.34901962, g: 0.70980394, b: 0.9686275, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

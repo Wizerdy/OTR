@@ -1255,7 +1255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186af658cf2dc6a49b934c30c829886c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPower: 60
+  laserPower: 25
   Collider: {fileID: 740045366}
 --- !u!1 &762178084
 GameObject:

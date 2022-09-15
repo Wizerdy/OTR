@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScriptableStatusEffect : ScriptableObject
 {
     public string effectName;
+    public bool isDebuff;
     public float amount;
     public float duration;
     public bool isDOT;

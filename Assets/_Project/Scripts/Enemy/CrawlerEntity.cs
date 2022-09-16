@@ -13,7 +13,7 @@ public class CrawlerEntity : MonoBehaviour {
     [SerializeField] EntityAttacks _entityAttacks;
 
     [SerializeField] float _timeBewteenPatrol = 1f;
-    [SerializeField] float _attackTime = 1f;
+    //[SerializeField] float _attackTime = 1f;
 
     [SerializeField, HideInInspector] BetterEvent<RaycastHit2D> _onView = new BetterEvent<RaycastHit2D>();
 

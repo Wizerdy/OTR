@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-[CreateAssetMenu(fileName = "New Attack", menuName = "Scriptable Object")]
+[CreateAssetMenu(fileName = "New Attack", menuName = "Scriptable Object/Attacks/Dash Attack")]
 public class Attack : ScriptableObject {
     [SerializeField] AmplitudeCurve _dash = new AmplitudeCurve();
     [SerializeField] float _chargeTime = 1f;

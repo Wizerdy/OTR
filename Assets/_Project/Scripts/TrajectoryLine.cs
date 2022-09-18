@@ -24,6 +24,7 @@ public class TrajectoryLine : MonoBehaviour
         lineRenderer.startWidth = startThiccness;
         lineRenderer.endWidth = endThiccness;
         filter.useTriggers = false;
+        Physics2D.queriesHitTriggers = false;
     }
 
     // Update is called once per frame
@@ -35,22 +36,22 @@ public class TrajectoryLine : MonoBehaviour
     }
 
     private void ShootingRay(Vector2 pos) {
-        linePoint++;
+        //linePoint++;
 
-        List<RaycastHit2D> hits = Physics2D.Raycast(ransform.position, playerDir, filter, length);
+
+        //List<RaycastHit2D> hits = Physics2D.Raycast(transform.position, playerDir, filter, length);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDir, length) ;
-        Debug.DrawRay(transform.position, playerDir, Color.green);
         Vector2 endPos = pos + (length * playerDir);
-
+        Debug.Log(hit.transform.name);
         if (hit) {
-            endPos = hit.transform.position;
+            //endPos = hit.transform.position;
             //Vector2 bouncePos = hit.transform.position;
             //lineRenderer.SetPosition(linePoint, bouncePos);
             //linePoint++;
         }
 
         lineRenderer.SetPosition(0, pos);
-        lineRenderer.SetPosition(linePoint, endPos);
+        lineRenderer.SetPosition(1, endPos);
     }
 
     private void GetDirection(Vector2 direction) {

@@ -417,28 +417,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 50
   _onHit:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onHeal:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onDeath:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _destroyOnDeath: 1
   _damageModifiers: []
   _onMaxHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onInvicible:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onVulnerable:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onLateStart:
-    m_PersistentCalls:
-      m_Calls: []
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!4 &125719974
 Transform:
   m_ObjectHideFlags: 0
@@ -1729,6 +1736,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityMovements: {fileID: 46967778}
   _entityOrientation: {fileID: 46967780}
+  _entityAbilities: {fileID: 0}
+  _entityAttacks: {fileID: 0}
   _timeBewteenPatrol: 1
   _attackTime: 1
   _onView:
@@ -7140,6 +7149,10 @@ PrefabInstance:
     - target: {fileID: 3905317884828674427, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439602694822361419, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}

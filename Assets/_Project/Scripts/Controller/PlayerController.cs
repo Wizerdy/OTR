@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ToolsBoxEngine;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerInput _playerInput;
     [SerializeField] PlayerEntity _player;
+    [SerializeField] AimHelperReference _aimHelperReference;
 
     bool _setupThrow = false;
 
@@ -29,7 +31,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _Aim(InputAction.CallbackContext cc) {
-        _player.Aim(cc.ReadValue<Vector2>());
+        Vector2 direction = cc.ReadValue<Vector2>();
+        if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
+        _player.Aim(direction);
     }
 
     private void _StopAim(InputAction.CallbackContext cc) {

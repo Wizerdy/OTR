@@ -9,25 +9,31 @@ using UnityEngine;
 public class AtomeMagnet : MonoBehaviour {
     [SerializeField] bool _isActive;
     public bool IsActive { get => _isActive; set => _isActive = value; }
+    float _radius;
     EntityCollisionArea _entityCollisionArea;
-    [SerializeField] string ComponentToMagnet;
+    [SerializeField] string _componentToMagnet = "IHoldable";
     [SerializeField] AnimationCurve _force;
-    [SerializeField] float _radius;
     [SerializeField] CircleCollider2D _circleCollider2D;
     Coroutine _coroutine = null;
+    private void Reset() {
+        _entityCollisionArea = GetComponent<EntityCollisionArea>();
+        _circleCollider2D = GetComponent<CircleCollider2D>();
+    }
 
     private void Start() {
-        _entityCollisionArea = GetComponent<EntityCollisionArea>();
-        _circleCollider2D.radius = _radius;
+        if (_entityCollisionArea == null) {
+            _entityCollisionArea = GetComponent<EntityCollisionArea>();
+        }
+        _radius = _circleCollider2D.radius;
     }
 
     void Update() {
         if (IsActive && !_entityCollisionArea.IsEmpty() && null == _coroutine) {
             GameObject nearest = null;
             try {
-                nearest = _entityCollisionArea.Nearest(pair => pair.Key.gameObject.GetComponent(Type.GetType(ComponentToMagnet)) != null);
+                nearest = _entityCollisionArea.Nearest(pair => pair.Key.gameObject.GetComponent(Type.GetType(_componentToMagnet)) != null);
             } catch {
-                Debug.LogError("The Type \"" + ComponentToMagnet + "\" is Not Recognise");
+                Debug.LogError("The Type \"" + _componentToMagnet + "\" is Not Recognise");
                 IsActive = false;
             }
             //GameObject nearestIHoldable = _entityCollisionArea.Nearest();

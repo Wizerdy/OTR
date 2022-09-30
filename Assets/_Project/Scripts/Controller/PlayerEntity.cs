@@ -11,6 +11,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
+    [SerializeField] EntityTryCatch _entityTryCatch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
@@ -79,6 +80,10 @@ public class PlayerEntity : MonoBehaviour {
     public void Throw(Vector2 direction) {
         _holding.Throw(direction, _root.gameObject);
         _weaponry.Drop();
+    }
+
+    public void TryCatch() {
+        _entityTryCatch.TryCatch();
     }
 
     #endregion

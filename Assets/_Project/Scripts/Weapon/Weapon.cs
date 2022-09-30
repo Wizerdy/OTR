@@ -7,6 +7,7 @@ using ToolsBoxEngine;
 public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] protected bool _isOnFloor = true;
+    [SerializeField] protected bool _isInAir = true;
     [SerializeField] protected int _damage = 10;
     [SerializeField] protected float _throwPower = 50f;
     [SerializeField, Range(0f, 1f)] private float _movespeed = 1f;
@@ -34,6 +35,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public int Damage => _damage;
     public bool IsAttacking => _attacking;
     public bool CanAttack => !IsAttacking && _canAttack;
+    public bool IsInAir => _isInAir;
     protected float MoveSpeed { get => _movespeed; set { _movespeed = value; _onMovespeedSet.Invoke(value); } }
 
     #endregion

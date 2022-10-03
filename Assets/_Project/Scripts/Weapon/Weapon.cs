@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 
+public enum AttackIndex { FIRST, SECOND }
+
 public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] protected bool _isOnFloor = true;
@@ -11,10 +13,12 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected float _throwPower = 50f;
     [SerializeField, Range(0f, 1f)] private float _movespeed = 1f;
 
-    [SerializeField] protected BetterEvent<Vector2> _onAttackStart = new BetterEvent<Vector2>();
-    [SerializeField] protected BetterEvent _onAttackEnd = new BetterEvent();
+    [SerializeField] protected BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
+    [SerializeField] protected BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
+
+    protected Dictionary<AttackIndex, System.Func<EntityAbilities, Vector2, IEnumerator>> _attacks;
 
     protected Animator _targetAnimator;
 
@@ -27,8 +31,8 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     #region Properties
 
-    public event UnityAction<Vector2> OnAttackStart { add => _onAttackStart += value; remove => _onAttackStart -= value; }
-    public event UnityAction OnAttackEnd { add => _onAttackEnd.AddListener(value); remove => _onAttackEnd.RemoveListener(value); }
+    public event UnityAction<AttackIndex, Vector2> OnAttackStart { add => _onAttack += value; remove => _onAttack -= value; }
+    public event UnityAction<AttackIndex> OnAttackEnd { add => _onAttackEnd.AddListener(value); remove => _onAttackEnd.RemoveListener(value); }
     public event UnityAction OnFall { add => _onFall.AddListener(value); remove => _onFall.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
     public int Damage => _damage;
@@ -41,7 +45,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     #region Legacy
 
     protected virtual void _OnStart() { }
-    protected virtual void _OnAttackEnd() { }
+    protected virtual void _OnPressAttackEnd(AttackIndex type, EntityAbilities caster) { }
     protected virtual void _OnPickedUpdate() { }
     protected virtual void _OnAim(Vector2 direction) { }
     protected virtual void _OnPickup(EntityHolding holding) { }
@@ -82,22 +86,19 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _OnAim(direction);
     }
 
-    public IEnumerator Attack(Vector2 direction) {
+    public IEnumerator Attack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
         if (!CanAttack) { yield return null; }
+        if (!_attacks.ContainsKey(type)) { yield return null; }
         _attacking = true;
-        _onAttackStart.Invoke(direction);
-        yield return IAttack(direction);
+        _onAttack.Invoke(type, direction);
+        yield return _attacks[type](caster, direction);
         _attacking = false;
-        _onAttackEnd.Invoke();
+        _onAttackEnd.Invoke(type);
     }
 
-    public void AttackEnd() {
-        _OnAttackEnd();
+    public void PressAttackEnd(AttackIndex type, EntityAbilities caster) {
+        _OnPressAttackEnd(type, caster);
     }
-
-    //IEnumerator ILaunchAttack(Vector2 direction) { }
-
-    protected abstract IEnumerator IAttack(Vector2 direction);
 
     #region IHoldable
 

@@ -493,6 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 887048020161268641}
+  - component: {fileID: 7815873619314827620}
   - component: {fileID: 8205320720882076262}
   - component: {fileID: 2062017968}
   - component: {fileID: 7752909231506326022}
@@ -526,6 +527,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7815873619314827620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89b0ee8bd4060d4b82739776576acee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &8205320720882076262
 Rigidbody2D:
   serializedVersion: 4
@@ -722,12 +735,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 887048020161268641}
-  _interactCollider: {fileID: 1807640208009173419}
+  _abilities: {fileID: 7815873619314827620}
   _movements: {fileID: 6862933262211988682}
   _oriention: {fileID: 7488032526107593726}
   _holding: {fileID: 4819328008194156798}
   _weaponry: {fileID: 3867635824926218261}
   _directionnalSprite: {fileID: 3645087357924411892}
+  _interactCollider: {fileID: 1807640208009173419}
   _onAim:
     _event:
       m_PersistentCalls:
@@ -792,6 +806,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bd0df46b-e684-4783-9d2e-a79e4ce1dbfe
     m_ActionName: Gameplay/SetupThrow[/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4430ed80-921d-4f02-b705-ea745dd501b0
+    m_ActionName: Gameplay/Second Attack[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -1118,7 +1136,7 @@ MonoBehaviour:
   _attackAnimator: {fileID: 5925994806173688309}
   _damageHealth: {fileID: 7460772279012484888}
   _health: {fileID: 147940007823276091}
-  _onAttackStart:
+  _onAttack:
     _event:
       m_PersistentCalls:
         m_Calls: []

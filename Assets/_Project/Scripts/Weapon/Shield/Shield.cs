@@ -15,6 +15,7 @@ public class Shield : Weapon {
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
+        _attacks.Add(AttackIndex.FIRST, IAttack);
     }
 
     protected override void _OnAim(Vector2 direction) {
@@ -63,7 +64,7 @@ public class Shield : Weapon {
         weaponry.Health.RemoveDamageModifier(_directionalModifier);
     }
 
-    protected override IEnumerator IAttack(Vector2 direction) {
+    protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         if (!_aiming) { yield break; }
 

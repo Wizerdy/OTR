@@ -9,7 +9,8 @@ using ToolsBoxEngine;
 public class FrameColliderEditor : Editor {
     private static class Colors {
         public static Color NOT_SELECTED = new Color(1f, 1f, 1f, 0.1f);
-        public static Color IN_GROUP = new Color(0.7f, 0.7f, 0.7f, 0.8f);
+        //public static Color IN_GROUP = new Color(0.7f, 0.7f, 0.7f, 0.8f);
+        public static Color IN_GROUP = new Color(0.7f, 0.2f, 0.2f, 0.8f);
         public static Color SELECTED = Color.yellow;
     }
 
@@ -34,10 +35,16 @@ public class FrameColliderEditor : Editor {
 
         EditorGUI.BeginChangeCheck();
 
+        EditorGUI.BeginChangeCheck();
+
         EditorGUI.BeginDisabledGroup(_colliders == null || _colliders.Count == 0 || _colliders.Count == 1);
         EditorGUILayout.PrefixLabel("Group");
         _index.x = EditorGUILayout.IntSlider(_index.x, 0, _colliders.Count - 1);
         EditorGUI.EndDisabledGroup();
+
+        if (EditorGUI.EndChangeCheck()) {
+            _index.y = 0;
+        }
 
         if (_colliders.ContainsKey(_index.x)) {
 
@@ -84,13 +91,19 @@ public class FrameColliderEditor : Editor {
         if (GUILayout.Button(" +[] ")) {
             AddRectangle();
         }
-        GUILayout.Button(" X ");
+        EditorGUI.BeginDisabledGroup(!(_index.x >= 0 && _index.x < _colliders.Count && _index.y < _colliders[_index.x].Count));
+        if (GUILayout.Button(" X ")) {
+            DeleteCollider(_colliders[_index.x][_index.y]);
+        }
+        EditorGUI.EndDisabledGroup();
 
         EditorGUILayout.EndHorizontal();
     }
 
     private void OnSceneGUI() {
         if (!_init) { Init(); }
+
+        float aspect = SceneView.lastActiveSceneView.size;
         Matrix4x4 baseMatrix = Handles.matrix;
         FrameCollider target = (serializedObject.targetObject as FrameCollider);
         Handles.matrix = target?.transform.localToWorldMatrix ?? Handles.matrix;
@@ -122,14 +135,14 @@ public class FrameColliderEditor : Editor {
                         FrameCollider.Rectangle rectangle = pair.Value[i] as FrameCollider.Rectangle;
                         Quaternion nion = Handles.FreeRotateHandle(Quaternion.AngleAxis(rectangle.rotation, Vector3.forward), box.center, 1f);
                         Debug.DrawLine(Vector3.zero, nion * Vector3.right, Color.blue, 5f);
-                        Debug.Log(Quaternion.Angle(Quaternion.AngleAxis(0f, Vector3.forward), nion));
+                        //Debug.Log(Quaternion.Angle(Quaternion.AngleAxis(0f, Vector3.forward), nion));
                         (pair.Value[i] as FrameCollider.Rectangle).rotation = Quaternion.Angle(Quaternion.AngleAxis(0f, Vector3.forward), nion);
                     }
                 }
 
                 if (_index.x == pair.Key && i == _index.y) {
                     handle.DrawHandle();
-                    handle.center = Handles.FreeMoveHandle(handle.center, Quaternion.identity, 0.5f, Vector3.zero, Handles.CircleHandleCap);
+                    handle.center = Handles.FreeMoveHandle(handle.center, Quaternion.identity, 0.1f * aspect, Vector3.zero, Handles.CircleHandleCap);
                 }
 
                 if (EditorGUI.EndChangeCheck()) {
@@ -193,20 +206,24 @@ public class FrameColliderEditor : Editor {
         FrameCollider.Rectangle rectangle = new FrameCollider.Rectangle(Vector2.zero, Vector3.one * 5f, 0f);
 
         NewBoxBounds(rectangle);
-
+        _colliders[_index.x].Add(rectangle);
         int size = ++p_overlapRectangle.arraySize;
         SerializeRectangle(p_overlapRectangle.GetArrayElementAtIndex(size - 1), rectangle, 0);
         _properties[rectangle] = p_overlapRectangle.GetArrayElementAtIndex(size - 1);
+
+        SceneView.RepaintAll();
     }
 
     private void AddCircle() {
         FrameCollider.Circle circle = new FrameCollider.Circle(Vector2.zero, 5f);
 
         NewSphereBounds(circle);
-
+        _colliders[_index.x].Add(circle);
         int size = ++p_overlapCircle.arraySize;
         SerializeCircle(p_overlapCircle.GetArrayElementAtIndex(size - 1), circle, 0);
         _properties[circle] = p_overlapCircle.GetArrayElementAtIndex(size - 1);
+
+        SceneView.RepaintAll();
     }
 
     private void Replicate(SerializedProperty element) {
@@ -313,5 +330,21 @@ public class FrameColliderEditor : Editor {
 
     private FrameCollider.Rectangle BoundsToRectangle(BoxBoundsHandle handle) {
         return new FrameCollider.Rectangle(handle.center, handle.size, 0f);
+    }
+
+    // TODO
+    private void DeleteCollider(FrameCollider.IOverlapCollider2D collider) {
+        if (collider == null) { return; }
+
+        if (collider is FrameCollider.Circle circle) {
+            SerializedProperty indexed = p_overlapCircle.GetArrayElementAtIndex(p_overlapCircle.arraySize - 1);
+            FrameCollider.IOverlapCollider2D last = DeserializeCircle(indexed.FindPropertyRelative("value"));
+            SerializeCircle(_properties[circle], DeserializeCircle(indexed.FindPropertyRelative("value")), FindIndex(indexed));
+            _properties.SwapKey(circle, last);
+            --p_overlapCircle.arraySize;
+        }
+
+        _properties.Remove(collider);
+        _boundsHandle.Remove(collider);
     }
 }

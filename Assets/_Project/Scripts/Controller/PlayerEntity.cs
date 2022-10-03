@@ -17,6 +17,7 @@ public class PlayerEntity : MonoBehaviour {
 
     Token _canLookAround = new Token();
 
+    public bool HasWeapon => _weaponry.HasWeapon;
     public Vector2 Orientation => _oriention.Orientation;
     public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }
 
@@ -29,7 +30,7 @@ public class PlayerEntity : MonoBehaviour {
         _movements.OnDashStart += _OnDash;
         _movements.OnDashEnd += _OnStopDash;
 
-        _weaponry.OnAttackStart += _OnAttackStart;
+        _weaponry.OnAttack += _OnAttackStart;
         _weaponry.OnAttackEnd += _OnAttackEnd;
     }
 
@@ -47,18 +48,20 @@ public class PlayerEntity : MonoBehaviour {
         _onAim.Invoke(direction);
     }
 
-    public void Attack(Vector2 direction) {
+    public void Attack(AttackIndex type, Vector2 direction) {
         if (_weaponry.HasWeapon) {
-            _weaponry.Attack(direction);
-        } else {
-            _movements.Dash(Orientation);
+            _weaponry.Attack(type, direction);
         }
     }
 
-    public void AttackEnd() {
+    public void AttackEnd(AttackIndex type) {
         if (_weaponry.HasWeapon) {
-            _weaponry.AttackEnd();
+            _weaponry.AttackEnd(type);
         }
+    }
+
+    public void Dash(Vector2 direction) {
+        _movements.Dash(direction);
     }
 
     #region Item interaction
@@ -106,13 +109,13 @@ public class PlayerEntity : MonoBehaviour {
         CanLookAround = true;
     }
 
-    private void _OnAttackStart(Vector2 direction) {
+    private void _OnAttackStart(AttackIndex type, Vector2 direction) {
         _movements.Stop();
         _movements.CanMove = false;
         CanLookAround = false;
     }
 
-    private void _OnAttackEnd() {
+    private void _OnAttackEnd(AttackIndex type) {
         _movements.CanMove = true;
         CanLookAround = true;
     }

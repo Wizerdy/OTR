@@ -15,6 +15,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     [SerializeField] protected BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
     [SerializeField] protected BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
+    [SerializeField] protected BetterEvent<Collider2D> _onAttackHit = new BetterEvent<Collider2D>();
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
 
@@ -33,6 +34,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     public event UnityAction<AttackIndex, Vector2> OnAttackStart { add => _onAttack += value; remove => _onAttack -= value; }
     public event UnityAction<AttackIndex> OnAttackEnd { add => _onAttackEnd.AddListener(value); remove => _onAttackEnd.RemoveListener(value); }
+    public event UnityAction<Collider2D> OnAttackHit { add => _onAttackHit.AddListener(value); remove => _onAttackHit.RemoveListener(value); }
     public event UnityAction OnFall { add => _onFall.AddListener(value); remove => _onFall.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
     public int Damage => _damage;
@@ -54,6 +56,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     protected virtual void _OnDrop(EntityWeaponry weaponry) { }
     protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, Collider2D collider = null) { }
     protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, GameObject obj) { }
+    protected virtual void _OnAttackHit(Collider2D collider) { }
 
     #endregion
 
@@ -88,8 +91,8 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     }
 
     public IEnumerator Attack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
-        if (!CanAttack) { yield return null; }
-        if (!_attacks.ContainsKey(type)) { yield return null; }
+        if (!CanAttack) { yield break; }
+        if (!_attacks.ContainsKey(type)) { yield break; }
         _attacking = true;
         _onAttack.Invoke(type, direction);
         yield return _attacks[type](caster, direction);
@@ -120,12 +123,14 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     public void Drop(EntityWeaponry weaponry) {
         _OnDrop(weaponry);
+        weaponry.DamageHealth.OnTrigger -= _InvokeAttackHit;
         _targetAnimator = null;
     }
 
     public void Pickup(EntityWeaponry weaponry) {
         _targetAnimator = weaponry.Animator;
         weaponry.SetMovementSlow(_movespeed);
+        weaponry.DamageHealth.OnTrigger += _InvokeAttackHit;
         _OnPickup(weaponry);
     }
 
@@ -164,6 +169,11 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
             _colliders[i].isTrigger = state;
         }
         _isOnFloor = state;
+    }
+
+    private void _InvokeAttackHit(Collider2D collider) {
+        _OnAttackHit(collider);
+        _onAttackHit.Invoke(collider);
     }
 
     #endregion

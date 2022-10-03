@@ -12,6 +12,7 @@ public class TrajectoryLine : MonoBehaviour {
     [SerializeField] private PlayerEntity entity;
     [SerializeField] private float reflectionOffSet = 0.15f;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private LayerMask ignoreMask;
     private Vector2 playerDir;
     private Vector2 originalDir;
 
@@ -56,7 +57,7 @@ public class TrajectoryLine : MonoBehaviour {
 
         lineRenderer.positionCount++;
 
-        RaycastHit2D hit = Physics2D.Raycast(startPos, direction, distance);
+        RaycastHit2D hit = Physics2D.Raycast(startPos, direction, distance, ignoreMask);
         //Debug.Log("LINE NUM " + lineRenderer.positionCount + "        DIR " + direction + "     DISTANCE " + distance + "     START POS" + spawnPos);
         if (hit.point != Vector2.zero) {
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);

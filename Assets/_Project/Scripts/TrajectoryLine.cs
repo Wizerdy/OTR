@@ -10,9 +10,8 @@ public class TrajectoryLine : MonoBehaviour {
     [SerializeField] private float startThiccness = 0.7f;
     [SerializeField] private float endThiccness = 0.3f;
     [SerializeField] private PlayerEntity entity;
-    [SerializeField] private Collider2D playerCollider;
     [SerializeField] private float reflectionOffSet = 0.15f;
-    private LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer lineRenderer;
     private Vector2 playerDir;
     private Vector2 originalDir;
 
@@ -21,7 +20,6 @@ public class TrajectoryLine : MonoBehaviour {
         if (entity == null) { return; }
         entity.OnAim += GetDirection;
 
-        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = startThiccness;
         lineRenderer.endWidth = endThiccness;
         Physics2D.queriesHitTriggers = false;

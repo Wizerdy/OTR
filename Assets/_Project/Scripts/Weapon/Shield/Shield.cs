@@ -64,7 +64,7 @@ public class Shield : Weapon {
         weaponry.Health.RemoveDamageModifier(_directionalModifier);
     }
 
-    protected IEnumerator IAttack(Vector2 direction) {
+    protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         if (!_aiming) { yield break; }
 

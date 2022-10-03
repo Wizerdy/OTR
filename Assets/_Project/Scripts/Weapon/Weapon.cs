@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
 
-    protected Dictionary<AttackIndex, System.Func<Vector2, IEnumerator>> _attacks;
+    protected Dictionary<AttackIndex, System.Func<EntityAbilities, Vector2, IEnumerator>> _attacks;
 
     protected Animator _targetAnimator;
 
@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     #region Legacy
 
     protected virtual void _OnStart() { }
-    protected virtual void _OnPressAttackEnd(AttackIndex type) { }
+    protected virtual void _OnPressAttackEnd(AttackIndex type, EntityAbilities caster) { }
     protected virtual void _OnPickedUpdate() { }
     protected virtual void _OnAim(Vector2 direction) { }
     protected virtual void _OnPickup(EntityHolding holding) { }
@@ -86,18 +86,18 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _OnAim(direction);
     }
 
-    public IEnumerator Attack(AttackIndex type, Vector2 direction) {
+    public IEnumerator Attack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
         if (!CanAttack) { yield return null; }
         if (!_attacks.ContainsKey(type)) { yield return null; }
         _attacking = true;
         _onAttack.Invoke(type, direction);
-        yield return _attacks[type](direction);
+        yield return _attacks[type](caster, direction);
         _attacking = false;
         _onAttackEnd.Invoke(type);
     }
 
-    public void PressAttackEnd(AttackIndex type) {
-        _OnPressAttackEnd(type);
+    public void PressAttackEnd(AttackIndex type, EntityAbilities caster) {
+        _OnPressAttackEnd(type, caster);
     }
 
     #region IHoldable

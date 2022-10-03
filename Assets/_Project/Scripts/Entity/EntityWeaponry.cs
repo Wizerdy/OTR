@@ -57,15 +57,15 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         _weapon = null;
     }
 
-    public void PressAttack(AttackIndex type, Vector2 direction) {
+    public void PressAttack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
         if (!HasWeapon || !_weapon.CanAttack) { return; }
         _damageHealth.ResetHitted();
-        StartCoroutine(_weapon.Attack(type, direction));
+        StartCoroutine(_weapon.Attack(type, caster, direction));
     }
 
-    public void PressAttackEnd(AttackIndex type) {
+    public void PressAttackEnd(AttackIndex type, EntityAbilities caster) {
         if (!HasWeapon || _weapon.CanAttack) { return; }
-        _weapon.PressAttackEnd(type);
+        _weapon.PressAttackEnd(type, caster);
     }
 
     public void Aim(Vector2 direction) {

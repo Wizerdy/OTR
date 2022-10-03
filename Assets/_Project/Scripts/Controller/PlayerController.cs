@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerEntity _player;
     [SerializeField] AimHelperReference _aimHelperReference;
 
-    bool _setupThrow = false;
-
     private void Reset() {
         _playerInput = GetComponent<PlayerInput>();
     }

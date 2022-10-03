@@ -16,7 +16,7 @@ public class Sword : Weapon {
         _attacks.Add(AttackIndex.FIRST, IAttack);
     }
 
-    protected IEnumerator IAttack(Vector2 direction) {
+    protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         if (_routine_ResetCombo != null) { CoroutinesManager.Stop(_routine_ResetCombo); }
 

@@ -35,7 +35,7 @@ public class SendBackEntity : MonoBehaviour {
 
     public void Attack(Vector2 direction) {
         if (_weaponry.HasWeapon) {
-            _weaponry.PressAttack(AttackIndex.FIRST, direction);
+            _weaponry.PressAttack(AttackIndex.FIRST, null, direction);
         } else {
             _movements.Dash(Orientation);
         }

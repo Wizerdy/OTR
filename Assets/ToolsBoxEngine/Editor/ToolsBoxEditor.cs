@@ -43,7 +43,7 @@ namespace ToolsBoxEngine {
                 Debug.Log("vector2Value = " + serializedProperty.vector2Value);
                 Debug.Log("vector3Value = " + serializedProperty.vector3Value);
             } catch (Exception e) {
-
+                Debug.LogError(e);
             }
         }
     }

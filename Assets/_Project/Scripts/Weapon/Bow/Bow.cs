@@ -12,7 +12,7 @@ public class Bow : Weapon {
         _attacks.Add(AttackIndex.FIRST, IAttack);
     }
 
-    protected IEnumerator IAttack(Vector2 direction) {
+    protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         _targetAnimator.SetTrigger(_triggerName);

@@ -51,13 +51,13 @@ public class PlayerEntity : MonoBehaviour {
 
     public void PressAttack(AttackIndex type, Vector2 direction) {
         if (_weaponry.HasWeapon) {
-            _weaponry.PressAttack(type, direction);
+            _weaponry.PressAttack(type, _abilities, direction);
         }
     }
 
     public void PressAttackEnd(AttackIndex type) {
         if (_weaponry.HasWeapon) {
-            _weaponry.PressAttackEnd(type);
+            _weaponry.PressAttackEnd(type, _abilities);
         }
     }
 

@@ -65,6 +65,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     private void Awake() {
         _colliders = GetComponentsInChildren<Collider2D>();
+        _attacks = new Dictionary<AttackIndex, System.Func<EntityAbilities, Vector2, IEnumerator>>();
     }
 
     private void Start() {

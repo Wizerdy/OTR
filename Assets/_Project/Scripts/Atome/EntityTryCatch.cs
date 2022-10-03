@@ -28,11 +28,11 @@ public class EntityTryCatch : MonoBehaviour {
     public void TryCatch() {
         if (CanCatch && !_entityCollisionArea.IsEmpty()) {
             GameObject nearest = null;
-            nearest = _entityCollisionArea.Nearest(pair => pair.Key.gameObject.GetComponent<Weapon>().IsInAir);
+            nearest = _entityCollisionArea.Nearest(pair => !pair.Key.gameObject.GetComponent<Weapon>().IsOnFloor);
             if (nearest != null) {
                 _entityHolding.Pickup(nearest);
                 CatchSuccess();
-            } else {
+            } else { 
                 CatchFailed();
             }
         } else {

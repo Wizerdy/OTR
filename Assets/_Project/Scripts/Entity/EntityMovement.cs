@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using System.Security.Cryptography;
 
 public class EntityMovement : MonoBehaviour, IEntityAbility {
     private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING }
@@ -61,6 +62,8 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     SpeedModifier _currentSlow = null;
 
     SpeedModifier _moveToSlow = null;
+
+    Coroutine _movement;
 
     #region Properties
 
@@ -242,6 +245,41 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     #endregion
+
+    struct Movement {
+        public Movement(float duration, float speedReference, AnimationCurve curve = null) {
+            _speedReference = speedReference;
+            if (curve == null) {
+                _curve = new AnimationCurve();
+                _curve.AddKey(0, 1);
+                _curve.AddKey(1, 1);
+            } else {
+                _curve = curve;
+            }
+            _duration = duration;
+        }
+        public float _speedReference;
+        public AnimationCurve _curve;
+        public float _duration;
+    }
+
+    public void CreateMovement(float duration, float speedReference, AnimationCurve curve = null) {
+        if (_movement != null) {
+            return;
+        }
+        Movement newMovement = new Movement(duration, speedReference, curve);
+        _movement = StartCoroutine(NewMovement(newMovement));
+    }
+
+    IEnumerator NewMovement(Movement movement) {
+        CanMove = false;
+        Timer timer = new Timer(this, movement._duration).Start();
+        while (timer.CurrentDuration < movement._duration) {
+            Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+            yield return null;
+        }
+        CanMove = true;
+    }
 
     #region Dash
 

@@ -22,14 +22,16 @@ public class Timer {
         _duration = duration;
     }
 
-    public void Start(float duration, float offset = 0) {
+    public Timer Start(float duration, float offset = 0) {
         _currentDuration = duration;
         Start(offset);
+        return this;
     }
-    public void Start(float offset = 0) {
+    public Timer Start(float offset = 0) {
         _pause = false;
         End();
         coroutine = _instigator.StartCoroutine(StartTimer(offset));
+        return this;
     }
 
     public void Pause() {

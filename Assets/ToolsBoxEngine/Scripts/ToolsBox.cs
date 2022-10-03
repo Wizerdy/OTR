@@ -126,28 +126,34 @@ namespace ToolsBoxEngine {
         }
     }
 
+    [System.Serializable]
     public class Counted<T> {
-        T value;
-        int count;
+        T _value;
+        int _count;
 
-        public T Value { get => value; set => this.value = value; }
-        public int Count { get => count; set => count = value; }
+        public T Value { get => _value; set => _value = value; }
+        public int Count { get => _count; set => _count = value; }
 
         public Counted(T value) {
-            this.value = value;
+            _value = value;
+        }
+
+        public Counted(int count, T value) {
+            _count = count;
+            _value = value;
         }
 
         public void Reset() {
-            count = 0;
+            _count = 0;
         }
 
         public static Counted<T> operator ++(Counted<T> a) {
-            ++a.count;
+            ++a._count;
             return a;
         }
 
         public static Counted<T> operator --(Counted<T> a) {
-            --a.count;
+            --a._count;
             return a;
         }
     }
@@ -586,6 +592,29 @@ namespace ToolsBoxEngine {
                     break;
             }
             return false;
+        }
+
+        public static Color Override(this Color color, float value, Axis axis = Axis.W) {
+            switch (axis) {
+                case Axis.X:
+                    return new Color(value, color.g, color.b, color.a);
+                case Axis.Y:
+                    return new Color(color.r, value, color.b, color.a);
+                case Axis.Z:
+                    return new Color(color.r, color.g, value, color.a);
+                case Axis.W:
+                    return new Color(color.r, color.g, color.b, value);
+            }
+            return color;
+        }
+
+        public static void SwapKey<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey oldKey, TKey newKey) {
+            if (!dictionary.ContainsKey(oldKey)) { Debug.LogWarning("Key not found : " + oldKey); return; }
+
+            TValue value = dictionary[oldKey];
+            if (dictionary.ContainsKey(newKey)) { dictionary[oldKey] = dictionary[newKey]; }
+            else { dictionary.Remove(oldKey); }
+            dictionary[newKey] = value;
         }
 
         #endregion

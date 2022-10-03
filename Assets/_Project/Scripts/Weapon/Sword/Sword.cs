@@ -12,7 +12,11 @@ public class Sword : Weapon {
 
     string[] _triggerName = { "Sword_slash_1", "Sword_slash_2", "Sword_slash_3" };
 
-    protected override IEnumerator IAttack(Vector2 direction) {
+    protected override void _OnStart() {
+        _attacks.Add(AttackIndex.FIRST, IAttack);
+    }
+
+    protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         if (_routine_ResetCombo != null) { CoroutinesManager.Stop(_routine_ResetCombo); }
 

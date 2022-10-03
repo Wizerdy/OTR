@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "First Attack",
                     "type": "Button",
                     "id": "cf04e2f2-3ea2-4151-bd80-1f5be1ce7b16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Second Attack",
+                    "type": "Button",
+                    "id": "4430ed80-921d-4f02-b705-ea745dd501b0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -121,11 +130,11 @@
                 {
                     "name": "",
                     "id": "80d565f7-01a9-4573-a590-9a088d30677f",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "First Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -136,7 +145,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Attack",
+                    "action": "First Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -220,7 +229,7 @@
                 {
                     "name": "",
                     "id": "5db0b0b4-237c-4b67-b38f-41d507a42a35",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -236,6 +245,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SetupThrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1915433d-b95a-43b4-8b9f-ea63b16e91f2",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Second Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60f83162-1460-457e-b323-3fe48065ffe8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Second Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

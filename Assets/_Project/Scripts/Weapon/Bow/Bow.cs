@@ -8,7 +8,11 @@ public class Bow : Weapon {
     [SerializeField] float _bulletSpeed = 5f;
     string _triggerName = "Bow_shoot";
 
-    protected override IEnumerator IAttack(Vector2 direction) {
+    protected override void _OnStart() {
+        _attacks.Add(AttackIndex.FIRST, IAttack);
+    }
+
+    protected IEnumerator IAttack(Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         _targetAnimator.SetTrigger(_triggerName);

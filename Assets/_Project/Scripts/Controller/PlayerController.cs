@@ -16,10 +16,10 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         _playerInput.actions["Aim"].performed += _Aim;
         _playerInput.actions["Aim"].canceled += _StopAim;
-        _playerInput.actions["FirstAttack"].performed += _PressFirstAttack;
-        _playerInput.actions["FirstAttack"].canceled += _PressFirstAttackEnd;
-        _playerInput.actions["SecondAttack"].performed += _PressSecondAttack;
-        _playerInput.actions["SecondAttack"].canceled += _PressSecondAttackEnd;
+        _playerInput.actions["First Attack"].performed += _PressFirstAttack;
+        _playerInput.actions["First Attack"].canceled += _PressFirstAttackEnd;
+        _playerInput.actions["Second Attack"].performed += _PressSecondAttack;
+        _playerInput.actions["Second Attack"].canceled += _PressSecondAttackEnd;
         _playerInput.actions["Throw"].performed += _Throw;
 
         //_playerInput.actions["SetupThrow"].performed += _SetupThrow;

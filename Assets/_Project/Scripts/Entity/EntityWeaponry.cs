@@ -21,6 +21,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
     public Animator Animator => _attackAnimator;
     public Health Health => _health;
+    public DamageHealth DamageHealth => _damageHealth;
     public bool HasWeapon => _weapon != null;
 
     public event UnityAction<AttackIndex, Vector2> OnAttack { add => _onAttack += value; remove => _onAttack -= value; }

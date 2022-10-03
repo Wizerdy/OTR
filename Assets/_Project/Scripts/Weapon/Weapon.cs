@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     #region Legacy
 
     protected virtual void _OnStart() { }
-    protected virtual void _OnAttackEnd() { }
+    protected virtual void _OnPressAttackEnd(AttackIndex type) { }
     protected virtual void _OnPickedUpdate() { }
     protected virtual void _OnAim(Vector2 direction) { }
     protected virtual void _OnPickup(EntityHolding holding) { }
@@ -88,6 +88,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     public IEnumerator Attack(AttackIndex type, Vector2 direction) {
         if (!CanAttack) { yield return null; }
+        if (!_attacks.ContainsKey(type)) { yield return null; }
         _attacking = true;
         _onAttack.Invoke(type, direction);
         yield return _attacks[type](direction);
@@ -95,13 +96,9 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _onAttackEnd.Invoke(type);
     }
 
-    public void AttackEnd(AttackIndex type) {
-        _OnAttackEnd();
+    public void PressAttackEnd(AttackIndex type) {
+        _OnPressAttackEnd(type);
     }
-
-    //IEnumerator ILaunchAttack(Vector2 direction) { }
-
-    protected abstract IEnumerator IAttack(Vector2 direction);
 
     #region IHoldable
 

@@ -57,15 +57,15 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         _weapon = null;
     }
 
-    public void Attack(AttackIndex type, Vector2 direction) {
+    public void PressAttack(AttackIndex type, Vector2 direction) {
         if (!HasWeapon || !_weapon.CanAttack) { return; }
         _damageHealth.ResetHitted();
         StartCoroutine(_weapon.Attack(type, direction));
     }
 
-    public void AttackEnd(AttackIndex type) {
+    public void PressAttackEnd(AttackIndex type) {
         if (!HasWeapon || _weapon.CanAttack) { return; }
-        _weapon.AttackEnd(type);
+        _weapon.PressAttackEnd(type);
     }
 
     public void Aim(Vector2 direction) {

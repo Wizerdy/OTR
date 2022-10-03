@@ -6,12 +6,13 @@ using ToolsBoxEngine;
 
 public class PlayerEntity : MonoBehaviour {
     [SerializeField] Transform _root;
-    [SerializeField] ColliderDelegate _interactCollider;
+    [SerializeField] EntityAbilities _abilities;
     [SerializeField] EntityMovement _movements;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
+    [SerializeField] ColliderDelegate _interactCollider;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
 
@@ -48,15 +49,15 @@ public class PlayerEntity : MonoBehaviour {
         _onAim.Invoke(direction);
     }
 
-    public void Attack(AttackIndex type, Vector2 direction) {
+    public void PressAttack(AttackIndex type, Vector2 direction) {
         if (_weaponry.HasWeapon) {
-            _weaponry.Attack(type, direction);
+            _weaponry.PressAttack(type, direction);
         }
     }
 
-    public void AttackEnd(AttackIndex type) {
+    public void PressAttackEnd(AttackIndex type) {
         if (_weaponry.HasWeapon) {
-            _weaponry.AttackEnd(type);
+            _weaponry.PressAttackEnd(type);
         }
     }
 

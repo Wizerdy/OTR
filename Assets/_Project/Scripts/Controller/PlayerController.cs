@@ -18,10 +18,10 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         _playerInput.actions["Aim"].performed += _Aim;
         _playerInput.actions["Aim"].canceled += _StopAim;
-        _playerInput.actions["FirstAttack"].performed += _FirstAttack;
-        _playerInput.actions["FirstAttack"].canceled += _FirstAttackEnd;
-        _playerInput.actions["SecondAttack"].performed += _SecondAttack;
-        _playerInput.actions["SecondAttack"].canceled += _SecondAttackEnd;
+        _playerInput.actions["FirstAttack"].performed += _PressFirstAttack;
+        _playerInput.actions["FirstAttack"].canceled += _PressFirstAttackEnd;
+        _playerInput.actions["SecondAttack"].performed += _PressSecondAttack;
+        _playerInput.actions["SecondAttack"].canceled += _PressSecondAttackEnd;
         _playerInput.actions["Throw"].performed += _Throw;
 
         //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
@@ -42,20 +42,20 @@ public class PlayerController : MonoBehaviour {
         _player.Aim(Vector2.zero);
     }
 
-    private void _FirstAttack(InputAction.CallbackContext cc) {
-        _player.Attack(AttackIndex.FIRST, _player.Orientation);
+    private void _PressFirstAttack(InputAction.CallbackContext cc) {
+        _player.PressAttack(AttackIndex.FIRST, _player.Orientation);
     }
 
-    private void _FirstAttackEnd(InputAction.CallbackContext cc) {
-        _player.AttackEnd(AttackIndex.FIRST);
+    private void _PressFirstAttackEnd(InputAction.CallbackContext cc) {
+        _player.PressAttackEnd(AttackIndex.FIRST);
     }
 
-    private void _SecondAttack(InputAction.CallbackContext cc) {
-        _player.Attack(AttackIndex.SECOND, _player.Orientation);
+    private void _PressSecondAttack(InputAction.CallbackContext cc) {
+        _player.PressAttack(AttackIndex.SECOND, _player.Orientation);
     }
 
-    private void _SecondAttackEnd(InputAction.CallbackContext cc) {
-        _player.AttackEnd(AttackIndex.SECOND);
+    private void _PressSecondAttackEnd(InputAction.CallbackContext cc) {
+        _player.PressAttackEnd(AttackIndex.SECOND);
     }
 
     private void _Throw(InputAction.CallbackContext cc) {

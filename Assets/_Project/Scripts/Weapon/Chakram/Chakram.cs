@@ -24,8 +24,10 @@ public class Chakram : Weapon {
         sr = GetComponentInChildren<SpriteRenderer>();
         stack = 1;
         ColorUpdate();
+        _attacks.Add(AttackIndex.FIRST, IAttack);
     }
-    protected override IEnumerator IAttack(Vector2 direction) {
+
+    protected IEnumerator IAttack(Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         Debug.Log(direction);

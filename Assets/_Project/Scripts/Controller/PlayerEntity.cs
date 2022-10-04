@@ -11,7 +11,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
-    [SerializeField] EntityTryCatch _entityTryCatch;
+    [SerializeField] EntityTryCatch _catch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
     [SerializeField] ColliderDelegate _interactCollider;
 
@@ -87,7 +87,7 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void TryCatch() {
-        _entityTryCatch.TryCatch();
+        _catch.TryCatch();
     }
 
     #endregion

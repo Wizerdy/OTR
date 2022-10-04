@@ -6,7 +6,7 @@ using ToolsBoxEngine;
 using System.Security.Cryptography;
 
 public class EntityMovement : MonoBehaviour, IEntityAbility {
-    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING }
+    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING, RESTRAINED }
 
     public class SpeedModifier {
         float _percentage;
@@ -105,6 +105,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     private void UpdateMove() {
+        if (_state == State.RESTRAINED) { return; }
         if (_state == State.DASHING) { UpdateDash(); return; }
         if (!CanMove) { return; }
         if (_currentMaxSpeed <= 0f) { SetSpeed(0f); return; }
@@ -272,13 +273,23 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     IEnumerator NewMovement(Movement movement) {
-        CanMove = false;
-        Timer timer = new Timer(this, movement._duration).Start();
-        while (timer.CurrentDuration < movement._duration) {
-            Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+        _state = State.RESTRAINED;
+        Timer timer = new Timer(this, movement._duration);
+        bool finish = false;
+        timer.OnActivate += () => finish = true;
+        timer.Start();
+        Vector2 directionSave = Orientation.normalized;
+        while (!finish) {
+            if (_direction.normalized != Vector2.zero) {
+                directionSave = _direction.normalized;
+                Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+            } else {
+                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+            }
             yield return null;
         }
-        CanMove = true;
+        _movement = null;
+        _state = State.DECELERATING;
     }
 
     #region Dash

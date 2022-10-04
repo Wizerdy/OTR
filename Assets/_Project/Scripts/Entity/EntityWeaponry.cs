@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using ToolsBoxEngine;
 
 public class EntityWeaponry : MonoBehaviour, IEntityAbility {
+    [SerializeField] EntityAbilities _entityAbilities;
     [SerializeField] EntityMovement _entityMovement;
     [SerializeField] Animator _attackAnimator;
     [SerializeField] DamageHealth _damageHealth;
@@ -40,7 +41,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     public void Pickup(Weapon weapon) {
         if (weapon == null) { return; }
         Drop();
-        weapon.Pickup(this);
+        weapon.Pickup(this, _entityAbilities);
         weapon.OnMovespeedSet += SetMovementSlow;
         weapon.OnAttackStart += _InvokeOnAttack;
         weapon.OnAttackEnd += _InvokeOnAttackEnd;

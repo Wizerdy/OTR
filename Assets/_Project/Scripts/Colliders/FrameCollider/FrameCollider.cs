@@ -54,15 +54,20 @@ public class FrameCollider : MonoBehaviour {
     [SerializeField] List<Indexed<Circle>> _overlapCircle;
     [SerializeField] List<Indexed<Rectangle>> _overlapRectangle;
 
+    [SerializeField] int _currentIndex = 0;
+
     private void Reset() {
 
     }
 
     public Collider2D[] Overlap() {
+        if (_currentIndex < 0) { return null; }
         List<Collider2D> output = new List<Collider2D>();
         Collider2D[] colliders;
 
         for (int i = 0; i < _overlapCircle.Count; i++) {
+            if (_overlapCircle[i].index != _currentIndex) { continue; }
+
             colliders = _overlapCircle[i].value.Overlap(transform);
             for (int j = 0; j < colliders.Length; j++) {
                 if (!output.Contains(colliders[j])) {
@@ -71,6 +76,8 @@ public class FrameCollider : MonoBehaviour {
             }
         }
         for (int i = 0; i < _overlapRectangle.Count; i++) {
+            if (_overlapRectangle[i].index != _currentIndex) { continue; }
+
             colliders = _overlapCircle[i].value.Overlap(transform);
             for (int j = 0; j < colliders.Length; j++) {
                 if (!output.Contains(colliders[j])) {

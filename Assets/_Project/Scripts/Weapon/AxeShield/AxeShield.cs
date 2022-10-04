@@ -18,7 +18,9 @@ public class AxeShield : Weapon
 
     string _boolName_aim = "AxeShield_Slash";
 
-    string _triggerName_attack = "AxeShield_Slash";
+    string _triggerName_attack_slash = "AxeShield_Slash";
+    string _triggerName_attack_parry = "AxeShield_Parry";
+
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
         _attacks.Add(AttackIndex.FIRST, IAttackSlash);
@@ -41,18 +43,16 @@ public class AxeShield : Weapon
 
     protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
-
-        //caster.Get<EntityArmor>().armor = armorPointCurrent;
-        _targetAnimator.SetTrigger(_triggerName_attack);
+        
+        //User.Get<EntityArmor>().armor = armorPointCurrent;
+        _targetAnimator.SetTrigger(_triggerName_attack_slash);
         yield return new WaitForSeconds(_attackTime);
     }
 
     protected IEnumerator IAttackParry(EntityAbilities caster, Vector2 direction) {
-        Debug.Log("Parry");
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
-
-        _targetAnimator.SetTrigger(_triggerName_attack);
+        _targetAnimator.SetTrigger(_triggerName_attack_parry);
         yield return new WaitForSeconds(_attackTime);
     }
 }

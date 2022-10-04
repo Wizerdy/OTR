@@ -25,6 +25,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     protected Collider2D[] _colliders;
 
+    EntityAbilities _user = null;
     protected bool _canAttack = true;
     protected bool _attacking = false;
 
@@ -42,6 +43,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public bool CanAttack => !IsAttacking && _canAttack;
     public bool IsOnFloor => _isOnFloor;
     protected float MoveSpeed { get => _movespeed; set { _movespeed = value; _onMovespeedSet.Invoke(value); } }
+    protected EntityAbilities User => _user;
 
     #endregion
 
@@ -126,12 +128,14 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _OnDrop(weaponry);
         weaponry.DamageHealth.OnTrigger -= _InvokeAttackHit;
         _targetAnimator = null;
+        _user = null;
     }
 
-    public void Pickup(EntityWeaponry weaponry) {
+    public void Pickup(EntityWeaponry weaponry, EntityAbilities user = null) {
         _targetAnimator = weaponry.Animator;
         weaponry.SetMovementSlow(_movespeed);
         weaponry.DamageHealth.OnTrigger += _InvokeAttackHit;
+        _user = user;
         _OnPickup(weaponry);
     }
 

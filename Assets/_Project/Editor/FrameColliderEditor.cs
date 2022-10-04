@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using ToolsBoxEngine;
+using System.Linq;
 
 [CustomEditor(typeof(FrameCollider))]
 public class FrameColliderEditor : Editor {
     private static class Colors {
         public static Color NOT_SELECTED = new Color(1f, 1f, 1f, 0.1f);
-        //public static Color IN_GROUP = new Color(0.7f, 0.7f, 0.7f, 0.8f);
         public static Color IN_GROUP = new Color(0.7f, 0.2f, 0.2f, 0.8f);
         public static Color SELECTED = Color.yellow;
     }
@@ -23,27 +23,35 @@ public class FrameColliderEditor : Editor {
     SerializedProperty p_overlapRectangle;
 
     Vector2Int _index = Vector2Int.zero;
+    int _fakeIndex = 0;
 
-    Dictionary<int, List<FrameCollider.IOverlapCollider2D>> _colliders = new Dictionary<int, List<FrameCollider.IOverlapCollider2D>>();
+    float _sceneAspect = 0f;
+
+    SortedDictionary<int, List<FrameCollider.IOverlapCollider2D>> _colliders = new SortedDictionary<int, List<FrameCollider.IOverlapCollider2D>>();
     Dictionary<FrameCollider.IOverlapCollider2D, PrimitiveBoundsHandle> _boundsHandle = new Dictionary<FrameCollider.IOverlapCollider2D, PrimitiveBoundsHandle>();
     Dictionary<FrameCollider.IOverlapCollider2D, SerializedProperty> _properties = new Dictionary<FrameCollider.IOverlapCollider2D, SerializedProperty>();
 
     public override void OnInspectorGUI() {
-        base.OnInspectorGUI();
-
         if (!_init) { Init(); }
 
         EditorGUI.BeginChangeCheck();
 
         EditorGUI.BeginChangeCheck();
 
-        EditorGUI.BeginDisabledGroup(_colliders == null || _colliders.Count == 0 || _colliders.Count == 1);
+        EditorGUI.BeginDisabledGroup(_colliders == null || _colliders.Count == 0);
         EditorGUILayout.PrefixLabel("Group");
-        _index.x = EditorGUILayout.IntSlider(_index.x, 0, _colliders.Count - 1);
+        _fakeIndex = _index.x + 1;
+        _fakeIndex = EditorGUILayout.IntSlider(_fakeIndex, 0, _colliders.Count == 0 ? 0 : _colliders.Keys.Last() + 1);
+        _index.x = _fakeIndex - 1;
         EditorGUI.EndDisabledGroup();
 
         if (EditorGUI.EndChangeCheck()) {
             _index.y = 0;
+            serializedObject.FindProperty("_currentIndex").intValue = _index.x;
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        if (_index.x < 0) {
         }
 
         if (_colliders.ContainsKey(_index.x)) {
@@ -65,17 +73,33 @@ public class FrameColliderEditor : Editor {
 
             EditorGUI.BeginChangeCheck();
 
+            EditorGUILayout.Separator();
+
             FrameCollider.IOverlapCollider2D collider = _colliders[_index.x][_index.y];
+
+            EditorGUI.BeginChangeCheck();
+            int newIndex = EditorGUILayout.IntField("Group", Mathf.Max(_fakeIndex, 0));
+            if (EditorGUI.EndChangeCheck()) {
+                if (newIndex - 1 >= 0) {
+                    ChangeIndex(collider, newIndex - 1);
+                }
+            }
+
+            EditorGUILayout.Separator();
 
             if (collider is FrameCollider.Circle circle) { CircleField(circle); }
             else if (collider is FrameCollider.Rectangle box) { RectangleField(box); }
             EditorGUILayout.EndVertical();
 
             if (EditorGUI.EndChangeCheck()) {
-                if (collider is FrameCollider.Circle c) { SerializeCircle(_properties[c], c, _index.y); NewSphereBounds(c); } 
-                else if (collider is FrameCollider.Rectangle b) { SerializeRectangle(_properties[b], b, _index.y); NewBoxBounds(b); }
+                if (collider is FrameCollider.Circle c) { SerializeCircle(_properties[c], c, FindIndex(_properties[c])); NewSphereBounds(c); } 
+                else if (collider is FrameCollider.Rectangle b) { SerializeRectangle(_properties[b], b, FindIndex(_properties[b])); NewBoxBounds(b); }
                 SceneView.RepaintAll();
             }
+        } else if (_index.x < 0) {
+            EditorGUILayout.HelpBox(" Disabled", MessageType.Info);
+        } else {
+            EditorGUILayout.HelpBox(" Empty", MessageType.Warning);
         }
 
         if (EditorGUI.EndChangeCheck()) {
@@ -86,24 +110,29 @@ public class FrameColliderEditor : Editor {
 
         GUILayout.FlexibleSpace();
         if (GUILayout.Button(" +O ")) {
-            AddCircle();
+            _index.x = Mathf.Max(_index.x, 0);
+            AddCircle(_index.x);
+            _index.y = _colliders[_index.x].Count - 1;
         }
         if (GUILayout.Button(" +[] ")) {
-            AddRectangle();
+            _index.x = Mathf.Max(_index.x, 0);
+            AddRectangle(_index.x);
+            _index.y = _colliders[_index.x].Count - 1;
         }
-        EditorGUI.BeginDisabledGroup(!(_index.x >= 0 && _index.x < _colliders.Count && _index.y < _colliders[_index.x].Count));
+        EditorGUI.BeginDisabledGroup(!_colliders.ContainsKey(_index.x) || _index.y >= _colliders[_index.x].Count);
         if (GUILayout.Button(" X ")) {
             DeleteCollider(_colliders[_index.x][_index.y]);
         }
         EditorGUI.EndDisabledGroup();
 
         EditorGUILayout.EndHorizontal();
+
     }
 
     private void OnSceneGUI() {
         if (!_init) { Init(); }
 
-        float aspect = SceneView.lastActiveSceneView.size;
+        _sceneAspect = SceneView.lastActiveSceneView.size;
         Matrix4x4 baseMatrix = Handles.matrix;
         FrameCollider target = (serializedObject.targetObject as FrameCollider);
         Handles.matrix = target?.transform.localToWorldMatrix ?? Handles.matrix;
@@ -142,7 +171,7 @@ public class FrameColliderEditor : Editor {
 
                 if (_index.x == pair.Key && i == _index.y) {
                     handle.DrawHandle();
-                    handle.center = Handles.FreeMoveHandle(handle.center, Quaternion.identity, 0.1f * aspect, Vector3.zero, Handles.CircleHandleCap);
+                    handle.center = Handles.FreeMoveHandle(handle.center, Quaternion.identity, 0.05f * _sceneAspect, Vector3.zero, Handles.CircleHandleCap);
                 }
 
                 if (EditorGUI.EndChangeCheck()) {
@@ -170,7 +199,12 @@ public class FrameColliderEditor : Editor {
     }
 
     private void Init() {
-        Debug.Log("Init !");
+        _colliders = new SortedDictionary<int, List<FrameCollider.IOverlapCollider2D>>();
+        _properties = new Dictionary<FrameCollider.IOverlapCollider2D, SerializedProperty>();
+        _boundsHandle = new Dictionary<FrameCollider.IOverlapCollider2D, PrimitiveBoundsHandle>();
+        _index.x = serializedObject.FindProperty("_currentIndex").intValue;
+
+        _sceneAspect = SceneView.lastActiveSceneView.size;
 
         serializedObject.Update();
         //p_overlapColliders = serializedObject.FindProperty("_overlapColliders");
@@ -202,11 +236,11 @@ public class FrameColliderEditor : Editor {
         rectangle.rotation = EditorGUILayout.FloatField("Rotation", rectangle.rotation);
     }
 
-    private void AddRectangle() {
-        FrameCollider.Rectangle rectangle = new FrameCollider.Rectangle(Vector2.zero, Vector3.one * 5f, 0f);
+    private void AddRectangle(int index) {
+        FrameCollider.Rectangle rectangle = new FrameCollider.Rectangle(Vector2.zero, Vector3.one * 0.1f * _sceneAspect, 0f);
 
         NewBoxBounds(rectangle);
-        _colliders[_index.x].Add(rectangle);
+        AddCollider(_index.x, rectangle);
         int size = ++p_overlapRectangle.arraySize;
         SerializeRectangle(p_overlapRectangle.GetArrayElementAtIndex(size - 1), rectangle, 0);
         _properties[rectangle] = p_overlapRectangle.GetArrayElementAtIndex(size - 1);
@@ -214,13 +248,13 @@ public class FrameColliderEditor : Editor {
         SceneView.RepaintAll();
     }
 
-    private void AddCircle() {
-        FrameCollider.Circle circle = new FrameCollider.Circle(Vector2.zero, 5f);
+    private void AddCircle(int index) {
+        FrameCollider.Circle circle = new FrameCollider.Circle(Vector2.zero, 0.1f * _sceneAspect);
 
         NewSphereBounds(circle);
-        _colliders[_index.x].Add(circle);
+        AddCollider(_index.x, circle);
         int size = ++p_overlapCircle.arraySize;
-        SerializeCircle(p_overlapCircle.GetArrayElementAtIndex(size - 1), circle, 0);
+        SerializeCircle(p_overlapCircle.GetArrayElementAtIndex(size - 1), circle, index);
         _properties[circle] = p_overlapCircle.GetArrayElementAtIndex(size - 1);
 
         SceneView.RepaintAll();
@@ -228,20 +262,19 @@ public class FrameColliderEditor : Editor {
 
     private void Replicate(SerializedProperty element) {
         int index = FindIndex(element);
-        if (!_colliders.ContainsKey(index)) { _colliders.Add(index, new List<FrameCollider.IOverlapCollider2D>()); }
 
         switch (FindType(element)) {
             case ColliderType.NULL:
                 break;
             case ColliderType.CIRCLE:
                 FrameCollider.Circle circle = DeserializeCircle(element.FindPropertyRelative("value"));
-                _colliders[index].Add(circle);
+                AddCollider(index, circle);
                 _properties[circle] = element;
                 NewSphereBounds(circle);
                 break;
             case ColliderType.RECTANGLE:
                 FrameCollider.Rectangle rectangle = DeserializeRectangle(element.FindPropertyRelative("value"));
-                _colliders[index].Add(rectangle);
+                AddCollider(index, rectangle);
                 _properties[rectangle] = element;
                 NewBoxBounds(rectangle);
                 break;
@@ -280,16 +313,6 @@ public class FrameColliderEditor : Editor {
         }
         return ColliderType.NULL;
     }
-
-    //private void SerializeNewObject(PrimitiveBoundsHandle handle) {
-    //    int size = ++p_overlapCircle.arraySize;
-
-    //    if (handle is SphereBoundsHandle sphere) {
-    //        SerializeCircle(p_overlapCircle.GetArrayElementAtIndex(size - 1), new FrameCollider.Circle(sphere.center, sphere.radius), 0);
-    //    } else if (handle is BoxBoundsHandle box) {
-    //        SerializeRectangle(p_overlapCircle.GetArrayElementAtIndex(size - 1), new FrameCollider.Rectangle(box.center, box.size, 0f), 0);
-    //    }
-    //}
 
     private void SerializeCircle(SerializedProperty property, FrameCollider.Circle value, int index) {
         property.FindPropertyRelative("index").intValue = index;
@@ -332,19 +355,58 @@ public class FrameColliderEditor : Editor {
         return new FrameCollider.Rectangle(handle.center, handle.size, 0f);
     }
 
-    // TODO
+    private void AddCollider(int index, FrameCollider.IOverlapCollider2D collider) {
+        if (!_colliders.ContainsKey(index)) { _colliders.Add(index, new List<FrameCollider.IOverlapCollider2D>()); }
+        _colliders[index].Add(collider);
+    }
+
     private void DeleteCollider(FrameCollider.IOverlapCollider2D collider) {
         if (collider == null) { return; }
 
+        int index = FindIndex(_properties[collider]);
+        _colliders[index].Remove(collider);
+        _index.y = 0;
+        if (_colliders[index].Count == 0) { _colliders.Remove(index); _index.x = 0; }
+
         if (collider is FrameCollider.Circle circle) {
-            SerializedProperty indexed = p_overlapCircle.GetArrayElementAtIndex(p_overlapCircle.arraySize - 1);
-            FrameCollider.IOverlapCollider2D last = DeserializeCircle(indexed.FindPropertyRelative("value"));
-            SerializeCircle(_properties[circle], DeserializeCircle(indexed.FindPropertyRelative("value")), FindIndex(indexed));
-            _properties.SwapKey(circle, last);
+            SerializedProperty p_last = p_overlapCircle.GetArrayElementAtIndex(p_overlapCircle.arraySize - 1);
+            SerializeCircle(_properties[circle], DeserializeCircle(p_last.FindPropertyRelative("value")), index);
+            --p_overlapCircle.arraySize;
+        } else if (collider is FrameCollider.Rectangle rectangle) {
+            SerializedProperty p_last = p_overlapCircle.GetArrayElementAtIndex(p_overlapCircle.arraySize - 1);
+            SerializeCircle(_properties[rectangle], DeserializeCircle(p_last.FindPropertyRelative("value")), index);
             --p_overlapCircle.arraySize;
         }
 
-        _properties.Remove(collider);
-        _boundsHandle.Remove(collider);
+        serializedObject.ApplyModifiedProperties();
+
+        Init();
+
+        SceneView.RepaintAll();
+        Repaint();
+    }
+
+    private void ChangeIndex(FrameCollider.IOverlapCollider2D collider, int index) {
+        foreach (var pair in _colliders) {
+            if (pair.Value.Contains(collider)) {
+                pair.Value.Remove(collider);
+                if (pair.Value.Count == 0) {
+                    _colliders.Remove(pair.Key);
+                }
+                break;
+            }
+        }
+
+        AddCollider(index, collider);
+
+        _properties[collider].FindPropertyRelative("index").intValue = index;
+
+        //serializedObject.ApplyModifiedProperties();
+
+        _index.x = index;
+        _index.y = _colliders[index].Count - 1;
+
+        SceneView.RepaintAll();
+        Repaint();
     }
 }

@@ -11,9 +11,7 @@ public class AxeShield : Weapon
     [SerializeField] private float armorPointRegenerationValue = 1f;
     [SerializeField] private float armorPointMax = 10f;
     [SerializeField] private float armorPointOnPickUp = 5f;
-    [SerializeField] DirectionalModifier _directionalModifier;
     [SerializeField] float _attackTime = 0.2f;
-    [SerializeField, Range(0f, 1f)] float _aimingSpeed = 0.5f;
 
     float _baseSpeed = 1f;
     bool _aiming = false;
@@ -23,53 +21,36 @@ public class AxeShield : Weapon
     string _triggerName_attack = "AxeShield_Slash";
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
+        _attacks.Add(AttackIndex.FIRST, IAttackSlash);
+        _attacks.Add(AttackIndex.SECOND, IAttackParry);
     }
 
-    protected override void _OnAim(Vector2 direction) {
-        if (direction == Vector2.zero) {
-            if (_aiming) { StopAiming(); }
-            return;
-        }
-
-        if (!_aiming) { StartAiming(); }
-        UpdateAim(direction);
-    }
-    private void StartAiming() {
-        _aiming = true;
-        MoveSpeed = _aimingSpeed;
-        _directionalModifier.enabled = true;
-        _targetAnimator.SetBool(_boolName_aim, true);
-    }
-
-    private void UpdateAim(Vector2 direction) {
-        _directionalModifier.Direction = direction;
-    }
-
-    private void StopAiming() {
-        _aiming = false;
-        _directionalModifier.enabled = false;
-        _targetAnimator.SetBool(_boolName_aim, false);
-        MoveSpeed = _baseSpeed;
-    }
     protected override void _OnPickup(EntityWeaponry weaponry) {
         armorPointCurrent = armorPointOnPickUp;
-
-        weaponry.Health.AddDamageModifier(_directionalModifier);
     }
 
     protected override void _OnDrop(EntityHolding holding) {
-        armorPointCurrent = 0;
         _targetAnimator.SetBool(_boolName_aim, false);
         _aiming = false;
         MoveSpeed = _baseSpeed;
     }
 
     protected override void _OnDrop(EntityWeaponry weaponry) {
-        weaponry.Health.RemoveDamageModifier(_directionalModifier);
+        armorPointCurrent = 0;
     }
-    protected override IEnumerator IAttack(Vector2 direction) {
+
+    protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
-        if (!_aiming) { yield break; }
+
+        //caster.Get<EntityArmor>().armor = armorPointCurrent;
+        _targetAnimator.SetTrigger(_triggerName_attack);
+        yield return new WaitForSeconds(_attackTime);
+    }
+
+    protected IEnumerator IAttackParry(EntityAbilities caster, Vector2 direction) {
+        Debug.Log("Parry");
+        if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+
 
         _targetAnimator.SetTrigger(_triggerName_attack);
         yield return new WaitForSeconds(_attackTime);

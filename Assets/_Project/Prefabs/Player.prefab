@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7881652080676257308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8645605529720170383}
   - component: {fileID: 4930296015400493900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7218357272819391788}
   - component: {fileID: 8366557170519287406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1515176502077426959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimHelperReference: {fileID: 11400000, guid: d347a1e1c65ceeb459c0fe71bf19da75, type: 2}
   _target: {fileID: 887048020161268641}
-  _angle: 60
+  _angle: 20
 --- !u!1 &4845077738687642125
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1689040970645145834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,7 +1243,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Positions:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
@@ -1313,12 +1313,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e829eec52a81c42bfed4eae4d69656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 15
-  startThiccness: 0.7
-  endThiccness: 0.1
+  length: 20
+  startThiccness: 0.1
+  endThiccness: 0.01
   entity: {fileID: 1367052518068913686}
   reflectionOffSet: 0.15
   lineRenderer: {fileID: 3150322644942064179}
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 247
 --- !u!1 &6055268961327354095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4950985417178541481}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1467,7 @@ GameObject:
   - component: {fileID: 9173737571912781023}
   - component: {fileID: 9045096297075060414}
   - component: {fileID: 688195700584301401}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1641,7 +1644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6443265103858021647}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1678,7 @@ GameObject:
   - component: {fileID: 620326091306565303}
   - component: {fileID: 8577564925376013893}
   - component: {fileID: 1256699919457296107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

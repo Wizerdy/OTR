@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
 
 public class TrajectoryLine : MonoBehaviour {
     [SerializeField] private float length = 3.0f;

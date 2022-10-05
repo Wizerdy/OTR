@@ -1300,6 +1300,7 @@ GameObject:
   - component: {fileID: 5663522544748566436}
   - component: {fileID: 999920878507942826}
   - component: {fileID: 3898770291736452412}
+  - component: {fileID: 8043135533065027778}
   m_Layer: 8
   m_Name: Pistarbalete
   m_TagString: Untagged
@@ -1364,7 +1365,7 @@ MonoBehaviour:
   bolt: {fileID: 3347002109676334983, guid: 1cd7654d341bbdf4892b6691d57607cd, type: 3}
   _attackTime: 0.2
   _boltSpeed: 5
-  specialBolt: {fileID: 3347002109676334983, guid: 1cd7654d341bbdf4892b6691d57607cd, type: 3}
+  specialBolt: {fileID: 3347002109676334983, guid: bf8c87cfdae0fd543af2273b4295b68a, type: 3}
   _sbAttackTime: 0.2
   _sbSpeed: 5
 --- !u!50 &3898770291736452412
@@ -1388,6 +1389,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8043135533065027778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222340644001921282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714a313bd42ad74439323b33a43357ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weakPoint: {fileID: 7220968247356330884, guid: 35eeb3f34d1c74642bf45f1db0df89b7, type: 3}
 --- !u!1 &4710014006350374929
 GameObject:
   m_ObjectHideFlags: 0

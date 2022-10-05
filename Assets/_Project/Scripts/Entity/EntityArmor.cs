@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityArmor : DamageModifier
-{
+public class EntityArmor : DamageModifier, IEntityAbility {
     [SerializeField] private int armorCurrent;
     [SerializeField] private int armorMax;
     [SerializeField] private int armorRegenValue;

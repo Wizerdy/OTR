@@ -56,6 +56,7 @@ public class DamageHealth : MonoBehaviour {
         _onTrigger?.Invoke(collider);
 
         Collide(obj, hardHit);
+        //Debug.Log(collider.name);
     }
 
     private void Collide(GameObject obj, bool hardHit) {

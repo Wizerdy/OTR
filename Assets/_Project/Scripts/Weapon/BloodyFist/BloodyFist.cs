@@ -20,6 +20,9 @@ public class BloodyFist : Weapon {
     [SerializeField] float _hitThreatPoint;
     [SerializeField] float _hitStorePoint;
     [SerializeField] float _hitStorePointCost;
+    [SerializeField] float _pushduration;
+    [SerializeField] float _pushStrenght;
+    [SerializeField] AnimationCurve _pushCurve;
 
     [Header("Dash")]
     [SerializeField] float _storePointCost;
@@ -40,8 +43,11 @@ public class BloodyFist : Weapon {
     }
     protected IEnumerator FirstAttack(EntityAbilities ea, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
-        if (_entityStorePoint == null)
+        if (_entityStorePoint == null) {
             _entityStorePoint = ea.Get<EntityStorePoint>();
+            _entityStorePoint.ChangeMinValue(0f);
+            _entityStorePoint.ChangeMaxValue(_storePointMax);
+        }
         _targetAnimator.SetTrigger(_triggerName[_comboIndex]);
         ++_comboIndex;
         _comboIndex %= _triggerName.Length;
@@ -52,18 +58,19 @@ public class BloodyFist : Weapon {
         if (_entityMovement == null)
             _entityMovement = ea.Get<EntityMovement>();
 
-        _entityMovement.CreateMovement(_duration, _speed, _accelerationCurve);
+        _entityMovement.CreateMovement(_duration, _speed, default, _accelerationCurve);
         yield return null;
     }
 
     protected override void _OnAttackHit(Collider2D collider) {
         if (collider.tag == "Boss" || collider.tag == "Enemy") {
-            collider.gameObject.GetComponent<IHealth>().TakeDamage((int)_hitdamage, gameObject);
+            collider.gameObject.GetComponentInRoot<IHealth>().TakeDamage((int)_hitdamage, gameObject);
             _entityStorePoint.GainStorePoint(_hitStorePoint);
         }
-        if (collider.tag == "Player") {
-            collider.gameObject.GetComponent<IHealth>().TakeHeal((int)_hitStorePointCost);
+        if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject) {
+            collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)_hitStorePointCost);
             _entityStorePoint.LoseStorePoint(_storePointCost);
+            collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
         }
     }
 }

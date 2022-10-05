@@ -1362,10 +1362,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  axeShieldSlashDamage: 2
   aggroPointGenerated: 0.5
   parryCooldown: 0.5
-  armorPointCurrent: 10
-  armorPointRegenerationRate: 1.5
+  armorPointRegenerationRate: 1
   armorPointRegenerationValue: 1
   armorPointMax: 10
   armorPointOnPickUp: 5
@@ -1797,7 +1797,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1155849928}
           m_TargetAssemblyTypeName: AxeShieldSlash, Assembly-CSharp
-          m_MethodName: Test
+          m_MethodName: DealDamage
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1849,6 +1849,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cc3727a3040ce4ba769dcb75507c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
+  _isOnFloor: 0
+  _damage: 10
+  _throwPower: 50
+  _movespeed: 1
+  _onAttack:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAttackEnd:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAttackHit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onFall:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMovespeedSet:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  axeShield: {fileID: 904435275}
 --- !u!1 &1514259512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,6 +1907,153 @@ Transform:
   m_Father: {fileID: 1908095291}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1520228154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520228158}
+  - component: {fileID: 1520228157}
+  - component: {fileID: 1520228156}
+  - component: {fileID: 1520228155}
+  - component: {fileID: 1520228159}
+  m_Layer: 0
+  m_Name: TestDamageZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1520228155
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520228154}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.4609375, y: 1.953125}
+    newSize: {x: 2.4609375, y: 1.953125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.4609375, y: 1.953125}
+  m_EdgeRadius: 0
+--- !u!50 &1520228156
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520228154}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!212 &1520228157
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520228154}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d2835744d10e3ff4b9c64ac3015432f2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.4609375, y: 1.953125}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1520228158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520228154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.129922, y: -3.787515, z: -0.15121038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520228159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520228154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae4fd8814f74584ca1cd6d10cc8b997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 6288217453340800927}
 --- !u!1 &1636841156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,6 +2737,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 147940007823276091, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _damageModifiers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 147940007823276091, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _damageModifiers.Array.data[0]
+      value: 
+      objectReference: {fileID: 6288217453340800926}
     - target: {fileID: 171589354208800743, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name
       value: AxeShield
@@ -2634,6 +2815,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+--- !u!1 &6288217453340800925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 830210744592985116, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+  m_PrefabInstance: {fileID: 6288217453340800924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6288217453340800926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288217453340800925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563c0cd7151eccd40b288ad8856b3e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _value: 0
+  _onUse:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  armorCurrent: 0
+  armorMax: 0
+  armorRegenValue: 0
+  armorRegenRate: 0
+--- !u!114 &6288217453340800927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 147940007823276091, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+  m_PrefabInstance: {fileID: 6288217453340800924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288217453340800925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab9ecaaffc80f45b10495ca1ec7e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6893955642075219181
 Transform:
   m_ObjectHideFlags: 0

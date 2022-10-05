@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class AxeShield : Weapon
 {
+    public int axeShieldSlashDamage = 2;
     [SerializeField] private float aggroPointGenerated = 0.5f;
     [SerializeField] private float parryCooldown = 0.5f;
-    [SerializeField] private float armorPointCurrent = 10f;
-    [SerializeField] private float armorPointRegenerationRate = 1.5f;
-    [SerializeField] private float armorPointRegenerationValue = 1f;
-    [SerializeField] private float armorPointMax = 10f;
-    [SerializeField] private float armorPointOnPickUp = 5f;
+    //[SerializeField] private int armorPointCurrent = 10;
+    [SerializeField] private float armorPointRegenerationRate = 1;
+    [SerializeField] private int armorPointRegenerationValue = 1;
+    [SerializeField] private int armorPointMax = 10;
+    [SerializeField] private int armorPointOnPickUp = 5;
     [SerializeField] float _attackTime = 0.2f;
+
+    private EntityArmor entityArmor;
 
     float _baseSpeed = 1f;
     bool _aiming = false;
@@ -28,7 +31,15 @@ public class AxeShield : Weapon
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
-        armorPointCurrent = armorPointOnPickUp;
+        //armorPointCurrent = armorPointOnPickUp;
+
+        entityArmor = User.Get<EntityArmor>();
+
+        entityArmor.OnPickUp();
+        entityArmor.SetMaxArmor(armorPointMax);
+        entityArmor.SetCurrentArmor(armorPointOnPickUp);
+        entityArmor.SetRegenRate(armorPointRegenerationRate);
+        entityArmor.SetRegenValue(armorPointRegenerationValue);
     }
 
     protected override void _OnDrop(EntityHolding holding) {
@@ -38,13 +49,13 @@ public class AxeShield : Weapon
     }
 
     protected override void _OnDrop(EntityWeaponry weaponry) {
-        armorPointCurrent = 0;
+        //armorPointCurrent = 0;
+        entityArmor.ResetArmor();
     }
 
     protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         
-        //User.Get<EntityArmor>().armor = armorPointCurrent;
         _targetAnimator.SetTrigger(_triggerName_attack_slash);
         yield return new WaitForSeconds(_attackTime);
     }

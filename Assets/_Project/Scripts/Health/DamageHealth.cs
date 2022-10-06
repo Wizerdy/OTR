@@ -60,8 +60,8 @@ public class DamageHealth : MonoBehaviour {
     }
 
     private void Collide(GameObject obj, bool hardHit) {
-        if (_damageables.Contains(obj.tag)) {
-            GameObject root = obj.GetComponent<ColliderRoot>()?.Root ?? obj;
+        GameObject root = obj.GetRoot();
+        if (_damageables.Contains(root.tag)) {
             if (_onlyDamageOnceEach && _hitted.Contains(root)) { return; }
             _hitted.Add(root);
             IHealth health = root.GetComponent<IHealth>();

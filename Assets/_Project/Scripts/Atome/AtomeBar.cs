@@ -9,15 +9,19 @@ public class AtomeBar : MonoBehaviour {
     [SerializeField] Slider _slider;
     [SerializeField] float _maxValue;
     [SerializeField] float _minValue;
-    [SerializeField] float _value;
+    [SerializeField] float _currentValue;
     [SerializeField, HideInInspector] BetterEvent<Slider> _onValueChanged = new BetterEvent<Slider>();
 
-    public float Value { get => _value; set { _value = value; UpdateSlider(); } }
-    public float MaxValue { get => _maxValue; set { _maxValue = value; UpdateSlider(); } }
-    public float MinValue { get => _minValue; set { _minValue = value; UpdateSlider(); } }
+    public float Value { get => _currentValue;}
+    public float MaxValue { get => _maxValue;}
+    public float MinValue { get => _minValue;}
 
     public event UnityAction<Slider> OnValueChanged { add => _onValueChanged.AddListener(value); remove => _onValueChanged.RemoveListener(value); }
-    void UpdateSlider() {
+
+    private void Start() {
+        UpdateSlider();
+    }
+    public void UpdateSlider() {
         if (_slider == null) return;
         _slider.value = Value;
         _slider.minValue = _minValue;
@@ -25,18 +29,35 @@ public class AtomeBar : MonoBehaviour {
         _onValueChanged?.Invoke(_slider);
     }
 
-    public float Add(float value) {
-        _value += value;
-        if (_value > _maxValue) {
-            _value = _maxValue;
+    public void Add(float value) {
+        _currentValue += value;
+        if (_currentValue > _maxValue) {
+            _currentValue = _maxValue;
         }
-        return value;
+        UpdateSlider();
     }
 
     public void Remove(float value) {
-        _value -= value;
-        if (_value < _minValue) {
-            _value = _minValue;
+        _currentValue -= value;
+        if (_currentValue < _minValue) {
+            _currentValue = _minValue;
         }
+        UpdateSlider();
+    }
+
+    public float ChangeMaxValue(float newMaxValue) {
+        _maxValue = newMaxValue;
+        if (_maxValue < _currentValue) {
+            _currentValue = _maxValue;
+        }
+        return _maxValue;
+    }
+
+    public float ChangeMinValue(float newMinValue) {
+        _minValue = newMinValue;
+        if (_minValue > _currentValue) {
+            _currentValue = _minValue;
+        }
+        return _minValue;
     }
 }

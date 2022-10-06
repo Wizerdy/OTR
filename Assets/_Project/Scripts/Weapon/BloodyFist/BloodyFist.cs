@@ -64,12 +64,12 @@ public class BloodyFist : Weapon {
 
     protected override void _OnAttackHit(Collider2D collider) {
         if (collider.tag == "Boss" || collider.tag == "Enemy") {
-            collider.gameObject.GetComponentInRoot<IHealth>().TakeDamage((int)_hitdamage, gameObject);
-            _entityStorePoint.GainStorePoint(_hitStorePoint);
+            _entityStorePoint.GainPoint(_hitStorePoint);
         }
         if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject) {
-            collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)_hitStorePointCost);
-            _entityStorePoint.LoseStorePoint(_storePointCost);
+            Debug.Log(collider.gameObject.transform.parent.parent.parent);
+            collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
+            _entityStorePoint.LosePoint(_hitStorePointCost,false);
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
         }
     }

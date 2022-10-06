@@ -2435,6 +2435,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: _healthPercentValueStorePoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: _pushCurve.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}

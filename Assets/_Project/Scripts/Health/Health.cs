@@ -20,7 +20,7 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField, HideInInspector] BetterEvent _onLateStart = new BetterEvent();
 
     Token _invicibilityToken = new Token();
-
+    [SerializeField] Transform root;
 
     #region Properties
 
@@ -107,7 +107,11 @@ public class Health : MonoBehaviour, IHealth {
     public void Die() {
         _onDeath?.Invoke();
         if (_destroyOnDeath) {
-            Destroy(gameObject);
+            if (root != null) {
+                Destroy(root.gameObject);
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 

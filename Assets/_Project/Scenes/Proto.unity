@@ -1191,11 +1191,15 @@ MonoBehaviour:
   _damage: 10
   _throwPower: 50
   _movespeed: 1
-  _onAttackStart:
+  _onAttack:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onAttackEnd:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAttackHit:
     _event:
       m_PersistentCalls:
         m_Calls: []

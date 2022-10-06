@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] PlayerEntity _player;
     [SerializeField] AimHelperReference _aimHelperReference;
 
+    bool _aiming = false;
+
     private void Reset() {
         _playerInput = GetComponent<PlayerInput>();
     }
@@ -20,24 +22,30 @@ public class PlayerController : MonoBehaviour {
         _playerInput.actions["First Attack"].canceled += _PressFirstAttackEnd;
         _playerInput.actions["Second Attack"].performed += _PressSecondAttack;
         _playerInput.actions["Second Attack"].canceled += _PressSecondAttackEnd;
-        _playerInput.actions["Throw"].performed += _Throw;
+        _playerInput.actions["Throw"].performed += _SetupThrow;
+        _playerInput.actions["Throw"].canceled += _Throw;
 
+        _player.ShowAimLine(false);
         //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
         //_playerInput.actions["SetupThrow"].canceled += _SetupThrow;
     }
 
     private void Update() {
-        _player.Move(_playerInput.actions["Movements"].ReadValue<Vector2>());
+        Vector2 direction = _playerInput.actions["Movements"].ReadValue<Vector2>();
+        _player.Move(direction);
+        if (!_aiming) { _player.Aim(direction); }
     }
 
     private void _Aim(InputAction.CallbackContext cc) {
         Vector2 direction = cc.ReadValue<Vector2>();
         if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
         _player.Aim(direction);
+        _aiming = true;
     }
 
     private void _StopAim(InputAction.CallbackContext cc) {
         _player.Aim(Vector2.zero);
+        _aiming = false;
     }
 
     private void _PressFirstAttack(InputAction.CallbackContext cc) {
@@ -56,7 +64,12 @@ public class PlayerController : MonoBehaviour {
         _player.PressAttackEnd(AttackIndex.SECOND);
     }
 
+    private void _SetupThrow(InputAction.CallbackContext cc) {
+        _player.ShowAimLine(true);
+    }
+
     private void _Throw(InputAction.CallbackContext cc) {
+        _player.ShowAimLine(false);
         if (_player.HasWeapon) {
             _player.Throw(_player.Orientation);
         } else {

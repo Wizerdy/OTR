@@ -14,6 +14,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityTryCatch _catch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
     [SerializeField] ColliderDelegate _interactCollider;
+    [SerializeField] TrajectoryLine _trajectoryLine;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
 
@@ -47,6 +48,7 @@ public class PlayerEntity : MonoBehaviour {
         //if (direction == Vector2.zero) { direction = _movements.Orientation; }
         _oriention.LookAt(direction);
         _weaponry.Aim(direction);
+        if (_trajectoryLine != null) { _trajectoryLine.Direction = direction; }
         _onAim.Invoke(direction);
     }
 
@@ -64,6 +66,10 @@ public class PlayerEntity : MonoBehaviour {
 
     public void Dash(Vector2 direction) {
         _movements.Dash(direction);
+    }
+
+    public void ShowAimLine(bool state) {
+        _trajectoryLine?.gameObject.SetActive(state);
     }
 
     #region Item interaction

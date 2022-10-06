@@ -5,6 +5,7 @@ using ToolsBoxEngine;
 
 public class EntityOrientation : MonoBehaviour, IEntityAbility {
     [SerializeField] Transform _root;
+
     Vector2 _orientation = Vector2.up;
 
     public Vector2 Orientation => _orientation;

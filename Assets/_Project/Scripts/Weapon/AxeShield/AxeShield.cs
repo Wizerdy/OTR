@@ -32,14 +32,13 @@ public class AxeShield : Weapon
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
         //armorPointCurrent = armorPointOnPickUp;
-
         entityArmor = User.Get<EntityArmor>();
 
         entityArmor.OnPickUp();
-        entityArmor.SetMaxArmor(armorPointMax);
-        entityArmor.SetCurrentArmor(armorPointOnPickUp);
-        entityArmor.SetRegenRate(armorPointRegenerationRate);
-        entityArmor.SetRegenValue(armorPointRegenerationValue);
+        entityArmor.MaxArmor = armorPointMax;
+        entityArmor.CurrentArmor = armorPointOnPickUp;
+        entityArmor.RegenRateArmor = armorPointRegenerationRate;
+        entityArmor.RegenValueArmor = armorPointRegenerationValue;
     }
 
     protected override void _OnDrop(EntityHolding holding) {

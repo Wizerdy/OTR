@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EntityArmor : DamageModifier, IEntityAbility {
+public class EntityArmor : MonoBehaviour, IEntityAbility {
     [SerializeField] private int armorCurrent;
     [SerializeField] private int armorMax;
     [SerializeField] private int armorRegenValue;
@@ -20,13 +21,14 @@ public class EntityArmor : DamageModifier, IEntityAbility {
         if (isWieldingAxeShield) {
             time -= Time.deltaTime;
             if (time <= 0) {
-                armorCurrent += armorRegenValue;
+                if (armorCurrent < armorMax)
+                    armorCurrent += armorRegenValue;
                 time = armorRegenRate;
             }
         }
     }
 
-    public void ApplyArmor(int armorValue) {
+    private void ApplyArmor(int armorValue) {
 
     }
 
@@ -39,25 +41,20 @@ public class EntityArmor : DamageModifier, IEntityAbility {
         isWieldingAxeShield = false;
     }
 
-    public void SetMaxArmor(int value) {
+    private void SetMaxArmor(int value) {
         armorMax = value;
     }
 
-    public void SetCurrentArmor(int value) {
+    private void SetCurrentArmor(int value) {
         armorCurrent = value;
     }
 
-    public void SetRegenValue(int value) {
+    private void SetRegenValue(int value) {
         armorRegenValue = value;
     }
 
-    public void SetRegenRate(float value) {
+    private void SetRegenRate(float value) {
         armorRegenRate = value;
         time = armorRegenRate;
-    }
-
-    protected override bool Usable(int value, GameObject source) {
-        Debug.Log("use armor");
-        throw new System.NotImplementedException();
     }
 }

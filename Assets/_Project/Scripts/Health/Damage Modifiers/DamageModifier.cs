@@ -19,6 +19,8 @@ public abstract class DamageModifier : MonoBehaviour {
     [Space]
     [SerializeField, HideInInspector] BetterEvent<int, GameObject> _onUse = new BetterEvent<int, GameObject>();
 
+    public int Value { get => _value; set => SetValue(value); }
+
     public ResistanceType Resistance { get => _type; set => _type = value; }
 
     public event UnityAction<int, GameObject> OnUse { add => _onUse += value; remove => _onUse -= value; }
@@ -46,6 +48,10 @@ public abstract class DamageModifier : MonoBehaviour {
                 break;
         }
         return amount;
+    }
+
+    private void SetValue(int value) {
+        _value = value;
     }
 
     protected abstract bool Usable(int value, GameObject source);

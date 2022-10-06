@@ -12,9 +12,9 @@ public class AtomeBar : MonoBehaviour {
     [SerializeField] float _currentValue;
     [SerializeField, HideInInspector] BetterEvent<Slider> _onValueChanged = new BetterEvent<Slider>();
 
-    public float Value { get => _currentValue;}
-    public float MaxValue { get => _maxValue;}
-    public float MinValue { get => _minValue;}
+    public float Value { get => _currentValue; }
+    public float MaxValue { get => _maxValue; }
+    public float MinValue { get => _minValue; }
 
     public event UnityAction<Slider> OnValueChanged { add => _onValueChanged.AddListener(value); remove => _onValueChanged.RemoveListener(value); }
 
@@ -33,6 +33,20 @@ public class AtomeBar : MonoBehaviour {
         _currentValue += value;
         if (_currentValue > _maxValue) {
             _currentValue = _maxValue;
+        }
+        UpdateSlider();
+    }
+
+    public void Remove(float value, bool letOne) {
+        _currentValue -= value;
+        if (letOne) {
+            if (_currentValue < _minValue + 1) {
+                _currentValue = _minValue + 1;
+            }
+        } else {
+            if (_currentValue < _minValue) {
+                _currentValue = _minValue;
+            }
         }
         UpdateSlider();
     }

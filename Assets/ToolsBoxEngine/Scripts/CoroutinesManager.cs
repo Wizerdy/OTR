@@ -7,7 +7,7 @@ public class CoroutinesManager : MonoBehaviour {
 
     static CoroutinesManager _instance;
 
-    static CoroutinesManager Instance { get { if (_instance == null) { CreateInstance(); } return _instance; } }
+    public static CoroutinesManager Instance { get { if (_instance == null) { CreateInstance(); } return _instance; } }
 
     private static void CreateInstance() {
         if (_instance != null) { return; }

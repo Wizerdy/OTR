@@ -13,18 +13,18 @@ public class AtomeBarHealth : MonoBehaviour {
     }
 
     void Start() {
-        _health.OnHit += (int value) => _atomeBar.Remove(value);
+        _health.OnHit += (int value) => _atomeBar.Remove(value, false);
         _health.OnHeal += (int value) => _atomeBar.Add(value);
         if (_entityStorePoint != null)
-            _entityStorePoint.TooMuchPointLoseDifference += (float value) => _atomeBar.Remove(value);
+            _entityStorePoint.TooMuchPointLoseDifference += (float value) => _atomeBar.Remove(value, true);
         StartCoroutine(Tools.Delay(UpdateBar, 0.1f));
     }
 
     private void OnDestroy() {
-        _health.OnHit -= (int value) => _atomeBar.Remove(value);
-        _health.OnHeal -= (int value) => _atomeBar.Add(value);
+        _health.OnHit += (int value) => _atomeBar.Remove(value, false);
+        _health.OnHeal += (int value) => _atomeBar.Add(value);
         if (_entityStorePoint != null)
-            _entityStorePoint.TooMuchPointLoseDifference -= (float value) => _atomeBar.Remove(value);
+            _entityStorePoint.TooMuchPointLoseDifference += (float value) => _atomeBar.Remove(value, true);
     }
 
     private void UpdateBar() {

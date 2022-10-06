@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f540cb00f3efe4f9e29576e30dbe9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _atomeBar: {fileID: 0}
+  _atomeBar: {fileID: 1191604174}
   _entityStorePoint: {fileID: 0}
   _health: {fileID: 3604493418037129004}
 --- !u!1 &1441828932
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 50
+  _currentHealth: 0
   _onHit:
     _event:
       m_PersistentCalls:
@@ -552,6 +553,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  root: {fileID: 833565563422465026}
 --- !u!1 &3597390815709052632
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3597390815709052632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.79, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -727,7 +729,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 4a8693f15eb2c1648bcbb8db1f4795d3, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0

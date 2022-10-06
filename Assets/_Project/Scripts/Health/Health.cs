@@ -102,6 +102,7 @@ public class Health : MonoBehaviour, IHealth {
         _currentHealth += amount;
         _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
         _onHeal?.Invoke(amount);
+        Debug.Log("heal"+ gameObject.transform.parent.name);
     }
 
     public void Die() {

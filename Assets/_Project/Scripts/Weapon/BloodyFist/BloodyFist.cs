@@ -26,14 +26,19 @@ public class BloodyFist : Weapon {
 
     [Header("Dash")]
     [SerializeField] float _storePointCost;
-    [SerializeField] float _cooldown;
+    [SerializeField] float _dashCooldown;
     [SerializeField] float _speed;
     [SerializeField] float _duration;
     [SerializeField] AnimationCurve _accelerationCurve;
-
+    Timer _cooldown;
+    Timer aller;
     protected override void _OnStart() {
         _attacks.Add(AttackIndex.FIRST, FirstAttack);
         _attacks.Add(AttackIndex.SECOND, SecondAttack);
+        _cooldown = new Timer(CoroutinesManager.Instance, _hitcooldown, false);
+        aller = new Timer(CoroutinesManager.Instance, 0.1f);
+        aller.OnActivate += () => Debug.Log(_cooldown.CurrentDuration);
+        aller.Start();
     }
 
     protected override void _OnDrop(EntityWeaponry entityWeaponry) {
@@ -43,11 +48,14 @@ public class BloodyFist : Weapon {
     }
     protected IEnumerator FirstAttack(EntityAbilities ea, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+        if (_cooldown.IsWorking) { yield break; }
         if (_entityStorePoint == null) {
             _entityStorePoint = ea.Get<EntityStorePoint>();
             _entityStorePoint.ChangeMinValue(0f);
             _entityStorePoint.ChangeMaxValue(_storePointMax);
         }
+        _cooldown.Duration = _hitcooldown;
+        _cooldown.Start();
         _targetAnimator.SetTrigger(_triggerName[_comboIndex]);
         ++_comboIndex;
         _comboIndex %= _triggerName.Length;
@@ -55,10 +63,17 @@ public class BloodyFist : Weapon {
     }
 
     protected IEnumerator SecondAttack(EntityAbilities ea, Vector2 direction) {
-        if (_entityMovement == null)
+        if (_cooldown.IsWorking) { yield break; }
+        if (_entityMovement == null) {
+            _entityStorePoint = ea.Get<EntityStorePoint>();
+            _entityStorePoint.ChangeMinValue(0f);
+            _entityStorePoint.ChangeMaxValue(_storePointMax);
             _entityMovement = ea.Get<EntityMovement>();
-
+        }
+        _cooldown.Duration = _dashCooldown;
+        _cooldown.Start();
         _entityMovement.CreateMovement(_duration, _speed, default, _accelerationCurve);
+        _entityStorePoint.LosePoint(_storePointCost, true);
         yield return null;
     }
 
@@ -69,7 +84,7 @@ public class BloodyFist : Weapon {
         if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject) {
             Debug.Log(collider.gameObject.transform.parent.parent.parent);
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
-            _entityStorePoint.LosePoint(_hitStorePointCost,false);
+            _entityStorePoint.LosePoint(_hitStorePointCost, false);
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
         }
     }

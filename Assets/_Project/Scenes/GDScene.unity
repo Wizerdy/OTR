@@ -484,11 +484,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: _hitcooldown
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: _dashCooldown
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: _storePointCost

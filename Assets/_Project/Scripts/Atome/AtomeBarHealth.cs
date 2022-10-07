@@ -28,9 +28,9 @@ public class AtomeBarHealth : MonoBehaviour {
     }
 
     private void UpdateBar() {
-        _atomeBar.Add(_health.CurrentHealth);
         _atomeBar.ChangeMaxValue(_health.MaxHealth);
         _atomeBar.ChangeMinValue(0);
+        _atomeBar.Add(_health.CurrentHealth);
         _atomeBar.UpdateSlider();
     }
 }

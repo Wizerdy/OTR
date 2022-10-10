@@ -6,11 +6,12 @@ using ToolsBoxEngine;
 
 public class Health : MonoBehaviour, IHealth {
     [SerializeField] int _maxHealth = 50;
+    [SerializeField, ReadOnly] int _currentHealth;
+    [SerializeField] bool _destroyOnDeath = true;
     [Space]
     [SerializeField] BetterEvent<int> _onHit = new BetterEvent<int>();
     [SerializeField] BetterEvent<int> _onHeal = new BetterEvent<int>();
     [SerializeField] BetterEvent _onDeath = new BetterEvent();
-    [SerializeField] bool _destroyOnDeath = true;
     [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
 
     [SerializeField, HideInInspector] BetterEvent<int> _onMaxHealthChange = new BetterEvent<int>();
@@ -19,7 +20,6 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField, HideInInspector] BetterEvent _onLateStart = new BetterEvent();
 
     Token _invicibilityToken = new Token();
-    int _currentHealth;
 
     #region Properties
 

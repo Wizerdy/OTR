@@ -14,12 +14,6 @@ public class AttachGameObjectsToParticles : MonoBehaviour
     private List<GameObject> m_Instances = new List<GameObject>();
     private ParticleSystem.Particle[] m_Particles;
 
-    private static FieldInfo m_FalloffField = typeof(Light2D).GetField("m_FalloffIntensity", BindingFlags.NonPublic | BindingFlags.Instance);
-
-    public void SetFalloff(Light2D light, float falloff) {
-        m_FalloffField.SetValue(light, falloff);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +44,6 @@ public class AttachGameObjectsToParticles : MonoBehaviour
                     m_Instances[i].GetComponent<Light2D>().intensity = Mathf.Clamp(m_Instances[i].GetComponent<Light2D>().intensity, m_Particles[i].startSize, m_Particles[i].GetCurrentSize(m_ParticleSystem)) * 3;
                 if (dynamicColor)
                     m_Instances[i].GetComponent<Light2D>().color = m_Particles[i].GetCurrentColor(m_ParticleSystem);
-                SetFalloff(m_Instances[i].GetComponent<Light2D>(), Mathf.Clamp(m_Instances[i].GetComponent<Light2D>().falloffIntensity, m_Particles[i].startSize, m_Particles[i].GetCurrentSize(m_ParticleSystem)) * 3);
             }
             else
             {

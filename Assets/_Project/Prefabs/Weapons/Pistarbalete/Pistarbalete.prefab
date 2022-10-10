@@ -1363,11 +1363,11 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   bolt: {fileID: 3347002109676334983, guid: 1cd7654d341bbdf4892b6691d57607cd, type: 3}
-  _attackTime: 0.2
-  _boltSpeed: 5
+  _attackTime: 0.05
+  _boltSpeed: 20
   specialBolt: {fileID: 3347002109676334983, guid: bf8c87cfdae0fd543af2273b4295b68a, type: 3}
-  _sbAttackTime: 0.2
-  _sbSpeed: 5
+  _sbAttackTime: 0.05
+  _sbSpeed: 10
 --- !u!50 &3898770291736452412
 Rigidbody2D:
   serializedVersion: 4
@@ -1865,7 +1865,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -2027,7 +2027,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

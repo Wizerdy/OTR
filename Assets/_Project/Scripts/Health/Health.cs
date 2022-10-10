@@ -6,12 +6,12 @@ using ToolsBoxEngine;
 
 public class Health : MonoBehaviour, IHealth {
     [SerializeField] int _maxHealth = 50;
-    [SerializeField] int _currentHealth;
+    [SerializeField, ReadOnly] int _currentHealth;
+    [SerializeField] bool _destroyOnDeath = true;
     [Space]
     [SerializeField] BetterEvent<int> _onHit = new BetterEvent<int>();
     [SerializeField] BetterEvent<int> _onHeal = new BetterEvent<int>();
     [SerializeField] BetterEvent _onDeath = new BetterEvent();
-    [SerializeField] bool _destroyOnDeath = true;
     [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
 
     [SerializeField, HideInInspector] BetterEvent<int> _onMaxHealthChange = new BetterEvent<int>();
@@ -20,7 +20,6 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField, HideInInspector] BetterEvent _onLateStart = new BetterEvent();
 
     Token _invicibilityToken = new Token();
-    [SerializeField] Transform root;
 
     #region Properties
 
@@ -84,35 +83,17 @@ public class Health : MonoBehaviour, IHealth {
         }
     }
 
-    public void TakeDamage(int amount) {
-        if (!CanTakeDamage) { return; }
-        if (amount <= 0) { return; }
-
-        _currentHealth -= amount;
-        _currentHealth = Mathf.Max(0, _currentHealth);
-        _onHit?.Invoke(amount);
-
-        if (_currentHealth <= 0) {
-            Die();
-        }
-    }
-
     public void TakeHeal(int amount) {
         if (amount <= 0 || _currentHealth >= _maxHealth) { return; }
         _currentHealth += amount;
         _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
         _onHeal?.Invoke(amount);
-        Debug.Log("heal"+ gameObject.transform.parent.name);
     }
 
     public void Die() {
         _onDeath?.Invoke();
         if (_destroyOnDeath) {
-            if (root != null) {
-                Destroy(root.gameObject);
-            } else {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bcc1d401cc4ab254eab0c5b60475cf74
+guid: a4d8f7a2bb3c2b04b98caf2137bbd477
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,76 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arbalest-Sheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b6a8fa50a31829e4389c51be5dff50b8
-      internalID: -992412289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arbalest-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6686e97e36a98db4aa6e0168d33d3ebe
-      internalID: -52274086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arbalest-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39af9524e139d174fb09879a9ec0da24
-      internalID: -115939061
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arbalest-Sheet_3
+      name: Run_Bouclier_Right_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1cf5a9a86f5c354cbe94098e6af671d
-      internalID: 1898474648
+      spriteID: 1c00265e75300ea46aa2d81a38ee9151
+      internalID: 627057383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arbalest-Sheet_4
+      name: Run_Bouclier_Right_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 64
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea441e988be4ff24f9f9e4fa273b01b8
-      internalID: 146285703
+      spriteID: 46205f730ce18f9469228cffb3069c9a
+      internalID: -372035567
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arbalest-Sheet_5
+      name: Run_Bouclier_Right_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 128
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,8 +160,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16c2c3b1ddb39314396d09da3f26e5c7
-      internalID: -601402764
+      spriteID: fff3cf74d611da2408d4be486138f9c1
+      internalID: 1231631960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_Bouclier_Right_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a06aee85ff0930045a21633218ae9822
+      internalID: 1902826189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_Bouclier_Right_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce563483fc2e46a429fab66347c17774
+      internalID: 1856339509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_Bouclier_Right_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37bf2e15028d674f98aa9ba8cbc4356
+      internalID: 1019361921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_Bouclier_Right_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 963c3322860babb409fb582f4331748a
+      internalID: -1180068287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_Bouclier_Right_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3950d7ecc40a8714480ef54c49f48a6d
+      internalID: -684187605
       vertices: []
       indices: 
       edges: []
@@ -240,12 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Arbalest-Sheet_2: -115939061
-      Arbalest-Sheet_5: -601402764
-      Arbalest-Sheet_1: -52274086
-      Arbalest-Sheet_3: 1898474648
-      Arbalest-Sheet_0: -992412289
-      Arbalest-Sheet_4: 146285703
+      Run_Bouclier_Right_2: 1231631960
+      Run_Bouclier_Right_3: 1902826189
+      Run_Bouclier_Right_7: -684187605
+      Run_Bouclier_Right_6: -1180068287
+      Run_Bouclier_Right_4: 1856339509
+      Run_Bouclier_Right_5: 1019361921
+      Run_Bouclier_Right_1: -372035567
+      Run_Bouclier_Right_0: 627057383
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

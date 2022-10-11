@@ -31,14 +31,10 @@ public class BloodyFist : Weapon {
     [SerializeField] float _duration;
     [SerializeField] AnimationCurve _accelerationCurve;
     Timer _cooldown;
-    Timer aller;
     protected override void _OnStart() {
         _attacks.Add(AttackIndex.FIRST, FirstAttack);
         _attacks.Add(AttackIndex.SECOND, SecondAttack);
         _cooldown = new Timer(CoroutinesManager.Instance, _hitcooldown, false);
-        aller = new Timer(CoroutinesManager.Instance, 0.1f);
-        aller.OnActivate += () => Debug.Log(_cooldown.CurrentDuration);
-        aller.Start();
     }
 
     protected override void _OnDrop(EntityWeaponry entityWeaponry) {
@@ -78,11 +74,12 @@ public class BloodyFist : Weapon {
     }
 
     protected override void _OnAttackHit(Collider2D collider) {
+        Debug.Log(collider.transform.gameObject);
         if (collider.tag == "Boss" || collider.tag == "Enemy") {
             _entityStorePoint.GainPoint(_hitStorePoint);
         }
         if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject) {
-            Debug.Log(collider.gameObject.transform.parent.parent.parent);
+            Debug.Log(collider.gameObject.transform.parent);
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
             _entityStorePoint.LosePoint(_hitStorePointCost, false);
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);

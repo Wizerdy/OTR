@@ -64,6 +64,7 @@ public class AtomeBar : MonoBehaviour {
         if (_maxValue < _currentValue) {
             _currentValue = _maxValue;
         }
+        UpdateSlider();
         return _maxValue;
     }
 
@@ -72,6 +73,7 @@ public class AtomeBar : MonoBehaviour {
         if (_minValue > _currentValue) {
             _currentValue = _minValue;
         }
+        UpdateSlider();
         return _minValue;
     }
 }

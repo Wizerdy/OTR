@@ -83,6 +83,21 @@ public class Health : MonoBehaviour, IHealth {
         }
     }
 
+
+    public void TakeDamage(int amount) {
+        if (!CanTakeDamage) { return; }
+
+        if (amount <= 0) { return; }
+
+        _currentHealth -= amount;
+        _currentHealth = Mathf.Max(0, _currentHealth);
+        _onHit?.Invoke(amount);
+
+        if (_currentHealth <= 0) {
+            Die();
+        }
+    }
+
     public void TakeHeal(int amount) {
         if (amount <= 0 || _currentHealth >= _maxHealth) { return; }
         _currentHealth += amount;

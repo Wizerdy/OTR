@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1413837170, guid: 38e895268f5e0544595f1395fa3f29f9, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: ba2eee92f583c6748a7d9c959dc08ece, type: 3}
   m_Type: 2
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 5fb07d2b27700164e8d27297921a3dbf, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: ba2eee92f583c6748a7d9c959dc08ece, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -371,7 +371,7 @@ RectTransform:
   m_GameObject: {fileID: 1441828932}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01134, y: 0.01134, z: 0.01134}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.01134}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 466809220}
@@ -380,7 +380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.13, y: 2.25}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 400, y: 57.0498}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1441828936
@@ -521,8 +521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ab9ecaaffc80f45b10495ca1ec7e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 10000
   _currentHealth: 0
+  _destroyOnDeath: 1
   _onHit:
     _event:
       m_PersistentCalls:
@@ -535,7 +536,6 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _destroyOnDeath: 1
   _damageModifiers: []
   _onMaxHealthChange:
     _event:
@@ -553,7 +553,6 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  root: {fileID: 833565563422465026}
 --- !u!1 &3597390815709052632
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +682,7 @@ Transform:
   m_GameObject: {fileID: 5432754695876308089}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6961287015584866918}

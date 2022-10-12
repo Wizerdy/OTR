@@ -183,8 +183,9 @@ MonoBehaviour:
   _root: {fileID: 3347002109676334983}
   _damage: 5
   _damageables:
-    tags: []
-    state: 0
+    tags:
+    - Enemy
+    state: 1
   _destroyOnHit: 1
   _onlyDamageOnceEach: 1
   _ignoreTag:

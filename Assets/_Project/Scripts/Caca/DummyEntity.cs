@@ -8,11 +8,13 @@ public class DummyEntity : MonoBehaviour {
     [SerializeField] Animator _animator;
     [SerializeField] GameObject _colliders;
     [SerializeField] float _reviveTime = 3f;
+    [SerializeField] PowerUp _powerUp;
 
     private void Start() {
         if (_health != null) {
             _health.OnDeath += _OnDeath;
         }
+        _powerUp?.Clone().Enable();
     }
 
     private void _OnDeath() {

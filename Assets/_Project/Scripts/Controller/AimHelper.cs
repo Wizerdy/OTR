@@ -46,7 +46,6 @@ public class AimHelper : MonoBehaviour {
     public void Add(Transform transform, float angle) {
         if (Contains(transform)) { Debug.LogWarning("Already contained : " + transform.name); return; }
         _targetsList.Add(new AimableTarget(transform, angle));
-        Debug.Log("Added To List : " + _targetsList[^1].target.name + " .. " + _targetsList.Count);
     }
 
     private AimableTarget Find(Transform transform) {

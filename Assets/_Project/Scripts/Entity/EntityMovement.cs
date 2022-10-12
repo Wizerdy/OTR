@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using System.Security.Cryptography;
 
 public class EntityMovement : MonoBehaviour, IEntityAbility {
-    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING }
+    private enum State { NONE, ACCELERATING, DECELERATING, TURNING, TURNING_AROUND, DASHING, RESTRAINED }
 
     public class SpeedModifier {
         float _percentage;
@@ -62,6 +63,8 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
 
     SpeedModifier _moveToSlow = null;
 
+    Coroutine _movement;
+
     #region Properties
 
     public bool CanMove {
@@ -102,6 +105,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     private void UpdateMove() {
+        if (_state == State.RESTRAINED) { return; }
         if (_state == State.DASHING) { UpdateDash(); return; }
         if (!CanMove) { return; }
         if (_currentMaxSpeed <= 0f) { SetSpeed(0f); return; }
@@ -242,6 +246,69 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     #endregion
+
+    struct Movement {
+        public Movement(float duration, float speedReference, Vector2 direction = default, AnimationCurve curve = null) {
+            _speedReference = speedReference;
+            if (curve == null) {
+                _curve = new AnimationCurve();
+                _curve.AddKey(0, 1);
+                _curve.AddKey(1, 1);
+            } else {
+                _curve = curve;
+            }
+            _duration = duration;
+            if (direction != default) {
+                _direction = direction;
+            } else {
+                _direction = Vector2.zero;
+            }
+        }
+        public Vector2 _direction;
+        public float _speedReference;
+        public AnimationCurve _curve;
+        public float _duration;
+    }
+
+    public void CreateMovement(float duration, float speedReference, Vector2 direction, AnimationCurve curve = null) {
+        if (_movement != null) {
+            StopCoroutine(_movement);
+        }
+        Movement newMovement = new Movement(duration, speedReference, direction, curve);
+        _movement = StartCoroutine(NewMovement(newMovement));
+    }
+
+    IEnumerator NewMovement(Movement movement) {
+        _state = State.RESTRAINED;
+        Timer timer = new Timer(this, movement._duration);
+        bool finish = false;
+        timer.OnActivate += () => finish = true;
+        timer.Start();
+        Vector2 directionSave;
+        bool constant = false;
+        if (movement._direction == Vector2.zero) {
+            directionSave = Orientation.normalized;
+        } else {
+            directionSave = movement._direction;
+            constant = true;
+        }
+
+        while (!finish) {
+            if (constant) {
+                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+            } else {
+                if (_direction.normalized != Vector2.zero) {
+                    directionSave = _direction.normalized;
+                    Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+                } else {
+                    Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+                }
+            }
+            yield return null;
+        }
+        _movement = null;
+        _state = State.DECELERATING;
+    }
 
     #region Dash
 

@@ -41,6 +41,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public int Damage => _damage;
     public bool IsAttacking => _attacking;
     public bool CanAttack => !IsAttacking && _canAttack;
+    public bool IsOnFloor => _isOnFloor;
     protected float MoveSpeed { get => _movespeed; set { _movespeed = value; _onMovespeedSet.Invoke(value); } }
     protected EntityAbilities User => _user;
 

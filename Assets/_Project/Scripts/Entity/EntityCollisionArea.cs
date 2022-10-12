@@ -49,6 +49,9 @@ public class EntityCollisionArea : MonoBehaviour {
             }
         }
     }
+    public bool IsEmpty() {
+        return _objectsInside.Count == 0;
+    }
 
     public bool IsInArea(GameObject obj) {
         return _objectsInside.ContainsKey(obj.GetRoot());

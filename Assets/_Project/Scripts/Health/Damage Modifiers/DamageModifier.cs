@@ -32,7 +32,7 @@ public abstract class DamageModifier : MonoBehaviour {
         return Modify(value);
     }
 
-    protected int Modify(int amount) {
+    protected virtual int Modify(int amount) {
         switch (_type) {
             case ResistanceType.WEAKNESS:
                 amount += _value;

@@ -124,6 +124,10 @@ namespace ToolsBoxEngine {
             percentage = Mathf.Clamp01(percentage);
             timer = percentage * duration;
         }
+
+        public float Evaluate(float percentage) {
+            return curve.Evaluate(percentage);
+        }
     }
 
     [System.Serializable]

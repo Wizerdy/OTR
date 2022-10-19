@@ -61,10 +61,12 @@ public class BloodyFist : Weapon {
     protected IEnumerator SecondAttack(EntityAbilities ea, Vector2 direction) {
         if (_cooldown.IsWorking) { yield break; }
         if (_entityMovement == null) {
+            _entityMovement = ea.Get<EntityMovement>();
+        }
+        if (_entityStorePoint == null) {
             _entityStorePoint = ea.Get<EntityStorePoint>();
             _entityStorePoint.ChangeMinValue(0f);
             _entityStorePoint.ChangeMaxValue(_storePointMax);
-            _entityMovement = ea.Get<EntityMovement>();
         }
         _cooldown.Duration = _dashCooldown;
         _cooldown.Start();
@@ -74,12 +76,12 @@ public class BloodyFist : Weapon {
     }
 
     protected override void _OnAttackHit(Collider2D collider) {
-        Debug.Log(collider.transform.gameObject);
+        //Debug.Log(collider.transform.gameObject);
         if (collider.tag == "Boss" || collider.tag == "Enemy") {
             _entityStorePoint.GainPoint(_hitStorePoint);
         }
-        if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject) {
-            Debug.Log(collider.gameObject.transform.parent);
+        if (collider.tag == "Player" && collider.gameObject.GetRoot() != User.gameObject && !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)) {
+            Debug.Log(collider.gameObject);
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
             _entityStorePoint.LosePoint(_hitStorePointCost, false);
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);

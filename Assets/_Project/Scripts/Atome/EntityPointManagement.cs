@@ -26,10 +26,11 @@ public class EntityPointManagement : MonoBehaviour, IEntityAbility {
     public float MinValue => _minValue;
     public float MaxValue => _maxValue;
     public float CurrentValue => _currentValue;
-    public float GainPoint(float storePoint) {
+    public float GainPoint(float storePoint, bool difference = false) {
         _currentValue += storePoint;
         if (_currentValue > _maxValue) {
-            _tooMuchPointGainDifference?.Invoke(Mathf.Abs(_currentValue - _minValue));
+            if (difference)
+                _tooMuchPointGainDifference?.Invoke(Mathf.Abs(_currentValue - _maxValue));
             _currentValue = _maxValue;
         }
         _onValueChanged?.Invoke();
@@ -39,8 +40,8 @@ public class EntityPointManagement : MonoBehaviour, IEntityAbility {
     public float LosePoint(float storePoint, bool difference) {
         _currentValue -= storePoint;
         if (_currentValue < _minValue) {
-            if(difference)
-            _tooMuchPointLoseDifference?.Invoke(Mathf.Abs(_currentValue - _minValue));
+            if (difference)
+                _tooMuchPointLoseDifference?.Invoke(Mathf.Abs(_currentValue - _minValue));
             _currentValue = _minValue;
         }
         _onValueChanged?.Invoke();

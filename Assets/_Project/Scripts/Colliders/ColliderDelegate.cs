@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 public class ColliderDelegate : MonoBehaviour {
     [SerializeField] BetterEvent<Collision2D> _onCollisionEnter = new BetterEvent<Collision2D>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 public class CrawlerEntity : MonoBehaviour {
     enum State { NONE, PATROLLING, CHASING, ATTACKING }

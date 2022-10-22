@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
 
 public class AtomeBar : MonoBehaviour {

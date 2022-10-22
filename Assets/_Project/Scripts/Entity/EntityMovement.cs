@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 using System.Security.Cryptography;
 
 public class EntityMovement : MonoBehaviour, IEntityAbility {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 using System.Linq;
 
 public class EntityCollisionArea : MonoBehaviour {

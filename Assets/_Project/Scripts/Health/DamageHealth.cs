@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 [System.Serializable]
 public class DamageHealth : MonoBehaviour {

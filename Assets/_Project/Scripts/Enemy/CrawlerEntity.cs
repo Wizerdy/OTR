@@ -98,7 +98,7 @@ public class CrawlerEntity : MonoBehaviour {
     }
 
     IEnumerator AttackRoutine(GameObject target, Vector2 direction) {
-        Debug.Log("ATTACK MONKEY !");
+        //Debug.Log("ATTACK MONKEY !");
         yield return _entityAttacks.Use("Test", target, direction);
         ChangeState(State.PATROLLING);
         //yield return new WaitForSeconds(_attackTime);

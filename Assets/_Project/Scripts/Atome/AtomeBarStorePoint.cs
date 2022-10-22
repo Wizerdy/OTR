@@ -22,14 +22,9 @@ public class AtomeBarStorePoint : MonoBehaviour {
         _entityStorePoint.CurrentValueChanged -= (float value) => { if (value < _entityStorePoint.CurrentValue) { _atomeBar.Remove(Mathf.Abs(value - _entityStorePoint.CurrentValue), false); } else { _atomeBar.Add(Mathf.Abs(value - _entityStorePoint.CurrentValue)); } };
         _entityStorePoint.MaxValueChanged -= (float value) => _atomeBar.ChangeMaxValue(value);
         _entityStorePoint.MinValueChanged -= (float value) => _atomeBar.ChangeMinValue(value);
-
     }
 
     private void UpdateBar() {
-        _atomeBar.Add(_entityStorePoint.CurrentValue);
-        _atomeBar.ChangeMaxValue(_entityStorePoint.MaxValue);
-        _atomeBar.ChangeMinValue(_entityStorePoint.MinValue);
         _atomeBar.UpdateSlider();
     }
-
 }

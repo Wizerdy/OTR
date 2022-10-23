@@ -26,8 +26,8 @@ public class AxeShield : Weapon
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
-        _attacks.Add(AttackIndex.FIRST, IAttackSlash);
-        _attacks.Add(AttackIndex.SECOND, IAttackParry);
+        _attacks.Add(AttackIndex.FIRST, IAttackParry);
+        _attacks.Add(AttackIndex.SECOND, IAttackSlash);
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
@@ -53,6 +53,8 @@ public class AxeShield : Weapon
     }
 
     protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {
+        SoundManager.Instance.PlaySfxByIndex(0);
+
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         
         _targetAnimator.SetTrigger(_triggerName_attack_slash);
@@ -60,6 +62,8 @@ public class AxeShield : Weapon
     }
 
     protected IEnumerator IAttackParry(EntityAbilities caster, Vector2 direction) {
+        SoundManager.Instance.StopAudio(AudioName.MusicTest);
+
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         _targetAnimator.SetTrigger(_triggerName_attack_parry);

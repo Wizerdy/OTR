@@ -8,4 +8,8 @@ public class Charge : BossAttack {
     public override void Activate(EntityAbilities ea, Transform target) {
         ea.Get<EntityMovement>().CreateMovement(_duration, _speed, target.position - ea.gameObject.transform.position);
     }
+
+    public override void Activate(EntityAbilities ea, Transform[] targets) {
+        
+    }
 }

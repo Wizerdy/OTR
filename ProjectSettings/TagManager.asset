@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Laser
   - Enemy
+  - Wall
+  - Boss
+  - BossItem
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Player
   - Shield
   - Weapon
-  - 
-  - 
+  - Boss
+  - BossItem
   - 
   - 
   - 

@@ -263,6 +263,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
             } else {
                 _direction = Vector2.zero;
             }
+            direction.Normalize();
         }
         public Vector2 _direction;
         public float _speedReference;
@@ -286,6 +287,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
         timer.Start();
         Vector2 directionSave;
         bool constant = false;
+        Rigidbody.velocity = Vector3.zero;
         if (movement._direction == Vector2.zero) {
             directionSave = Orientation.normalized;
         } else {
@@ -308,6 +310,10 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
         }
         _movement = null;
         _state = State.DECELERATING;
+    }
+
+    public void StopMovement() {
+        StopCoroutine(_movement);
     }
 
     #region Dash

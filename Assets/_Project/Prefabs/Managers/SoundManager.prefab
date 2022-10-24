@@ -46,13 +46,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundsMusic:
   - audioName: 3
-    audio: {fileID: 8300000, guid: b71326780d68ad2479650ae983487d14, type: 3}
+    audio:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     volume: 0.6
     loop: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
   soundsSfx:
   - audioName: 2
-    audio: {fileID: 8300000, guid: e900408f5ba78974c93c8d37ef9575a2, type: 3}
+    audio:
+    - {fileID: 8300000, guid: e900408f5ba78974c93c8d37ef9575a2, type: 3}
     volume: 1
     loop: 0
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+  - audioName: 4
+    audio:
+    - {fileID: 8300000, guid: 44e7221f3512fbf4e90cd33b82ac7e77, type: 3}
+    - {fileID: 8300000, guid: 1d42254ce2c39ee4683f92170619e4f1, type: 3}
+    - {fileID: 8300000, guid: b11b2280ca7aa944fa748d5de9e60f6b, type: 3}
+    - {fileID: 8300000, guid: a0d59ea61d825af45b9b9fb6483d665f, type: 3}
+    - {fileID: 8300000, guid: 448303c47c65c2b4784141a808ab29c9, type: 3}
+    - {fileID: 8300000, guid: fc15507138bdc9344bdb81ba367fb4c8, type: 3}
+    - {fileID: 8300000, guid: 84a9eb877c0b59f4096a95646fd869e7, type: 3}
+    - {fileID: 8300000, guid: 301553271a7758948ac5a888a2999e64, type: 3}
+    - {fileID: 8300000, guid: 96577c41ea13e1e45b607323ea16f221, type: 3}
+    - {fileID: 8300000, guid: fade637163aeb774bbb2af416c134b53, type: 3}
+    - {fileID: 8300000, guid: a62be65048405914e8944b09c20e06e3, type: 3}
+    - {fileID: 8300000, guid: 73e5ade3c17f41e408776df4b4138601, type: 3}
+    - {fileID: 8300000, guid: 5f1eb1f5bbf378c4391c44e12e101f06, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
   activeMusic: 1
   activeSfx: 1

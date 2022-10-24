@@ -245,7 +245,6 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
         RemoveSlow(_moveToSlow);
     }
 
-    #endregion
 
     struct Movement {
         public Movement(float duration, float speedReference, Vector2 direction = default, AnimationCurve curve = null) {
@@ -259,11 +258,10 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
             }
             _duration = duration;
             if (direction != default) {
-                _direction = direction;
+                _direction = direction.normalized;
             } else {
                 _direction = Vector2.zero;
             }
-            direction.Normalize();
         }
         public Vector2 _direction;
         public float _speedReference;
@@ -272,9 +270,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     public void CreateMovement(float duration, float speedReference, Vector2 direction, AnimationCurve curve = null) {
-        if (_movement != null) {
-            StopCoroutine(_movement);
-        }
+        StopMovement();
         Movement newMovement = new Movement(duration, speedReference, direction, curve);
         _movement = StartCoroutine(NewMovement(newMovement));
     }
@@ -283,11 +279,11 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
         _state = State.RESTRAINED;
         Timer timer = new Timer(this, movement._duration);
         bool finish = false;
-        timer.OnActivate += () => finish = true;
-        timer.Start();
-        Vector2 directionSave;
         bool constant = false;
+        timer.OnActivate += () => finish = true;
+        Vector2 directionSave;
         Rigidbody.velocity = Vector3.zero;
+        timer.Start();
         if (movement._direction == Vector2.zero) {
             directionSave = Orientation.normalized;
         } else {
@@ -297,13 +293,13 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
 
         while (!finish) {
             if (constant) {
-                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0,timer.Duration,timer.CurrentDuration));
             } else {
                 if (_direction.normalized != Vector2.zero) {
                     directionSave = _direction.normalized;
-                    Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+                    Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
                 } else {
-                    Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(timer.CurrentDuration);
+                    Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
                 }
             }
             yield return null;
@@ -313,8 +309,12 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     public void StopMovement() {
-        StopCoroutine(_movement);
+        if (_movement != null) {
+            StopCoroutine(_movement);
+        }
     }
+
+    #endregion
 
     #region Dash
 

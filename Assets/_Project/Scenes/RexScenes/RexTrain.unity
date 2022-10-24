@@ -384,7 +384,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 734035845}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &123470124
 MonoBehaviour:
@@ -398,9 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c886b85f7d856143906e6749434c5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  _speed: 10
-  _duration: 1
+  weight: 0
+  _speed: 30
+  _duration: 2
+  _entityMovement: {fileID: 0}
 --- !u!1 &149240408
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,10 +547,22 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 641596146}
-          m_TargetAssemblyTypeName: EntityMovement, Assembly-CSharp
-          m_MethodName: StopMovement
-          m_Mode: 1
+        - m_Target: {fileID: 123470124}
+          m_TargetAssemblyTypeName: Charge, Assembly-CSharp
+          m_MethodName: Hit
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1961962098}
+          m_TargetAssemblyTypeName: ChargeComeBack, Assembly-CSharp
+          m_MethodName: Hit
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -602,6 +615,55 @@ Transform:
   m_Father: {fileID: 1032466094}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &456123245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456123246}
+  - component: {fileID: 456123247}
+  m_Layer: 9
+  m_Name: Charge (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &456123246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456123245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 734035845}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456123247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456123245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c204a83b337126a4fbf33803fadc1eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  _speed: 50
+  _duration: 1
+  _delayCharge: 0.5
+  _entityMovement: {fileID: 0}
 --- !u!1 &477710482
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +861,7 @@ MonoBehaviour:
   _bossPhases:
   - {fileID: 734035846}
   _currentPhase: 1
+  _timeBetweenAttack: 5
 --- !u!114 &641596146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,8 +1021,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1520294172}
   - {fileID: 123470123}
+  - {fileID: 1961962097}
+  - {fileID: 456123246}
+  - {fileID: 1520294172}
   - {fileID: 1885611453}
   - {fileID: 1834308681}
   m_Father: {fileID: 421244980}
@@ -979,7 +1044,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacks:
   - {fileID: 123470124}
+  - {fileID: 1961962098}
+  - {fileID: 456123247}
   - {fileID: 1520294173}
+  - {fileID: 1885611454}
+  - {fileID: 1834308682}
 --- !u!1001 &777423066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1532,7 +1601,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1583,7 +1652,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 734035845}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1520294173
 MonoBehaviour:
@@ -1597,9 +1666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1000
-  _bossBallprefab: {fileID: 5639516966137141597, guid: b8a90bae3aca3fd4fbf8a2a03d8faa56, type: 3}
-  _speed: 50
+  weight: 0
+  _bossBallprefab: {fileID: 7596212308714034114, guid: b8a90bae3aca3fd4fbf8a2a03d8faa56, type: 3}
+  _speed: 10
   _duration: 10
 --- !u!1 &1834308680
 GameObject:
@@ -1610,6 +1679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834308681}
+  - component: {fileID: 1834308682}
   m_Layer: 9
   m_Name: BallV3
   m_TagString: Untagged
@@ -1630,8 +1700,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 734035845}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834308682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834308680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  _bossBallprefab: {fileID: -391399695015942750, guid: 5a35f022810c55f40b4aa20ceb9a3b28, type: 3}
+  _speed: 10
+  _duration: 10
 --- !u!1 &1885611452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1885611453}
+  - component: {fileID: 1885611454}
   m_Layer: 9
   m_Name: BallV2
   m_TagString: Untagged
@@ -1661,8 +1748,74 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 734035845}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1885611454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885611452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  _bossBallprefab: {fileID: 7596212308714034114, guid: 1eb56dbb8ae81cc49b74cbbf52a6f6a3, type: 3}
+  _speed: 10
+  _duration: 10
+--- !u!1 &1961962096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1961962097}
+  - component: {fileID: 1961962098}
+  m_Layer: 9
+  m_Name: Charge (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1961962097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961962096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 734035845}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1961962098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961962096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245044e885683834ca6bd9474fffe418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  _speed: 30
+  _duration: 2
+  _entityMovement: {fileID: 0}
+  _ea: {fileID: 0}
+  _firsthit: 1
 --- !u!1 &2097025648
 GameObject:
   m_ObjectHideFlags: 0

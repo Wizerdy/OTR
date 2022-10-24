@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-public abstract class BossBall : MonoBehaviour {
+public class BossBall : MonoBehaviour {
     protected Rigidbody2D _rb;
     public Vector2 _startDirection;
     public float _speed;
@@ -18,7 +18,8 @@ public abstract class BossBall : MonoBehaviour {
     private void Update() {
         r = _rb.velocity;
     }
-    public abstract void Hit(Collision2D collision);
-
-
+    public virtual void Hit(Collision2D collision) {
+        if (collision.collider.tag == "Wall")
+            _rb.velocity = Vector2.Reflect(r.normalized, collision.GetContact(0).normal) * _speed;
+    }
 }

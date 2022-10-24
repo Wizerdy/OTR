@@ -7,9 +7,10 @@ public class EntityBoss : MonoBehaviour {
     [SerializeField] MenacePointSystemReference _threatSystem;
     [SerializeField] List<BossPhase> _bossPhases;
     [SerializeField] int _currentPhase;
+    [SerializeField] float _timeBetweenAttack;
     Timer _timer;
     private void Start() {
-        _timer = new Timer(this, 2);
+        _timer = new Timer(this, _timeBetweenAttack);
         _timer.OnActivate += Attack;
         _timer.Start();
     }

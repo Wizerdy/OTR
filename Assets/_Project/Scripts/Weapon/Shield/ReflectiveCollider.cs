@@ -6,6 +6,7 @@ using ToolsBoxEngine;
 public class ReflectiveCollider : MonoBehaviour {
     [SerializeField] bool _launchIt = false;
     [SerializeField] float _force = 4f;
+    [SerializeField] float reflectedProjectileDamage = 10f;
     Vector2 _aimingDirection = Vector2.up;
 
     public Vector2 Aim { get => _aimingDirection; set => _aimingDirection = value; }

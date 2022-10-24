@@ -6,6 +6,7 @@ using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 
 public enum AttackIndex { FIRST, SECOND }
+public enum WeaponType { UNDEFINED, SWORD, SHIELD, BOW, BLOODFIST, CROSSGUN, SHIELDAXE }
 
 public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected Rigidbody2D _rb;
@@ -29,6 +30,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     EntityAbilities _user = null;
     protected bool _canAttack = true;
     protected bool _attacking = false;
+    protected WeaponType _type = WeaponType.UNDEFINED;
 
     protected Vector2 _lastVelocity = Vector2.zero;
 
@@ -43,6 +45,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public bool IsAttacking => _attacking;
     public bool CanAttack => !IsAttacking && _canAttack;
     public bool IsOnFloor => _isOnFloor;
+    public WeaponType Type => _type;
     protected float MoveSpeed { get => _movespeed; set { _movespeed = value; _onMovespeedSet.Invoke(value); } }
     protected EntityAbilities User => _user;
 

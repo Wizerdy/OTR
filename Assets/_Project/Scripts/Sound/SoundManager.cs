@@ -77,8 +77,13 @@ public class SoundManager : MonoBehaviour {
 
         PlaySound source = obj.GetComponent<PlaySound>();
         Sound soundToPlay = FindSfx(audioName);
+
+        if (soundToPlay.randomPitch) {
+            source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
+        }
+
         source.sound = soundToPlay;
-        source.audioSource.clip = soundToPlay.audio;
+        source.audioSource.clip = soundToPlay.audio[Random.Range(0,source.sound.audio.Length - 1)];
         source.audioSource.loop = soundToPlay.loop;
         source.audioSource.volume = soundToPlay.volume;
         //if (soundToPlay.playOnAwake) {
@@ -103,10 +108,16 @@ public class SoundManager : MonoBehaviour {
         //AudioSource source = obj.GetComponent<AudioSource>();
         PlaySound source = obj.GetComponent<PlaySound>();
         Sound soundToPlay = FindMusic(audioName);
+
+        if (soundToPlay.randomPitch) {
+            source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
+        }
+
         source.sound = soundToPlay;
-        source.audioSource.clip = soundToPlay.audio;
+        source.audioSource.clip = soundToPlay.audio[Random.Range(0, source.sound.audio.Length - 1)];
         source.audioSource.loop = soundToPlay.loop;
         source.audioSource.volume = soundToPlay.volume;
+        
         //if (soundToPlay.playOnAwake) {
         obj.SetActive(true);
         StartCoroutine(source.StartSound());

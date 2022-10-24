@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121ce9a481518944ad9371df9f137ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageHealth: {fileID: 5882125061950032962, guid: 38c73f754ac0d6e48a2f0ed3c5bc28c0, type: 3}
-  _rb: {fileID: 2200106324864427959, guid: 38c73f754ac0d6e48a2f0ed3c5bc28c0, type: 3}
+  _damageHealth: {fileID: 5882125061950032962}
+  _rb: {fileID: 2200106324864427959}
   _onCollide:
     _event:
       m_PersistentCalls:

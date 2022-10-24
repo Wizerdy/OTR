@@ -203,8 +203,9 @@ MonoBehaviour:
   _destroyOnHit: 1
   _onlyDamageOnceEach: 1
   _ignoreTag:
-    tags: []
-    state: 0
+    tags:
+    - Wall
+    state: 1
   _onCollide:
     _event:
       m_PersistentCalls:

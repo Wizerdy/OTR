@@ -51,8 +51,6 @@ public class AxeShield : Weapon
     }
 
     protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {
-        SoundManager.Instance.PlaySfxByIndex(0);
-
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         
         _targetAnimator.SetTrigger(_triggerName_attack_slash);
@@ -60,8 +58,6 @@ public class AxeShield : Weapon
     }
 
     protected IEnumerator IAttackParry(EntityAbilities caster, Vector2 direction) {
-        SoundManager.Instance.StopAudio(AudioName.MusicTest);
-
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         _targetAnimator.SetTrigger(_triggerName_attack_parry);

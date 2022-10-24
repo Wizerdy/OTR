@@ -60,6 +60,15 @@ public class FrameCollider : MonoBehaviour {
 
     }
 
+    private void FixedUpdate() {
+        if (_currentIndex < 0) { return; }
+
+        Collider2D[] colliders = Overlap();
+        for (int i = 0; i < colliders.Length; i++) {
+            SendMessage("OnTriggerEnter2D", colliders[i]);
+        }
+    }
+
     public Collider2D[] Overlap() {
         if (_currentIndex < 0) { return null; }
         List<Collider2D> output = new List<Collider2D>();

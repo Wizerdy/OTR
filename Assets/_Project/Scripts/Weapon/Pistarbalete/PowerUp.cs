@@ -4,9 +4,16 @@ using UnityEngine;
 
 public abstract class PowerUp : ScriptableObject {
     protected EntityAbilities _target;
+    protected bool _enabled = false;
+    protected bool _cloned = false;
 
-    public void SetTarget(EntityAbilities ability) {
-        _target = ability;
+    public bool Enabled => _enabled;
+
+    public PowerUp SetTarget(EntityAbilities ability) {
+        PowerUp target = this;
+        if (!_cloned) { target = Clone(); }
+        target._target = ability;
+        return target;
     }
 
     public abstract void Enable();

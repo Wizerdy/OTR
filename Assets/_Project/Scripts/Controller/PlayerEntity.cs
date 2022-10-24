@@ -44,11 +44,11 @@ public class PlayerEntity : MonoBehaviour {
         if (direction != Vector2.zero) { _directionnalSprite?.ChangeSprite(direction); }
     }
 
-    public void Aim(Vector2 direction) {
+    public void Aim(Vector2 direction, bool aiming = true) {
         if (!CanLookAround) { return; }
         //if (direction == Vector2.zero) { direction = _movements.Orientation; }
         _oriention.LookAt(direction);
-        _weaponry.Aim(direction);
+        if (aiming) { _weaponry.Aim(direction); }
         if (_trajectoryLine != null) { _trajectoryLine.Direction = direction; }
         _onAim.Invoke(direction);
     }

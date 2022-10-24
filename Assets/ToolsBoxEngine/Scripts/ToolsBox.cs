@@ -8,6 +8,7 @@ namespace ToolsBoxEngine {
     #region Enums
 
     public enum Axis { X, Y, Z, W }
+    public enum Axis2D { X, Y }
     public enum DebugType { NORMAL, WARNING, ERROR }
 
     public enum Comparison { EQUAL, DIFFERENT, LESS, LESS_EQUAL, GREATER, GREATER_EQUAL }

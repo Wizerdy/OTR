@@ -181,6 +181,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _damage: 5
   _perfectDamage: 5
 --- !u!114 &5882125061950032962
 MonoBehaviour:

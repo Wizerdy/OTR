@@ -111,6 +111,32 @@ namespace ToolsBoxEngine {
         public class StackableFunc<T> {
             public List<Func<T, T>> _funcs;
 
+            public int Count => _funcs.Count;
+
+            #region Big Five
+
+            public StackableFunc() {
+                _funcs = new List<Func<T, T>>();
+            }
+
+            public StackableFunc(StackableFunc<T> input) {
+                _funcs = new List<Func<T, T>>(input._funcs);
+            }
+
+            public static StackableFunc<T> operator +(StackableFunc<T> input, Func<T, T> add) {
+                StackableFunc<T> output = new StackableFunc<T>(input);
+                output.Add(add);
+                return output;
+            }
+
+            public static StackableFunc<T> operator -(StackableFunc<T> input, Func<T, T> add) {
+                StackableFunc<T> output = new StackableFunc<T>(input);
+                output.Remove(add);
+                return output;
+            }
+
+            #endregion
+
             public T Use(T arg) {
                 for (int i = 0; i < _funcs.Count; i++) {
                     arg = _funcs[i](arg);
@@ -124,6 +150,10 @@ namespace ToolsBoxEngine {
                 _funcs.Remove(func);
             }
 
+            public void Clear() {
+                _funcs.Clear();
+            }
+
             public void Add(Func<T, T> func) {
                 _funcs.Add(func);
             }
@@ -134,6 +164,14 @@ namespace ToolsBoxEngine {
 
             public bool Contains(Func<T, T> func) {
                 return _funcs.Contains(func);
+            }
+
+            public void Copy(StackableFunc<T> stFunc) {
+                _funcs = new List<Func<T, T>>(stFunc._funcs);
+            }
+
+            public void CopyReference(StackableFunc<T> stFunc) {
+                _funcs = stFunc._funcs;
             }
 
             #endregion

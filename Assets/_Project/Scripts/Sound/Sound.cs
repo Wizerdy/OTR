@@ -4,6 +4,7 @@ public enum AudioName {
     None,
     ShieldSlash,
     ShieldSlashHit,
+    ShieldParry,
     MusicTest,
     CrossbowShooting,
 }

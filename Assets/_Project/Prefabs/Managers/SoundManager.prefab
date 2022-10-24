@@ -64,7 +64,7 @@ MonoBehaviour:
     randomPitch: 0
     minPitch: 0
     maxPitch: 0
-  - audioName: 4
+  - audioName: 5
     audio:
     - {fileID: 8300000, guid: 44e7221f3512fbf4e90cd33b82ac7e77, type: 3}
     - {fileID: 8300000, guid: 1d42254ce2c39ee4683f92170619e4f1, type: 3}
@@ -79,6 +79,17 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a62be65048405914e8944b09c20e06e3, type: 3}
     - {fileID: 8300000, guid: 73e5ade3c17f41e408776df4b4138601, type: 3}
     - {fileID: 8300000, guid: 5f1eb1f5bbf378c4391c44e12e101f06, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 3
+    audio:
+    - {fileID: 8300000, guid: 2b0bf9baaad8c9a4392f8fb997829468, type: 3}
+    - {fileID: 8300000, guid: 542d3daa43822384aa22b4a26295d670, type: 3}
+    - {fileID: 8300000, guid: d54406dfb5127bc4fbb4dac73dfee922, type: 3}
+    - {fileID: 8300000, guid: 5970ecdbcc0bf034597ebda6283f5492, type: 3}
     volume: 1
     loop: 0
     randomPitch: 1

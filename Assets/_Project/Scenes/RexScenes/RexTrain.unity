@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62640728}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: -17.3, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -351,6 +351,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -769,7 +773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477710482}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 17.3, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -808,6 +812,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -1510,8 +1518,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020056467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -9.48, z: 0}
+  m_LocalScale: {x: 35.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1549,6 +1557,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -1609,7 +1621,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1032466096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,8 +1933,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097025648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 9.48, z: 0}
+  m_LocalScale: {x: 35.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1960,6 +1972,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

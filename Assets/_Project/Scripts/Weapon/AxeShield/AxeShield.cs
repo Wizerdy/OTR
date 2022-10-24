@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class AxeShield : Weapon
 {
-    public int axeShieldSlashDamage = 2;
-    [SerializeField] private float aggroPointGenerated = 0.5f;
+    //[SerializeField] private float aggroPointGenerated = 0.5f;
     [SerializeField] private float parryCooldown = 0.5f;
-    //[SerializeField] private int armorPointCurrent = 10;
     [SerializeField] private float armorPointRegenerationRate = 1;
     [SerializeField] private int armorPointRegenerationValue = 1;
     [SerializeField] private int armorPointMax = 10;

@@ -312,6 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1486856499904730864}
   - component: {fileID: 1486856499904730871}
+  - component: {fileID: 2195756821676496089}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -385,7 +386,8 @@ MonoBehaviour:
             m_StringArgument: Damaged
             m_BoolArgument: 0
           m_CallState: 2
-  _damageModifiers: []
+  _damageModifiers:
+  - {fileID: 2195756821676496089}
   _onMaxHealthChange:
     _event:
       m_PersistentCalls:
@@ -402,6 +404,26 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &2195756821676496089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486856499904730870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e28cc8a1c168f04c94ee945bc36375f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 4
+  _value: 0
+  _onUse:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _radiuses: {x: 2, y: 4, z: 5, w: 7}
+  _curveIt: 1
 --- !u!1 &1486856499947928098
 GameObject:
   m_ObjectHideFlags: 0

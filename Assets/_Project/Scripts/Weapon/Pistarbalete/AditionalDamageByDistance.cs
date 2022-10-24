@@ -6,6 +6,7 @@ using ToolsBoxEngine;
 
 public class AditionalDamageByDistance : MonoBehaviour {
     [SerializeField] AnimationCurve _damageByDistance;
+    [SerializeField] int _damage = 5;
     [SerializeField] int _perfectDamage = 5;
 
     Vector2 _startPosition;
@@ -17,7 +18,7 @@ public class AditionalDamageByDistance : MonoBehaviour {
         _startPosition = transform.Position2D();
     }
 
-    public int ComputeDamages(int damage, float percentage) {
-        return Mathf.CeilToInt(damage * _damageByDistance.Evaluate(percentage)) + (percentage >= 1f ? _perfectDamage : 0);
+    public int ComputeDamages(float percentage) {
+        return Mathf.CeilToInt(_damage * _damageByDistance.Evaluate(percentage)) + (percentage >= 1f ? _perfectDamage : 0);
     }
 }

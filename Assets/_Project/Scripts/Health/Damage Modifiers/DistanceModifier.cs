@@ -5,8 +5,6 @@ using ToolsBoxEngine;
 
 public class DistanceModifier : DamageModifier {
     [SerializeField] Vector4 _radiuses = new Vector4(2f, 4f, 5f, 7f);
-    //[SerializeField] bool _inside = true;
-    [SerializeField] bool _curveIt = true;
 
     AditionalDamageByDistance _module = null;
 
@@ -19,7 +17,6 @@ public class DistanceModifier : DamageModifier {
 
     protected override int Modify(int amount) {
         amount = base.Modify(amount);
-        if (!_curveIt) { return amount; }
         if (_module == null) { return amount; }
 
         float distance = (transform.Position2D() - _module.StartPosition).magnitude;
@@ -34,8 +31,8 @@ public class DistanceModifier : DamageModifier {
             }
         }
 
-        Debug.Log(_module.ComputeDamages(amount, Mathf.Max(0f, Mathf.Min(1f, percentage))) + " .. p:" + percentage + " .. d:" + distance);
-        return _module.ComputeDamages(amount, Mathf.Max(0f, Mathf.Min(1f, percentage)));
+        //Debug.Log(amount + _module.ComputeDamages(Mathf.Max(0f, Mathf.Min(1f, percentage))) + " .. p:" + percentage + " .. d:" + distance);
+        return amount + _module.ComputeDamages(Mathf.Max(0f, Mathf.Min(1f, percentage)));
     }
 
     private void OnDrawGizmosSelected() {

@@ -17,17 +17,22 @@ public class DamageHealth : MonoBehaviour {
     [SerializeField, HideInInspector] BetterEvent<Collision2D> _onCollide = new BetterEvent<Collision2D>();
     [SerializeField, HideInInspector] BetterEvent<Collider2D> _onTrigger = new BetterEvent<Collider2D>();
     [SerializeField, HideInInspector] BetterEvent<IHealth, int> _onDamage = new BetterEvent<IHealth, int>();
+    [SerializeField, HideInInspector] BetterEvent _onDead = new BetterEvent();
 
     List<GameObject> _hitted = new List<GameObject>();
+
+    StackableFunc<int> _damageModifier = new StackableFunc<int>();
 
     #region Properties
 
     public int Damage { get { return _damage; } set { _damage = value; } }
+    public StackableFunc<int> DamageModifier => _damageModifier;
     public MultipleTagSelector Damageables { get { return _damageables; } set { _damageables = value; } }
 
     public event UnityAction<Collision2D> OnCollide { add { _onCollide.AddListener(value); } remove { _onCollide.RemoveListener(value); } }
     public event UnityAction<Collider2D> OnTrigger { add { _onTrigger.AddListener(value); } remove { _onTrigger.RemoveListener(value); } }
     public event UnityAction<IHealth, int> OnDamage { add { _onDamage.AddListener(value); } remove { _onDamage.RemoveListener(value); } }
+    public event UnityAction OnDead { add => _onDead += value; remove => _onDead -= value; }
 
     #endregion
 
@@ -67,17 +72,24 @@ public class DamageHealth : MonoBehaviour {
             _hitted.Add(root);
             IHealth health = root.GetComponent<IHealth>();
             if (health != null && health.CanTakeDamage) {
-                health.TakeDamage(_damage, gameObject);
-                _onDamage?.Invoke(health, _damage);
+                int damages = _damageModifier.Use(_damage);
+                health.TakeDamage(damages, gameObject);
+                _onDamage?.Invoke(health, damages);
             }
+
             if (_destroyOnHit) {
                 Die();
             }
+            _onDead.Invoke();
+
             return;
         }
 
-        if (hardHit && _destroyOnHit) {
-            Die();
+        if (hardHit) {
+            if (_destroyOnHit) {
+                Die();
+            }
+            _onDead.Invoke();
         }
     }
 

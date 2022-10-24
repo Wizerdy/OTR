@@ -15,6 +15,8 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     Weapon _weapon;
     EntityMovement.SpeedModifier _movementSlow;
 
+    [SerializeField, HideInInspector] BetterEvent<Weapon> _onPickup = new BetterEvent<Weapon>();
+    [SerializeField, HideInInspector] BetterEvent<Weapon> _onDrop = new BetterEvent<Weapon>();
     [SerializeField, HideInInspector] BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
     [SerializeField, HideInInspector] BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
 
@@ -26,6 +28,8 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     public DamageHealth DamageHealth => _damageHealth;
     public bool HasWeapon => _weapon != null;
 
+    public event UnityAction<Weapon> OnPickup { add => _onPickup += value; remove => _onPickup -= value; }
+    public event UnityAction<Weapon> OnDrop { add => _onDrop += value; remove => _onDrop -= value; }
     public event UnityAction<AttackIndex, Vector2> OnAttack { add => _onAttack += value; remove => _onAttack -= value; }
     public event UnityAction<AttackIndex> OnAttackEnd { add => _onAttackEnd += value; remove => _onAttackEnd -= value; }
 
@@ -48,6 +52,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         weapon.OnAttackEnd += _InvokeOnAttackEnd;
         _weapon = weapon;
         _damageHealth.Damage = _weapon.Damage;
+        _onPickup.Invoke(weapon);
     }
 
     public void Drop() {
@@ -57,6 +62,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         _weapon.OnAttackStart -= _InvokeOnAttack;
         _weapon.OnAttackEnd -= _InvokeOnAttackEnd;
         SetMovementSlow(1f);
+        _onDrop.Invoke(_weapon);
         _weapon = null;
     }
 

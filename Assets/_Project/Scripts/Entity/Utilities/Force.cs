@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Force : MonoBehaviour {
+public class Force {
     public enum ForceMode {
         TIMED, INPUT
     }

@@ -282,7 +282,7 @@
                 {
                     "name": "",
                     "id": "24091d4f-86ce-4cff-8c1a-d23b8c2fa79e",
-                    "path": "<Joystick>/stick/down",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

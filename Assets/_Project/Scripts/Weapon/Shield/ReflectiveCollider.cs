@@ -9,6 +9,8 @@ public class ReflectiveCollider : MonoBehaviour {
     [SerializeField] bool _launchIt = false;
     [SerializeField] float _force = 4f;
     [SerializeField] float reflectedProjectileDamage = 10f;
+    [SerializeField] ParticleSystem parryVFX;
+
     Vector2 _aimingDirection = Vector2.up;
 
     [SerializeField] protected BetterEvent<Collider2D> _onParry = new BetterEvent<Collider2D>();
@@ -21,6 +23,8 @@ public class ReflectiveCollider : MonoBehaviour {
         if (_launchIt) {
             reflectable.Launch(_force, _aimingDirection);
             _onParry.Invoke(collision);
+            parryVFX.Play();
+            //StartCoroutine(StopParticleSystem(parryVFXDuration));
         }
     }
 
@@ -32,6 +36,12 @@ public class ReflectiveCollider : MonoBehaviour {
         } else {
             Debug.Log("Reflect : " + collision.gameObject.name);
             reflectable.Reflect(collision.GetContact(0));
+
         }
     }
+
+    //IEnumerator StopParticleSystem(float time) {
+    //    yield return new WaitForSeconds(time);
+    //    parryVFX.Stop();
+    //}
 }

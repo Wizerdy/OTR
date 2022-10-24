@@ -8,7 +8,7 @@ public class LaunchBall : BossAttack {
     [SerializeField] float _duration;
     public override void Activate(EntityAbilities ea, Transform target) {
         BossBall newBall = Instantiate(_bossBallprefab);
-        newBall.transform.position = ea.transform.position;
+        newBall.transform.position = ea.transform.position + (target.position - ea.transform.position).normalized;
         newBall._startDirection = (target.position - ea.transform.position).normalized;
         newBall._speed = _speed;
         newBall._duration = _duration;

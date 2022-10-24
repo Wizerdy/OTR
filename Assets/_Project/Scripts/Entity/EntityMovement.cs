@@ -313,6 +313,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
         if (_movement != null) {
             StopCoroutine(_movement);
         }
+        _rb.velocity = Vector2.zero;
     }
 
     #endregion

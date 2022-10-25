@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestProjectile : MonoBehaviour, IReflectable
 {
+    [SerializeField] private float lifeSpan = 3.0f; 
     private Rigidbody2D rb2D;
 
     public void Launch(float force, Vector2 direction) {
@@ -11,7 +14,7 @@ public class TestProjectile : MonoBehaviour, IReflectable
     }
 
     public void Reflect(ContactPoint2D collision) {
-        throw new System.NotImplementedException();
+        Debug.Log("reflect");
     }
 
     // Start is called before the first frame update
@@ -24,6 +27,9 @@ public class TestProjectile : MonoBehaviour, IReflectable
     // Update is called once per frame
     void Update()
     {
-        
+        lifeSpan -= Time.deltaTime;
+        if (lifeSpan < 0) {
+            Destroy(gameObject);
+        }
     }
 }

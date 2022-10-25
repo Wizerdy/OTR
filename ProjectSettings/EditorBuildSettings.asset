@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Project/Scenes/Proto.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/_Project/Scenes/AdrienProto.unity
-    guid: a8a4c5ef3ab4b04498a4f573c4293120
+    path: Assets/_Project/Scenes/GDScene.unity
+    guid: 18ec6bc310b87ee4ba25a9648a99c820
+  - enabled: 1
+    path: Assets/_Project/Scenes/RexScenes/RexTrain.unity
+    guid: 4e2cf8e5b68405c4ca3eff3f04ddcffc
   m_configObjects: {}

@@ -2,13 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New PowerUpByWeapon", menuName = "Scriptable Object/Power Up/PowerUpByWeapon", order = 4)]
+[CreateAssetMenu(fileName = "PU_PowerUpByWeapon", menuName = "Scriptable Object/Power Up/PowerUp By Weapon", order = 4)]
 public class PowerUpByWeapon : PowerUp {
-    [SerializeField] List<(Weapon, PowerUp)> _powerUps;
+    [System.Serializable]
+    struct Weapon_PU {
+        public WeaponType weapon;
+        public PowerUp powerUp;
+    }
+
+    [SerializeField] List<Weapon_PU> _powerUps;
 
     PowerUp _powerUp;
 
+    public override PowerUp Clone() {
+        PowerUpByWeapon output = CreateInstance<PowerUpByWeapon>();
+        output._powerUps = new List<Weapon_PU>(_powerUps);
+        output._target = _target;
+        output._enabled = false;
+        output._cloned = true;
+        return output;
+    }
+
     public override void Enable() {
+        if (_enabled) { return; }
+
         if (_target == null) { return; }
         EntityWeaponry weaponry = _target.Get<EntityWeaponry>();
         if (weaponry == null || !weaponry.HasWeapon) { return; }
@@ -21,26 +38,23 @@ public class PowerUpByWeapon : PowerUp {
 
         if (_powerUp == null) { return; }
 
-        _powerUp = _powerUp.Clone();
-        _powerUp.SetTarget(_target);
+        _powerUp = _powerUp.SetTarget(_target);
         _powerUp.Enable();
+
+        _enabled = _powerUp.Enabled;
     }
 
     public override void Disable() {
+        if (_powerUp == null) { return; }
+
         _powerUp.Disable();
         _powerUp = null;
     }
 
-    public override PowerUp Clone() {
-        PowerUpByWeapon output = CreateInstance<PowerUpByWeapon>();
-        output.SetTarget(_target);
-        return output;
-    }
-
     PowerUp Find(Weapon weapon) {
         for (int i = 0; i < _powerUps.Count; i++) {
-            if (_powerUps[i].Item1 == weapon) {
-                return _powerUps[i].Item2;
+            if (_powerUps[i].weapon == weapon.Type) {
+                return _powerUps[i].powerUp;
             }
         }
         return null;

@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
         _playerInput.actions["Second Attack"].canceled += _PressSecondAttackEnd;
         _playerInput.actions["Throw"].performed += _SetupThrow;
         _playerInput.actions["Throw"].canceled += _Throw;
+        _playerInput.actions["Teleport"].performed += _Teleport;
 
         _player.ShowAimLine(false);
         //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
@@ -33,18 +34,18 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         Vector2 direction = _playerInput.actions["Movements"].ReadValue<Vector2>();
         _player.Move(direction);
-        if (!_aiming) { _player.Aim(direction); }
+        if (!_aiming) { _player.Aim(direction, false); }
     }
 
     private void _Aim(InputAction.CallbackContext cc) {
         Vector2 direction = cc.ReadValue<Vector2>();
         if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
-        _player.Aim(direction);
+        _player.Aim(direction, true);
         _aiming = true;
     }
 
     private void _StopAim(InputAction.CallbackContext cc) {
-        _player.Aim(Vector2.zero);
+        _player.Aim(Vector2.zero, true);
         _aiming = false;
     }
 
@@ -65,7 +66,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _SetupThrow(InputAction.CallbackContext cc) {
-        _player.ShowAimLine(true);
+        if (_player.HasWeapon) {
+            _player.ShowAimLine(true);
+        }
+    }
+    
+    private void _Teleport(InputAction.CallbackContext cc) {
+        _player.transform.parent.transform.position = Vector3.zero;
     }
 
     private void _Throw(InputAction.CallbackContext cc) {

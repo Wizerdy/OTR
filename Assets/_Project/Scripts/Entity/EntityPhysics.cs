@@ -6,12 +6,14 @@ using ToolsBoxEngine;
 
 public class EntityPhysics : MonoBehaviour {
     [SerializeField] Rigidbody2D _rb;
+    [ReadOnly, SerializeField] List<Force> _forcesDisplay = new List<Force>();
+    [SerializeField] bool _debug = false;
 
     SortedDictionary<int, List<Force>> _forces = new SortedDictionary<int, List<Force>>();
 
     private void FixedUpdate() {
         foreach (KeyValuePair<int, List<Force>> pair in _forces) {
-            for (int i = 0; i < _forces.Count; i++) {
+            for (int i = 0; i < pair.Value.Count; i++) {
                 pair.Value[i].Update(Time.fixedDeltaTime);
             }
         }
@@ -34,12 +36,20 @@ public class EntityPhysics : MonoBehaviour {
     }
 
     public Force Add(float strength, Vector2 direction, float weight, Force.ForceMode mode, AnimationCurve start, AnimationCurve end, int priority) {
-        Force force = new Force(strength, direction, weight, mode, start, end);
+        return Add(strength, direction, weight, mode, AnimationCurve.Linear(0f, 0f, 1f, 1f), 1f, AnimationCurve.Linear(1f, 1f, 0f, 0f), 1f, priority);
+    }
+
+    public Force Add(float strength, Vector2 direction, float weight, Force.ForceMode mode, AnimationCurve start, float startTime, AnimationCurve end, float endTime, int priority) {
+        Force force = new Force(strength, direction, weight, mode, start, startTime, end, endTime);
+        if (!_forces.ContainsKey(priority)) { _forces.Add(priority, new List<Force>()); }
         _forces[priority].Add(force);
+        _forcesDisplay.Add(force);
         return force;
     }
 
     public void Add(Force force, int priority) {
+        if (!_forces.ContainsKey(priority)) { _forces.Add(priority, new List<Force>()); }
+        _forcesDisplay.Add(force);
         _forces[priority].Add(force);
     }
 
@@ -49,6 +59,7 @@ public class EntityPhysics : MonoBehaviour {
                 Remove(force, pair.Key);
             }
         }
+        _forcesDisplay.Remove(force);
     }
 
     public void Remove(Force force, int priority) {
@@ -56,6 +67,9 @@ public class EntityPhysics : MonoBehaviour {
         if (!_forces[priority].Contains(force)) { return; }
 
         _forces[priority].Remove(force);
+        _forcesDisplay.Remove(force);
+
+        if (_forces[priority].Count <= 0) { _forces.Remove(priority); }
     }
 
     #endregion
@@ -68,21 +82,28 @@ public class EntityPhysics : MonoBehaviour {
         int maxPriority = _forces.Keys.Last();
         int minPriority = _forces.Keys.First();
 
-        for (int priority = maxPriority; priority > minPriority; --priority) {
-            if (!_forces.ContainsKey(priority)) { continue; }
+        try {
+            for (int priority = maxPriority; priority >= minPriority; --priority) {
+                if (!_forces.ContainsKey(priority)) { continue; }
 
-            float sliceWeight = weight / _forces[priority].Count;
-            for (int index = 0; index < _forces[priority].Count; ++index) {
-                // Les inputs ne peuvent End et pique du poids, ces enculay (Do not forget)
-                if (_forces[priority][index].Mode != Force.ForceMode.INPUT && _forces[priority][index].HasEnded) {
-                    Remove(_forces[priority][index], priority);
-                    continue;
+                float sliceWeight = weight / _forces[priority].Count;
+                for (int index = 0; index < _forces[priority].Count; ++index) {
+                    if (_forces[priority][index] == null) { continue; }
+                    // Les inputs ne peuvent End et pique du poids, ces enculay (Do not forget)
+                    if (_forces[priority][index].Mode != Force.ForceMode.INPUT && _forces[priority][index].HasEnded) {
+                        Remove(_forces[priority][index], priority);
+                        continue;
+                    }
+
+                    float currentWeight = _forces[priority][index].Weight * sliceWeight;
+                    weight -= currentWeight;
+                    force += _forces[priority][index].Evaluate() * currentWeight;
                 }
-
-                float currentWeight = _forces[priority][index].Weight * sliceWeight;
-                weight -= currentWeight;
-                force += _forces[priority][index].Evaluate() * currentWeight;
             }
+        } catch (KeyNotFoundException k) {
+            if (_debug) { Debug.LogWarning("Happen : " + k); }
+        } catch (System.Exception e) {
+            Debug.LogError(e);
         }
 
         return force;

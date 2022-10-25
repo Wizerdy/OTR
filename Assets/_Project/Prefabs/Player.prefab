@@ -945,6 +945,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onDead:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3584440937519556868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1812,6 +1816,14 @@ MonoBehaviour:
   _attackAnimator: {fileID: 5925994806173688309}
   _damageHealth: {fileID: 7460772279012484888}
   _health: {fileID: 147940007823276091}
+  _onPickup:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDrop:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onAttack:
     _event:
       m_PersistentCalls:
@@ -2563,11 +2575,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _launchIt: 1
-  _force: 10
+  _force: 15
   reflectedProjectileDamage: 10
-  parryVFX: {fileID: 0}
-  parryVFXDuration: 1.5
+  parryVFX: {fileID: 2066405181529481965}
   _onParry:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+          m_MethodName: PlaySfxByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _onParryTrigger:
     _event:
       m_PersistentCalls:
         m_Calls:
@@ -3088,6 +3115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347cea33d9573534ea745ace0acf42de, type: 3}
+--- !u!198 &2066405181529481965 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 257195096158688461, guid: 347cea33d9573534ea745ace0acf42de, type: 3}
+  m_PrefabInstance: {fileID: 2250925718040327712}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5051170655265145239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6423744889885915063, guid: 347cea33d9573534ea745ace0acf42de, type: 3}

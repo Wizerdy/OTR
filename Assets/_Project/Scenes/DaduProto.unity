@@ -659,6 +659,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onParryTrigger:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!61 &612571765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2275,7 +2279,6 @@ MonoBehaviour:
   _animator: {fileID: 1639457792496938401}
   _colliders: {fileID: 1639457793663224085}
   _reviveTime: 3
-  _powerUp: {fileID: 0}
 --- !u!4 &1639457793710248800
 Transform:
   m_ObjectHideFlags: 0
@@ -2818,22 +2821,6 @@ PrefabInstance:
     - target: {fileID: 1573649334131984570, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066405181529481965, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066405181529481965, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
-      propertyPath: lengthInSec
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066405181529481965, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066405181529481965, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3905317884828674427, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name

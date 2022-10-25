@@ -7,6 +7,7 @@ using UnityEngine;
 public class TestProjectile : MonoBehaviour, IReflectable
 {
     [SerializeField] private float lifeSpan = 3.0f; 
+    [SerializeField] private float speed = 3.0f; 
     private Rigidbody2D rb2D;
 
     public void Launch(float force, Vector2 direction) {
@@ -14,14 +15,13 @@ public class TestProjectile : MonoBehaviour, IReflectable
     }
 
     public void Reflect(ContactPoint2D collision) {
-        Debug.Log("reflect");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        rb2D.velocity = Vector2.left;
+        rb2D.velocity = Vector2.left * speed;
     }
 
     // Update is called once per frame

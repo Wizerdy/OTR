@@ -1481,8 +1481,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4430ed80-921d-4f02-b705-ea745dd501b0
     m_ActionName: Gameplay/Second Attack[/Keyboard/q]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -2575,26 +2575,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _launchIt: 1
-  _force: 15
+  _force: 10
   reflectedProjectileDamage: 10
-  parryVFX: {fileID: 2066405181529481965}
+  parryVFX: {fileID: 0}
   _onParry:
-    _event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-          m_MethodName: PlaySfxByIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  _onParryTrigger:
     _event:
       m_PersistentCalls:
         m_Calls:
@@ -3115,11 +3099,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347cea33d9573534ea745ace0acf42de, type: 3}
---- !u!198 &2066405181529481965 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 257195096158688461, guid: 347cea33d9573534ea745ace0acf42de, type: 3}
-  m_PrefabInstance: {fileID: 2250925718040327712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5051170655265145239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6423744889885915063, guid: 347cea33d9573534ea745ace0acf42de, type: 3}

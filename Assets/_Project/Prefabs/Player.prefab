@@ -945,6 +945,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onDead:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3584440937519556868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,8 +1481,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4430ed80-921d-4f02-b705-ea745dd501b0
     m_ActionName: Gameplay/Second Attack[/Keyboard/q]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1812,6 +1816,14 @@ MonoBehaviour:
   _attackAnimator: {fileID: 5925994806173688309}
   _damageHealth: {fileID: 7460772279012484888}
   _health: {fileID: 147940007823276091}
+  _onPickup:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDrop:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onAttack:
     _event:
       m_PersistentCalls:
@@ -2566,7 +2578,6 @@ MonoBehaviour:
   _force: 10
   reflectedProjectileDamage: 10
   parryVFX: {fileID: 0}
-  parryVFXDuration: 1.5
   _onParry:
     _event:
       m_PersistentCalls:

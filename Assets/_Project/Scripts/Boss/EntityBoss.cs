@@ -16,9 +16,8 @@ public class EntityBoss : MonoBehaviour {
         if(_currentAttack != null)
         _currentAttack.Finished -= Attack;
 
-        _currentAttack = _bossPhases[_currentPhase - 1].GetAnAttack();
+        _currentAttack = _bossPhases[_currentPhase].GetAnAttack();
         _currentAttack.Finished += Attack;
         _currentAttack.Activate(_entityAbilities, _threatSystem.Instance.Threatening().transform);
     }
-
 }

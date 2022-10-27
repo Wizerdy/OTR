@@ -10,5 +10,13 @@ namespace Sloot {
             }
             return result;
         }
+
+        public static float Pow(float number, int pow) {
+            float result = 1;
+            for (int i = 0; i < pow; i++) {
+                result *= number;
+            }
+            return result;
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Charge : BossAttack {
     [SerializeField] float _speed;
     [SerializeField] float _duration;
-    [SerializeField] EntityMovement _entityMovement;
+    EntityMovement _entityMovement;
     public override void Activate(EntityAbilities ea, Transform target) {
         _entityMovement = ea.Get<EntityMovement>();
         _entityMovement.CreateMovement(_duration, _speed, target.position - ea.gameObject.transform.position);

@@ -13,7 +13,8 @@ public class ReflectiveCollider : MonoBehaviour {
 
     Vector2 _aimingDirection = Vector2.up;
 
-    [SerializeField] protected BetterEvent<Collider2D> _onParry = new BetterEvent<Collider2D>();
+    [SerializeField] protected BetterEvent<Collision2D> _onParry = new BetterEvent<Collision2D>();
+    [SerializeField] protected BetterEvent<Collider2D> _onParryTrigger = new BetterEvent<Collider2D>();
 
     public Vector2 Aim { get => _aimingDirection; set => _aimingDirection = value; }
 
@@ -22,7 +23,10 @@ public class ReflectiveCollider : MonoBehaviour {
         if (reflectable == null) { return; }
         if (_launchIt) {
             reflectable.Launch(_force, _aimingDirection);
-            _onParry.Invoke(collision);
+            _onParryTrigger.Invoke(collision);
+            if (parryVFX.isPlaying)
+                parryVFX.Stop();
+
             parryVFX.Play();
             //StartCoroutine(StopParticleSystem(parryVFXDuration));
         }
@@ -33,9 +37,14 @@ public class ReflectiveCollider : MonoBehaviour {
         if (reflectable == null) { return; }
         if (_launchIt) {
             reflectable.Launch(_force, _aimingDirection);
+            _onParry.Invoke(collision);
+            if (parryVFX.isPlaying)
+                parryVFX.Stop();
+
+            parryVFX.Play();
         } else {
-            Debug.Log("Reflect : " + collision.gameObject.name);
-            reflectable.Reflect(collision.GetContact(0));
+            //Debug.Log("Reflect : " + collision.gameObject.name);
+            //reflectable.Reflect(collision.GetContact(0));
 
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace ToolsBoxEngine {
     public class OnUnityCallback : MonoBehaviour {
         [System.Serializable]
-        enum UnityCallback { AWAKE, ENABLE, START, UPDATE, DISABLE, DESTROY }
+        enum UnityCallback { AWAKE, ENABLE, START, UPDATE, DISABLE, DESTROY, COLLISION_ENTER, TRIGGER_ENTER }
 
         [SerializeField] UnityCallback _callback;
         [Space]
@@ -34,6 +34,22 @@ namespace ToolsBoxEngine {
 
         void OnDestroy() {
             if (_callback == UnityCallback.DESTROY) { _action?.Invoke(gameObject); }
+        }
+
+        private void OnCollisionEnter(Collision collision) {
+            if (_callback == UnityCallback.COLLISION_ENTER) { _action?.Invoke(gameObject); }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision) {
+            if (_callback == UnityCallback.COLLISION_ENTER) { _action?.Invoke(gameObject); }
+        }
+
+        private void OnTriggerEnter(Collider collision) {
+            if (_callback == UnityCallback.TRIGGER_ENTER) { _action?.Invoke(gameObject); }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision) {
+            if (_callback == UnityCallback.TRIGGER_ENTER) { _action?.Invoke(gameObject); }
         }
     }
 }

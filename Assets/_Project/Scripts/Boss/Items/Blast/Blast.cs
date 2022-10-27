@@ -42,7 +42,6 @@ public class Blast : MonoBehaviour {
 
     public void Hit(Collider2D collider) {
         if (collider.gameObject.tag == "Player") {
-            Debug.Log(collider.name);
             hits.Add(collider.gameObject.GetRoot().GetComponent<IHealth>());
         }
     }
@@ -54,7 +53,7 @@ public class Blast : MonoBehaviour {
         for (int i = 0; i < hits.Count; i++) {
             hits[i].TakeDamage(damages, this.gameObject);
         }
-        gameObject.SetActive(false);
+        Die();
     }
 
     void MeshGeneration() {
@@ -69,6 +68,11 @@ public class Blast : MonoBehaviour {
         _mesh.triangles = triangles;
 
 
+    }
+
+    void Die(){
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
 }

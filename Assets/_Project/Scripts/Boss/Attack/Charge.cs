@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Charge : BossAttack {
+    [Header("Charge :")]
     [SerializeField] float _speed;
     [SerializeField] float _duration;
     EntityMovement _entityMovement;

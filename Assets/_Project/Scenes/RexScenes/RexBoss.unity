@@ -402,7 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c886b85f7d856143906e6749434c5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 10
+  _weight: 0
+  _endDuration: 0
   _speed: 30
   _duration: 2
 --- !u!1 &149240408
@@ -687,7 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c204a83b337126a4fbf33803fadc1eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  _weight: 0
+  _endDuration: 0
   _speed: 50
   _duration: 1
   _delayCharge: 0.5
@@ -887,7 +889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ac906774c2f5441b1a1c59271a7120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  _weight: 1
+  _endDuration: 2
   _blastPrefab: {fileID: 6847216084149886456, guid: 85a941a1c35fdbb4b84dbc5c6d1dde92, type: 3}
   _width: 2
   _secondWidth: 4
@@ -1851,7 +1854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  _weight: 0
+  _endDuration: 0
   _bossBallprefab: {fileID: 7596212308714034114, guid: b8a90bae3aca3fd4fbf8a2a03d8faa56, type: 3}
   _speed: 10
   _duration: 10
@@ -2392,7 +2396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 10
+  _weight: 0
+  _endDuration: 0
   _bossBallprefab: {fileID: -391399695015942750, guid: 5a35f022810c55f40b4aa20ceb9a3b28, type: 3}
   _speed: 10
   _duration: 10
@@ -2440,7 +2445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 2
+  _weight: 0
+  _endDuration: 0
   _bossBallprefab: {fileID: 7596212308714034114, guid: 1eb56dbb8ae81cc49b74cbbf52a6f6a3, type: 3}
   _speed: 10
   _duration: 10
@@ -2488,7 +2494,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245044e885683834ca6bd9474fffe418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  _weight: 0
+  _endDuration: 0
   _speed: 30
   _duration: 2
   _entityMovement: {fileID: 0}

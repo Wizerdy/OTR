@@ -4,6 +4,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class ChargeComeBack : BossAttack {
+    [Header("ChargeComeBack :")]
     [SerializeField] float _speed;
     [SerializeField] float _duration;
     [SerializeField] EntityMovement _entityMovement;

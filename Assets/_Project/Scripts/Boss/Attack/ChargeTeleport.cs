@@ -4,6 +4,7 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class ChargeTeleport : BossAttack {
+    [Header("ChargeTeleport :")]
     [SerializeField] float _speed;
     [SerializeField] float _duration;
     [SerializeField] float _delayCharge;

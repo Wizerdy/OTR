@@ -7,15 +7,18 @@ public class EntityBoss : MonoBehaviour {
     [SerializeField] MenacePointSystemReference _threatSystem;
     [SerializeField] List<BossPhase> _bossPhases;
     [SerializeField] int _currentPhase;
-    [SerializeField] float _timeBetweenAttack;
+    [SerializeField] BossAttack _currentAttack;
     Timer _timer;
     private void Start() {
-        _timer = new Timer(this, _timeBetweenAttack);
-        _timer.OnActivate += Attack;
-        _timer.Start();
+        Attack();
     }
     void Attack() {
-        _bossPhases[_currentPhase - 1].GetAnAttack().Activate(_entityAbilities, _threatSystem.Instance.Threatening().transform);
+        if(_currentAttack != null)
+        _currentAttack.Finished -= Attack;
+
+        _currentAttack = _bossPhases[_currentPhase - 1].GetAnAttack();
+        _currentAttack.Finished += Attack;
+        _currentAttack.Activate(_entityAbilities, _threatSystem.Instance.Threatening().transform);
     }
 
 }

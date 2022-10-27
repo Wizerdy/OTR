@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace Sloot {
     public class Controller2DSideNewInput : Controller {
-        PlayerControls playerControls;
+        PlayerControlsSloot playerControls;
         private void Awake() {
-            playerControls = new PlayerControls();
+            playerControls = new PlayerControlsSloot();
             playerControls._2DSide.Enable();
             playerControls._2DSide.Movement.performed += ctx => _direction.x = ctx.ReadValue<Vector2>().x;
             playerControls._2DSide.Movement.performed += ctx => _direction.y = ctx.ReadValue<Vector2>().y;

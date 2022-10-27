@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossBlast : BossAttack {
+    [Header("Blast :")]
     [SerializeField] Blast _blastPrefab;
     [SerializeField] float _width;
     [SerializeField] float _secondWidth;
@@ -11,7 +12,6 @@ public class BossBlast : BossAttack {
     [SerializeField] float _distBlast;
     [SerializeField] int _damages;
     [SerializeField] float _damagesMultiplier;
-    [SerializeField] float _duration;
 
     public override void Activate(EntityAbilities ea, Transform target) {
         Vector2[] array = new Vector2[6];
@@ -25,6 +25,7 @@ public class BossBlast : BossAttack {
         array[3] = array[2] + (direction * _distBlast);
         Blast _newBlast = Instantiate(_blastPrefab, transform.position, Quaternion.identity).ChangeDamages(_damages).ChangeDamagesMultipler(_damagesMultiplier);
         _newBlast.ChangePoints(array);
+        End();
     }
 
     public override void Activate(EntityAbilities ea, Transform[] targets) {

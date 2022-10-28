@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossBlast : BossAttack {
-    [Header("Blast :")]
+    [Header("Pas Touche:")]
     [SerializeField] Blast _blastPrefab;
+    [Header("Blast :")]
+    [SerializeField] float _chargeDuration;
+    [SerializeField] float _blastDuration;
     [SerializeField] float _width;
     [SerializeField] float _secondWidth;
     [SerializeField] float _angle;
@@ -14,8 +17,10 @@ public class BossBlast : BossAttack {
     [SerializeField] float _damagesMultiplier;
 
     protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
+        yield return new WaitForSeconds(_chargeDuration);
         Blast(ea.transform.position, target);
-        yield return EndAttack();
+        yield return new WaitForSeconds(_blastDuration);
+        yield return StartCoroutine(Disactivate());
     }
 
     void Blast(Vector3 ourPosition, Transform target) {
@@ -28,7 +33,7 @@ public class BossBlast : BossAttack {
         array[2] = array[1] + (Vector2)(Quaternion.Euler(0, 0, -(_angle - 90)) * direction * _secondWidth);
         array[4] = array[5] + (direction * _distBlast);
         array[3] = array[2] + (direction * _distBlast);
-        Blast _newBlast = Instantiate(_blastPrefab, transform.position, Quaternion.identity).ChangeDamages(_damages).ChangeDamagesMultipler(_damagesMultiplier);
+        Blast _newBlast = Instantiate(_blastPrefab, transform.position, Quaternion.identity).ChangeDamages(_damages).ChangeDamagesMultipler(_damagesMultiplier).ChangeDuration(_blastDuration);
         _newBlast.ChangePoints(array);
     }
 }

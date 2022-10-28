@@ -4,11 +4,18 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class BossChargeTeleport : BossCharge {
-    
+    [SerializeField] float _delayBeforeTeleport;
+    [SerializeField] float _distFromPlayer;
     protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
-        ea.transform.position = target.position + (Vector3.zero - target.position).normalized * 2;
+        _hitWall = false;
         _entityMovement = ea.Get<EntityMovement>();
-        Vector2 direction = target.position - ea.gameObject.transform.position;
-        yield return StartCoroutine(Tools.Delay(() => _entityMovement.CreateMovement(_duration, _speed, direction), _delayCharge));
+        _entityColliders = ea.Get<EntityColliders>();
+        yield return new WaitForSeconds(_delayBeforeTeleport);
+        ea.transform.position = target.position + (Vector3.zero - target.position).normalized * _distFromPlayer;
+        _entityColliders.Main.OnTriggerEnter += Hit;
+        yield return StartCoroutine(Charge(ea.transform.position, target.position, _delayBeforeCharge, _speed));
+        _entityMovement.StopMovement();
+        _entityColliders.Main.OnTriggerEnter -= Hit;
+        yield return StartCoroutine(Disactivate());
     }
 }

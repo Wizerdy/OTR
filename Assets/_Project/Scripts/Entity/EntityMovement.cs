@@ -78,6 +78,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     public bool IsMoving => _speed >= 0.01f;
     public Vector2 Orientation => _orientation;
     public Vector2 Direction => _direction;
+    public Vector2 Velocity => _rb.velocity;
 
     public event UnityAction OnRun { add => _onRun.AddListener(value); remove => _onRun.RemoveListener(value); }
     public event UnityAction<Vector2> OnAcceleration { add => _onAcceleration.AddListener(value); remove => _onAcceleration.RemoveListener(value); }
@@ -247,74 +248,7 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
 
-    struct Movement {
-        public Movement(float duration, float speedReference, Vector2 direction = default, AnimationCurve curve = null) {
-            _speedReference = speedReference;
-            if (curve == null) {
-                _curve = new AnimationCurve();
-                _curve.AddKey(0, 1);
-                _curve.AddKey(1, 1);
-            } else {
-                _curve = curve;
-            }
-            _duration = duration;
-            if (direction != default) {
-                _direction = direction.normalized;
-            } else {
-                _direction = Vector2.zero;
-            }
-        }
-        public Vector2 _direction;
-        public float _speedReference;
-        public AnimationCurve _curve;
-        public float _duration;
-    }
-
-    public void CreateMovement(float duration, float speedReference, Vector2 direction, AnimationCurve curve = null) {
-        StopMovement();
-        Movement newMovement = new Movement(duration, speedReference, direction, curve);
-        _movement = StartCoroutine(NewMovement(newMovement));
-    }
-
-    IEnumerator NewMovement(Movement movement) {
-        _state = State.RESTRAINED;
-        Timer timer = new Timer(this, movement._duration);
-        bool finish = false;
-        bool constant = false;
-        timer.OnActivate += () => finish = true;
-        Vector2 directionSave;
-        Rigidbody.velocity = Vector3.zero;
-        timer.Start();
-        if (movement._direction == Vector2.zero) {
-            directionSave = Orientation.normalized;
-        } else {
-            directionSave = movement._direction;
-            constant = true;
-        }
-
-        while (!finish) {
-            if (constant) {
-                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0,timer.Duration,timer.CurrentDuration));
-            } else {
-                if (_direction.normalized != Vector2.zero) {
-                    directionSave = _direction.normalized;
-                    Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
-                } else {
-                    Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
-                }
-            }
-            yield return null;
-        }
-        _movement = null;
-        _state = State.DECELERATING;
-    }
-
-    public void StopMovement() {
-        if (_movement != null) {
-            StopCoroutine(_movement);
-        }
-        _rb.velocity = Vector2.zero;
-    }
+   
 
     #endregion
 
@@ -393,4 +327,73 @@ public class EntityMovement : MonoBehaviour, IEntityAbility {
     }
 
     #endregion
+
+    struct Movement {
+        public Movement(float duration, float speedReference, Vector2 direction = default, AnimationCurve curve = null) {
+            _speedReference = speedReference;
+            if (curve == null) {
+                _curve = new AnimationCurve();
+                _curve.AddKey(0, 1);
+                _curve.AddKey(1, 1);
+            } else {
+                _curve = curve;
+            }
+            _duration = duration;
+            if (direction != default) {
+                _direction = direction.normalized;
+            } else {
+                _direction = Vector2.zero;
+            }
+        }
+        public Vector2 _direction;
+        public float _speedReference;
+        public AnimationCurve _curve;
+        public float _duration;
+    }
+
+    public void CreateMovement(float duration, float speedReference, Vector2 direction, AnimationCurve curve = null) {
+        StopMovement();
+        Movement newMovement = new Movement(duration, speedReference, direction, curve);
+        _movement = StartCoroutine(NewMovement(newMovement));
+    }
+
+    IEnumerator NewMovement(Movement movement) {
+        _state = State.RESTRAINED;
+        Timer timer = new Timer(this, movement._duration);
+        bool finish = false;
+        bool constant = false;
+        timer.OnActivate += () => finish = true;
+        Vector2 directionSave;
+        Rigidbody.velocity = Vector3.zero;
+        timer.Start();
+        if (movement._direction == Vector2.zero) {
+            directionSave = Orientation.normalized;
+        } else {
+            directionSave = movement._direction;
+            constant = true;
+        }
+
+        while (!finish) {
+            if (constant) {
+                Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
+            } else {
+                if (_direction.normalized != Vector2.zero) {
+                    directionSave = _direction.normalized;
+                    Rigidbody.velocity = _direction.normalized * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
+                } else {
+                    Rigidbody.velocity = directionSave * movement._speedReference * movement._curve.Evaluate(Mathf.InverseLerp(0, timer.Duration, timer.CurrentDuration));
+                }
+            }
+            yield return null;
+        }
+        _movement = null;
+        _state = State.DECELERATING;
+    }
+
+    public void StopMovement() {
+        if (_movement != null) {
+            StopCoroutine(_movement);
+        }
+        _rb.velocity = Vector2.zero;
+    }
 }

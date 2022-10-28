@@ -35,14 +35,14 @@ public class MenacePointSystem : MonoBehaviour {
         if (_menaces.Count == 0) { return null; }
 
         EntityAbilities output = null;
-        int max = 0;
+        int max = -1;
 
         foreach (KeyValuePair<EntityAbilities, int> menace in _menaces) {
             if (max <= menace.Value) {
                 output = menace.Key;
+                max = menace.Value;
             }
         }
-
         return output;
     }
 }

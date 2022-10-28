@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolsBoxEngine;
 using Sloot;
 using System.Linq;
 
@@ -8,13 +9,18 @@ public class Blast : MonoBehaviour {
     [SerializeField] List<IHealth> hits = new List<IHealth>();
     Vector2[] _points;
     int _damages;
+    float _duration;
     float _damagesMultiplier;
     PolygonCollider2D _polygonCollider;
     Mesh _mesh;
     MeshFilter _meshFilter;
-    MeshRenderer _meshRenderer;
     public Blast ChangeDamages(int damages) {
         _damages = damages;
+        return this;
+    }
+
+    public Blast ChangeDuration(float duration) {
+        _duration = duration;
         return this;
     }
 
@@ -26,16 +32,11 @@ public class Blast : MonoBehaviour {
         _polygonCollider = GetComponent<PolygonCollider2D>();
         _polygonCollider.points = _points;
         _meshFilter = GetComponent<MeshFilter>();
-        _meshRenderer = GetComponent<MeshRenderer>();
         MeshGeneration();
         _meshFilter.mesh = _mesh;
+        StartCoroutine(Tools.Delay(() => ApplyDamages(), _duration));
     }
 
-    private void Update() {
-        if (hits.Count > 0) {
-            ApplyDamages();
-        }
-    }
     public void ChangePoints(Vector2[] points) {
         _points = points;
     }
@@ -66,8 +67,6 @@ public class Blast : MonoBehaviour {
             2, 4, 3
         };
         _mesh.triangles = triangles;
-
-
     }
 
     void Die(){

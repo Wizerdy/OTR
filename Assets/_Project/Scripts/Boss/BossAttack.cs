@@ -10,9 +10,10 @@ public abstract class  BossAttack : MonoBehaviour {
     [Header("Boss Attack General :")]
     [SerializeField] protected float _weight;
     [SerializeField] float _endDuration;
-    [SerializeField] bool _isActive;
     [SerializeField, HideInInspector] BetterEvent _finished;
+     bool _isActive;
     public float Weight => _weight;
+    public bool IsActive => _isActive;
 
     public event UnityAction Finished { add => _finished.AddListener(value); remove => _finished.RemoveListener(value); }
 
@@ -22,8 +23,12 @@ public abstract class  BossAttack : MonoBehaviour {
     }
 
     protected abstract IEnumerator Attack(EntityAbilities ea, Transform target);
+    protected virtual IEnumerator EndAttack() {
+        yield break;
+    }
 
-    protected IEnumerator EndAttack() {
+    protected IEnumerator Disactivate() {
+        yield return StartCoroutine(EndAttack());
         yield return StartCoroutine(Wait());
     }
 

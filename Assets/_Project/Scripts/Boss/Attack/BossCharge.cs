@@ -11,15 +11,28 @@ public class BossCharge : BossAttack {
     protected bool _hitWall = false;
     protected EntityMovement _entityMovement;
     protected EntityColliders _entityColliders;
-    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
+    protected DamageHealth _damageHealth;
+    protected int _damagesMemory;
+
+    protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
         _entityMovement = ea.Get<EntityMovement>();
         _entityColliders = ea.Get<EntityColliders>();
+        _damageHealth = _entityColliders.Main.gameObject.GetComponent<DamageHealth>();
+        _damagesMemory = _damageHealth.Damage;
+        _damageHealth.SetDamage(_damages);
         _entityColliders.Main.OnTriggerEnter += Hit;
+        yield break;
+    }
+    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
         yield return StartCoroutine(Charge(ea.transform.position, target.position, _delayBeforeCharge, _speed));
+    }
+
+    protected override IEnumerator AttackEnds(EntityAbilities ea, Transform target) {
         _entityMovement.StopMovement();
+        _damageHealth.SetDamage(_damagesMemory);
         _entityColliders.Main.OnTriggerEnter -= Hit;
-        yield return StartCoroutine(Disactivate());
+        yield break;
     }
 
     protected IEnumerator Charge(Vector3 ownPosition, Vector3 targetPosition, float delay, float speed) {
@@ -48,14 +61,12 @@ public class BossCharge : BossAttack {
 
     protected void Hit(Collision2D collision) {
         if (collision.transform.tag == "Wall") {
-            Debug.Log("hit");
             _hitWall = true;
         }
     }
 
     protected void Hit(Collider2D collision) {
         if (collision.transform.tag == "Wall") {
-            Debug.Log("hit");
             _hitWall = true;
 
         }

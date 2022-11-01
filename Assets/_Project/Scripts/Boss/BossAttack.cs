@@ -9,7 +9,8 @@ using UnityEngine.EventSystems;
 public abstract class  BossAttack : MonoBehaviour {
     [Header("Boss Attack General :")]
     [SerializeField] protected float _weight;
-    [SerializeField] float _endDuration;
+    [SerializeField] protected float _endDuration;
+    [SerializeField] protected int _damages;
     [SerializeField, HideInInspector] BetterEvent _finished;
      bool _isActive;
     public float Weight => _weight;
@@ -18,23 +19,24 @@ public abstract class  BossAttack : MonoBehaviour {
     public event UnityAction Finished { add => _finished.AddListener(value); remove => _finished.RemoveListener(value); }
 
     public void Activate(EntityAbilities ea, Transform target) {
+        StartCoroutine(Launch(ea,target));
+    }
+
+    IEnumerator Launch(EntityAbilities ea, Transform target) {
         _isActive = true;
-        StartCoroutine(Attack(ea,target));
-    }
-
-    protected abstract IEnumerator Attack(EntityAbilities ea, Transform target);
-    protected virtual IEnumerator EndAttack() {
-        yield break;
-    }
-
-    protected IEnumerator Disactivate() {
-        yield return StartCoroutine(EndAttack());
-        yield return StartCoroutine(Wait());
-    }
-
-    IEnumerator Wait() {
+        yield return AttackBegins(ea, target);
+        yield return Attack(ea, target);
+        yield return AttackEnds(ea, target);
         yield return new WaitForSeconds(_endDuration);
         _isActive = false;
         _finished?.Invoke();
+    }
+
+    protected abstract IEnumerator Attack(EntityAbilities ea, Transform target);
+    protected virtual IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
+        yield break;
+    }
+    protected virtual IEnumerator AttackEnds(EntityAbilities ea, Transform target) {
+        yield break;
     }
 }

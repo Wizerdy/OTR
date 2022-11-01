@@ -13,21 +13,20 @@ public class BossBlast : BossAttack {
     [SerializeField] float _angle;
     [SerializeField] float _distFromBoss;
     [SerializeField] float _distBlast;
-    [SerializeField] int _damages;
     [SerializeField] float _damagesMultiplier;
 
-    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
+    protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         yield return new WaitForSeconds(_chargeDuration);
+    }
+    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
         Blast(ea.transform.position, target);
         yield return new WaitForSeconds(_blastDuration);
-        yield return StartCoroutine(Disactivate());
     }
 
     void Blast(Vector3 ourPosition, Transform target) {
         Vector2[] array = new Vector2[6];
         Vector2 direction = (target.position - ourPosition).normalized;
         array[0] = (direction * _distFromBoss) + (Vector2)(Quaternion.Euler(0, 0, 90f) * (direction * _width / 2));
-        // array[6] = (direction * _distFromBoss) + (Vector2)(Quaternion.Euler(0, 0, 90f) * (direction * _width / 2));
         array[1] = (direction * _distFromBoss) + (Vector2)(Quaternion.Euler(0, 0, 90f) * (-direction * _width / 2));
         array[5] = array[0] + (Vector2)(Quaternion.Euler(0, 0, _angle - 90) * direction * _secondWidth);
         array[2] = array[1] + (Vector2)(Quaternion.Euler(0, 0, -(_angle - 90)) * direction * _secondWidth);

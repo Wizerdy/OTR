@@ -14,10 +14,14 @@ public class EntityBoss : MonoBehaviour {
         StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
     void Attack() {
-        if(_currentAttack != null)
-        _currentAttack.Finished -= Attack;
+        if (_currentAttack != null)
+            _currentAttack.Finished -= Attack;
         _currentAttack = _bossPhases[_currentPhase].GetAnAttack();
         _currentAttack.Finished += Attack;
         _currentAttack.Activate(_entityAbilities, _threatSystem.Instance.Threatening().transform);
+    }
+
+    public void PhasePlusPlus() {
+        _currentPhase++;
     }
 }

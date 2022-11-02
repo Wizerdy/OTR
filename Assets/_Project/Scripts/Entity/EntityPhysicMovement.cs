@@ -4,7 +4,7 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public enum PhysicPriority {
-    PLAYER_INPUT = 0, HIGH_PRIORITY = 50
+    PLAYER_INPUT = 0, DASH = 5, HIGH_PRIORITY = 50
 }
 
 public class EntityPhysicMovement : MonoBehaviour {
@@ -14,14 +14,23 @@ public class EntityPhysicMovement : MonoBehaviour {
     [SerializeField] float _maxSpeed = 10f;
     [SerializeField] AnimationCurve _acceleration = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] float _accelerationTime = 1f;
-    [SerializeField] AnimationCurve _deceleration = AnimationCurve.Linear(1f, 1f, 0f, 0f);
+    [SerializeField] AnimationCurve _deceleration = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     [SerializeField] float _decelerationTime = 1f;
+
+    Token _cantMoveToken = new Token();
 
     Vector2 _orientation = Vector2.zero;
     Force _forceMovement;
 
+    public bool CanMove { get => !_cantMoveToken.HasToken; set => _cantMoveToken.AddToken(!value); }
+
+    private void Reset() {
+        _entityPhysics = GetComponent<EntityPhysics>();
+    }
+
     private void Start() {
-        Debug.Log(_entityPhysics);
+        _cantMoveToken.OnFill += _DontMove;
+
         _forceMovement = _entityPhysics.Add(
             _maxSpeed, Vector2.zero, 1f,
             Force.ForceMode.INPUT,
@@ -35,6 +44,16 @@ public class EntityPhysicMovement : MonoBehaviour {
     }
 
     public void Move(Vector2 direction) {
+        if (!CanMove) { return; }
+        MoveDirection(direction);
+    }
+
+    public void Stop() {
+        _forceMovement.Reset();
+        _DontMove();
+    }
+
+    private void MoveDirection(Vector2 direction) {
         if (_forceMovement == null) { return; }
         if (_forceMovement.State == Force.ForceState.DECELERATION && direction != Vector2.zero) {
             _forceMovement.ChangeState(Force.ForceState.ACCELERATION);
@@ -47,5 +66,9 @@ public class EntityPhysicMovement : MonoBehaviour {
         if (direction != Vector2.zero) {
             _orientation = direction;
         }
+    }
+
+    private void _DontMove() {
+        MoveDirection(Vector2.zero);
     }
 }

@@ -13,6 +13,10 @@ namespace ToolsBoxEngine {
 
             public event UnityAction<T1, T2> Event { add => _event.AddListener(value); remove => _event.RemoveListener(value); }
 
+            public BetterEvent() {
+                _event = new UnityEvent<T1, T2>();
+            }
+
             public void Invoke(T1 argument1, T2 argument2) {
                 try {
                     _event?.Invoke(argument1, argument2);
@@ -47,6 +51,10 @@ namespace ToolsBoxEngine {
 
             public event UnityAction<T> Event { add => _event.AddListener(value); remove => _event.RemoveListener(value); }
 
+            public BetterEvent() {
+                _event = new UnityEvent<T>();
+            }
+
             public void Invoke(T argument) {
                 try {
                     _event?.Invoke(argument);
@@ -80,6 +88,10 @@ namespace ToolsBoxEngine {
             [SerializeField] UnityEvent _event;
 
             public event UnityAction Event { add => _event.AddListener(value); remove => _event.RemoveListener(value); }
+
+            public BetterEvent() {
+                _event = new UnityEvent();
+            }
 
             public void Invoke() {
                 try {

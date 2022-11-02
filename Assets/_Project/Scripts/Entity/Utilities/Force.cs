@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using ToolsBoxEngine.BetterEvents;
 
 [System.Serializable]
 public class Force {
@@ -19,23 +21,45 @@ public class Force {
     [SerializeField] float _endDuration = 1f;
     [SerializeField] ForceMode _mode = ForceMode.TIMED;
 
+    [SerializeField] BetterEvent<Force> _onStart = new BetterEvent<Force>();
+    [SerializeField] BetterEvent<Force, ForceState> _onChangeState = new BetterEvent<Force, ForceState>();
+    [SerializeField] BetterEvent<Force> _onEnd = new BetterEvent<Force>();
+
+    bool _ignored = false;
     float _currentPercent = 0;
     ForceState _state = ForceState.ACCELERATION;
+
+    #region Properties
 
     public float Strength { get => _strength; set => _strength = value; }
     public Vector2 Direction { get => _direction; set => _direction = value; }
     public float Weight { get => _weight; set => _weight = value; }
-    public AnimationCurve Start { get => _start; }
-    public AnimationCurve End { get => _end; }
-    public ForceMode Mode { get => _mode; }
-    public ForceState State { get => _state; }
+    public AnimationCurve Start => _start;
+    public AnimationCurve End => _end;
+    public ForceMode Mode => _mode;
+    public ForceState State => _state;
 
+    public bool Ignored { get => _ignored; set => _ignored = value; }
     public bool HasEnded { get => _state == ForceState.DECELERATION && _currentPercent <= 0; }
+
+    #endregion
+
+    #region Events
+
+    public event UnityAction<Force> OnStart { add => _onStart += value; remove => _onStart -= value; }
+    public event UnityAction<Force, ForceState> OnChangeState { add => _onChangeState += value; remove => _onChangeState -= value; }
+    public event UnityAction<Force> OnEnd { add => _onEnd += value; remove => _onEnd -= value; }
+
+    #endregion
 
     public Force(float strength, Vector2 direction, float weight = 1f,
         ForceMode mode = ForceMode.TIMED,
         AnimationCurve start = null, float startTime = 1f,
-        AnimationCurve end = null, float endTime = 1f) {
+        AnimationCurve end = null, float endTime = 1f
+    ) {
+        _onStart = new BetterEvent<Force>();
+        _onChangeState = new BetterEvent<Force, ForceState>();
+        _onEnd = new BetterEvent<Force>();
         _strength = strength;
         _direction = direction.normalized;
         _weight = Mathf.Min(weight, 1f);
@@ -73,10 +97,11 @@ public class Force {
     public void Update(float deltaTime) {
         switch (_state) {
             case ForceState.ACCELERATION:
+                if (_currentPercent == 0f) { _onStart.Invoke(this); }
                 if (_startDuration != 0f) {
                     _currentPercent += deltaTime / _startDuration;
                 } else {
-                    _state = ForceState.DECELERATION;
+                    ChangeState(ForceState.DECELERATION);
                     _currentPercent = 1f;
                     return;
                 }
@@ -84,19 +109,22 @@ public class Force {
                 if (_currentPercent >= 1f) {
                     switch (_mode) {
                         case ForceMode.TIMED:
-                            _state = ForceState.DECELERATION;
+                            ChangeState(ForceState.DECELERATION);
                             break;
                         case ForceMode.INPUT:
                         default:
                             _currentPercent = 1f;
-                            _state = ForceState.STAGNATION;
+                            ChangeState(ForceState.STAGNATION);
                             break;
                     }
                 }
                 break;
             case ForceState.DECELERATION:
-                _currentPercent -= deltaTime / _endDuration;
-                _currentPercent = Mathf.Max(0f, _currentPercent);
+                if (_currentPercent > 0f) {
+                    _currentPercent -= deltaTime / _endDuration;
+                    _currentPercent = Mathf.Max(0f, _currentPercent);
+                    _onEnd.Invoke(this);
+                }
                 break;
             case ForceState.STAGNATION:
             default:
@@ -104,7 +132,13 @@ public class Force {
         }
     }
 
+    public void Reset() {
+        _currentPercent = 0f;
+        ChangeState(ForceState.ACCELERATION);
+    }
+
     public void ChangeState(ForceState state) {
         _state = state;
+        _onChangeState.Invoke(this, state);
     }
 }

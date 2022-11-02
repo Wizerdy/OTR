@@ -829,6 +829,10 @@ namespace ToolsBoxEngine {
             function();
         }
 
+        public static IEnumerator DelayOneFrame(BasicDelegate function) {
+            yield return null;
+            function();
+        }
         #endregion
     }
 

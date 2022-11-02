@@ -179,6 +179,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _damage: 5
   _perfectDamage: 5
 --- !u!114 &5882125061950032962
 MonoBehaviour:
@@ -204,6 +205,7 @@ MonoBehaviour:
     - GameController
     - Laser
     - Enemy
+    - Boss
     state: 1
   _destroyOnHit: 1
   _onlyDamageOnceEach: 1
@@ -220,6 +222,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

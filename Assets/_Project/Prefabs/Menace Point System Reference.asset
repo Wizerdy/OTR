@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fa26d4e52a95d142ba24d2e10fd32fe, type: 3}
-  m_Name: New Menace Point System Reference
+  m_Name: Menace Point System Reference
   m_EditorClassIdentifier: 
   _instance: {fileID: 0}

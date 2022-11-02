@@ -353,6 +353,7 @@ MonoBehaviour:
   _damageables:
     tags:
     - Enemy
+    - Boss
     state: 1
   _destroyOnHit: 1
   _onlyDamageOnceEach: 1
@@ -369,6 +370,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

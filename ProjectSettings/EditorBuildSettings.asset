@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/GDScene.unity
     guid: 18ec6bc310b87ee4ba25a9648a99c820
   - enabled: 1
-    path: Assets/_Project/Scenes/RexScenes/RexTrain.unity
+    path: Assets/_Project/Scenes/RexScenes/RexBoss.unity
     guid: 4e2cf8e5b68405c4ca3eff3f04ddcffc
   m_configObjects: {}

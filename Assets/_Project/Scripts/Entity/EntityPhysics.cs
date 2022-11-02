@@ -14,6 +14,7 @@ public class EntityPhysics : MonoBehaviour {
     private void FixedUpdate() {
         foreach (KeyValuePair<int, List<Force>> pair in _forces) {
             for (int i = 0; i < pair.Value.Count; i++) {
+                if (pair.Value[i].Ignored) { continue; }
                 pair.Value[i].Update(Time.fixedDeltaTime);
             }
         }
@@ -86,9 +87,17 @@ public class EntityPhysics : MonoBehaviour {
             for (int priority = maxPriority; priority >= minPriority; --priority) {
                 if (!_forces.ContainsKey(priority)) { continue; }
 
-                float sliceWeight = weight / _forces[priority].Count;
+                int count = 0;
+                for (int index = 0; index < _forces[priority].Count; index++) {
+                    if (!_forces[priority][index].Ignored) {
+                        ++count;
+                    }
+                }
+
+                float sliceWeight = weight / count;
                 for (int index = 0; index < _forces[priority].Count; ++index) {
                     if (_forces[priority][index] == null) { continue; }
+                    if (_forces[priority][index].Ignored) { continue; }
                     // Les inputs ne peuvent End et pique du poids, ces enculay (Do not forget)
                     if (_forces[priority][index].Mode != Force.ForceMode.INPUT && _forces[priority][index].HasEnded) {
                         Remove(_forces[priority][index], priority);

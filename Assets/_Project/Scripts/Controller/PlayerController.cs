@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour {
     private void _SetupThrow(InputAction.CallbackContext cc) {
         if (_player.HasWeapon) {
             _player.ShowAimLine(true);
+        } else {
+            _player.Dash(_player.Orientation);
         }
     }
     
@@ -79,8 +81,6 @@ public class PlayerController : MonoBehaviour {
         _player.ShowAimLine(false);
         if (_player.HasWeapon) {
             _player.Throw(_player.Orientation);
-        } else {
-            _player.Dash(_player.Orientation);
         }
     }
 }

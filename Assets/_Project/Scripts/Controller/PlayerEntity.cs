@@ -8,7 +8,9 @@ using ToolsBoxEngine.BetterEvents;
 public class PlayerEntity : MonoBehaviour {
     [SerializeField] Transform _root;
     [SerializeField] EntityAbilities _abilities;
-    [SerializeField] EntityMovement _movements;
+    //[SerializeField] EntityMovement _movements;
+    [SerializeField] EntityPhysicMovement _pMovements;
+    [SerializeField] PhysicForce _dashForce;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
@@ -31,16 +33,18 @@ public class PlayerEntity : MonoBehaviour {
         _interactCollider.OnCollisionEnter += _Pickup;
         _interactCollider.OnTriggerEnter += _Pickup;
 
-        _movements.OnDashStart += _OnDash;
-        _movements.OnDashEnd += _OnStopDash;
+        _dashForce.OnStart += _OnDash;
+        _dashForce.OnEnd += _OnStopDash;
 
         _weaponry.OnAttack += _OnAttackStart;
         _weaponry.OnAttackEnd += _OnAttackEnd;
     }
 
     public void Move(Vector2 direction) {
-        if (!_movements.CanMove) { return; }
-        _movements.Move(direction);
+        //if (!_movements.CanMove) { return; }
+        if (!_pMovements.CanMove) { return; }
+        //_movements.Move(direction);
+        _pMovements.Move(direction);
         if (direction != Vector2.zero) { _directionnalSprite?.ChangeSprite(direction); }
     }
 
@@ -66,7 +70,7 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void Dash(Vector2 direction) {
-        _movements.Dash(direction);
+        _dashForce.Use(direction, (int)PhysicPriority.DASH);
     }
 
     public void ShowAimLine(bool state) {
@@ -113,9 +117,8 @@ public class PlayerEntity : MonoBehaviour {
         }
     }
 
-    private void _OnDash(Vector2 direction) {
+    private void _OnDash() {
         CanLookAround = false;
-
     }
 
     private void _OnStopDash() {
@@ -123,13 +126,15 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     private void _OnAttackStart(AttackIndex type, Vector2 direction) {
-        _movements.Stop();
-        _movements.CanMove = false;
+        //_movements.Stop();
+        _pMovements.Stop();
+        //_movements.CanMove = false;
+        _pMovements.CanMove = false;
         CanLookAround = false;
     }
 
     private void _OnAttackEnd(AttackIndex type) {
-        _movements.CanMove = true;
+        _pMovements.CanMove = true;
         CanLookAround = true;
     }
 

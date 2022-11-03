@@ -10,6 +10,7 @@ public class EntityPointManagement : MonoBehaviour, IEntityAbility {
     [SerializeField] float _maxValue;
     [SerializeField] float _minValue = 0f;
     [SerializeField] float _currentValue;
+
     [SerializeField] BetterEvent _onValueChanged = new BetterEvent();
     [SerializeField] BetterEvent<float> _onMaxValueChanged = new BetterEvent<float>();
     [SerializeField] BetterEvent<float> _onMinValueChanged = new BetterEvent<float>();
@@ -27,6 +28,7 @@ public class EntityPointManagement : MonoBehaviour, IEntityAbility {
     public float MinValue => _minValue;
     public float MaxValue => _maxValue;
     public float CurrentValue => _currentValue;
+
     public float GainPoint(float storePoint, bool difference = false) {
         _currentValue += storePoint;
         if (_currentValue > _maxValue) {
@@ -38,6 +40,7 @@ public class EntityPointManagement : MonoBehaviour, IEntityAbility {
         _onCurrentValueChanged?.Invoke(_currentValue);
         return _currentValue;
     }
+
     public float LosePoint(float storePoint, bool difference) {
         _currentValue -= storePoint;
         if (_currentValue < _minValue) {

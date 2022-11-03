@@ -69,8 +69,12 @@ PrefabInstance:
       objectReference: {fileID: 816834182, guid: 627dbefa7ebbcee42bf9c8747685f142, type: 3}
     - target: {fileID: 3905317884828674427, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name
-      value: Player_Green
+      value: Pollo
       objectReference: {fileID: 0}
+    - target: {fileID: 4812016295901184202, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aab8325fedc1c343a93592de4e6b630, type: 2}
     - target: {fileID: 5051170655265145240, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_IsActive
       value: 0

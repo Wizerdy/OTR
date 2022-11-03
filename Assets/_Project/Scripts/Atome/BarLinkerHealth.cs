@@ -5,29 +5,29 @@ using ToolsBoxEngine;
 
 public class BarLinkerHealth : MonoBehaviour {
     [SerializeField] AtomeBar _atomeBar;
-    [SerializeField] Health _health;
+    [SerializeField] HealthReference _health;
 
     private void Reset() {
         _atomeBar = GetComponent<AtomeBar>();
     }
 
     void Start() {
-        if (_health == null) { return; }
-        _health.OnHit += _OnHit;
-        _health.OnHeal += _OnHeal;
+        if (!_health.IsValid()) { return; }
+        _health.Instance.OnHit += _OnHit;
+        _health.Instance.OnHeal += _OnHeal;
         StartCoroutine(Tools.Delay(UpdateBar, 0.1f));
     }
 
     private void OnDestroy() {
-        if (_health == null) { return; }
-        _health.OnHit -= _OnHit;
-        _health.OnHeal -= _OnHeal;
+        if (!_health.IsValid()) { return; }
+        _health.Instance.OnHit -= _OnHit;
+        _health.Instance.OnHeal -= _OnHeal;
     }
 
     private void UpdateBar() {
-        _atomeBar.ChangeMaxValue(_health.MaxHealth);
+        _atomeBar.ChangeMaxValue(_health.Instance.MaxHealth);
         _atomeBar.ChangeMinValue(0);
-        _atomeBar.Add(_health.CurrentHealth);
+        _atomeBar.Add(_health.Instance.CurrentHealth);
         _atomeBar.UpdateSlider();
     }
 

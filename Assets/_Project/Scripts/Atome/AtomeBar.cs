@@ -19,9 +19,14 @@ public class AtomeBar : MonoBehaviour {
 
     public event UnityAction<Slider> OnValueChanged { add => _onValueChanged.AddListener(value); remove => _onValueChanged.RemoveListener(value); }
 
+    private void Reset() {
+        _slider = GetComponent<Slider>();
+    }
+
     private void Start() {
         UpdateSlider();
     }
+
     public void UpdateSlider() {
         if (_slider == null) return;
         _slider.value = Value;

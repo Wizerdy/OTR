@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3905317884828674427, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player_Red
       objectReference: {fileID: 0}
     - target: {fileID: 3942601794622133276, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_AnchorMax.y
@@ -183,10 +183,42 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7139785713022883529, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Color.b
+      value: 0.23529413
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139785713022883529, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139785713022883529, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200047283684627640, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1913175876, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
     - target: {fileID: 8285912827514894061, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9140352232306040431, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 387203220, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
+    - target: {fileID: 9140352232306040431, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _sprites.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 49541265, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
+    - target: {fileID: 9140352232306040431, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _sprites.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: 1913175876, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
+    - target: {fileID: 9140352232306040431, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _sprites.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 49541265, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
 --- !u!114 &1217979761444358053 stripped

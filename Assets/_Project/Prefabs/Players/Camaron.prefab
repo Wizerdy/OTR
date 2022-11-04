@@ -1269,6 +1269,7 @@ MonoBehaviour:
   _weaponry: {fileID: 3867635824926218261}
   _catch: {fileID: 4440464384365179180}
   _directionnalSprite: {fileID: 9140352232306040431}
+  _invincibility: {fileID: 0}
   _interactCollider: {fileID: 1807640208009173419}
   _trajectoryLine: {fileID: 4158273122409191761}
   _onAim:
@@ -1479,7 +1480,7 @@ GameObject:
   - component: {fileID: 1622388577964920190}
   - component: {fileID: 4072202642788751678}
   - component: {fileID: 6708155632029178962}
-  - component: {fileID: 4057810074239311071}
+  - component: {fileID: 5721446320250136749}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1946,7 +1947,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &4057810074239311071
+--- !u!114 &5721446320250136749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

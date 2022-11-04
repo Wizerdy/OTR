@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-public class EntityInvincibitlity : MonoBehaviour, IEntityAbility {
+public class EntityInvincibility : MonoBehaviour, IEntityAbility {
     [SerializeField] LayerMask _invicibleLayer;
     [SerializeField] List<Collider2D> _colliders;
     [SerializeField] Health _health;

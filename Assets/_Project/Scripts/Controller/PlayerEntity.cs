@@ -16,7 +16,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityWeaponry _weaponry;
     [SerializeField] EntityTryCatch _catch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
-    [SerializeField] EntityInvincibitlity _invincibility;
+    [SerializeField] EntityInvincibility _invincibility;
     [SerializeField] ColliderDelegate _interactCollider;
     [SerializeField] TrajectoryLine _trajectoryLine;
 

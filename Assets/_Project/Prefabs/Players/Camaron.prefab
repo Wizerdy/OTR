@@ -1469,6 +1469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4395526148452863028}
+  - component: {fileID: 1094344770189593231}
   - component: {fileID: 6862933262211988682}
   - component: {fileID: 7488032526107593726}
   - component: {fileID: 4819328008194156798}
@@ -1477,8 +1478,8 @@ GameObject:
   - component: {fileID: 4440464384365179180}
   - component: {fileID: 1622388577964920190}
   - component: {fileID: 4072202642788751678}
-  - component: {fileID: 1094344770189593231}
   - component: {fileID: 6708155632029178962}
+  - component: {fileID: 4057810074239311071}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1501,6 +1502,21 @@ Transform:
   m_Father: {fileID: 887048020161268641}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1094344770189593231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985431924503224253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a61a1f1dd9a9c418b93ca81231a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 8205320720882076262}
+  _forcesDisplay: []
+  _debug: 0
 --- !u!114 &6862933262211988682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1858,21 +1874,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _decelerationTime: 0.25
---- !u!114 &1094344770189593231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5985431924503224253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a61a1f1dd9a9c418b93ca81231a877, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 8205320720882076262}
-  _forcesDisplay: []
-  _debug: 0
 --- !u!114 &6708155632029178962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1945,6 +1946,24 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &4057810074239311071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985431924503224253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ab7d7f9db11e7459a6ff26bf3fea7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invicibleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  _colliders:
+  - {fileID: 4457475169470103257}
+  _health: {fileID: 147940007823276091}
 --- !u!1 &5999092901668536895
 GameObject:
   m_ObjectHideFlags: 0

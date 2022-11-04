@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 public enum PhysicPriority {
     PLAYER_INPUT = 0, DASH = 5, HIGH_PRIORITY = 50
@@ -18,6 +19,7 @@ public class EntityPhysicMovement : MonoBehaviour {
     [SerializeField] float _decelerationTime = 1f;
 
     Token _cantMoveToken = new Token();
+    StackableFunc<float> _speedModifier = new StackableFunc<float>();
 
     Vector2 _orientation = Vector2.zero;
     Force _forceMovement;
@@ -70,5 +72,13 @@ public class EntityPhysicMovement : MonoBehaviour {
 
     private void _DontMove() {
         MoveDirection(Vector2.zero);
+    }
+
+    private void AddSpeedModifier(float modifier) {
+        _speedModifier.Add(_speedModifier);
+    }
+
+    float _SpeedModifier(float source, float modifier) {
+        return source * modifier;
     }
 }

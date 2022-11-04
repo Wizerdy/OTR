@@ -36,6 +36,9 @@ public class Force {
     public float Weight { get => _weight; set => _weight = value; }
     public AnimationCurve Start => _start;
     public AnimationCurve End => _end;
+    public float StartDuration => _startDuration;
+    public float EndDuration => _endDuration;
+    public float Duration => _startDuration + _endDuration;
     public ForceMode Mode => _mode;
     public ForceState State => _state;
 
@@ -51,6 +54,11 @@ public class Force {
     public event UnityAction<Force> OnEnd { add => _onEnd += value; remove => _onEnd -= value; }
 
     #endregion
+
+    public Force(Force force) :
+        this(force._strength, force._direction, force._weight, force._mode, force._start, force._startDuration, force._end, force._endDuration) {
+
+    }
 
     public Force(float strength, Vector2 direction, float weight = 1f,
         ForceMode mode = ForceMode.TIMED,
@@ -76,6 +84,11 @@ public class Force {
             _end = end;
         }
         _endDuration = endTime;
+    }
+
+    public Force(ForceData force, Vector2 direction, float weight, ForceMode mode)
+        : this(force.Strength, direction, weight, mode, force.Acceleration, force.AccelerationTime, force.Deceleration, force.DecelerationTime) {
+
     }
 
     public Vector2 Evaluate() {

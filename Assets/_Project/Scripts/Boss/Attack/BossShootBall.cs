@@ -8,7 +8,7 @@ public class BossShootBall : BossAttack {
     [Header("Ball :")]
     [SerializeField] float _ballSpeed;
     [SerializeField] float _ballDuration;
-    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
+    protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         LaunchBall(ea.transform.position, target.position);
         yield break;
     }

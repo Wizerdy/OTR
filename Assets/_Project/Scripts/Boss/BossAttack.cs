@@ -5,6 +5,7 @@ using Sloot;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 public abstract class  BossAttack : MonoBehaviour {
     [Header("Boss Attack General :")]
@@ -24,19 +25,23 @@ public abstract class  BossAttack : MonoBehaviour {
 
     IEnumerator Launch(EntityAbilities ea, Transform target) {
         _isActive = true;
-        yield return AttackBegins(ea, target);
         yield return Attack(ea, target);
-        yield return AttackEnds(ea, target);
         yield return new WaitForSeconds(_endDuration);
         _isActive = false;
         _finished?.Invoke();
     }
 
-    protected abstract IEnumerator Attack(EntityAbilities ea, Transform target);
     protected virtual IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         yield break;
     }
+    protected abstract IEnumerator AttackMiddle(EntityAbilities ea, Transform target);
     protected virtual IEnumerator AttackEnds(EntityAbilities ea, Transform target) {
         yield break;
+    }
+
+    protected virtual IEnumerator Attack(EntityAbilities ea, Transform target) {
+        yield return AttackBegins(ea, target);
+        yield return AttackMiddle(ea, target);
+        yield return AttackEnds(ea, target);
     }
 }

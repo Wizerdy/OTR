@@ -24,7 +24,7 @@ public class BossCharge : BossAttack {
         _entityColliders.Main.OnTriggerEnter += Hit;
         yield break;
     }
-    protected override IEnumerator Attack(EntityAbilities ea, Transform target) {
+    protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         yield return StartCoroutine(Charge(ea.transform.position, target.position, _delayBeforeCharge, _speed));
     }
 

@@ -7,6 +7,44 @@ using UnityEngine.Events;
 namespace ToolsBoxEngine {
     namespace BetterEvents {
         [Serializable]
+        public class BetterEvent<T1, T2, T3> {
+            [Space]
+            [SerializeField] UnityEvent<T1, T2, T3> _event;
+
+            public event UnityAction<T1, T2, T3> Event { add => _event.AddListener(value); remove => _event.RemoveListener(value); }
+
+            public BetterEvent() {
+                _event = new UnityEvent<T1, T2, T3>();
+            }
+
+            public void Invoke(T1 argument1, T2 argument2, T3 argument3) {
+                try {
+                    _event?.Invoke(argument1, argument2, argument3);
+                } catch (Exception e) {
+                    Debug.LogException(e);
+                }
+            }
+
+            public void AddListener(UnityAction<T1, T2, T3> action) {
+                _event.AddListener(action);
+            }
+
+            public void RemoveListener(UnityAction<T1, T2, T3> action) {
+                _event.RemoveListener(action);
+            }
+
+            public static BetterEvent<T1, T2, T3> operator +(BetterEvent<T1, T2, T3> e, UnityAction<T1, T2, T3> action) {
+                e.AddListener(action);
+                return e;
+            }
+
+            public static BetterEvent<T1, T2, T3> operator -(BetterEvent<T1, T2, T3> e, UnityAction<T1, T2, T3> action) {
+                e.RemoveListener(action);
+                return e;
+            }
+        }
+
+        [Serializable]
         public class BetterEvent<T1, T2> {
             [Space]
             [SerializeField] UnityEvent<T1, T2> _event;

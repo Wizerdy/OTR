@@ -17,8 +17,8 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
 
     [SerializeField, HideInInspector] BetterEvent<Weapon> _onPickup = new BetterEvent<Weapon>();
     [SerializeField, HideInInspector] BetterEvent<Weapon> _onDrop = new BetterEvent<Weapon>();
-    [SerializeField, HideInInspector] BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
-    [SerializeField, HideInInspector] BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
+    [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex, Vector2> _onAttack = new BetterEvent<Weapon, AttackIndex, Vector2>();
+    [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex> _onAttackEnd = new BetterEvent<Weapon, AttackIndex>();
 
     #region Properties
 
@@ -30,8 +30,8 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
 
     public event UnityAction<Weapon> OnPickup { add => _onPickup += value; remove => _onPickup -= value; }
     public event UnityAction<Weapon> OnDrop { add => _onDrop += value; remove => _onDrop -= value; }
-    public event UnityAction<AttackIndex, Vector2> OnAttack { add => _onAttack += value; remove => _onAttack -= value; }
-    public event UnityAction<AttackIndex> OnAttackEnd { add => _onAttackEnd += value; remove => _onAttackEnd -= value; }
+    public event UnityAction<Weapon, AttackIndex, Vector2> OnAttack { add => _onAttack += value; remove => _onAttack -= value; }
+    public event UnityAction<Weapon, AttackIndex> OnAttackEnd { add => _onAttackEnd += value; remove => _onAttackEnd -= value; }
 
     #endregion
 
@@ -88,10 +88,10 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     }
 
     private void _InvokeOnAttack(AttackIndex type, Vector2 direction) {
-        _onAttack.Invoke(type, direction);
+        _onAttack.Invoke(_weapon, type, direction);
     }
 
     private void _InvokeOnAttackEnd(AttackIndex type) {
-        _onAttackEnd.Invoke(type);
+        _onAttackEnd.Invoke(_weapon, type);
     }
 }

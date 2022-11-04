@@ -152,6 +152,14 @@ namespace ToolsBoxEngine {
             _count = 0;
         }
 
+        public static implicit operator T(Counted<T> a) {
+            return a._value;
+        }
+
+        public static implicit operator int(Counted<T> a) {
+            return a._count;
+        }
+
         public static Counted<T> operator ++(Counted<T> a) {
             ++a._count;
             return a;

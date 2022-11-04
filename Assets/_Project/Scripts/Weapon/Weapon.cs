@@ -93,6 +93,8 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     #endregion
 
+    public abstract float AttackTime(AttackIndex index);
+
     public void Aim(Vector2 direction) {
         _OnAim(direction);
     }

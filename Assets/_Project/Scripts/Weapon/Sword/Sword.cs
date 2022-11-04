@@ -30,4 +30,13 @@ public class Sword : Weapon {
     private void OnDestroy() {
         if (_routine_ResetCombo != null) { CoroutinesManager.Stop(_routine_ResetCombo); }
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            default:
+                return 0f;
+        }
+    }
 }

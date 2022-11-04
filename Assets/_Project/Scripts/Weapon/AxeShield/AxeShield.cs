@@ -63,4 +63,15 @@ public class AxeShield : Weapon
         _targetAnimator.SetTrigger(_triggerName_attack_parry);
         yield return new WaitForSeconds(_attackTime);
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            case AttackIndex.SECOND:
+                return _attackTime;
+            default:
+                return 0f;
+        }
+    }
 }

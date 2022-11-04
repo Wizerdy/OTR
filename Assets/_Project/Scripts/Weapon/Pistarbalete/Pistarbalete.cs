@@ -85,4 +85,15 @@ public class Pistarbalete : Weapon {
             yield return new WaitForSeconds(_sbAttackTime);
         }
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            case AttackIndex.SECOND:
+                return _sbAttackTime;
+            default:
+                return 0f;
+        }
+    }
 }

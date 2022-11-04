@@ -68,4 +68,13 @@ public class Chakram : Weapon {
             transform.localScale = new Vector3(transform.localScale.x + scaleAddedToEachStack, transform.localScale.y + scaleAddedToEachStack, transform.localScale.z + scaleAddedToEachStack);
         }
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            default:
+                return 0f;
+        }
+    }
 }

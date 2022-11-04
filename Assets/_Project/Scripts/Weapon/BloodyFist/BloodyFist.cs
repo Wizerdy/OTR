@@ -87,4 +87,15 @@ public class BloodyFist : Weapon {
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
         }
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _pushduration;
+            case AttackIndex.SECOND:
+                return _duration;
+            default:
+                return 0f;
+        }
+    }
 }

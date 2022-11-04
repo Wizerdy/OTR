@@ -71,4 +71,13 @@ public class Shield : Weapon {
         _targetAnimator.SetTrigger(_triggerName_attack);
         yield return new WaitForSeconds(_attackTime);
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            default:
+                return 0f;
+        }
+    }
 }

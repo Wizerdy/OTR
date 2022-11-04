@@ -20,4 +20,13 @@ public class Bow : Weapon {
         _bullet.GetComponent<Rigidbody2D>().velocity = direction * _bulletSpeed;
         yield return new WaitForSeconds(_attackTime);
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            default:
+                return 0f;
+        }
+    }
 }

@@ -28,4 +28,15 @@ public class Staff : Weapon
 
         yield return new WaitForSeconds(_attackTime);
     }
+
+    public override float AttackTime(AttackIndex index) {
+        switch (index) {
+            case AttackIndex.FIRST:
+                return _attackTime;
+            case AttackIndex.SECOND:
+                return chargeTime;
+            default:
+                return 0f;
+        }
+    }
 }

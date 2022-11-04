@@ -16,6 +16,7 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityWeaponry _weaponry;
     [SerializeField] EntityTryCatch _catch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
+    [SerializeField] EntityInvincibitlity _invincibility;
     [SerializeField] ColliderDelegate _interactCollider;
     [SerializeField] TrajectoryLine _trajectoryLine;
 
@@ -119,23 +120,29 @@ public class PlayerEntity : MonoBehaviour {
 
     private void _OnDash() {
         CanLookAround = false;
+        _invincibility.Invincible(true);
     }
 
     private void _OnStopDash() {
         CanLookAround = true;
+        _invincibility.Invincible(false);
     }
 
-    private void _OnAttackStart(AttackIndex type, Vector2 direction) {
-        //_movements.Stop();
-        _pMovements.Stop();
-        //_movements.CanMove = false;
-        _pMovements.CanMove = false;
-        CanLookAround = false;
+    private void _OnAttackStart(Weapon weapon, AttackIndex type, Vector2 direction) {
+        if (weapon.AttackTime(type) > 0f) {
+            //_movements.Stop();
+            _pMovements.Stop();
+            //_movements.CanMove = false;
+            _pMovements.CanMove = false;
+            CanLookAround = false;
+        }
     }
 
-    private void _OnAttackEnd(AttackIndex type) {
-        _pMovements.CanMove = true;
-        CanLookAround = true;
+    private void _OnAttackEnd(Weapon weapon, AttackIndex type) {
+        if (weapon.AttackTime(type) > 0f) {
+            _pMovements.CanMove = true;
+            CanLookAround = true;
+        }
     }
 
     #endregion

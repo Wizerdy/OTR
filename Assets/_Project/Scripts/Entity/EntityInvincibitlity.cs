@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-public class EntityInvicibitlity : MonoBehaviour, IEntityAbility {
+public class EntityInvincibitlity : MonoBehaviour, IEntityAbility {
     [SerializeField] LayerMask _invicibleLayer;
     [SerializeField] List<Collider2D> _colliders;
     [SerializeField] Health _health;
+
+    bool _invincible = false;
 
     Dictionary<Collider2D, int> _collidersLayers = new Dictionary<Collider2D, int>();
     Coroutine _routine_layer = null;
@@ -19,14 +21,22 @@ public class EntityInvicibitlity : MonoBehaviour, IEntityAbility {
     }
 
     public void ChangeCollisionLayer(float time) {
+        if (time <= 0f) { return; }
         if (_routine_layer != null) { StopCoroutine(_routine_layer); }
         _routine_layer = StartCoroutine(IChangeCollisionLayer(time));
     }
 
-    public void Invicible(float time) {
-        _health.CanTakeDamage = false;
-        if (_routine_invincible != null) { _health.CanTakeDamage = true; StopCoroutine(_routine_invincible); }
-        _routine_invincible = StartCoroutine(Tools.Delay(() => _health.CanTakeDamage = true, time));
+    public void Invincible(bool state) {
+        if (_invincible == state) { return; }
+        _invincible = state;
+        _health.CanTakeDamage = !_invincible;
+    }
+
+    public void Invincible(float time) {
+        if (time <= 0f) { return; }
+        Invincible(true);
+        if (_routine_invincible != null) { StopCoroutine(_routine_invincible); }
+        _routine_invincible = StartCoroutine(Tools.Delay(() => Invincible(false), time));
     }
 
     IEnumerator IChangeCollisionLayer(float time) {

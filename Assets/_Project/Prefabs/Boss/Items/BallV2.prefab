@@ -181,7 +181,76 @@ MonoBehaviour:
   _startDirection: {x: 0, y: 0}
   _speed: 0
   _duration: 0
-  r: {x: 0, y: 0}
+  _damages: 0
+  _reminder: {x: 0, y: 0}
+  _bounceForce:
+    _strength: 30
+    _direction: {x: 0, y: 0}
+    _weight: 1
+    _start:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0.2
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+  _bounceDuration: 0
 --- !u!114 &-3410604980442100846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +283,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

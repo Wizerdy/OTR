@@ -8,6 +8,7 @@ public class BossShootBall : BossAttack {
     [Header("Ball :")]
     [SerializeField] float _ballSpeed;
     [SerializeField] float _ballDuration;
+    [SerializeField] Force _bounceForce;
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         LaunchBall(ea.transform.position, target.position);
         yield break;
@@ -15,7 +16,7 @@ public class BossShootBall : BossAttack {
 
 
     protected void LaunchBall(Vector3 ourPosition, Vector3 targetPosition) {
-        BossBall newBall = Instantiate(_bossBallprefab).ChangeDamages(_damages).ChangeDuration(_ballDuration).ChangeSpeed(_ballSpeed).ChangeStartDirection((targetPosition - ourPosition).normalized);
+        BossBall newBall = Instantiate(_bossBallprefab).ChangeDamages(_damages).ChangeDuration(_ballDuration).ChangeSpeed(_ballSpeed).ChangeStartDirection((targetPosition - ourPosition).normalized).ChangeForce(_bounceForce);
         newBall.transform.position = ourPosition + (targetPosition - ourPosition).normalized;
     }
 }

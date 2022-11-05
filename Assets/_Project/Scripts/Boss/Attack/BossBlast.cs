@@ -16,10 +16,10 @@ public class BossBlast : BossAttack {
     [SerializeField] protected float _damagesMultiplier;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
+        Blast(ea.transform.position, target.position);
         yield return new WaitForSeconds(_chargeDuration);
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
-        Blast(ea.transform.position, target.position);
         yield return new WaitForSeconds(_blastDuration);
     }
 
@@ -32,7 +32,7 @@ public class BossBlast : BossAttack {
         array[2] = array[1] + (Vector2)(Quaternion.Euler(0, 0, -(_angle - 90)) * direction * _secondWidth);
         array[4] = array[5] + (direction * _distBlast);
         array[3] = array[2] + (direction * _distBlast);
-        Blast _newBlast = Instantiate(_blastPrefab, transform.position, Quaternion.identity).ChangeDamages(_damages).ChangeDamagesMultipler(_damagesMultiplier).ChangeDuration(_blastDuration);
+        Blast _newBlast = Instantiate(_blastPrefab, transform.position, Quaternion.identity).ChangeDamages(_damages).ChangeDamagesMultipler(_damagesMultiplier).ChangeBlastDuration(_blastDuration).ChangeChargeDuration(_blastDuration);
         _newBlast.ChangePoints(array);
     }
 }

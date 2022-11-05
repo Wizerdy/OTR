@@ -397,8 +397,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 50
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &123470122
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,8 +481,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &149240408
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,8 +803,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 20
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _delayBeforeTeleport: 1
   _distFromPlayer: 2
 --- !u!1 &340969032
@@ -799,8 +889,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 50
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &342435873
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,11 +1002,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -1028,8 +1156,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 20
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _delayBeforeTeleport: 1
   _distFromPlayer: 2
 --- !u!1 &477710482
@@ -1338,6 +1496,13 @@ MonoBehaviour:
   - {fileID: 1142180319}
   _currentPhase: 0
   _currentAttack: {fileID: 0}
+  _nextAttack: {fileID: 0}
+  _newPhase:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _center: {fileID: 0}
+  _sr: {fileID: 0}
 --- !u!114 &641596146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCollider: {fileID: 342435876}
+  _collider: {fileID: 0}
 --- !u!1001 &703168157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1590,15 +1756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff79cf47abb1fa4fadda7cac24c2202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks:
-  - {fileID: 123470124}
-  - {fileID: 1961962098}
-  - {fileID: 456123247}
-  - {fileID: 1520294173}
-  - {fileID: 1885611454}
-  - {fileID: 1834308682}
-  - {fileID: 529735295}
-  - {fileID: 340969034}
+  _attacks: []
+  _isDebugging: 0
 --- !u!1001 &777423066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2374,8 +2533,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _speedComeback: 30
 --- !u!1 &1103104026
 GameObject:
@@ -2429,10 +2618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff79cf47abb1fa4fadda7cac24c2202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks:
-  - {fileID: 1788868156}
-  - {fileID: 289704503}
-  - {fileID: 637201270}
+  _attacks: []
+  _isDebugging: 0
 --- !u!1 &1142180318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,8 +2649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff79cf47abb1fa4fadda7cac24c2202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks:
-  - {fileID: 219953497}
+  _attacks: []
+  _isDebugging: 0
 --- !u!4 &1142180320
 Transform:
   m_ObjectHideFlags: 0
@@ -2539,8 +2726,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 50
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &1372921197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,8 +2810,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 20
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _delayBeforeTeleport: 1
   _distFromPlayer: 2
 --- !u!1 &1425738393
@@ -2649,8 +2896,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &1520294171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,8 +3034,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _speedComeback: 30
 --- !u!1 &1673465566
 GameObject:
@@ -3188,8 +3495,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
   _speedComeback: 30
 --- !u!1 &1995746684
 GameObject:
@@ -3243,8 +3580,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _delayBeforeCharge: 1
-  _duration: 20
   _speed: 30
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &2097025648
 GameObject:
   m_ObjectHideFlags: 0

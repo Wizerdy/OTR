@@ -7,9 +7,12 @@ using System.Linq;
 
 public class Blast : MonoBehaviour {
     [SerializeField] List<IHealth> hits = new List<IHealth>();
+    [SerializeField] Material _charging;
+    [SerializeField] Material _blasting;
     Vector2[] _points;
     int _damages;
-    float _duration;
+    float _chargeDuration;
+    float _blastDuration;
     float _damagesMultiplier;
     PolygonCollider2D _polygonCollider;
     Mesh _mesh;
@@ -19,8 +22,12 @@ public class Blast : MonoBehaviour {
         return this;
     }
 
-    public Blast ChangeDuration(float duration) {
-        _duration = duration;
+    public Blast ChangeBlastDuration(float blastDuration) {
+        _blastDuration = blastDuration;
+        return this;
+    } 
+    public Blast ChangeChargeDuration(float chargeDuration) {
+        _chargeDuration = chargeDuration;
         return this;
     }
 
@@ -29,12 +36,9 @@ public class Blast : MonoBehaviour {
         return this;
     }
     private void Start() {
-        _polygonCollider = GetComponent<PolygonCollider2D>();
-        _polygonCollider.points = _points;
-        _meshFilter = GetComponent<MeshFilter>();
         MeshGeneration();
-        _meshFilter.mesh = _mesh;
-        StartCoroutine(Tools.Delay(() => ApplyDamages(), _duration));
+        ShowBlast();
+        StartCoroutine(Tools.Delay(() => BlastArea(), _chargeDuration));
     }
 
     public void ChangePoints(Vector2[] points) {
@@ -52,12 +56,13 @@ public class Blast : MonoBehaviour {
         if (hits.Count > 1)
             damages = (int)(damages * AlgebraSloot.Pow(_damagesMultiplier, hits.Count - 1));
         for (int i = 0; i < hits.Count; i++) {
-            hits[i].TakeDamage(damages, this.gameObject);
+            hits[i].TakeDamage(damages, gameObject);
         }
         Die();
     }
 
     void MeshGeneration() {
+        _meshFilter = GetComponent<MeshFilter>();
         _mesh = new Mesh();
         _mesh.vertices = _points.Select((v2) => (Vector3)v2).ToArray();
         int[] triangles = new int[] {
@@ -65,8 +70,9 @@ public class Blast : MonoBehaviour {
             0, 5, 2,
             2, 5, 4,
             2, 4, 3
-        };
+        }; 
         _mesh.triangles = triangles;
+        _meshFilter.mesh = _mesh;
     }
 
     void Die(){
@@ -74,4 +80,14 @@ public class Blast : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    void ShowBlast() {
+        gameObject.GetComponent<Renderer>().material = _charging;
+    }
+
+    void BlastArea() {
+        _polygonCollider = GetComponent<PolygonCollider2D>();
+        _polygonCollider.points = _points;
+        gameObject.GetComponent<Renderer>().material = _blasting;
+        StartCoroutine(Tools.Delay(() => ApplyDamages(), _blastDuration));
+    }
 }

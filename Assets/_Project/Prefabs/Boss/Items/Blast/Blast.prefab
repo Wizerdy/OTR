@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5729225095273936163}
   - component: {fileID: 6699600704170952735}
   - component: {fileID: 5162432884260082162}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015f28293f6afd04b9e08f4ed239467e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charging: {fileID: 2100000, guid: c0033b08d92089d4c92b7bc25eb5d4a3, type: 2}
+  _blasting: {fileID: 2100000, guid: e64b825218daf4f40b7b9ab5f2a90ddb, type: 2}
 --- !u!50 &6859762543148905606
 Rigidbody2D:
   serializedVersion: 4
@@ -120,6 +122,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
@@ -137,6 +143,10 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []

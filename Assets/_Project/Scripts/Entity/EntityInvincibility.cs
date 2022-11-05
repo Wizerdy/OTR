@@ -4,7 +4,7 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class EntityInvincibility : MonoBehaviour, IEntityAbility {
-    [SerializeField] LayerMask _invicibleLayer;
+    [SerializeField] string _invincibleLayer;
     [SerializeField] List<Collider2D> _colliders;
     [SerializeField] Health _health;
 
@@ -41,7 +41,7 @@ public class EntityInvincibility : MonoBehaviour, IEntityAbility {
 
     IEnumerator IChangeCollisionLayer(float time) {
         for (int i = 0; i < _colliders.Count; i++) {
-            _colliders[i].gameObject.layer = _invicibleLayer;
+            _colliders[i].gameObject.layer = LayerMask.NameToLayer(_invincibleLayer);
         }
         yield return new WaitForSeconds(time);
         for (int i = 0; i < _colliders.Count; i++) {

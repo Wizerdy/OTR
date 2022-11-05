@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EntityColliders : MonoBehaviour, IEntityAbility {
     [SerializeField] ColliderDelegate _mainCollider;
+    [SerializeField] Collider2D _collider;
 
-    public ColliderDelegate Main => _mainCollider;
+    public ColliderDelegate MainEvent => _mainCollider;
+    public Collider2D Main => _collider;
 }

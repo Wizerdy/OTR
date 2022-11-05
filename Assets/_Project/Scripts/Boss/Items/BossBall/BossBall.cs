@@ -10,7 +10,8 @@ public class BossBall : MonoBehaviour {
     [SerializeField] protected float _duration;
     [SerializeField] protected int _damages;
     [SerializeField] protected Vector2 _reminder;
-    [SerializeField] protected bool _mustDie = false;
+    [SerializeField] protected Force _bounceForce;
+    protected bool _mustDie = false;
     Timer _deathTimer;
 
     public BossBall ChangeSpeed(float speed) {
@@ -31,6 +32,11 @@ public class BossBall : MonoBehaviour {
     public BossBall ChangeStartDirection(Vector2 startDirection) {
         _startDirection = startDirection;
         return this;
+    } 
+    
+    public BossBall ChangeForce(Force bounceForce) {
+        _bounceForce = bounceForce;
+        return this;
     }
 
 
@@ -50,9 +56,30 @@ public class BossBall : MonoBehaviour {
     public virtual void Hit(Collision2D collision) {
         if (collision.collider.tag == "Wall") {
             if (_mustDie) {
-                Destroy(gameObject);
+                Die();
+            } else {
+                _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
             }
-            _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
         }
+
+        if (collision.transform.CompareTag("Player")) {
+            _bounceForce.Reset();
+            EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
+            EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
+            Vector2 direction = _rb.velocity.normalized;
+            float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
+            if (dot > 0) {
+                _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
+            } else {
+                _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
+            }
+            eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
+            epPlayer.Add(new Force(_bounceForce), 10);
+        }
+    }
+
+    void Die() {
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

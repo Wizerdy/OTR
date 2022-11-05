@@ -158,11 +158,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -181,7 +189,40 @@ MonoBehaviour:
   _startDirection: {x: 0, y: 0}
   _speed: 0
   _duration: 0
-  r: {x: 0, y: 0}
+  _damages: 0
+  _reminder: {x: 0, y: 0}
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+  _bounceDuration: 0
   _angle: 45
   _childrenPrefab: {fileID: 7596212308714034114, guid: 1eb56dbb8ae81cc49b74cbbf52a6f6a3, type: 3}
 --- !u!114 &-1024161514461283400
@@ -216,6 +257,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

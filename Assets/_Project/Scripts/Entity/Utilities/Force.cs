@@ -36,6 +36,9 @@ public class Force {
     public float Weight { get => _weight; set => _weight = value; }
     public AnimationCurve Start => _start;
     public AnimationCurve End => _end;
+    public float StartDuration => _startDuration;
+    public float EndDuration => _endDuration;
+    public float Duration => _startDuration + _endDuration;
     public ForceMode Mode => _mode;
     public ForceState State => _state;
 
@@ -52,6 +55,10 @@ public class Force {
 
     #endregion
 
+    public Force(Force force) :
+        this(force._strength, force._direction, force._weight, force._mode, force._start, force._startDuration, force._end, force._endDuration) {
+
+    }
     public Force(float strength, Vector2 direction, float weight = 1f,
         ForceMode mode = ForceMode.TIMED,
         AnimationCurve start = null, float startTime = 1f,
@@ -101,7 +108,7 @@ public class Force {
                 if (_startDuration != 0f) {
                     _currentPercent += deltaTime / _startDuration;
                 } else {
-                    ChangeState(ForceState.DECELERATION);
+                    ChangeState(_mode == ForceMode.TIMED ? ForceState.DECELERATION : ForceState.STAGNATION);
                     _currentPercent = 1f;
                     return;
                 }
@@ -109,6 +116,7 @@ public class Force {
                 if (_currentPercent >= 1f) {
                     switch (_mode) {
                         case ForceMode.TIMED:
+                            _currentPercent = 2f - _currentPercent;
                             ChangeState(ForceState.DECELERATION);
                             break;
                         case ForceMode.INPUT:

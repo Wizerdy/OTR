@@ -1,15 +1,16 @@
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-public class EntityPhysics : MonoBehaviour {
+public class EntityPhysics : MonoBehaviour, IEntityAbility {
     [SerializeField] Rigidbody2D _rb;
     [ReadOnly, SerializeField] List<Force> _forcesDisplay = new List<Force>();
     [SerializeField] bool _debug = false;
 
     SortedDictionary<int, List<Force>> _forces = new SortedDictionary<int, List<Force>>();
+
+    public Vector2 Velocity => _rb.velocity;
 
     private void FixedUpdate() {
         foreach (KeyValuePair<int, List<Force>> pair in _forces) {
@@ -55,12 +56,17 @@ public class EntityPhysics : MonoBehaviour {
     }
 
     public void Remove(Force force) {
-        foreach (KeyValuePair<int, List<Force>> pair in _forces) {
-            if (pair.Value.Contains(force)) {
-                Remove(force, pair.Key);
+        try {
+            foreach (KeyValuePair<int, List<Force>> pair in _forces) {
+                if (pair.Value.Contains(force)) {
+                    Remove(force, pair.Key);
+                    _forcesDisplay.Remove(force);
+                }
             }
+        } catch (System.Exception e) {
+            if(_debug)
+            Debug.LogError(e);
         }
-        _forcesDisplay.Remove(force);
     }
 
     public void Remove(Force force, int priority) {
@@ -77,6 +83,10 @@ public class EntityPhysics : MonoBehaviour {
 
     public Vector2 ComputeForces() {
         Vector2 force = Vector2.zero;
+
+        if (_forces.Count == 0) {
+            return force;
+        }
 
         float weight = 1f;
 

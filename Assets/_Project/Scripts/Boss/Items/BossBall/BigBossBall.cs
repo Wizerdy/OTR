@@ -18,7 +18,8 @@ public class BigBossBall : BossBall {
                 .ChangeDamages(_damages)
                 .ChangeDuration(_duration)
                 .ChangeSpeed(_speed)
-                .ChangeStartDirection(Quaternion.Euler(new Vector3(0, 0, -_angle + _angle * i)) * (Vector3)direction);
+                .ChangeStartDirection(Quaternion.Euler(new Vector3(0, 0, -_angle + _angle * i)) * (Vector3)direction)
+                .ChangeForce(_bounceForce);
         }
         Destroy(gameObject);
     }

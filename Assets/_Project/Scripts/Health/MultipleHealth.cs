@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using ToolsBoxEngine.BetterEvents;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MultipleHealth : MonoBehaviour {
     Health _health;
@@ -14,7 +16,7 @@ public class MultipleHealth : MonoBehaviour {
         NewHealth();
     }
 
-    public void NewHealth() {
+    void NewHealth() {
         _currentHealth++;
         if(_currentHealth >= _healths.Count) {
             Die();
@@ -24,7 +26,7 @@ public class MultipleHealth : MonoBehaviour {
         _health.Load(healthData);
     }
 
-    public void Die() {
+    void Die() {
         _health.OnDeath -= NewHealth;
         Destroy(gameObject.transform.parent.gameObject);
     }

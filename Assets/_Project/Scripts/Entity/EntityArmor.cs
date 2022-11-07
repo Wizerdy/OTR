@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityArmor : MonoBehaviour, IEntityAbility {
+    [SerializeField] private Health health;
+    [SerializeField] private ArmorModifier modifier;
     [SerializeField] private int armorCurrent;
     [SerializeField] private int armorMax;
     [SerializeField] private int armorRegenValue;
@@ -34,10 +36,12 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
 
     public void OnPickUp() {
         isWieldingAxeShield = true;
+        health.AddDamageModifier(modifier);
     }
 
     public void ResetArmor() {
         armorCurrent = 0;
+        health.RemoveDamageModifier(modifier);
         isWieldingAxeShield = false;
     }
 

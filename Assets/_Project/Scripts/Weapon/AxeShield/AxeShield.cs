@@ -15,7 +15,7 @@ public class AxeShield : Weapon
     private EntityArmor entityArmor;
 
     float _baseSpeed = 1f;
-    bool _aiming = false;
+    //bool _aiming = false;
 
     string _boolName_aim = "AxeShield_Slash";
 
@@ -41,7 +41,7 @@ public class AxeShield : Weapon
 
     protected override void _OnDrop(EntityHolding holding) {
         _targetAnimator.SetBool(_boolName_aim, false);
-        _aiming = false;
+        //_aiming = false;
         MoveSpeed = _baseSpeed;
     }
 
@@ -61,7 +61,7 @@ public class AxeShield : Weapon
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
         _targetAnimator.SetTrigger(_triggerName_attack_parry);
-        yield return new WaitForSeconds(_attackTime);
+        yield return new WaitForSeconds(parryCooldown);
     }
 
     public override float AttackTime(AttackIndex index) {

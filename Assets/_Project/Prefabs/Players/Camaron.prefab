@@ -1776,6 +1776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563c0cd7151eccd40b288ad8856b3e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 147940007823276091}
+  modifier: {fileID: 6288217453340800929}
   armorCurrent: 0
   armorMax: 0
   armorRegenValue: 0

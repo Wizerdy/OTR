@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7664188759876081843}
   - component: {fileID: 7596212308714034114}
   - component: {fileID: -3410604980442100846}
+  - component: {fileID: -8693095343977289428}
   m_Layer: 10
   m_Name: BallV2
   m_TagString: BossItem
@@ -297,3 +298,15 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &-8693095343977289428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960929105861941386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

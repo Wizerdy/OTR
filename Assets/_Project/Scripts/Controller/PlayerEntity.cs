@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 
-public class PlayerEntity : MonoBehaviour {
+public class PlayerEntity : MonoBehaviour , IEntityAbility {
     [SerializeField] Transform _root;
     [SerializeField] EntityAbilities _abilities;
     //[SerializeField] EntityMovement _movements;

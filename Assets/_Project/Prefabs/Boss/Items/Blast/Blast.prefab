@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5729225095273936163}
   - component: {fileID: 6699600704170952735}
   - component: {fileID: 5162432884260082162}
+  - component: {fileID: 4762912714718934693}
   m_Layer: 10
   m_Name: Blast
   m_TagString: Untagged
@@ -200,3 +201,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037423992103907809}
   m_Mesh: {fileID: 0}
+--- !u!114 &4762912714718934693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037423992103907809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

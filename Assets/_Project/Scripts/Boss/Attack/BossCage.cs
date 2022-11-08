@@ -24,7 +24,7 @@ public class BossCage : BossAttack {
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform transform) {
-        Cage newCage = Instantiate(_cagePrefab).ChangeBotLeft(_botLeft).ChangePosition(_position).ChangeSize(_size).ChangeTopRight(_topRight).ChangeDuration(_cageDuration).ChangeDamages(_damages).ChangeTick(_tick);
+        Cage newCage = Instantiate(_cagePrefab).ChangeBotLeft(_botLeft).ChangePosition(_position).ChangeSize(_size).ChangeTopRight(_topRight).ChangeDuration(_cageDuration).ChangeDamages(_damages).ChangeTick(_tick).ChangeDamagesBonus(_bonusDamageEveryTick);
         newCage.transform.position = _position;
         yield break;
     }

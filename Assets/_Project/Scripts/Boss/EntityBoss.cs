@@ -22,6 +22,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _sr = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
+
     void Attack() {
         if (_currentAttack != null)
             _currentAttack.Finished -= Attack;

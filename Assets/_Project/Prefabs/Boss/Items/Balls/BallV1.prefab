@@ -223,6 +223,7 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
+  _destroyOnPlayerHit: 1
 --- !u!114 &-3499688898107672776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ MonoBehaviour:
     tags:
     - Player
     state: 1
-  _destroyOnHit: 1
+  _destroyOnHit: 0
   _onlyDamageOnceEach: 1
   _ignoreTag:
     tags: []

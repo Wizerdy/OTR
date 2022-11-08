@@ -7,8 +7,8 @@ using ToolsBoxEngine;
 public class BossCage : BossAttack {
     [Header("Prog")]
     [SerializeField] Cage _cagePrefab;
-    [SerializeField] Transform _topRight;
-    [SerializeField] Transform _botLeft;
+    [SerializeField] Transform _topLeft;
+    [SerializeField] Transform _botRight;
     [Header("GD")]
     [SerializeField] Vector2 _position;
     [SerializeField] Vector2 _size;
@@ -24,7 +24,7 @@ public class BossCage : BossAttack {
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform transform) {
-        Cage newCage = Instantiate(_cagePrefab).ChangeBotLeft(_botLeft).ChangePosition(_position).ChangeSize(_size).ChangeTopRight(_topRight).ChangeDuration(_cageDuration).ChangeDamages(_damages).ChangeTick(_tick).ChangeDamagesBonus(_bonusDamageEveryTick);
+        Cage newCage = Instantiate(_cagePrefab).ChangeBotRight(_botRight).ChangePosition(_position).ChangeSize(_size).ChangeTopLeft(_topLeft).ChangeDuration(_cageDuration).ChangeDamages(_damages).ChangeTick(_tick).ChangeDamagesBonus(_bonusDamageEveryTick);
         newCage.transform.position = _position;
         yield break;
     }

@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Cage : MonoBehaviour {
     [SerializeField] Material _material;
-    Transform _topRight;
-    Transform _botLeft;
+    Transform _topLeft;
+    Transform _botRight;
     Vector2 _position;
     Vector2 _size;
     float _duration;
@@ -21,13 +21,13 @@ public class Cage : MonoBehaviour {
     PolygonCollider2D _polygonCollider;
     Dictionary<IHealth, Vector2> _hits;
 
-    public Cage ChangeTopRight(Transform topRight) {
-        _topRight = topRight;
+    public Cage ChangeTopLeft(Transform topLeft) {
+        _topLeft = topLeft;
         return this;
     }
 
-    public Cage ChangeBotLeft(Transform botLeft) {
-        _botLeft = botLeft;
+    public Cage ChangeBotRight(Transform botRight) {
+        _botRight = botRight;
         return this;
     }
 
@@ -65,14 +65,14 @@ public class Cage : MonoBehaviour {
         transform.position = _position;
         _mesh = new Mesh();
         _mesh.vertices = new Vector3[] {
-             new Vector3(_topRight.position.x,_topRight.position.y,0),
-            new Vector3( _botLeft.position.x, _topRight.position.y,0),
+             new Vector3(_topLeft.position.x,_topLeft.position.y,0),
+            new Vector3( _botRight.position.x, _topLeft.position.y,0),
             new Vector3( _position.x - _size.x / 2, _position.y + _size.y / 2,0),
             new Vector3( _position.x + _size.x / 2, _position.y + _size.y / 2,0),
             new Vector3( _position.x + _size.x / 2,_position.y - _size.y / 2,0),
-            new Vector3(_botLeft.position.x,_botLeft.position.y,0),
+            new Vector3(_botRight.position.x,_botRight.position.y,0),
             new Vector3( _position.x - _size.x / 2,_position.y - _size.y / 2,0),
-            new Vector3( _topRight.position.x,_botLeft.position.y,0),
+            new Vector3( _topLeft.position.x,_botRight.position.y,0),
         };
 
         _mesh.triangles = new int[] {
@@ -92,22 +92,22 @@ public class Cage : MonoBehaviour {
         _beforeDie.OnActivate += Die;
         gameObject.GetComponent<Renderer>().material = _material;
         Vector2[] points = new Vector2[] {
-             new Vector3(_topRight.position.x,_topRight.position.y,0),
-            new Vector2( _botLeft.position.x, _topRight.position.y),
-            new Vector3(_botLeft.position.x,_botLeft.position.y,0),
-            new Vector2( _topRight.position.x, _botLeft.position.y),
+             new Vector3(_topLeft.position.x,_topLeft.position.y,0),
+            new Vector2( _botRight.position.x, _topLeft.position.y),
+            new Vector3(_botRight.position.x,_botRight.position.y,0),
+            new Vector2( _topLeft.position.x, _botRight.position.y),
             new Vector2( _position.x - _size.x / 2,_position.y - _size.y / 2),
             new Vector2( _position.x + _size.x / 2,_position.y - _size.y / 2),
             new Vector2( _position.x + _size.x / 2, _position.y + _size.y / 2),
             new Vector2( _position.x - _size.x / 2, _position.y + _size.y / 2),
             new Vector2( _position.x - _size.x / 2,_position.y - _size.y / 2),
-            new Vector2( _topRight.position.x, _botLeft.position.y),
-             new Vector3(_topRight.position.x,_topRight.position.y,0),
+            new Vector2( _topLeft.position.x, _botRight.position.y),
+             new Vector3(_topLeft.position.x,_topLeft.position.y,0),
         };
         _polygonCollider = GetComponent<PolygonCollider2D>();
         _polygonCollider.points = points;
         BoxCollider2D[] boxCollider2D = GetComponentsInChildren<BoxCollider2D>();
-        Vector2 bigSize = new Vector2(Mathf.Abs(_topRight.position.x - _botLeft.position.x), Mathf.Abs(_topRight.position.y - _botLeft.position.y));
+        Vector2 bigSize = new Vector2(Mathf.Abs(_topLeft.position.x - _botRight.position.x), Mathf.Abs(_topLeft.position.y - _botRight.position.y));
         boxCollider2D[0].size = new Vector2((bigSize.x - _size.x) / 2, bigSize.y);
         boxCollider2D[0].gameObject.transform.position = new Vector2(-((bigSize.x - _size.x) / 4 + _size.x / 2), 0);
         boxCollider2D[1].size = new Vector2((bigSize.x - _size.x) / 2, bigSize.y);

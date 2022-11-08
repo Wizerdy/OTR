@@ -487,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458479434}
   m_Layer: 0
-  m_Name: BotLeft
+  m_Name: BotRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1288,7 +1288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1072584814}
   m_Layer: 0
-  m_Name: TopRight
+  m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

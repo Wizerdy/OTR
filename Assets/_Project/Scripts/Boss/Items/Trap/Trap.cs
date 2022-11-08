@@ -47,7 +47,7 @@ public class Trap : MonoBehaviour {
         _sr.sprite = closeSprite;
         Timer timer = new Timer(this, _tick);
         _open = true;
-        ea.Get<PlayerEntity>().Drop();
+        ea.Get<PlayerEntity>().Throw(ea.Get<EntityPhysics>().Velocity.normalized);
         EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
         EntityPhysics entityPhysics = ea.Get<EntityPhysics>();
         IHealth health = ea.transform.GetComponent<IHealth>();

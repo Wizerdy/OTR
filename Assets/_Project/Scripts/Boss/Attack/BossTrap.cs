@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 public class BossTrap : BossAttack {
     [Header("Prog")]
     [SerializeField] Trap _trapPrefab;
-    [SerializeField] Transform _topRight;
-    [SerializeField] Transform _botLeft;
+    [SerializeField] Transform _topLeft;
+    [SerializeField] Transform _botRight;
     [Header("GD")]
     [SerializeField] float _minimumDistBetween;
     [SerializeField] float _minimumDistFromSide;
@@ -32,8 +32,8 @@ public class BossTrap : BossAttack {
         int protection = 0;
         while (!placed || protection >= 1000) {
             placed = true;
-            float x = Random.Range(_topRight.position.x + _minimumDistFromSide, _botLeft.position.x - _minimumDistFromSide);
-            float y = Random.Range(_topRight.position.y - _minimumDistFromSide, _botLeft.position.y + _minimumDistFromSide);
+            float x = Random.Range(_topLeft.position.x + _minimumDistFromSide, _botRight.position.x - _minimumDistFromSide);
+            float y = Random.Range(_topLeft.position.y - _minimumDistFromSide, _botRight.position.y + _minimumDistFromSide);
             position = new Vector2(x, y);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, _minimumDistBetween);
             foreach (Collider2D collider in colliders) {

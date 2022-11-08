@@ -9,7 +9,7 @@ public class TestController : MonoBehaviour {
     [SerializeField] EntityPhysicMovement _movement;
     [SerializeField] AimHelperReference _aimHelperReference;
 
-    bool _aiming = false;
+    //bool _aiming = false;
 
     private void Reset() {
         _playerInput = GetComponent<PlayerInput>();

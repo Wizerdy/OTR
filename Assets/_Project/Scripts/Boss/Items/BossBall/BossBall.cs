@@ -63,7 +63,6 @@ public class BossBall : MonoBehaviour {
         }
 
         if (collision.transform.CompareTag("Player")) {
-            _bounceForce.Reset();
             EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
             EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
             Vector2 direction = _rb.velocity.normalized;
@@ -73,6 +72,7 @@ public class BossBall : MonoBehaviour {
             } else {
                 _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
             }
+            _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
         }

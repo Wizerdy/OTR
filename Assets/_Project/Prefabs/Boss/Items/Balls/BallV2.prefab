@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5535853679811284524}
   - component: {fileID: 7664188759876081843}
   - component: {fileID: 7596212308714034114}
-  - component: {fileID: -3499688898107672776}
+  - component: {fileID: -3410604980442100846}
   m_Layer: 10
-  m_Name: BallV1
+  m_Name: BallV2
   m_TagString: BossItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 8e11317b02a46a545a167f370515e4e7, type: 3}
-  m_Color: {r: 1, g: 0.9074646, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.5423229, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -158,11 +158,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -181,8 +189,76 @@ MonoBehaviour:
   _startDirection: {x: 0, y: 0}
   _speed: 0
   _duration: 0
-  r: {x: 0, y: 0}
---- !u!114 &-3499688898107672776
+  _damages: 0
+  _reminder: {x: 0, y: 0}
+  _bounceForce:
+    _strength: 30
+    _direction: {x: 0, y: 0}
+    _weight: 1
+    _start:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0.2
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+--- !u!114 &-3410604980442100846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,12 +276,11 @@ MonoBehaviour:
     tags:
     - Player
     state: 1
-  _destroyOnHit: 1
+  _destroyOnHit: 0
   _onlyDamageOnceEach: 1
   _ignoreTag:
-    tags:
-    - Wall
-    state: 1
+    tags: []
+    state: 0
   _onCollide:
     _event:
       m_PersistentCalls:
@@ -215,6 +290,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onDead:
     _event:
       m_PersistentCalls:
         m_Calls: []

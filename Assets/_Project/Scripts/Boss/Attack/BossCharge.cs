@@ -82,6 +82,7 @@ public class BossCharge : BossAttack {
             } else {
                 _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
             }
+            _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
         }

@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 3441056496593220011}
   - component: {fileID: 5535853679811284524}
   - component: {fileID: 7664188759876081843}
-  - component: {fileID: -391399695015942750}
-  - component: {fileID: -1024161514461283400}
+  - component: {fileID: 7596212308714034114}
+  - component: {fileID: -3410604980442100846}
+  - component: {fileID: -8693095343977289428}
   m_Layer: 10
-  m_Name: BallV3
+  m_Name: BallV2
   m_TagString: BossItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2960929105861941386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.299005, y: 1.6900281, z: 0.028019017}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,7 +96,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 8e11317b02a46a545a167f370515e4e7, type: 3}
-  m_Color: {r: 0.57040644, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.5423229, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -142,8 +143,8 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -391399695015942750}
-          m_TargetAssemblyTypeName: BigBossBall, Assembly-CSharp
+        - m_Target: {fileID: 7596212308714034114}
+          m_TargetAssemblyTypeName: BossBall, Assembly-CSharp
           m_MethodName: Hit
           m_Mode: 0
           m_Arguments:
@@ -174,7 +175,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &-391399695015942750
+--- !u!114 &7596212308714034114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2960929105861941386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15496064f302103499aea9e2ed275168, type: 3}
+  m_Script: {fileID: 11500000, guid: 334bcbc6e8fc83d4bb36c96814d0bdf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startDirection: {x: 0, y: 0}
@@ -192,23 +193,59 @@ MonoBehaviour:
   _damages: 0
   _reminder: {x: 0, y: 0}
   _bounceForce:
-    _strength: 0
+    _strength: 30
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -222,10 +259,7 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
-  _bounceDuration: 0
-  _angle: 45
-  _childrenPrefab: {fileID: 7596212308714034114, guid: 1eb56dbb8ae81cc49b74cbbf52a6f6a3, type: 3}
---- !u!114 &-1024161514461283400
+--- !u!114 &-3410604980442100846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,7 +278,7 @@ MonoBehaviour:
     - Player
     state: 1
   _destroyOnHit: 0
-  _onlyDamageOnceEach: 0
+  _onlyDamageOnceEach: 1
   _ignoreTag:
     tags: []
     state: 0
@@ -264,3 +298,15 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &-8693095343977289428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960929105861941386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

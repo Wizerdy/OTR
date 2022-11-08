@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 
-public class BossBall : MonoBehaviour {
+public class BossBall : MonoBehaviour, IReflectable {
     protected Rigidbody2D _rb;
     [SerializeField] protected Vector2 _startDirection;
     [SerializeField] protected float _speed;
@@ -63,7 +63,6 @@ public class BossBall : MonoBehaviour {
         }
 
         if (collision.transform.CompareTag("Player")) {
-            _bounceForce.Reset();
             EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
             EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
             Vector2 direction = _rb.velocity.normalized;
@@ -73,6 +72,7 @@ public class BossBall : MonoBehaviour {
             } else {
                 _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
             }
+            _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
         }
@@ -81,5 +81,13 @@ public class BossBall : MonoBehaviour {
     void Die() {
         gameObject.SetActive(false);
         Destroy(gameObject);
+    }
+
+    public void Reflect(ContactPoint2D collision) {
+        // non reflectable
+    }
+
+    public void Launch(float force, Vector2 direction) {
+        _rb.velocity = force * direction;
     }
 }

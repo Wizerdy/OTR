@@ -158,11 +158,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -250,7 +258,7 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
-  _bounceDuration: 0
+  parriedBossBallPrefab: {fileID: 4263007696735338259, guid: dde48b06819888a4594bc52d4c8499fa, type: 3}
 --- !u!114 &-3410604980442100846
 MonoBehaviour:
   m_ObjectHideFlags: 0

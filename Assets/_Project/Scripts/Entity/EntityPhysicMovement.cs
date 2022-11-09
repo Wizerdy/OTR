@@ -4,7 +4,7 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public enum PhysicPriority {
-    PLAYER_INPUT = 0, DASH = 5, HIGH_PRIORITY = 50
+    PLAYER_INPUT = 0, DASH = 5, PROJECTION = 10, BLOCK = 20,  HIGH_PRIORITY = 50
 }
 
 public class EntityPhysicMovement : MonoBehaviour {

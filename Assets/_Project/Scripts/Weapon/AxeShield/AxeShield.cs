@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class AxeShield : Weapon
 {
-    //[SerializeField] private float aggroPointGenerated = 0.5f;
+
     [SerializeField] private float parryCooldown = 0.5f;
     [SerializeField] private float armorPointRegenerationRate = 1;
     [SerializeField] private int armorPointRegenerationValue = 1;
     [SerializeField] private int armorPointMax = 10;
     [SerializeField] private int armorPointOnPickUp = 5;
+    [SerializeField] private int parryDamageReduction = 1;
     [SerializeField] float _attackTime = 0.2f;
+
 
     private EntityArmor entityArmor;
 
@@ -37,6 +39,7 @@ public class AxeShield : Weapon
         entityArmor.CurrentArmor = armorPointOnPickUp;
         entityArmor.RegenRateArmor = armorPointRegenerationRate;
         entityArmor.RegenValueArmor = armorPointRegenerationValue;
+        entityArmor.ParryDamageReduction = parryDamageReduction;
     }
 
     protected override void _OnDrop(EntityHolding holding) {

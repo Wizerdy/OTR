@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 3441056496593220011}
   - component: {fileID: 5535853679811284524}
   - component: {fileID: 7664188759876081843}
-  - component: {fileID: 7596212308714034114}
-  - component: {fileID: -3410604980442100846}
-  m_Layer: 10
-  m_Name: BallV2
+  - component: {fileID: -3499688898107672776}
+  - component: {fileID: 4263007696735338259}
+  m_Layer: 12
+  m_Name: ParriedBall
   m_TagString: BossItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 8e11317b02a46a545a167f370515e4e7, type: 3}
-  m_Color: {r: 1, g: 0.5423229, b: 0, a: 1}
+  m_Color: {r: 0.02114594, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -142,8 +142,8 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7596212308714034114}
-          m_TargetAssemblyTypeName: BossBall, Assembly-CSharp
+        - m_Target: {fileID: 4263007696735338259}
+          m_TargetAssemblyTypeName: BossBallParried, Assembly-CSharp
           m_MethodName: Hit
           m_Mode: 0
           m_Arguments:
@@ -158,6 +158,10 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
@@ -166,92 +170,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &7596212308714034114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2960929105861941386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334bcbc6e8fc83d4bb36c96814d0bdf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startDirection: {x: 0, y: 0}
-  _speed: 0
-  _duration: 0
-  _damages: 0
-  _reminder: {x: 0, y: 0}
-  _bounceForce:
-    _strength: 30
-    _direction: {x: 0, y: 0}
-    _weight: 1
-    _start:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _startDuration: 0
-    _end:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _endDuration: 0.2
-    _mode: 0
-    _onStart:
-      _event:
-        m_PersistentCalls:
-          m_Calls: []
-    _onChangeState:
-      _event:
-        m_PersistentCalls:
-          m_Calls: []
-    _onEnd:
-      _event:
-        m_PersistentCalls:
-          m_Calls: []
-  _bounceDuration: 0
---- !u!114 &-3410604980442100846
+  _onTriggerStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &-3499688898107672776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,13 +190,15 @@ MonoBehaviour:
   _damage: 1
   _damageables:
     tags:
-    - Player
+    - Boss
     state: 1
-  _destroyOnHit: 0
+  _destroyOnHit: 1
   _onlyDamageOnceEach: 1
   _ignoreTag:
-    tags: []
-    state: 0
+    tags:
+    - Wall
+    - Player
+    state: 1
   _onCollide:
     _event:
       m_PersistentCalls:
@@ -290,3 +215,51 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &4263007696735338259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960929105861941386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0623c8dcf7140f43b3cd603e73b3c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDirection: {x: 0, y: 0}
+  _speed: 0
+  _duration: 0
+  _damages: 0
+  _reminder: {x: 0, y: 0}
+  _bounceForce:
+    _strength: 0
+    _direction: {x: 0, y: 0}
+    _weight: 0
+    _start:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _startDuration: 0
+    _end:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _endDuration: 0
+    _mode: 0
+    _onStart:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onChangeState:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []
+    _onEnd:
+      _event:
+        m_PersistentCalls:
+          m_Calls: []

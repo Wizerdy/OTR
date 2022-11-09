@@ -14,6 +14,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] BetterEvent _newPhase;
     [SerializeField] Transform _center;
     [SerializeField] SpriteRenderer _sr;
+    [SerializeField] float _delayAttackNewPhase;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
     Timer _timer;
@@ -39,6 +40,9 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _newPhase?.Invoke();
         TeleportCenter();
         ChangeColor();
+        _entityAbilities.Get<EntityPhysics>().Purge();
+        _currentAttack.StopAllCoroutines();
+        StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase)); 
     }
 
     void TeleportCenter() {

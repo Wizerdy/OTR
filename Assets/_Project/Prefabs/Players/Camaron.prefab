@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 147940007823276091}
   - component: {fileID: 6288217453340800929}
   - component: {fileID: 4812016295901184202}
+  - component: {fileID: 5586991636877122026}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -499,8 +500,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _damageModifiers:
-  - {fileID: 6288217453340800929}
+  _damageModifiers: []
   _onMaxHealthChange:
     _event:
       m_PersistentCalls:
@@ -550,6 +550,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 147940007823276091}
   target: {fileID: 11400000, guid: 4c9b6f2d7327af34a9fb76d329728a68, type: 2}
+--- !u!114 &5586991636877122026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830210744592985116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa37a3fc3e3e5442af91c026ae732aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _value: 0
+  _onUse:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  entityArmor: {fileID: 1852167048}
 --- !u!1 &1404938914257621784
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +764,7 @@ GameObject:
   - component: {fileID: 5925994806173688309}
   - component: {fileID: 7460772279012484888}
   - component: {fileID: 3584440937519556868}
+  - component: {fileID: 7743391996850228488}
   m_Layer: 0
   m_Name: Attacks
   m_TagString: Untagged
@@ -849,6 +869,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1155849926}
   - {fileID: 6572940848056688857}
+--- !u!114 &7743391996850228488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100673382046815783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2b6fdab86bf254280c67c56b21dfc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 147940007823276091}
+  parryModifier: {fileID: 5586991636877122026}
 --- !u!1 &2483637401395524170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,11 +1811,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 147940007823276091}
-  modifier: {fileID: 6288217453340800929}
+  armorModifier: {fileID: 6288217453340800929}
   armorCurrent: 0
   armorMax: 0
   armorRegenValue: 0
   armorRegenRate: 0
+  parruDamageReduction: 0
 --- !u!114 &4440464384365179180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2744,7 +2779,7 @@ GameObject:
   - component: {fileID: 1315933339752112210}
   - component: {fileID: 1807640208009173419}
   - component: {fileID: 6987321407006887698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InteractCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

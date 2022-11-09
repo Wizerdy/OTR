@@ -127,4 +127,9 @@ public class EntityPhysics : MonoBehaviour, IEntityAbility {
 
         return force;
     }
+
+    public void Purge() {
+        _forcesDisplay.Clear();
+        _forces.Clear();
+    }
 }

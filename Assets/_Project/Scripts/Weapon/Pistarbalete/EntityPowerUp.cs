@@ -13,10 +13,16 @@ public class EntityPowerUp : MonoBehaviour, IEntityAbility {
         PowerUp up = powerUp.SetTarget(_abilities);
         _powerUps.Add(up);
         up.Enable();
+        up.OnDisable += _Remove;
         return up;
     }
 
     public void Stock(PowerUp powerUp) {
         _powerUps.Add(powerUp);
+    }
+
+    void _Remove(PowerUp up) {
+        _powerUps.Remove(up);
+        up.SetTarget(null);
     }
 }

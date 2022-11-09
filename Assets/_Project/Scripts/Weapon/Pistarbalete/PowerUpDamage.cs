@@ -13,32 +13,32 @@ public class PowerUpDamage : PowerUp {
         PowerUpDamage output = CreateInstance<PowerUpDamage>();
         output._target = _target;
         output._additionalDamage = _additionalDamage;
-        output._enabled = false;
+        output.SetEnable(false);
         output._cloned = true;
         return output;
     }
 
-    public override void Enable() {
-        if (_enabled) { return; }
-        if (_target == null) { return; }
+    protected override bool _Enable() {
+        if (Enabled) { return false; }
+        if (_target == null) { return false; }
 
         _targetWeaponry = _target.Get<EntityWeaponry>();
-        if (_targetWeaponry == null) { return; }
+        if (_targetWeaponry == null) { return false; }
 
         _targetWeaponry.DamageHealth?.DamageModifier.Add(_AdditionalDamage);
         _targetWeaponry.OnDrop += _Disable;
-        _enabled = true;
+        return true;
     }
 
-    public override void Disable() {
-        if (!_enabled) { return; }
-        if (_targetWeaponry == null) { return; }
+    protected override bool _Disable() {
+        if (!Enabled) { return false; }
+        if (_targetWeaponry == null) { return false; }
 
         _targetWeaponry.DamageHealth?.DamageModifier.Remove(_AdditionalDamage);
         _targetWeaponry.OnDrop -= _Disable;
 
         _targetWeaponry = null;
-        _enabled = false;
+        return true;
     }
 
     private int _AdditionalDamage(int damage) {

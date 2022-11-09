@@ -18,17 +18,17 @@ public class PowerUpByWeapon : PowerUp {
         PowerUpByWeapon output = CreateInstance<PowerUpByWeapon>();
         output._powerUps = new List<Weapon_PU>(_powerUps);
         output._target = _target;
-        output._enabled = false;
+        output.SetEnable(false);
         output._cloned = true;
         return output;
     }
 
-    public override void Enable() {
-        if (_enabled) { return; }
+    protected override bool _Enable() {
+        if (Enabled) { return false; }
 
-        if (_target == null) { return; }
+        if (_target == null) { return false; }
         EntityWeaponry weaponry = _target.Get<EntityWeaponry>();
-        if (weaponry == null) { return; }
+        if (weaponry == null) { return false; }
 
         if (_powerUp != null) {
             Disable();
@@ -36,19 +36,21 @@ public class PowerUpByWeapon : PowerUp {
 
         _powerUp = Find(weaponry.Weapon);
 
-        if (_powerUp == null) { return; }
+        if (_powerUp == null) { return false; }
 
         _powerUp = _powerUp.SetTarget(_target);
         _powerUp.Enable();
 
-        _enabled = _powerUp.Enabled;
+        return _powerUp.Enabled;
     }
 
-    public override void Disable() {
-        if (_powerUp == null) { return; }
+    protected override bool _Disable() {
+        if (_powerUp == null) { return false; }
 
         _powerUp.Disable();
         _powerUp = null;
+
+        return true;
     }
 
     PowerUp Find(Weapon weapon) {

@@ -12,28 +12,28 @@ public class PowerUpSpeed : PowerUp {
         PowerUpSpeed output = CreateInstance<PowerUpSpeed>();
         output._speedFactor = _speedFactor;
         output._target = _target;
-        output._enabled = false;
+        output.SetEnable(false);
         output._cloned = true;
         return output;
     }
 
-    public override void Enable() {
-        if (_enabled) { return; }
-        if (_target == null) { return; }
+    protected override bool _Enable() {
+        if (Enabled) { return false; }
+        if (_target == null) { return false; }
 
         _movements = _target.Get<EntityPhysicMovement>();
-        if (_movements == null) { return; }
+        if (_movements == null) { return false; }
 
         _movements.AddSpeedModifier(_speedFactor);
-        _enabled = true;
+        return true;
     }
 
-    public override void Disable() {
-        if (!_enabled) { return; }
-        if (_movements == null) { return; }
+    protected override bool _Disable() {
+        if (!Enabled) { return false; }
+        if (_movements == null) { return false; }
 
         _movements.RemoveSpeedModifier(_speedFactor);
 
-        _enabled = false;
+        return true;
     }
 }

@@ -15,33 +15,34 @@ public class PowerUpBloodPoint : PowerUp
         PowerUpBloodPoint output = CreateInstance<PowerUpBloodPoint>();
         output._target = _target;
         output._additionalBloodPoint = _additionalBloodPoint;
-        output._enabled = false;
+        output.SetEnable(false);
         output._cloned = true;
         return output;
     }
 
-    public override void Enable() {
-        if (_enabled) { return; }
-        if (_target == null) { return; }
+    protected override bool _Enable() {
+        if (Enabled) { return false; }
+        if (_target == null) { return false; }
 
         _targetWeaponry = _target.Get<EntityWeaponry>();
-        if (_targetWeaponry == null) { return; }
+        if (_targetWeaponry == null) { return false; }
         if (_targetWeaponry.HasWeapon && _targetWeaponry.Weapon is BloodyFist fists) {
             _targetWeapon = fists;
             fists.BloodPointsOnHit += _additionalBloodPoint;
             _targetWeaponry.OnDrop += _Disable;
-            _enabled = true;
+            return true;
         }
+        return false;
     }
 
-    public override void Disable() {
-        if (!_enabled) { return; }
+    protected override bool _Disable() {
+        if (!Enabled) { return false; }
         if (_targetWeapon != null) { _targetWeapon.BloodPointsOnHit -= _additionalBloodPoint; }
         if (_targetWeaponry != null) { _targetWeaponry.OnDrop -= _Disable; }
 
         _targetWeapon = null;
         _targetWeaponry = null;
-        _enabled = false;
+        return true;
     }
 
     void _Disable(Weapon weapon) {

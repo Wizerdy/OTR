@@ -79,11 +79,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -200,11 +208,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -407,11 +423,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -441,6 +465,7 @@ GameObject:
   - component: {fileID: 6288217453340800929}
   - component: {fileID: 4812016295901184202}
   - component: {fileID: 6787383259697280883}
+  - component: {fileID: 7526558783551321576}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -554,6 +579,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 3905317884828674427}
+--- !u!114 &7526558783551321576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830210744592985116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa37a3fc3e3e5442af91c026ae732aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _value: 0
+  _onUse:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  entityArmor: {fileID: 1852167048}
 --- !u!1 &1404938914257621784
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +793,7 @@ GameObject:
   - component: {fileID: 5925994806173688309}
   - component: {fileID: 7460772279012484888}
   - component: {fileID: 3584440937519556868}
+  - component: {fileID: 629688000995482535}
   m_Layer: 0
   m_Name: Attacks
   m_TagString: Untagged
@@ -854,6 +899,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1155849926}
   - {fileID: 6572940848056688857}
+--- !u!114 &629688000995482535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100673382046815783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2b6fdab86bf254280c67c56b21dfc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 147940007823276091}
+  parryModifier: {fileID: 7526558783551321576}
 --- !u!1 &2483637401395524170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,10 +1703,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563c0cd7151eccd40b288ad8856b3e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 147940007823276091}
+  armorModifier: {fileID: 6288217453340800929}
   armorCurrent: 0
   armorMax: 0
   armorRegenValue: 0
   armorRegenRate: 0
+  parruDamageReduction: 0
 --- !u!114 &4440464384365179180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,9 +1913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ab7d7f9db11e7459a6ff26bf3fea7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invicibleLayer:
-    serializedVersion: 2
-    m_Bits: 2048
+  _invincibleLayer: 
   _colliders:
   - {fileID: 4457475169470103257}
   _health: {fileID: 147940007823276091}
@@ -2340,11 +2400,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -2535,28 +2603,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _launchIt: 1
   _force: 10
-  reflectedProjectileDamage: 10
-  parryVFX: {fileID: 0}
-  _onParry:
-    _event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-          m_MethodName: PlaySfxByIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  _onParryTrigger:
-    _event:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &688195700584301401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2725,11 +2771,19 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _onCollisionStay:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _onTriggerEnter:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onTriggerExit:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onTriggerStay:
     _event:
       m_PersistentCalls:
         m_Calls: []

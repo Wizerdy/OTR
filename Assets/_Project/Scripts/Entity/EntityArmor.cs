@@ -6,11 +6,11 @@ using UnityEngine;
 public class EntityArmor : MonoBehaviour, IEntityAbility {
     [SerializeField] private Health health;
     [SerializeField] private ArmorModifier armorModifier;
-    [SerializeField] private int armorCurrent;
-    [SerializeField] private int armorMax;
-    [SerializeField] private int armorRegenValue;
-    [SerializeField] private float armorRegenRate;
-    [SerializeField] private int parruDamageReduction;
+    private int armorCurrent;
+    private int armorMax;
+    private int armorRegenValue;
+    private float armorRegenRate;
+    private int parryDamageReduction;
 
     private float time;
     private bool isWieldingAxeShield = false;
@@ -19,7 +19,7 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
     public int CurrentArmor { get => armorCurrent; set => SetCurrentArmor(value); }
     public int RegenValueArmor { get => armorRegenValue; set => SetRegenValue(value); }
     public float RegenRateArmor { get => armorRegenRate; set => SetRegenRate(value); }
-    public int ParryDamageReduction { get => parruDamageReduction; set => SetParryDamageReduction(value); }
+    public int ParryDamageReduction { get => parryDamageReduction; set => SetParryDamageReduction(value); }
 
     private void Update() {
         if (isWieldingAxeShield) {
@@ -60,7 +60,7 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
         time = armorRegenRate;
     }
     private void SetParryDamageReduction(int value) {
-        parruDamageReduction = value;
+        parryDamageReduction = value;
     }
 
 

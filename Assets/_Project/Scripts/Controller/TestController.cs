@@ -25,6 +25,6 @@ public class TestController : MonoBehaviour {
     }
 
     private void Bump(InputAction.CallbackContext cc) {
-        _movement.Bump();
+        //_movement.Bump();
     }
 }

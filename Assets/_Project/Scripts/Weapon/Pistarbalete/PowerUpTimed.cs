@@ -15,6 +15,7 @@ public class PowerUpTimed : PowerUp {
         PowerUpTimed output = CreateInstance<PowerUpTimed>();
         output._target = _target;
         output._powerUp = _powerUp;
+        output._time = _time;
         output._enabled = false;
         output._cloned = true;
         return output;
@@ -27,6 +28,7 @@ public class PowerUpTimed : PowerUp {
         _powerUpInstancied = _powerUp.SetTarget(_target);
         _powerUpInstancied.Enable();
 
+        Debug.Log(name + " : " + _time);
         _routine_timer = CoroutinesManager.Start(
             Tools.Delay(
                 (PowerUpTimed pu) => { _routine_timer = null; pu.Disable(); },

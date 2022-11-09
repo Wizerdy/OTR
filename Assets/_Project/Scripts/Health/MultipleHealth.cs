@@ -11,12 +11,11 @@ public class MultipleHealth : MonoBehaviour {
 
     private void Start() {
         _health = GetComponent<Health>();
-        _health.OnDeath += NewHealth;
         _currentHealth = -1;
         NewHealth();
     }
 
-    void NewHealth() {
+    public void NewHealth() {
         _currentHealth++;
         if(_currentHealth >= _healths.Count) {
             Die();
@@ -27,7 +26,6 @@ public class MultipleHealth : MonoBehaviour {
     }
 
     void Die() {
-        _health.OnDeath -= NewHealth;
         Destroy(gameObject.transform.parent.gameObject);
     }
 }

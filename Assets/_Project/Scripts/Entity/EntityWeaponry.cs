@@ -19,6 +19,8 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     [SerializeField, HideInInspector] BetterEvent<Weapon> _onDrop = new BetterEvent<Weapon>();
     [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex, Vector2> _onAttack = new BetterEvent<Weapon, AttackIndex, Vector2>();
     [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex> _onAttackEnd = new BetterEvent<Weapon, AttackIndex>();
+    [SerializeField, HideInInspector] BetterEvent<Collider2D> _onAttackTrigger = new BetterEvent<Collider2D>();
+    [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex, IHealth, int> _onAttackHit = new BetterEvent<Weapon, AttackIndex, IHealth, int>();
 
     #region Properties
 
@@ -32,11 +34,13 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     public event UnityAction<Weapon> OnDrop { add => _onDrop += value; remove => _onDrop -= value; }
     public event UnityAction<Weapon, AttackIndex, Vector2> OnAttack { add => _onAttack += value; remove => _onAttack -= value; }
     public event UnityAction<Weapon, AttackIndex> OnAttackEnd { add => _onAttackEnd += value; remove => _onAttackEnd -= value; }
+    public event UnityAction<Collider2D> OnAttackTrigger { add => _onAttackTrigger += value; remove => _onAttackTrigger -= value; }
+    public event UnityAction<Weapon, AttackIndex, IHealth, int> OnAttackHit { add => _onAttackHit += value; remove => _onAttackHit -= value; }
 
     #endregion
 
     private void Start() {
-        _movementSlow = _entityMovement.Slow(1f, 0f);
+        //_movementSlow = _entityMovement.Slow(1f, 0f);
     }
 
     private void Update() {
@@ -50,8 +54,9 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         weapon.OnMovespeedSet += SetMovementSlow;
         weapon.OnAttackStart += _InvokeOnAttack;
         weapon.OnAttackEnd += _InvokeOnAttackEnd;
+        weapon.OnAttackTrigger += _InvokeOnAttackTrigger;
+        weapon.OnAttackHit += _InvokeOnAttackHit;
         _weapon = weapon;
-        _damageHealth.Damage = _weapon.Damage;
         _onPickup.Invoke(weapon);
     }
 
@@ -61,6 +66,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
         _weapon.OnMovespeedSet -= SetMovementSlow;
         _weapon.OnAttackStart -= _InvokeOnAttack;
         _weapon.OnAttackEnd -= _InvokeOnAttackEnd;
+        _weapon.OnAttackTrigger -= _InvokeOnAttackTrigger;
         SetMovementSlow(1f);
         _onDrop.Invoke(_weapon);
         _weapon = null;
@@ -84,7 +90,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     }
 
     public void SetMovementSlow(float slow) {
-        _entityMovement.SetSlow(_movementSlow, slow);
+        //_entityMovement.SetSlow(_movementSlow, slow);
     }
 
     private void _InvokeOnAttack(AttackIndex type, Vector2 direction) {
@@ -93,5 +99,13 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
 
     private void _InvokeOnAttackEnd(AttackIndex type) {
         _onAttackEnd.Invoke(_weapon, type);
+    }
+
+    private void _InvokeOnAttackTrigger(Collider2D collider) {
+        _onAttackTrigger.Invoke(collider);
+    }
+
+    private void _InvokeOnAttackHit(AttackIndex index, IHealth health, int damage) {
+        _onAttackHit.Invoke(_weapon, index, health, damage);
     }
 }

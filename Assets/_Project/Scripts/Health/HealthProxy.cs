@@ -8,6 +8,7 @@ public class HealthProxy : MonoBehaviour, IHealth {
 
     public bool CanTakeDamage { get => health.CanTakeDamage; set => health.CanTakeDamage = value; }
     public int CurrentHealth { get => health.CurrentHealth; }
+    public GameObject GameObject => health.GameObject;
 
     public event UnityAction<int> OnHit { add => health.OnHit += value; remove => health.OnHit -= value; }
     public event UnityAction<int> OnHeal { add => health.OnHeal += value; remove => health.OnHeal -= value; }

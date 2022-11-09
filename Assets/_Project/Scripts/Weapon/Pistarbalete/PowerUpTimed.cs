@@ -15,14 +15,15 @@ public class PowerUpTimed : PowerUp {
         PowerUpTimed output = CreateInstance<PowerUpTimed>();
         output._target = _target;
         output._powerUp = _powerUp;
-        output._enabled = false;
+        output._time = _time;
+        output.SetEnable(false);
         output._cloned = true;
         return output;
     }
 
-    public override void Enable() {
-        if (_enabled) { return; }
-        if (_target == null) { return; }
+    protected override bool _Enable() {
+        if (Enabled) { Renable(); }
+        if (_target == null) { return false; }
 
         _powerUpInstancied = _powerUp.SetTarget(_target);
         _powerUpInstancied.Enable();
@@ -33,14 +34,19 @@ public class PowerUpTimed : PowerUp {
                 this,
                 _time));
 
-        _enabled = _powerUpInstancied.Enabled;
+        return _powerUpInstancied.Enabled;
     }
 
-    public override void Disable() {
-        if (!_enabled) { return; }
+    private void Renable() {
+        if (_routine_timer != null) { CoroutinesManager.Stop(_routine_timer); }
+    }
+
+    protected override bool _Disable() {
+        if (!Enabled) { return false; }
         if (_routine_timer != null) { CoroutinesManager.Stop(_routine_timer); }
         _powerUpInstancied?.Disable();
-        _enabled = false;
+
+        return true;
     }
 
     private void OnDestroy() {

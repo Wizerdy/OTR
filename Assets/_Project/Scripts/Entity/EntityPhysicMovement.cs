@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 public enum PhysicPriority {
     PLAYER_INPUT = 0, DASH = 5, PROJECTION = 10, BLOCK = 20,  HIGH_PRIORITY = 50
 }
 
-public class EntityPhysicMovement : MonoBehaviour {
+public class EntityPhysicMovement : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityPhysics _entityPhysics;
 
     [Header("Movements")]
@@ -18,11 +19,14 @@ public class EntityPhysicMovement : MonoBehaviour {
     [SerializeField] float _decelerationTime = 1f;
 
     Token _cantMoveToken = new Token();
+    List<float> _speedModifiers = new List<float>();
 
     Vector2 _orientation = Vector2.zero;
+    Vector2 _direction = Vector2.zero;
     Force _forceMovement;
 
     public bool CanMove { get => !_cantMoveToken.HasToken; set => _cantMoveToken.AddToken(!value); }
+    public bool Moving => _direction != Vector2.zero;
 
     private void Reset() {
         _entityPhysics = GetComponent<EntityPhysics>();
@@ -37,10 +41,6 @@ public class EntityPhysicMovement : MonoBehaviour {
             _acceleration, _accelerationTime,
             _deceleration, _decelerationTime,
             (int)PhysicPriority.PLAYER_INPUT);
-    }
-
-    public void Bump() {
-        _entityPhysics.Add(20f, Vector2.right, 0.7f, Force.ForceMode.TIMED, AnimationCurve.Constant(0f, 1f, 1f), 0f, _deceleration, 5f, (int)PhysicPriority.HIGH_PRIORITY);
     }
 
     public void Move(Vector2 direction) {
@@ -66,9 +66,28 @@ public class EntityPhysicMovement : MonoBehaviour {
         if (direction != Vector2.zero) {
             _orientation = direction;
         }
+        _direction = direction;
     }
 
     private void _DontMove() {
         MoveDirection(Vector2.zero);
+    }
+
+    public void AddSpeedModifier(float modifier) {
+        _speedModifiers.Add(modifier);
+        _forceMovement.Strength = ComputeSpeed();
+    }
+
+    public void RemoveSpeedModifier(float modifier) {
+        _speedModifiers.Remove(modifier);
+        _forceMovement.Strength = ComputeSpeed();
+    }
+
+    private float ComputeSpeed() {
+        float modifier = 1f;
+        for (int i = 0; i < _speedModifiers.Count; i++) {
+            modifier *= _speedModifiers[i];
+        }
+        return _maxSpeed * modifier;
     }
 }

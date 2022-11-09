@@ -24,7 +24,7 @@ public class Chakram : Weapon {
         sr = GetComponentInChildren<SpriteRenderer>();
         stack = 1;
         ColorUpdate();
-        _attacks.Add(AttackIndex.FIRST, IAttack);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(0f, 0, 0, IAttack));
     }
 
     protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
@@ -66,15 +66,6 @@ public class Chakram : Weapon {
             transform.localScale = new Vector3(1, 1, 1);
         } else if (stack < maxStack) {
             transform.localScale = new Vector3(transform.localScale.x + scaleAddedToEachStack, transform.localScale.y + scaleAddedToEachStack, transform.localScale.z + scaleAddedToEachStack);
-        }
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            default:
-                return 0f;
         }
     }
 }

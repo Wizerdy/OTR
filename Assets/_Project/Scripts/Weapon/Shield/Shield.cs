@@ -15,7 +15,7 @@ public class Shield : Weapon {
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
-        _attacks.Add(AttackIndex.FIRST, IAttack);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(0f, 0, 0, IAttack));
     }
 
     protected override void _OnAim(Vector2 direction) {
@@ -70,14 +70,5 @@ public class Shield : Weapon {
 
         _targetAnimator.SetTrigger(_triggerName_attack);
         yield return new WaitForSeconds(_attackTime);
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            default:
-                return 0f;
-        }
     }
 }

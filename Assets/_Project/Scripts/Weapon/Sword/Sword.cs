@@ -4,6 +4,7 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class Sword : Weapon {
+    [SerializeField] int _damages = 10;
     [SerializeField] float _attackTime = 0.2f;
     [SerializeField] float _comboTimer = 0.2f;
 
@@ -13,7 +14,7 @@ public class Sword : Weapon {
     string[] _triggerName = { "Sword_slash_1", "Sword_slash_2", "Sword_slash_3" };
 
     protected override void _OnStart() {
-        _attacks.Add(AttackIndex.FIRST, IAttack);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, _damages, 0, IAttack));
     }
 
     protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
@@ -29,14 +30,5 @@ public class Sword : Weapon {
 
     private void OnDestroy() {
         if (_routine_ResetCombo != null) { CoroutinesManager.Stop(_routine_ResetCombo); }
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            default:
-                return 0f;
-        }
     }
 }

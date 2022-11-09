@@ -1338,14 +1338,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 3898770291736452412}
   _isOnFloor: 1
-  _damage: 10
   _throwPower: 50
   _movespeed: 1
+  _showAim: 1
   _onAttack:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onAttackEnd:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAttackTrigger:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -1361,16 +1365,18 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _attackTime: 0
   _bolt: {fileID: 3347002109676334983, guid: 1cd7654d341bbdf4892b6691d57607cd, type: 3}
-  _boltDamage: 5
-  _boltDamageBonus: 2
+  _attackTime: 0
+  _boltDamages: 5
   _boltCooldown: 0.2
   _boltSpeed: 20
+  _threatPoint: 5
   specialBolt: {fileID: 3347002109676334983, guid: bf8c87cfdae0fd543af2273b4295b68a, type: 3}
   _powerUp: {fileID: 11400000, guid: 90202a1e59d6b4d42b113fcc42f4adaa, type: 2}
   _sbAttackTime: 0
+  _sbCooldown: 0.2
   _sbSpeed: 10
+  _sbThreatPoint: 5
 --- !u!50 &3898770291736452412
 Rigidbody2D:
   serializedVersion: 4

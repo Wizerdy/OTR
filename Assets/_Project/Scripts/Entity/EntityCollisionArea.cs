@@ -40,7 +40,7 @@ public class EntityCollisionArea : MonoBehaviour {
     private void LeaveTheArea(GameObject obj) {
         GameObject objectRoot = obj.gameObject.GetRoot();
         if (!_objectsInside.ContainsKey(objectRoot)) {
-            Debug.LogError("Not entered ? o.o " + objectRoot.name);
+            Debug.LogWarning("Not entered ? o.o " + objectRoot.name);
             return;
         } else {
             _objectsInside[objectRoot].AddToken(-1);

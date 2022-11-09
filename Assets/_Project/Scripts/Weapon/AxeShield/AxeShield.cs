@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AxeShield : Weapon
 {
+    [SerializeField] float _attackTime = 0.2f;
+    [SerializeField] int _damages = 10;
+    [SerializeField] int _threatPoint = 10;
+
     //[SerializeField] private float aggroPointGenerated = 0.5f;
     [SerializeField] private float parryCooldown = 0.5f;
     [SerializeField] private float armorPointRegenerationRate = 1;
     [SerializeField] private int armorPointRegenerationValue = 1;
     [SerializeField] private int armorPointMax = 10;
     [SerializeField] private int armorPointOnPickUp = 5;
-    [SerializeField] float _attackTime = 0.2f;
 
     private EntityArmor entityArmor;
 
@@ -24,8 +27,8 @@ public class AxeShield : Weapon
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
-        _attacks.Add(AttackIndex.FIRST, IAttackParry);
-        _attacks.Add(AttackIndex.SECOND, IAttackSlash);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, 0, 0, IAttackParry));
+        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(_attackTime, _damages, _threatPoint, IAttackSlash));
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
@@ -62,16 +65,5 @@ public class AxeShield : Weapon
 
         _targetAnimator.SetTrigger(_triggerName_attack_parry);
         yield return new WaitForSeconds(_attackTime);
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            case AttackIndex.SECOND:
-                return _attackTime;
-            default:
-                return 0f;
-        }
     }
 }

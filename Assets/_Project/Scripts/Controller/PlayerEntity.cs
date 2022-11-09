@@ -7,10 +7,11 @@ using ToolsBoxEngine.BetterEvents;
 
 public class PlayerEntity : MonoBehaviour {
     [SerializeField] Transform _root;
-    [SerializeField] EntityAbilities _abilities;
     //[SerializeField] EntityMovement _movements;
-    [SerializeField] EntityPhysicMovement _pMovements;
+    [SerializeField] EntityAbilities _abilities;
     [SerializeField] PhysicForce _dashForce;
+    [Header("Abilities")]
+    [SerializeField] EntityPhysicMovement _pMovements;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
     [SerializeField] EntityWeaponry _weaponry;
@@ -18,13 +19,17 @@ public class PlayerEntity : MonoBehaviour {
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
     [SerializeField] EntityInvincibility _invincibility;
     [SerializeField] ColliderDelegate _interactCollider;
+    [Header("Graphics")]
+    [SerializeField] Animator _animator;
     [SerializeField] TrajectoryLine _trajectoryLine;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
 
     Token _canLookAround = new Token();
+    Token _showAimLine = new Token();
 
     public bool HasWeapon => _weaponry.HasWeapon;
+    public Weapon Weapon => _weaponry.Weapon;
     public Vector2 Orientation => _oriention.Orientation;
     public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }
 
@@ -47,6 +52,9 @@ public class PlayerEntity : MonoBehaviour {
         //_movements.Move(direction);
         _pMovements.Move(direction);
         if (direction != Vector2.zero) { _directionnalSprite?.ChangeSprite(direction); }
+        if (_animator == null) { return; }
+        _animator?.SetBool("Running", direction != Vector2.zero);
+        if (direction != Vector2.zero) { _animator?.SetFloat("x", direction.x); _animator?.SetFloat("y", direction.y); }
     }
 
     public void Aim(Vector2 direction, bool aiming = true) {
@@ -75,7 +83,8 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     public void ShowAimLine(bool state) {
-        _trajectoryLine?.gameObject.SetActive(state);
+        _showAimLine.AddToken(state);
+        _trajectoryLine?.gameObject.SetActive(_showAimLine.HasToken);
     }
 
     #region Item interaction
@@ -129,7 +138,7 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     private void _OnAttackStart(Weapon weapon, AttackIndex type, Vector2 direction) {
-        if (weapon.AttackTime(type) > 0f) {
+        if (weapon.GetAttack(type).attackTime > 0f) {
             //_movements.Stop();
             _pMovements.Stop();
             //_movements.CanMove = false;
@@ -139,7 +148,7 @@ public class PlayerEntity : MonoBehaviour {
     }
 
     private void _OnAttackEnd(Weapon weapon, AttackIndex type) {
-        if (weapon.AttackTime(type) > 0f) {
+        if (weapon.GetAttack(type).attackTime > 0f) {
             _pMovements.CanMove = true;
             CanLookAround = true;
         }

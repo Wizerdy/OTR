@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Force Data", menuName = "ScriptableObject/Force Data")]
+[CreateAssetMenu(fileName = "New Force Data", menuName = "Scriptable Object/Force Data")]
 public class ForceData : ScriptableObject {
     [Header("Movements")]
     [SerializeField] float _strength = 10f;

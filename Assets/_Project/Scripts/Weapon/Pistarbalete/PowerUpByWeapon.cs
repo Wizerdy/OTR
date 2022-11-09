@@ -28,7 +28,7 @@ public class PowerUpByWeapon : PowerUp {
 
         if (_target == null) { return; }
         EntityWeaponry weaponry = _target.Get<EntityWeaponry>();
-        if (weaponry == null || !weaponry.HasWeapon) { return; }
+        if (weaponry == null) { return; }
 
         if (_powerUp != null) {
             Disable();
@@ -52,8 +52,12 @@ public class PowerUpByWeapon : PowerUp {
     }
 
     PowerUp Find(Weapon weapon) {
+        WeaponType type = WeaponType.UNDEFINED;
+        if (weapon != null) {
+            type = weapon.Type;
+        }
         for (int i = 0; i < _powerUps.Count; i++) {
-            if (_powerUps[i].weapon == weapon.Type) {
+            if (_powerUps[i].weapon == type) {
                 return _powerUps[i].powerUp;
             }
         }

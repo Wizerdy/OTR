@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec53bd495d7fc2f4e88fdc1865d31b4d, type: 3}
-  m_Name: PU_PowerUpByWeapon
+  m_Script: {fileID: 11500000, guid: 001da422c29fe174c8d5fa33d8340736, type: 3}
+  m_Name: PU_Speed
   m_EditorClassIdentifier: 
-  _powerUps:
-  - weapon: 5
-    powerUp: {fileID: 11400000, guid: 90202a1e59d6b4d42b113fcc42f4adaa, type: 2}
+  _speedFactor: 1.3

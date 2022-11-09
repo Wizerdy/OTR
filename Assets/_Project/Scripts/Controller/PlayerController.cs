@@ -33,18 +33,21 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         Vector2 direction = _playerInput.actions["Movements"].ReadValue<Vector2>();
+        if (direction != Vector2.zero) { direction = direction.normalized; }
         _player.Move(direction);
         if (!_aiming) { _player.Aim(direction, false); }
     }
 
     private void _Aim(InputAction.CallbackContext cc) {
         Vector2 direction = cc.ReadValue<Vector2>();
+        if (!_aiming && _player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(true); }
         if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
         _player.Aim(direction, true);
         _aiming = true;
     }
 
     private void _StopAim(InputAction.CallbackContext cc) {
+        if (_player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(false); }
         _player.Aim(Vector2.zero, true);
         _aiming = false;
     }
@@ -78,8 +81,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _Throw(InputAction.CallbackContext cc) {
-        _player.ShowAimLine(false);
         if (_player.HasWeapon) {
+            _player.ShowAimLine(false);
             _player.Throw(_player.Orientation);
         }
     }

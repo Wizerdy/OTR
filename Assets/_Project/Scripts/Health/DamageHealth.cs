@@ -28,6 +28,7 @@ public class DamageHealth : MonoBehaviour {
     public int Damage { get { return _damage; } set { _damage = value; } }
     public StackableFunc<int> DamageModifier => _damageModifier;
     public MultipleTagSelector Damageables { get { return _damageables; } set { _damageables = value; } }
+    public List<GameObject> Hitted { get => _hitted; set => _hitted = value; }
 
     public event UnityAction<Collision2D> OnCollide { add { _onCollide.AddListener(value); } remove { _onCollide.RemoveListener(value); } }
     public event UnityAction<Collider2D> OnTrigger { add { _onTrigger.AddListener(value); } remove { _onTrigger.RemoveListener(value); } }
@@ -65,8 +66,8 @@ public class DamageHealth : MonoBehaviour {
     }
 
     private void Collide(GameObject obj, bool hardHit) {
-        GameObject root = obj.GetRoot();
-        if (_damageables.Contains(root.tag)) {
+        if (_damageables.Contains(obj.tag)) {
+            GameObject root = obj.GetRoot();
             if (_onlyDamageOnceEach && _hitted.Contains(root)) { return; }
             _hitted.Add(root);
             IHealth health = root.GetComponent<IHealth>();

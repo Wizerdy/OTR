@@ -8,22 +8,39 @@ using ToolsBoxEngine.BetterEvents;
 public enum AttackIndex { FIRST, SECOND }
 public enum WeaponType { UNDEFINED, SWORD, SHIELD, BOW, BLOODFIST, CROSSGUN, SHIELDAXE }
 
+public struct WeaponAttack {
+    public float attackTime;
+    public int damage;
+    public int threatPoint;
+    public System.Func<EntityAbilities, Vector2, IEnumerator> attack;
+
+    public WeaponAttack(float attackTime, int damage, int threatPoint, System.Func<EntityAbilities, Vector2, IEnumerator> attack) {
+        this.attackTime = attackTime;
+        this.damage = damage;
+        this.threatPoint = threatPoint;
+        this.attack = attack;
+    }
+}
+
 public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] protected bool _isOnFloor = true;
-    [SerializeField] protected int _damage = 10;
+    //[SerializeField] protected int _damage = 10;
     [SerializeField] protected float _throwPower = 50f;
     [SerializeField, Range(0f, 1f)] private float _movespeed = 1f;
+    [SerializeField] bool _showAim = false;
 
     [SerializeField] protected BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
     [SerializeField] protected BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
-    [SerializeField] protected BetterEvent<Collider2D> _onAttackHit = new BetterEvent<Collider2D>();
+    [SerializeField] protected BetterEvent<Collider2D> _onAttackTrigger = new BetterEvent<Collider2D>();
+    [SerializeField] protected BetterEvent<AttackIndex, IHealth, int> _onAttackHit = new BetterEvent<AttackIndex, IHealth, int>();
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
 
-    protected Dictionary<AttackIndex, System.Func<EntityAbilities, Vector2, IEnumerator>> _attacks;
+    protected Dictionary<AttackIndex, WeaponAttack> _attacks;
 
     protected Animator _targetAnimator;
+    protected EntityWeaponry _weaponry;
 
     protected Collider2D[] _colliders;
 
@@ -34,20 +51,25 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     protected Vector2 _lastVelocity = Vector2.zero;
 
+    AttackIndex _currentIndex;
+
     #region Properties
 
     public event UnityAction<AttackIndex, Vector2> OnAttackStart { add => _onAttack += value; remove => _onAttack -= value; }
     public event UnityAction<AttackIndex> OnAttackEnd { add => _onAttackEnd.AddListener(value); remove => _onAttackEnd.RemoveListener(value); }
-    public event UnityAction<Collider2D> OnAttackHit { add => _onAttackHit.AddListener(value); remove => _onAttackHit.RemoveListener(value); }
+    public event UnityAction<Collider2D> OnAttackTrigger { add => _onAttackTrigger.AddListener(value); remove => _onAttackTrigger.RemoveListener(value); }
+    public event UnityAction<AttackIndex, IHealth, int> OnAttackHit { add => _onAttackHit.AddListener(value); remove => _onAttackHit.RemoveListener(value); }
+
     public event UnityAction OnFall { add => _onFall.AddListener(value); remove => _onFall.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
-    public int Damage => _damage;
+
     public bool IsAttacking => _attacking;
     public bool CanAttack => !IsAttacking && _canAttack;
     public bool IsOnFloor => _isOnFloor;
     public WeaponType Type => _type;
     protected float MoveSpeed { get => _movespeed; set { _movespeed = value; _onMovespeedSet.Invoke(value); } }
     protected EntityAbilities User => _user;
+    public bool ShowAim => _showAim;
 
     #endregion
 
@@ -63,7 +85,8 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     protected virtual void _OnDrop(EntityWeaponry weaponry) { }
     protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, Collider2D collider = null) { }
     protected virtual void _OnThrow(EntityHolding holding, Vector2 direction, GameObject obj) { }
-    protected virtual void _OnAttackHit(Collider2D collider) { }
+    protected virtual void _OnAttackTrigger(Collider2D collider) { }
+    protected virtual void _OnAttackHit(AttackIndex index, IHealth health, int damage) { }
 
     #endregion
 
@@ -75,7 +98,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     private void Awake() {
         _colliders = GetComponentsInChildren<Collider2D>();
-        _attacks = new Dictionary<AttackIndex, System.Func<EntityAbilities, Vector2, IEnumerator>>();
+        _attacks = new Dictionary<AttackIndex, WeaponAttack>();
     }
 
     private void Start() {
@@ -93,7 +116,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     #endregion
 
-    public abstract float AttackTime(AttackIndex index);
+    //public abstract float AttackTime(AttackIndex index);
 
     public void Aim(Vector2 direction) {
         _OnAim(direction);
@@ -104,13 +127,19 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         if (!_attacks.ContainsKey(type)) { yield break; }
         _attacking = true;
         _onAttack.Invoke(type, direction);
-        yield return _attacks[type](caster, direction);
+        _currentIndex = type;
+        _weaponry.DamageHealth.Damage = _attacks[type].damage;
+        yield return _attacks[type].attack(caster, direction);
         _attacking = false;
         _onAttackEnd.Invoke(type);
     }
 
     public void PressAttackEnd(AttackIndex type, EntityAbilities caster) {
         _OnPressAttackEnd(type, caster);
+    }
+
+    public WeaponAttack GetAttack(AttackIndex index) {
+        return _attacks[index];
     }
 
     #region IHoldable
@@ -132,15 +161,19 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     public void Drop(EntityWeaponry weaponry) {
         _OnDrop(weaponry);
-        weaponry.DamageHealth.OnTrigger -= _InvokeAttackHit;
+        _weaponry = null;
+        weaponry.DamageHealth.OnTrigger -= _InvokeAttackTrigger;
+        weaponry.DamageHealth.OnDamage -= _InvokeAttackHit;
         _targetAnimator = null;
         _user = null;
     }
 
     public void Pickup(EntityWeaponry weaponry, EntityAbilities user = null) {
+        _weaponry = weaponry;
         _targetAnimator = weaponry.Animator;
         weaponry.SetMovementSlow(_movespeed);
-        weaponry.DamageHealth.OnTrigger += _InvokeAttackHit;
+        weaponry.DamageHealth.OnTrigger += _InvokeAttackTrigger;
+        weaponry.DamageHealth.OnDamage += _InvokeAttackHit;
         _user = user;
         _OnPickup(weaponry);
     }
@@ -182,9 +215,14 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _isOnFloor = state;
     }
 
-    private void _InvokeAttackHit(Collider2D collider) {
-        _OnAttackHit(collider);
-        _onAttackHit.Invoke(collider);
+    protected void _InvokeAttackTrigger(Collider2D collider) {
+        _OnAttackTrigger(collider);
+        _onAttackTrigger.Invoke(collider);
+    }
+
+    protected void _InvokeAttackHit(IHealth health, int damage) {
+        _OnAttackHit(_currentIndex, health, damage);
+        _onAttackHit.Invoke(_currentIndex, health, damage);
     }
 
     #endregion

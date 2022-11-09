@@ -69,7 +69,7 @@ public class MultipleTagSelectorDrawer : PropertyDrawer {
         SerializedProperty prop_state = property.FindPropertyRelative("state");
         MultipleTagSelector.State state = (MultipleTagSelector.State)prop_state.enumValueIndex;
 
-        EditorGUI.DropShadowLabel(currentPosition, state.ToString());
+        //EditorGUI.DropShadowLabel(currentPosition, state.ToString());
 
         switch (state) {
             case MultipleTagSelector.State.MULTIPLE:

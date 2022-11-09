@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using TMPro;
 
 public class BossBall : MonoBehaviour, IReflectable {
     protected Rigidbody2D _rb;
@@ -13,6 +14,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected Force _bounceForce;
     protected bool _mustDie = false;
     Timer _deathTimer;
+    [SerializeField] BossBallParried parriedBossBallPrefab;
 
     public BossBall ChangeSpeed(float speed) {
         _speed = speed;
@@ -88,6 +90,12 @@ public class BossBall : MonoBehaviour, IReflectable {
     }
 
     public void Launch(float force, Vector2 direction) {
-        _rb.velocity = force * direction;
+        //_rb.velocity = force * direction;
+
+        BossBallParried newBall = Instantiate(parriedBossBallPrefab).ChangeDamages(_damages).ChangeDuration(_duration).ChangeSpeed(force).ChangeStartDirection(direction).ChangeForce(_bounceForce);
+        //newBall.transform.position = transform + (targetPosition - ourPosition).normalized;
+        newBall.transform.position = transform.position;
+
+        Die();
     }
 }

@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 6842265518048862627}
   - component: {fileID: 1927637910}
   - component: {fileID: 7594011021374072457}
+  - component: {fileID: 3780098475535578520}
   m_Layer: 6
   m_Name: Health
   m_TagString: Untagged
@@ -399,7 +400,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  _damageModifiers: []
+  _damageModifiers:
+  - {fileID: 3780098475535578520}
   _onMaxHealthChange:
     _event:
       m_PersistentCalls:
@@ -458,6 +460,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 6842265518048862626}
   target: {fileID: 11400000, guid: 10d7226d3d2838247832c9378df8a881, type: 2}
+--- !u!114 &3780098475535578520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842265518048862621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e28cc8a1c168f04c94ee945bc36375f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 4
+  _value: 0
+  _onUse:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _radiuses: {x: 2, y: 4, z: 5, w: 7}
 --- !u!1 &6842265518615937519
 GameObject:
   m_ObjectHideFlags: 0

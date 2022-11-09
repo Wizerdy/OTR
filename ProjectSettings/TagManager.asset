@@ -22,11 +22,11 @@ TagManager:
   - Boss
   - BossItem
   - PlayerInAir
-  - ParriedBall
   - BossItemWall
   - 
   - 
-  - 
+  - ParriedBall
+  - BossItemWall
   - 
   - 
   - 

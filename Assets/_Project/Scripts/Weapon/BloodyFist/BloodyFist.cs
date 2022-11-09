@@ -15,13 +15,14 @@ public class BloodyFist : Weapon {
     [SerializeField] float _storePointMax;
 
     [Header("Fist")]
-    [SerializeField] float _hitdamage;
+    [SerializeField] int _hitdamage;
+    [SerializeField] int _hitThreatPoint;
     [SerializeField] float _hitcooldown;
-    [SerializeField] float _hitThreatPoint;
     [SerializeField] float _hitStorePoint;
     [SerializeField] float _hitStorePointCost;
     [SerializeField] float _pushduration;
     [SerializeField] float _pushStrenght;
+    [SerializeField] float _pushAttackTime;
     [SerializeField] AnimationCurve _pushCurve;
 
     [Header("Dash")]
@@ -30,10 +31,14 @@ public class BloodyFist : Weapon {
     [SerializeField] float _speed;
     [SerializeField] float _duration;
     [SerializeField] AnimationCurve _accelerationCurve;
+
     Timer _cooldown;
+
+    public float BloodPointsOnHit { get => _hitStorePoint; set => _hitStorePoint = value; }
+
     protected override void _OnStart() {
-        _attacks.Add(AttackIndex.FIRST, FirstAttack);
-        _attacks.Add(AttackIndex.SECOND, SecondAttack);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_pushAttackTime, _hitdamage, _hitThreatPoint, FirstAttack));
+        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(_duration, 0, 0, SecondAttack));
         _cooldown = new Timer(CoroutinesManager.Instance, _hitcooldown, false);
     }
 
@@ -70,12 +75,12 @@ public class BloodyFist : Weapon {
         }
         _cooldown.Duration = _dashCooldown;
         _cooldown.Start();
-        _entityMovement.CreateMovement(_duration, _speed, default, _accelerationCurve);
+        _entityMovement?.CreateMovement(_duration, _speed, default, _accelerationCurve);
         _entityStorePoint.LosePoint(_storePointCost, true);
         yield return null;
     }
 
-    protected override void _OnAttackHit(Collider2D collider) {
+    protected override void _OnAttackTrigger(Collider2D collider) {
         //Debug.Log(collider.transform.gameObject);
         if (collider.tag == "Boss" || collider.tag == "Enemy") {
             _entityStorePoint.GainPoint(_hitStorePoint);
@@ -85,17 +90,6 @@ public class BloodyFist : Weapon {
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
             _entityStorePoint.LosePoint(_hitStorePointCost, false);
             collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushduration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
-        }
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _pushduration;
-            case AttackIndex.SECOND:
-                return _duration;
-            default:
-                return 0f;
         }
     }
 }

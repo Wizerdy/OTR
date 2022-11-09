@@ -223,6 +223,7 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
+  _destroyOnPlayerHit: 1
   parriedBossBallPrefab: {fileID: 4263007696735338259, guid: dde48b06819888a4594bc52d4c8499fa, type: 3}
 --- !u!114 &-3499688898107672776
 MonoBehaviour:
@@ -242,7 +243,7 @@ MonoBehaviour:
     tags:
     - Player
     state: 1
-  _destroyOnHit: 1
+  _destroyOnHit: 0
   _onlyDamageOnceEach: 1
   _ignoreTag:
     tags: []

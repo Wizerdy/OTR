@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] AimHelperReference _aimHelperReference;
 
     bool _aiming = false;
+    bool _aimLine = false;
 
     private void Reset() {
         _playerInput = GetComponent<PlayerInput>();
@@ -40,14 +41,14 @@ public class PlayerController : MonoBehaviour {
 
     private void _Aim(InputAction.CallbackContext cc) {
         Vector2 direction = cc.ReadValue<Vector2>();
-        if (!_aiming && _player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(true); }
+        if (!_aiming && _player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(true); _aimLine = true; }
         if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
         _player.Aim(direction, true);
         _aiming = true;
     }
 
     private void _StopAim(InputAction.CallbackContext cc) {
-        if (_player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(false); }
+        if (_aimLine) { _player.ShowAimLine(false); _aimLine = false; }
         _player.Aim(Vector2.zero, true);
         _aiming = false;
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7664188759876081843}
   - component: {fileID: -3499688898107672776}
   - component: {fileID: 4263007696735338259}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: ParriedBall
   m_TagString: BossItem
   m_Icon: {fileID: 0}

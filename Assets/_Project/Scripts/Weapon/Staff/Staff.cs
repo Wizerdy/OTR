@@ -13,7 +13,7 @@ public class Staff : Weapon
     private string _triggerName = "Staff_shoot";
 
     protected override void _OnStart() {
-        _attacks.Add(AttackIndex.FIRST, IAttack);
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(0f, 0, 0, IAttack));
     }
 
     protected IEnumerator IAttack(EntityAbilities caster, Vector2 direction) {
@@ -27,16 +27,5 @@ public class Staff : Weapon
         proj.GetComponent<Rigidbody2D>().velocity = direction * _projectileSpeed;
 
         yield return new WaitForSeconds(_attackTime);
-    }
-
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            case AttackIndex.SECOND:
-                return chargeTime;
-            default:
-                return 0f;
-        }
     }
 }

@@ -31,6 +31,7 @@ public class Health : MonoBehaviour, IHealth {
         get { return !_invicibilityToken.HasToken; }
         set { _invicibilityToken.AddToken(!value); }
     }
+    public GameObject GameObject => gameObject;
 
     public event UnityAction OnInvicible { add => _onInvicible.AddListener(value); remove => _onInvicible.RemoveListener(value); }
     public event UnityAction OnVulnerable { add => _onVulnerable.AddListener(value); remove => _onVulnerable.RemoveListener(value); }

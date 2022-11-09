@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2062017968, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2b51ccee6c4ee854bbb060e22d606fbf, type: 2}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -71,6 +75,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -16.723782
       objectReference: {fileID: 0}
+    - target: {fileID: 1367052518068913686, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 482834492125296445}
     - target: {fileID: 1573649334131984570, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -225,6 +233,11 @@ PrefabInstance:
       objectReference: {fileID: 49541265, guid: 71d4a7ce1bfba004cba8fd162c269f2f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+--- !u!95 &482834492125296445 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2062017968, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+  m_PrefabInstance: {fileID: 482834493636924045}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1217979761444358053 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1609048724699960616, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}

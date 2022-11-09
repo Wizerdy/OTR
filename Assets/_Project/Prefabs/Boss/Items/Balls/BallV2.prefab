@@ -259,6 +259,7 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
+  parriedBossBallPrefab: {fileID: 4263007696735338259, guid: dde48b06819888a4594bc52d4c8499fa, type: 3}
 --- !u!114 &-3410604980442100846
 MonoBehaviour:
   m_ObjectHideFlags: 0

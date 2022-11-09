@@ -9,8 +9,9 @@ public class MenacePointSystem : MonoBehaviour {
         if (!_menaces.ContainsKey(target)) {
             _menaces.Add(target, count);
         } else {
-            _menaces[target] = count;
+            _menaces[target] += count;
         }
+        Debug.Log(target.name + " : " + _menaces[target]);
     }
 
     public void Remove(EntityAbilities target, int count) {

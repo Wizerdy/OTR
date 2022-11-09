@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class AxeShield : Weapon
 {
-    //[SerializeField] private float aggroPointGenerated = 0.5f;
+    [Header("Slash")]
+    [SerializeField] private int slashDamage = 10;
+    [SerializeField] private int slashThreatGenerated = 1;
+    [SerializeField] float _attackTime = 0.2f;
+    [Header("Parry")]
     [SerializeField] private float parryCooldown = 0.5f;
+    [SerializeField] private int parryThreatGenerated = 0;
+    [SerializeField] private int parryDamageReduction = 1;
+    [Header("Armor")]
     [SerializeField] private float armorPointRegenerationRate = 1;
     [SerializeField] private int armorPointRegenerationValue = 1;
     [SerializeField] private int armorPointMax = 10;
     [SerializeField] private int armorPointOnPickUp = 5;
-    [SerializeField] float _attackTime = 0.2f;
+
 
     private EntityArmor entityArmor;
 
@@ -21,11 +28,24 @@ public class AxeShield : Weapon
 
     string _triggerName_attack_slash = "AxeShield_Slash";
     string _triggerName_attack_parry = "AxeShield_Parry";
+    private WeaponAttack attackSlash;
+    private WeaponAttack attackParry;
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
-        _attacks.Add(AttackIndex.FIRST, IAttackParry);
-        _attacks.Add(AttackIndex.SECOND, IAttackSlash);
+
+        attackSlash.attack = IAttackSlash;
+        attackSlash.damage = slashDamage;
+        attackSlash.attackTime = _attackTime;
+        attackSlash.threatPoint = slashThreatGenerated;
+
+        attackParry.attack = IAttackParry;
+        attackParry.damage = 0;
+        attackParry.attackTime = parryCooldown;
+        attackParry.threatPoint = parryThreatGenerated;
+
+        _attacks.Add(AttackIndex.FIRST, attackParry);
+        _attacks.Add(AttackIndex.SECOND, attackSlash);
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {
@@ -37,6 +57,7 @@ public class AxeShield : Weapon
         entityArmor.CurrentArmor = armorPointOnPickUp;
         entityArmor.RegenRateArmor = armorPointRegenerationRate;
         entityArmor.RegenValueArmor = armorPointRegenerationValue;
+        entityArmor.ParryDamageReduction = parryDamageReduction;
     }
 
     protected override void _OnDrop(EntityHolding holding) {
@@ -64,14 +85,15 @@ public class AxeShield : Weapon
         yield return new WaitForSeconds(parryCooldown);
     }
 
-    public override float AttackTime(AttackIndex index) {
-        switch (index) {
-            case AttackIndex.FIRST:
-                return _attackTime;
-            case AttackIndex.SECOND:
-                return _attackTime;
-            default:
-                return 0f;
-        }
-    }
+    //public override float AttackTime(AttackIndex index) {
+    //    switch (index) {
+    //        case AttackIndex.FIRST:
+    //            return _attackTime;
+    //        case AttackIndex.SECOND:
+    //            return _attackTime;
+    //        default:
+    //            return 0f;
+    //    }
+    //}
+
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class EntityArmor : MonoBehaviour, IEntityAbility {
     [SerializeField] private Health health;
-    [SerializeField] private ArmorModifier modifier;
-    [SerializeField] private int armorCurrent;
-    [SerializeField] private int armorMax;
-    [SerializeField] private int armorRegenValue;
-    [SerializeField] private float armorRegenRate;
+    [SerializeField] private ArmorModifier armorModifier;
+    private int armorCurrent;
+    private int armorMax;
+    private int armorRegenValue;
+    private float armorRegenRate;
+    private int parryDamageReduction;
 
     private float time;
     private bool isWieldingAxeShield = false;
@@ -18,6 +19,7 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
     public int CurrentArmor { get => armorCurrent; set => SetCurrentArmor(value); }
     public int RegenValueArmor { get => armorRegenValue; set => SetRegenValue(value); }
     public float RegenRateArmor { get => armorRegenRate; set => SetRegenRate(value); }
+    public int ParryDamageReduction { get => parryDamageReduction; set => SetParryDamageReduction(value); }
 
     private void Update() {
         if (isWieldingAxeShield) {
@@ -30,18 +32,14 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
         }
     }
 
-    private void ApplyArmor(int armorValue) {
-
-    }
-
     public void OnPickUp() {
         isWieldingAxeShield = true;
-        health.AddDamageModifier(modifier);
+        health.AddDamageModifier(armorModifier);
     }
 
     public void ResetArmor() {
         armorCurrent = 0;
-        health.RemoveDamageModifier(modifier);
+        health.RemoveDamageModifier(armorModifier);
         isWieldingAxeShield = false;
     }
 
@@ -61,4 +59,9 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
         armorRegenRate = value;
         time = armorRegenRate;
     }
+    private void SetParryDamageReduction(int value) {
+        parryDamageReduction = value;
+    }
+
+
 }

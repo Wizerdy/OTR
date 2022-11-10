@@ -853,7 +853,6 @@ MonoBehaviour:
   _damage: 5
   _damageables:
     tags:
-    - Untagged
     - Respawn
     - Finish
     - EditorOnly

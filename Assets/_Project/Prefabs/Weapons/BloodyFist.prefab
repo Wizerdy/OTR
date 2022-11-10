@@ -49,14 +49,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 8770567618907815269}
   _isOnFloor: 1
-  _damage: 10
   _throwPower: 50
   _movespeed: 1
+  _showAim: 0
   _onAttack:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _onAttackEnd:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onAttackTrigger:
     _event:
       m_PersistentCalls:
         m_Calls: []
@@ -75,65 +79,17 @@ MonoBehaviour:
   _comboIndex: 0
   _healthPercentValueStorePoint: 1
   _storePointMax: 50
-  _hitdamage: 10
-  _hitcooldown: 0
+  _hitDamage: 10
   _hitThreatPoint: 10
+  _hitCooldown: 0.5
   _hitStorePoint: 10
   _hitStorePointCost: 30
-  _pushduration: 0.1
-  _pushStrenght: 10
-  _pushCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _pushAttackTime: 0.2
+  _bumpForce: {fileID: 11400000, guid: 41e3b62926bd9e143a6dfd62c210a4e5, type: 2}
   _storePointCost: 0
-  _cooldown: 0
-  _speed: 50
-  _duration: 0.4
-  _accelerationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _dashCooldown: 0
+  _dashForce: {fileID: 11400000, guid: 671b60fbb24a06b4999b9ccb638564b4, type: 2}
+  _dashWeight: 0.8
 --- !u!50 &8770567618907815269
 Rigidbody2D:
   serializedVersion: 4

@@ -16,4 +16,5 @@ public class ForceData : ScriptableObject {
     public float AccelerationTime => _accelerationTime;
     public AnimationCurve Deceleration => _deceleration;
     public float DecelerationTime => _decelerationTime;
+    public float Duration => _accelerationTime + _decelerationTime;
 }

@@ -39,8 +39,8 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator Charge(Vector3 targetPosition, float delay, float speed) {
-        yield return new WaitForSeconds(delay);
         Debug.DrawRay(transform.position, targetPosition - _transform.position, Color.blue, _delayBeforeCharge);
+        yield return new WaitForSeconds(delay);
         _chargeForce = new Force(speed, targetPosition - _transform.position, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         _entityPhysics.Add(_chargeForce, 1);
         while (!_hitWall) {

@@ -405,16 +405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _launchIt: 0
   _force: 30
-  reflectedProjectileDamage: 10
-  parryVFX: {fileID: 0}
-  _onParry:
-    _event:
-      m_PersistentCalls:
-        m_Calls: []
-  _onParryTrigger:
-    _event:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!61 &612571765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1254,6 +1244,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: _dashWeight
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
 --- !u!1 &1780168470
@@ -1641,10 +1635,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1486856499947928156, guid: 9e9b85035a9001e4a95f3e5b6815defb, type: 3}
-      propertyPath: _powerUp
-      value: 
-      objectReference: {fileID: 11400000, guid: d1c43788bcb58ba458ed56f7138a9599, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e9b85035a9001e4a95f3e5b6815defb, type: 3}
 --- !u!4 &2445157395599075213
@@ -1915,7 +1905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 791562681275767084, guid: 13d46bef2c34e50488ba4093eb515ec0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.693
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 791562681275767084, guid: 13d46bef2c34e50488ba4093eb515ec0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2024,7 +2014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6458429211026500977, guid: 696bfd4eb8b28c640aca33f162a67652, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.713
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6458429211026500977, guid: 696bfd4eb8b28c640aca33f162a67652, type: 3}
       propertyPath: m_LocalPosition.y

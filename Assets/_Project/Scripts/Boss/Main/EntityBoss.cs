@@ -22,6 +22,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _sr = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
+
     void Attack() {
         if (_currentAttack != null)
             _currentAttack.Finished -= Attack;
@@ -37,12 +38,12 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
 
     public void PhasePlusPlus() {
         _currentPhase++;
-        _newPhase?.Invoke();
         TeleportCenter();
         ChangeColor();
         _entityAbilities.Get<EntityPhysics>().Purge();
         _currentAttack.StopAllCoroutines();
         StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase)); 
+        _newPhase?.Invoke();
     }
 
     void TeleportCenter() {

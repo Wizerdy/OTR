@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1486856498887489396}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,7 +423,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _radiuses: {x: 2, y: 4, z: 5, w: 7}
-  _curveIt: 1
 --- !u!1 &1486856499947928098
 GameObject:
   m_ObjectHideFlags: 0

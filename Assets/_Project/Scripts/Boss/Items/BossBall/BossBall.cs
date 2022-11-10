@@ -12,6 +12,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected int _damages;
     [SerializeField] protected Vector2 _reminder;
     [SerializeField] protected Force _bounceForce;
+    [SerializeField] bool _destroyOnPlayerHit = false;
     protected bool _mustDie = false;
     Timer _deathTimer;
     [SerializeField] BossBallParried parriedBossBallPrefab;
@@ -77,6 +78,9 @@ public class BossBall : MonoBehaviour, IReflectable {
             _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
+            if (_destroyOnPlayerHit) {
+                Die();
+            }
         }
     }
 

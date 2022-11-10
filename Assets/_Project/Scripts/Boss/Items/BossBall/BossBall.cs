@@ -95,10 +95,15 @@ public class BossBall : MonoBehaviour, IReflectable {
 
     public void Launch(float force, Vector2 direction) {
         //_rb.velocity = force * direction;
-
-        BossBallParried newBall = Instantiate(parriedBossBallPrefab).ChangeDamages(_damages).ChangeDuration(_duration).ChangeSpeed(force).ChangeStartDirection(direction).ChangeForce(_bounceForce);
         //newBall.transform.position = transform + (targetPosition - ourPosition).normalized;
+        BossBallParried newBall = Instantiate(parriedBossBallPrefab).ChangeDamages(_damages).ChangeDuration(_duration).ChangeSpeed(force).ChangeForce(_bounceForce);
         newBall.transform.position = transform.position;
+        if (direction != Vector2.zero) {
+            newBall.ChangeStartDirection(direction);
+        } else {
+            Vector2 newDir = _reminder * -1;
+            newBall.ChangeStartDirection(newDir);
+        }
 
         Die();
     }

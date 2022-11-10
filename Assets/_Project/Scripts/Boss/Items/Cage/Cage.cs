@@ -119,23 +119,27 @@ public class Cage : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (!_hits.ContainsKey(found)) {
-            _hits.Add(found, Vector2.zero);
+        if (collision.CompareTag("Player")) {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null) {
+                return;
+            }
+            if (!_hits.ContainsKey(found)) {
+                _hits.Add(found, Vector2.zero);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         // Debug.Log("Exit : " + collision.gameObject.GetRoot());
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (_hits.ContainsKey(found)) {
-            _hits.Remove(found);
+        if (collision.CompareTag("Player")) {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null) {
+                return;
+            }
+            if (_hits.ContainsKey(found)) {
+                _hits.Remove(found);
+            }
         }
     }
 

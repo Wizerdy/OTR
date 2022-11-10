@@ -16,6 +16,7 @@ public class BossBlast : BossAttack {
     [SerializeField] protected float _damagesMultiplier;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
+        _ea.Get<EntityBoss>().PlayAnimationTrigger("Blasting");
         Blast(ea.transform.position, target.position);
         yield return new WaitForSeconds(_chargeDuration);
     }

@@ -1,12 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Sloot;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using static UnityEngine.GraphicsBuffer;
-using Unity.VisualScripting;
 
 public abstract class BossAttack : MonoBehaviour {
     [Header("Boss Attack General :")]
@@ -18,6 +13,9 @@ public abstract class BossAttack : MonoBehaviour {
     BetterEvent _middle;
     BetterEvent _end;
     bool _isActive;
+
+    protected EntityAbilities _ea;
+
     public float Weight => _weight;
     public bool IsActive => _isActive;
 
@@ -27,6 +25,7 @@ public abstract class BossAttack : MonoBehaviour {
     public event UnityAction Finished { add => _finished.AddListener(value); remove => _finished.RemoveListener(value); }
 
     public void Activate(EntityAbilities ea, Transform target) {
+        _ea = ea;
         StartCoroutine(Launch(ea, target));
     }
 

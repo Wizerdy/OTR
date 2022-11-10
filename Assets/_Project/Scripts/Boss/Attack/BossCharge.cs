@@ -41,11 +41,13 @@ public class BossCharge : BossAttack {
     protected IEnumerator Charge(Vector3 targetPosition, float delay, float speed) {
         Debug.DrawRay(transform.position, targetPosition - _transform.position, Color.blue, _delayBeforeCharge);
         yield return new WaitForSeconds(delay);
+        _ea.Get<EntityBoss>().PlayAnimationBool("Charging", true);
         _chargeForce = new Force(speed, targetPosition - _transform.position, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         _entityPhysics.Add(_chargeForce, 1);
         while (!_hitWall) {
             yield return null;
         }
+        _ea.Get<EntityBoss>().PlayAnimationBool("Charging", false);
         _entityPhysics.Remove(_chargeForce);
     }
 
@@ -55,6 +57,7 @@ public class BossCharge : BossAttack {
         _entityPhysics.Add(_chargeForce, 1);
         bool pass = false;
         float lastDist = Vector3.Distance(destination, _transform.position);
+        _ea.Get<EntityBoss>().PlayAnimationBool("Charging", true);
         while (!pass) {
             float currentDist = Vector3.Distance(destination, _transform.position);
             if (currentDist > lastDist) {
@@ -64,6 +67,7 @@ public class BossCharge : BossAttack {
             }
             yield return null;
         }
+        _ea.Get<EntityBoss>().PlayAnimationBool("Charging", false);
         _entityPhysics.Remove(_chargeForce);
     }
 

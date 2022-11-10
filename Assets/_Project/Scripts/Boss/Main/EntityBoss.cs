@@ -7,19 +7,35 @@ using UnityEngine.Events;
 public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityAbilities _entityAbilities;
     [SerializeField] MenacePointSystemReference _threatSystem;
-    [SerializeField] List<BossPhase> _bossPhases;
-    [SerializeField] int _currentPhase;
-    [SerializeField] BossAttack _currentAttack;
-    [SerializeField] BossAttack _nextAttack;
-    [SerializeField] BetterEvent _newPhase;
     [SerializeField] Transform _center;
-    [SerializeField] SpriteRenderer _sr;
+    [SerializeField] int _currentPhase;
+    [SerializeField] List<BossPhase> _bossPhases;
+    [SerializeField] BossAttack _currentAttack;
+    [SerializeField] BetterEvent _newPhase;
+    [SerializeField] GameObject _phases;
     [SerializeField] float _delayAttackNewPhase;
+    BossAttack _nextAttack;
+     Animator _animator;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
     Timer _timer;
     private void Start() {
-        _sr = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
+        if(_phases != null) {
+            for (int i = 0; i < _phases.transform.childCount; i++) {
+                BossPhase phase = _phases.transform.GetChild(i).GetComponent<BossPhase>();
+                if (phase != null) {
+                    if(!_bossPhases.Contains(phase))
+                    _bossPhases.Add(phase);
+                }
+            }
+        }
+        for (int i = 0; i < _bossPhases.Count; i++) {
+            if (_bossPhases[i] == null) {
+                _bossPhases.RemoveAt(i);
+                i--;
+            }
+        }
+        _animator = _entityAbilities.GetComponentInChildren<Animator>();
         StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
 
@@ -39,7 +55,6 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     public void PhasePlusPlus() {
         _currentPhase++;
         TeleportCenter();
-        ChangeColor();
         _entityAbilities.Get<EntityPhysics>().Purge();
         _currentAttack.StopAllCoroutines();
         StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase)); 
@@ -50,8 +65,15 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _entityAbilities.transform.position = _center.position;
     }
 
-    void ChangeColor() {
-        Color NewColor = new (1/255f * Random.Range(0, 255), 1 / 255f * Random.Range(0, 255), 1 / 255f * Random.Range(0, 255), 1);
-        _sr.color = NewColor;
+    public void PlayAnimationTrigger(string animation) {
+        _animator.SetTrigger(animation);
+    }
+
+    public void PlayAnimationBool(string animation, bool value) {
+        _animator.SetBool(animation, value);
+    }
+
+    public void PlayAnimationTrigger() {
+        Debug.Log("oui");
     }
 }

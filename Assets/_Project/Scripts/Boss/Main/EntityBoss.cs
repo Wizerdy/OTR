@@ -10,10 +10,10 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] Transform _center;
     [SerializeField] int _currentPhase;
     [SerializeField] List<BossPhase> _bossPhases;
-    [SerializeField] BossAttack _currentAttack;
     [SerializeField] BetterEvent _newPhase;
     [SerializeField] GameObject _phases;
     [SerializeField] float _delayAttackNewPhase;
+    BossAttack _currentAttack;
     BossAttack _nextAttack;
      Animator _animator;
 

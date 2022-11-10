@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &262511538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262511540}
+  - component: {fileID: 262511539}
+  m_Layer: 0
+  m_Name: Destroyer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &262511540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262511538}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6842265518615937517}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262511539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262511538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbff848e80d464445a4ff17dbd3ba408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &550918135
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,18 +90,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityAbilities: {fileID: 6842265518615937523}
   _threatSystem: {fileID: 11400000, guid: 2d678f6cc645775479d019a253bbfc72, type: 2}
-  _bossPhases:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _center: {fileID: 0}
   _currentPhase: 0
-  _currentAttack: {fileID: 0}
-  _nextAttack: {fileID: 0}
+  _bossPhases: []
   _newPhase:
     _event:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 262511539}
           m_TargetAssemblyTypeName: DestroyerOnNewPhase, Assembly-CSharp
           m_MethodName: DestroyAll
           m_Mode: 1
@@ -69,10 +109,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  _center: {fileID: 0}
-  _sr: {fileID: 0}
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: BarLinkerHealth, Assembly-CSharp
+          m_MethodName: UpdateBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _phases: {fileID: 0}
   _delayAttackNewPhase: 5
-  _animator: {fileID: 0}
 --- !u!1 &594866396
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,18 +496,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityAbilities: {fileID: 0}
   _threatSystem: {fileID: 0}
-  _bossPhases: []
+  _center: {fileID: 0}
   _currentPhase: 0
-  _currentAttack: {fileID: 0}
-  _nextAttack: {fileID: 0}
+  _bossPhases: []
   _newPhase:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _center: {fileID: 0}
-  _sr: {fileID: 0}
+  _phases: {fileID: 0}
   _delayAttackNewPhase: 0
-  _animator: {fileID: 0}
 --- !u!1 &6842265518048862621
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +568,18 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 6842265518048862627}
+          m_TargetAssemblyTypeName: MultipleHealth, Assembly-CSharp
+          m_MethodName: NewHealth
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 550918137}
           m_TargetAssemblyTypeName: EntityBoss, Assembly-CSharp
           m_MethodName: PhasePlusPlus
@@ -648,6 +707,7 @@ Transform:
   - {fileID: 6748874159055998309}
   - {fileID: 6842265519318550369}
   - {fileID: 1637864084}
+  - {fileID: 262511540}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

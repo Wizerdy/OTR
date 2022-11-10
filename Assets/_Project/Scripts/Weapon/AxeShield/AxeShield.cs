@@ -18,11 +18,11 @@ public class AxeShield : Weapon
     [SerializeField] private int armorPointMax = 10;
     [SerializeField] private int armorPointOnPickUp = 5;
 
-
+    Vector2 aimingDirection;
     private EntityArmor entityArmor;
 
     float _baseSpeed = 1f;
-    //bool _aiming = false;
+    bool _aiming = false;
 
     string _boolName_aim = "AxeShield_Slash";
 
@@ -62,13 +62,35 @@ public class AxeShield : Weapon
 
     protected override void _OnDrop(EntityHolding holding) {
         _targetAnimator.SetBool(_boolName_aim, false);
-        //_aiming = false;
+        _aiming = false;
         MoveSpeed = _baseSpeed;
     }
 
     protected override void _OnDrop(EntityWeaponry weaponry) {
         //armorPointCurrent = 0;
         entityArmor.ResetArmor();
+    }
+
+    private void StartAiming() {
+        _aiming = true;
+    }
+
+    private void UpdateAim(Vector2 direction) {
+        aimingDirection = direction;
+    }
+
+    private void StopAiming() {
+        _aiming = false;
+    }
+
+    protected override void _OnAim(Vector2 direction) {
+        if (direction == Vector2.zero) {
+            if (_aiming) { StopAiming(); }
+            return;
+        }
+
+        if (!_aiming) { StartAiming(); }
+        UpdateAim(direction);
     }
 
     protected IEnumerator IAttackSlash(EntityAbilities caster, Vector2 direction) {

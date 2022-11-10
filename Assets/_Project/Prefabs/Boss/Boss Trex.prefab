@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 6842265518615937522}
   - component: {fileID: 4550686747762471897}
   m_Layer: 9
-  m_Name: Boss
+  m_Name: Boss Trex
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

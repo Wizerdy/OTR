@@ -32,6 +32,7 @@ public class Health : MonoBehaviour, IHealth {
         set { _invicibilityToken.AddToken(!value); }
     }
     public GameObject GameObject => gameObject;
+    public bool IsDead => _currentHealth <= 0;
 
     public event UnityAction OnInvicible { add => _onInvicible.AddListener(value); remove => _onInvicible.RemoveListener(value); }
     public event UnityAction OnVulnerable { add => _onVulnerable.AddListener(value); remove => _onVulnerable.RemoveListener(value); }
@@ -105,6 +106,17 @@ public class Health : MonoBehaviour, IHealth {
         _currentHealth += amount;
         _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
         _onHeal?.Invoke(amount);
+    }
+
+    public void TakeHeal(float amount) {
+        if (amount <= 0 || _currentHealth >= _maxHealth) { return; }
+        int delta = Mathf.RoundToInt(_maxHealth * amount);
+        if (delta + _currentHealth > _maxHealth) {
+            delta = _maxHealth - _currentHealth;
+        }
+        _currentHealth += delta;
+        _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
+        _onHeal?.Invoke(delta);
     }
 
     public void Die() {

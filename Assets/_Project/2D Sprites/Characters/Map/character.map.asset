@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd270504a0a9b64196ece4a6516cb9a, type: 3}
+  m_Name: character.map
+  m_EditorClassIdentifier: 
+  lookup:
+    entries:
+    - key:
+        serializedVersion: 2
+        rgba: 4294609677
+      value: {x: 0, y: 0}
+    - key:
+        serializedVersion: 2
+        rgba: 4279437824
+      value: {x: 0, y: 1}
+    - key:
+        serializedVersion: 2
+        rgba: 4282528788
+      value: {x: 0, y: 2}
+    - key:
+        serializedVersion: 2
+        rgba: 4291647119
+      value: {x: 0, y: 3}
+    - key:
+        serializedVersion: 2
+        rgba: 4294938551
+      value: {x: 0, y: 4}
+    - key:
+        serializedVersion: 2
+        rgba: 4283247104
+      value: {x: 0, y: 5}
+    - key:
+        serializedVersion: 2
+        rgba: 4286999337
+      value: {x: 0, y: 6}
+    - key:
+        serializedVersion: 2
+        rgba: 4294901248
+      value: {x: 0, y: 7}
+    - key:
+        serializedVersion: 2
+        rgba: 4293394308
+      value: {x: 0, y: 8}
+    - key:
+        serializedVersion: 2
+        rgba: 4286276134
+      value: {x: 0, y: 9}
+  data:
+  - serializedVersion: 2
+    rgba: 4294609677
+  - serializedVersion: 2
+    rgba: 4279437824
+  - serializedVersion: 2
+    rgba: 4282528788
+  - serializedVersion: 2
+    rgba: 4291647119
+  - serializedVersion: 2
+    rgba: 4294938551
+  - serializedVersion: 2
+    rgba: 4283247104
+  - serializedVersion: 2
+    rgba: 4286999337
+  - serializedVersion: 2
+    rgba: 4294901248
+  - serializedVersion: 2
+    rgba: 4293394308
+  - serializedVersion: 2
+    rgba: 4286276134

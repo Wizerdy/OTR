@@ -51,6 +51,7 @@ public class EntityPhysicMovement : MonoBehaviour, IEntityAbility {
     public void Stop() {
         _forceMovement.Reset();
         _DontMove();
+        _orientation = Vector2.zero;
     }
 
     private void MoveDirection(Vector2 direction) {

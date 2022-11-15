@@ -54,7 +54,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void _PressFirstAttack(InputAction.CallbackContext cc) {
-        _player.PressAttack(AttackIndex.FIRST, _player.Orientation);
+        if (!_player.TryRevive()) {
+            _player.PressAttack(AttackIndex.FIRST, _player.Orientation);
+        }
     }
 
     private void _PressFirstAttackEnd(InputAction.CallbackContext cc) {

@@ -13,6 +13,7 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField] BetterEvent<int> _onHit = new BetterEvent<int>();
     [SerializeField] BetterEvent<int> _onHeal = new BetterEvent<int>();
     [SerializeField] BetterEvent _onDeath = new BetterEvent();
+    [SerializeField] BetterEvent _onRevive = new BetterEvent();
     [SerializeField] List<DamageModifier> _damageModifiers = new List<DamageModifier>();
 
     [SerializeField, HideInInspector] BetterEvent<int> _onMaxHealthChange = new BetterEvent<int>();
@@ -39,6 +40,7 @@ public class Health : MonoBehaviour, IHealth {
     public event UnityAction<int> OnHit { add => _onHit.AddListener(value); remove => _onHit.RemoveListener(value); }
     public event UnityAction<int> OnHeal { add => _onHeal.AddListener(value); remove => _onHeal.RemoveListener(value); }
     public event UnityAction OnDeath { add => _onDeath.AddListener(value); remove => _onDeath.RemoveListener(value); }
+    public event UnityAction OnRevive { add => _onRevive.AddListener(value); remove => _onRevive.RemoveListener(value); }
     public event UnityAction<int> OnMaxHealthChange { add => _onMaxHealthChange.AddListener(value); remove => _onMaxHealthChange.RemoveListener(value); }
     public event UnityAction OnLateStart { add => _onLateStart.AddListener(value); remove => _onLateStart.RemoveListener(value); }
 
@@ -103,6 +105,7 @@ public class Health : MonoBehaviour, IHealth {
 
     public void TakeHeal(int amount) {
         if (amount <= 0 || _currentHealth >= _maxHealth) { return; }
+        if (IsDead) { _onRevive.Invoke(); }
         _currentHealth += amount;
         _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
         _onHeal?.Invoke(amount);
@@ -110,6 +113,7 @@ public class Health : MonoBehaviour, IHealth {
 
     public void TakeHeal(float amount) {
         if (amount <= 0 || _currentHealth >= _maxHealth) { return; }
+        if (IsDead) { _onRevive.Invoke(); }
         int delta = Mathf.RoundToInt(_maxHealth * amount);
         if (delta + _currentHealth > _maxHealth) {
             delta = _maxHealth - _currentHealth;

@@ -6,6 +6,7 @@ public class TexturePostprocessor : AssetPostprocessor {
     private const string ExtensionPNG = ".png";
     private const string PixelMapSuffix = ".map";
     private const string PixelWeightsPrefix = "source.";
+    private const string PixelMaskPrefix = "mask.";
 
     private void OnPostprocessTexture(Texture2D texture) {
         var fileName = Path.GetFileNameWithoutExtension(assetPath);
@@ -13,6 +14,8 @@ public class TexturePostprocessor : AssetPostprocessor {
 
         if (extension != ExtensionPNG)
             return;
+
+        //Debug.Log("Importing \".png\" file : " + fileName);
 
         if (fileName.EndsWith(PixelMapSuffix))
             ProcessPixelMap(texture, fileName);
@@ -30,24 +33,38 @@ public class TexturePostprocessor : AssetPostprocessor {
             return;
 
         var skinData = texture.GetPixels32();
+        var skinMask = texture.GetPixels32();
+
         for (var i = 0; i < skinData.Length; i++) {
             if (map.lookup.TryGetValue(skinData[i], out var position)) {
-                Debug.Log(skinData[i].r + ", " + skinData[i].g + " : " + position.x + " / " + position.y);
                 skinData[i].r = (byte)position.x;
                 skinData[i].g = (byte)position.y;
                 skinData[i].b = 0;
                 skinData[i].a = 255;
+
+                skinMask[i] = Color.white;
             } else {
-                skinData[i] = Color.clear;
+                //skinData[i] = Color.clear;
+
+                skinMask[i] = Color.black;
             }
         }
 
-        var path = assetPath.Replace(PixelWeightsPrefix, "");
+        string path = assetPath.Replace(PixelWeightsPrefix, "");
         var skinTexture = new Texture2D(texture.width, texture.height);
         skinTexture.SetPixels32(skinData);
         File.WriteAllBytes(path, skinTexture.EncodeToPNG());
         AssetDatabase.ImportAsset(path);
-        Debug.Log("Assets created at : " + path);
+        Debug.Log("Asset created at : " + path);
+
+        string maskPath = assetPath.Replace(PixelWeightsPrefix, PixelMaskPrefix);
+        var skinMaskTexture = new Texture2D(texture.width, texture.height);
+        skinMaskTexture.SetPixels32(skinMask);
+        File.WriteAllBytes(maskPath, skinMaskTexture.EncodeToPNG());
+        AssetDatabase.ImportAsset(maskPath);
+        Debug.Log("Mask created at : " + maskPath);
+
+        Debug.Log("Assets creation : Success");
     }
 
     private void ProcessPixelMap(Texture2D texture, string fileName) {

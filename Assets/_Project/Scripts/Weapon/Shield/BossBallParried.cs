@@ -54,11 +54,16 @@ public class BossBallParried : MonoBehaviour
     }
     public virtual void Hit(Collision2D collision) {
         if (collision.collider.tag == "Wall") {
-            if (_mustDie) {
-                Die();
-            } else {
-                _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
-            }
+            Die();
+            //if (_mustDie) {
+            //    Die();
+            //} else {
+            //    _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
+            //}
+        }
+
+        if (collision.collider.tag == "BossItem") {
+            Die();
         }
     }
 

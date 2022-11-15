@@ -13,8 +13,9 @@ public class BossPhase : MonoBehaviour {
 
     private void Start() {
         for (int i = 0; i < transform.childCount; i++) {
-            if (!_attacks.Contains(transform.GetChild(i).GetComponent<BossAttack>())){
-                _attacks.Add(transform.GetChild(i).GetComponent<BossAttack>());
+            BossAttack attack = transform.GetChild(i).GetComponent<BossAttack>();
+            if (null != attack && !_attacks.Contains(attack)){
+                _attacks.Add(attack);
             }
         }
     }

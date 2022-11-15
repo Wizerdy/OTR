@@ -24,7 +24,7 @@ public class BarLinkerHealth : MonoBehaviour {
         _health.Instance.OnHeal -= _OnHeal;
     }
 
-    private void UpdateBar() {
+    public void UpdateBar() {
         _atomeBar.ChangeMaxValue(_health.Instance.MaxHealth);
         _atomeBar.ChangeMinValue(0);
         _atomeBar.Add(_health.Instance.CurrentHealth);

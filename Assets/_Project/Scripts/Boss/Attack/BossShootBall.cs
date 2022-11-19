@@ -10,7 +10,7 @@ public class BossShootBall : BossAttack {
     [SerializeField] float _ballDuration;
     [SerializeField] Force _bounceForce;
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
-        _ea.Get<EntityBoss>().PlayAnimationTrigger("Projectiling");
+        _ea.Get<EntityBoss>().SetAnimationTrigger("Projectiling");
         LaunchBall(ea.transform.position, target.position);
         yield break;
     }

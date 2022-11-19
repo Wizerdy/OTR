@@ -30,7 +30,7 @@ public class BossOneForAll : BossAttack {
         for (int i = 0; i < _forAllersParasite.Length; i++) {
             _forAllersParasite[i].ChangeParasite(_forAllersParasite.ToList());
         }
-        _ea.Get<EntityBoss>().PlayAnimationTrigger("OneForAll-ing");
+        _ea.Get<EntityBoss>().SetAnimationTrigger("OneForAll-ing");
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {

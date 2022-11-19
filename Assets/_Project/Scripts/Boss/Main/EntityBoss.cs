@@ -13,20 +13,21 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] BetterEvent _newPhase;
     [SerializeField] GameObject _phases;
     [SerializeField] float _delayAttackNewPhase;
-    BossAttack _currentAttack;
+    [SerializeField] BossAttack _currentAttack;
     BossAttack _nextAttack;
-     Animator _animator;
+    Animator _animator;
+    SpriteRenderer _spriteRenderer;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
-    Timer _timer;
     private void Start() {
-        if(_phases != null) {
+        _animator = _entityAbilities.GetComponentInChildren<Animator>();
+        _spriteRenderer = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
+        if (_phases != null) {
             for (int i = 0; i < _phases.transform.childCount; i++) {
                 BossPhase phase = _phases.transform.GetChild(i).GetComponent<BossPhase>();
-                if (phase != null) {
-                    if(!_bossPhases.Contains(phase))
+                if (!_bossPhases.Contains(phase))
                     _bossPhases.Add(phase);
-                }
+
             }
         }
         for (int i = 0; i < _bossPhases.Count; i++) {
@@ -35,11 +36,11 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
                 i--;
             }
         }
-        _animator = _entityAbilities.GetComponentInChildren<Animator>();
         StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
 
     void Attack() {
+        FlipRight(true);
         if (_currentAttack != null)
             _currentAttack.Finished -= Attack;
         if (_nextAttack != null) {
@@ -57,7 +58,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         TeleportCenter();
         _entityAbilities.Get<EntityPhysics>().Purge();
         _currentAttack.StopAllCoroutines();
-        StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase)); 
+        StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase));
         _newPhase?.Invoke();
     }
 
@@ -65,15 +66,31 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _entityAbilities.transform.position = _center.position;
     }
 
-    public void PlayAnimationTrigger(string animation) {
+    public void SetAnimationTrigger(string animation) {
         _animator.SetTrigger(animation);
     }
 
-    public void PlayAnimationBool(string animation, bool value) {
+    public void SetAnimationBool(string animation, bool value) {
         _animator.SetBool(animation, value);
     }
 
-    public void PlayAnimationTrigger() {
-        Debug.Log("oui");
+    public void SetAnimationBoolTrue(string animation) {
+        _animator.SetBool(animation, true);
+    }
+
+    public void SetAnimationBoolFalse(string animation) {
+        _animator.SetBool(animation, false);
+    }
+
+    public bool GetAnimationBool(string animation) {
+        return _animator.GetBool(animation);
+    }
+
+    public void FlipRight(bool intoRight) {
+        if (intoRight) {
+            _spriteRenderer.transform.localScale = Vector3.one;
+        } else {
+            _spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 }

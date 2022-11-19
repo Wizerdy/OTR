@@ -18,7 +18,7 @@ public class BossCage : BossAttack {
     float _weightMemory;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
-        _ea.Get<EntityBoss>().PlayAnimationTrigger("Caging");
+        _ea.Get<EntityBoss>().SetAnimationTrigger("Caging");
         _weightMemory = _weight;
         _weight = 0;
         StartCoroutine(Tools.Delay(() => { _weight = _weightMemory; }, _cageDuration));

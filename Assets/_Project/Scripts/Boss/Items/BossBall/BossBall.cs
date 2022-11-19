@@ -12,10 +12,10 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected int _damages;
     [SerializeField] protected Vector2 _reminder;
     [SerializeField] protected Force _bounceForce;
-    [SerializeField] bool _destroyOnPlayerHit = false;
+    [SerializeField] protected bool _destroyOnPlayerHit = false;
     protected bool _mustDie = false;
-    Timer _deathTimer;
-    [SerializeField] BossBallParried parriedBossBallPrefab;
+    protected Timer _deathTimer;
+    [SerializeField] protected BossBallParried parriedBossBallPrefab;
 
     public BossBall ChangeSpeed(float speed) {
         _speed = speed;
@@ -43,7 +43,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     }
 
 
-    void Start() {
+    protected void Start() {
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = _startDirection.normalized * _speed;
         GetComponent<DamageHealth>().Damage = _damages;
@@ -84,7 +84,7 @@ public class BossBall : MonoBehaviour, IReflectable {
         }
     }
 
-    void Die() {
+    protected void Die() {
         gameObject.SetActive(false);
         Destroy(gameObject);
     }

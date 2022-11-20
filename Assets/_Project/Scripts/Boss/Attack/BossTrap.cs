@@ -8,8 +8,6 @@ using UnityEngine.UIElements;
 public class BossTrap : BossAttack {
     [Header("Prog")]
     [SerializeField] Trap _trapPrefab;
-    [SerializeField] Transform _topLeft;
-    [SerializeField] Transform _botRight;
     [Header("GD")]
     [SerializeField] float _minimumDistBetween;
     [SerializeField] float _minimumDistFromSide;
@@ -41,7 +39,6 @@ public class BossTrap : BossAttack {
             foreach (Collider2D collider in colliders) {
                 Debug.Log(collider.gameObject);
                 if (collider.gameObject.GetComponent<Trap>() != null) {
-                    Debug.Log("Touché" + position);
                     placed = false;
                 }
             }

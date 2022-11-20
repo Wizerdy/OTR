@@ -8,8 +8,6 @@ using UnityEngine.UIElements;
 public class BossMeteor : BossAttack {
     [Header("Prog")]
     [SerializeField] Meteor _meteorPrefab;
-    [SerializeField] Transform _topLeft;
-    [SerializeField] Transform _botRight;
     [Header("GD")]
     [SerializeField] float _minimumDistBetween;
     [SerializeField] float _minimumDistFromSide;

@@ -7,8 +7,6 @@ using ToolsBoxEngine;
 public class BossCage : BossAttack {
     [Header("Prog")]
     [SerializeField] Cage _cagePrefab;
-    [SerializeField] Transform _topLeft;
-    [SerializeField] Transform _botRight;
     [Header("GD")]
     [SerializeField] Vector2 _position;
     [SerializeField] Vector2 _size;
@@ -18,7 +16,7 @@ public class BossCage : BossAttack {
     float _weightMemory;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
-        _ea.Get<EntityBoss>().SetAnimationTrigger("Caging");
+        _entityBoss.SetAnimationTrigger("Caging");
         _weightMemory = _weight;
         _weight = 0;
         StartCoroutine(Tools.Delay(() => { _weight = _weightMemory; }, _cageDuration));

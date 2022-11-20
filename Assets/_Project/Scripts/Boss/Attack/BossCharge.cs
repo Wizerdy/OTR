@@ -10,22 +10,13 @@ public class BossCharge : BossAttack {
     [SerializeField] protected Force _bounceForce;
     [SerializeField] protected Force _bounceWallForce;
     protected bool _hitWall = false;
-    protected EntityPhysics _entityPhysics;
-    protected EntityColliders _entityColliders;
-    protected EntityBoss _entityBoss;
     protected DamageHealth _damageHealth;
     protected Force _chargeForce;
     protected int _damagesMemory;
-    protected Transform _transform;
     protected Vector3 _bounceWallDirection;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
-        _hitWall = false;
-        _entityPhysics = ea.Get<EntityPhysics>();
-        _entityColliders = ea.Get<EntityColliders>();
-        _entityBoss = ea.Get<EntityBoss>();
-        _transform = ea.transform;
         _damageHealth = _entityColliders.MainEvent.gameObject.GetComponent<DamageHealth>();
         _damagesMemory = _damageHealth.Damage;
         _damageHealth.SetDamage(_damages);
@@ -78,28 +69,26 @@ public class BossCharge : BossAttack {
         } else {
             _entityBoss.FlipRight(true);
         }
-
+        bool pass = false;
+        float lastDist = Vector3.Distance(destination, _transform.position);
         _chargeForce = new Force(speed, direction, 1);
+        _entityBoss.SetAnimationBool("Charging", true);
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
         }
         _entityPhysics.Add(_chargeForce, 1);
-        bool pass = false;
-        float lastDist = Vector3.Distance(destination, _transform.position);
-        _entityBoss.SetAnimationBool("Charging", true);
         while (!pass) {
-            float currentDist = Vector3.Distance(destination, _transform.position);
-            if (currentDist > lastDist) {
+            float dot = Vector3.Dot(direction, destination - _transform.position);
+            if (dot < 0) {
                 pass = true;
-            } else {
-                lastDist = currentDist;
+                _transform.position = destination;
+                _entityBoss.SetAnimationBool("HitWall", false);
+                _entityBoss.SetAnimationBool("Charging", false);
+                _entityBoss.SetAnimationBool("CanCharge", false);
+                _entityPhysics.Remove(_chargeForce);
             }
             yield return null;
         }
-        _entityBoss.SetAnimationBool("HitWall", false);
-        _entityBoss.SetAnimationBool("Charging", false);
-        _entityBoss.SetAnimationBool("CanCharge", false);
-        _entityPhysics.Remove(_chargeForce);
     }
 
     protected void Hit(Collision2D collision) {

@@ -14,7 +14,17 @@ public abstract class BossAttack : MonoBehaviour {
     BetterEvent _end;
     bool _isActive;
 
+    protected Transform _target;
+    protected Transform _transform;
     protected EntityAbilities _ea;
+    protected EntityPhysics _entityPhysics;
+    protected EntityBoss _entityBoss;
+    protected EntityColliders _entityColliders;
+    protected static Transform _center;
+    protected static Transform _topLeft;
+    protected static Transform _botRight;
+    protected static Transform _spawnBallRight;
+    protected static Transform _spawnBallLeft;
 
     public float Weight => _weight;
     public bool IsActive => _isActive;
@@ -26,7 +36,12 @@ public abstract class BossAttack : MonoBehaviour {
 
     public void Activate(EntityAbilities ea, Transform target) {
         _ea = ea;
-        StartCoroutine(Launch(ea, target));
+        _transform = ea.transform;
+        _target = target;
+        _entityBoss = _ea.Get<EntityBoss>();
+        _entityPhysics = _ea.Get<EntityPhysics>();
+        _entityColliders = ea.Get<EntityColliders>();
+        StartCoroutine(Launch(_ea, _target));
     }
 
     IEnumerator Launch(EntityAbilities ea, Transform target) {

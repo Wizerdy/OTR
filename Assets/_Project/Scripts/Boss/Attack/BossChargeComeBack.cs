@@ -8,7 +8,6 @@ public class BossChargeComeBack : BossCharge {
     [SerializeField] protected float _delayBeforeComeBack;
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         yield return StartCoroutine(Charge(target.position, _delayBeforeCharge, _speed));
-        yield return new WaitForSeconds(_delayBeforeComeBack);
-        yield return StartCoroutine(ChargeDestination(Vector3.zero, 0f, _speedComeback));
+        yield return StartCoroutine(ChargeDestination(_center.position, _delayBeforeComeBack, _speedComeback));
     }
 }

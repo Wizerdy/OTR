@@ -10,6 +10,7 @@ public class Trap : MonoBehaviour {
     int _damagesEveryTick;
     float _tick;
     bool _open;
+    Animator _animator;
 
     public Trap ChangeDamages(int damages) {
         _damagesEveryTick = damages;
@@ -27,8 +28,9 @@ public class Trap : MonoBehaviour {
     }
 
     private void Start() {
+        _animator = GetComponentInChildren<Animator>();
         _open = true;
-        _sr = GetComponent<SpriteRenderer>();
+        _sr = GetComponentInChildren<SpriteRenderer>();
         StartCoroutine(Tools.Delay(() => {
             _sr.enabled = false;
             _open = false;
@@ -55,6 +57,8 @@ public class Trap : MonoBehaviour {
         timer.Start();
         Force force = new Force(0, Vector2.zero, 1, Force.ForceMode.INPUT);
         entityPhysics.Add(force, (int)PhysicPriority.BLOCK);
+        ea.transform.position = transform.position;
+        _animator.SetBool("Trapped", true);
         while (entityWeaponry.Weapon == null) {
             yield return null;
         }

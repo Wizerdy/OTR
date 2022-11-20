@@ -5,28 +5,28 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-public class BossTrap : BossAttack {
+public class BossMeteor : BossAttack {
     [Header("Prog")]
-    [SerializeField] Trap _trapPrefab;
+    [SerializeField] Meteor _meteorPrefab;
     [Header("GD")]
     [SerializeField] float _minimumDistBetween;
     [SerializeField] float _minimumDistFromSide;
-    [SerializeField] float _trapNumber;
-    [SerializeField] float _visibleTime;
-    [SerializeField] float _tick;
+    [SerializeField] float _number;
+    [SerializeField] float _timeBeforeFall;
+    int nameMeteor = 0;
 
 
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         Physics2D.queriesHitTriggers = true;
-        for (int i = 0; i < _trapNumber; i++) {
-            PutTrap();
+        for (int i = 0; i < _number; i++) {
+            MeteorFall();
         }
         Physics2D.queriesHitTriggers = false;
         yield break;
     }
 
-    void PutTrap() {
-        Trap trap = Instantiate(_trapPrefab).ChangeVisibility(_visibleTime).ChangeDamages(_damages).ChangeTick(_tick);
+    void MeteorFall() {
+        Meteor meteor = Instantiate(_meteorPrefab).ChangeTimeBeforeFall(_timeBeforeFall).ChangeDamages(_damages);
         bool placed = false;
         Vector3 position = Vector3.zero;
         int protection = 0;
@@ -37,13 +37,15 @@ public class BossTrap : BossAttack {
             position = new Vector3(x, y, 0);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, _minimumDistBetween);
             foreach (Collider2D collider in colliders) {
-                Debug.Log(collider.gameObject);
-                if (collider.gameObject.GetComponent<Trap>() != null) {
+                if (collider.transform.GetComponent<Meteor>() != null) {
                     placed = false;
+                    break;
                 }
             }
             protection++;
         }
-        trap.transform.position = position;
+        meteor.transform.position = position;
+        meteor.name = "Meteor " + nameMeteor;
+        nameMeteor++;
     }
 }

@@ -11,7 +11,7 @@ public class MenacePointSystem : MonoBehaviour {
         } else {
             _menaces[target] += count;
         }
-        Debug.Log(target.name + " : " + _menaces[target]);
+       // Debug.Log(target.name + " : " + _menaces[target]);
     }
 
     public void Remove(EntityAbilities target, int count) {

@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class Cage : MonoBehaviour {
+public class Cage : MonoBehaviour
+{
     [SerializeField] Material _material;
     Transform _topLeft;
     Transform _botRight;
@@ -21,47 +22,56 @@ public class Cage : MonoBehaviour {
     PolygonCollider2D _polygonCollider;
     Dictionary<IHealth, Vector2> _hits;
 
-    public Cage ChangeTopLeft(Transform topLeft) {
+    public Cage ChangeTopLeft(Transform topLeft)
+    {
         _topLeft = topLeft;
         return this;
     }
 
-    public Cage ChangeBotRight(Transform botRight) {
+    public Cage ChangeBotRight(Transform botRight)
+    {
         _botRight = botRight;
         return this;
     }
 
-    public Cage ChangePosition(Vector2 position) {
+    public Cage ChangePosition(Vector2 position)
+    {
         _position = position;
         return this;
     }
 
-    public Cage ChangeSize(Vector2 size) {
+    public Cage ChangeSize(Vector2 size)
+    {
         _size = size;
         return this;
     }
 
-    public Cage ChangeDuration(float duration) {
+    public Cage ChangeDuration(float duration)
+    {
         _duration = duration;
         return this;
     }
 
-    public Cage ChangeDamages(int damages) {
+    public Cage ChangeDamages(int damages)
+    {
         _damagesEveryTick = damages;
         return this;
     }
 
-    public Cage ChangeDamagesBonus(int damagesBonus) {
+    public Cage ChangeDamagesBonus(int damagesBonus)
+    {
         _damagesBonusEveryTick = damagesBonus;
         return this;
     }
 
-    public Cage ChangeTick(float tick) {
+    public Cage ChangeTick(float tick)
+    {
         _tick = tick;
         return this;
     }
 
-    private void Start() {
+    private void Start()
+    {
         transform.position = _position;
         _mesh = new Mesh();
         _mesh.vertices = new Vector3[] {
@@ -118,37 +128,56 @@ public class Cage : MonoBehaviour {
         boxCollider2D[3].gameObject.transform.position = new Vector2(0, -((bigSize.y - _size.y) / 4 + _size.y / 2));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (!_hits.ContainsKey(found)) {
-            _hits.Add(found, Vector2.zero);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null)
+            {
+                return;
+            }
+            if (!_hits.ContainsKey(found))
+            {
+                _hits.Add(found, Vector2.zero);
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         // Debug.Log("Exit : " + collision.gameObject.GetRoot());
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (_hits.ContainsKey(found)) {
-            _hits.Remove(found);
+        if (collision.CompareTag("Player"))
+        {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null)
+            {
+                return;
+            }
+            if (_hits.ContainsKey(found))
+            {
+                _hits.Remove(found);
+            }
         }
     }
 
-    private void Update() {
-        if (_hits.Count != 0) {
-            foreach (KeyValuePair<IHealth, Vector2> keys in _hits.ToList()) {
+    private void Update()
+    {
+        if (_hits.Count != 0)
+        {
+            foreach (KeyValuePair<IHealth, Vector2> keys in _hits.ToList())
+            {
                 Vector2 time = keys.Value;
                 time.x += Time.deltaTime;
-                if (time.x >= _tick) {
+                if (time.x >= _tick)
+                {
                     time.x -= _tick;
-                    if (time.y == 0) {
+                    if (time.y == 0)
+                    {
                         time.y += _damagesEveryTick;
-                    } else {
+                    }
+                    else
+                    {
                         time.y += _damagesBonusEveryTick;
                     }
                     keys.Key.TakeDamage((int)time.y, gameObject);
@@ -158,7 +187,8 @@ public class Cage : MonoBehaviour {
         }
     }
 
-    void Die() {
+    void Die()
+    {
         gameObject.SetActive(false);
         Destroy(gameObject);
     }

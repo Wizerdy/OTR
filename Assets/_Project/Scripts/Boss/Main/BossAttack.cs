@@ -1,12 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Sloot;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using static UnityEngine.GraphicsBuffer;
-using Unity.VisualScripting;
 
 public abstract class BossAttack : MonoBehaviour {
     [Header("Boss Attack General :")]
@@ -18,6 +13,19 @@ public abstract class BossAttack : MonoBehaviour {
     BetterEvent _middle;
     BetterEvent _end;
     bool _isActive;
+
+    protected Transform _target;
+    protected Transform _transform;
+    protected EntityAbilities _ea;
+    protected EntityPhysics _entityPhysics;
+    protected EntityBoss _entityBoss;
+    protected EntityColliders _entityColliders;
+    protected static Transform _center;
+    protected static Transform _topLeft;
+    protected static Transform _botRight;
+    protected static Transform _spawnBallRight;
+    protected static Transform _spawnBallLeft;
+
     public float Weight => _weight;
     public bool IsActive => _isActive;
 
@@ -27,7 +35,13 @@ public abstract class BossAttack : MonoBehaviour {
     public event UnityAction Finished { add => _finished.AddListener(value); remove => _finished.RemoveListener(value); }
 
     public void Activate(EntityAbilities ea, Transform target) {
-        StartCoroutine(Launch(ea, target));
+        _ea = ea;
+        _transform = ea.transform;
+        _target = target;
+        _entityBoss = _ea.Get<EntityBoss>();
+        _entityPhysics = _ea.Get<EntityPhysics>();
+        _entityColliders = ea.Get<EntityColliders>();
+        StartCoroutine(Launch(_ea, _target));
     }
 
     IEnumerator Launch(EntityAbilities ea, Transform target) {

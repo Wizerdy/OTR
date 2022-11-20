@@ -170,6 +170,7 @@ public class SoundManager : MonoBehaviour {
 
     private GameObject CreateNewAudioSource() {
         GameObject source = new GameObject();
+        source.transform.parent = transform;
         source.AddComponent<AudioSource>();
         var play = source.AddComponent<PlaySound>();
         play.Init();

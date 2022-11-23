@@ -34,7 +34,7 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator Charge(Vector3 targetPosition, float delay, float speed) {
-        _entityBoss.SetAnimationBool("HitWall", false);
+        _entityBoss.SetAnimationBool("HitWallSide", false);
         Vector3 direction = targetPosition - _transform.position;
         if (Vector3.Dot(Vector3.right, direction) < 0) {
             _entityBoss.FlipRight(false);
@@ -52,7 +52,7 @@ public class BossCharge : BossAttack {
         while (!_hitWall) {
             yield return null;
         }
-        _entityBoss.SetAnimationBool("HitWall", true);
+        _entityBoss.SetAnimationBool("HitWallSide", true);
         _entityBoss.SetAnimationBool("Charging", false);
         _entityBoss.SetAnimationBool("CanCharge", false);
         _entityPhysics.Remove(_chargeForce);

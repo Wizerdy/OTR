@@ -32,7 +32,6 @@ public class BossShootBall : BossAttack {
 
 
     protected void LaunchBall(Vector3 spawnPosition, Vector3 targetPosition) {
-        BossBall newBall = Instantiate(_bossBallprefab).ChangeDamages(_damages).ChangeDuration(_ballDuration).ChangeSpeed(_ballSpeed).ChangeStartDirection((targetPosition - spawnPosition).normalized).ChangeForce(_bounceForce);
-        newBall.transform.position = spawnPosition;
+        BossBall newBall = Instantiate(_bossBallprefab, spawnPosition, Quaternion.identity).ChangeDamages(_damages).ChangeDuration(_ballDuration).ChangeSpeed(_ballSpeed).ChangeStartDirection((targetPosition - spawnPosition).normalized).ChangeForce(_bounceForce);
     }
 }

@@ -51,7 +51,6 @@ public class BossBall : MonoBehaviour, IReflectable {
         _deathTimer = new Timer(this, _duration, false);
         _deathTimer.OnActivate += () => _mustDie = true;
         _deathTimer.Start(_duration);
-        NewOrientation(_rb.velocity);
 
     }
 
@@ -64,7 +63,6 @@ public class BossBall : MonoBehaviour, IReflectable {
                 Die();
             } else {
                 _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
-                NewOrientation(_rb.velocity);
             }
         }
 
@@ -104,9 +102,5 @@ public class BossBall : MonoBehaviour, IReflectable {
         newBall.transform.position = transform.position;
 
         Die();
-    }
-
-    void NewOrientation(Vector3 orientation ) {
-        transform.LookAt(transform.position + orientation.normalized);
     }
 }

@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245044e885683834ca6bd9474fffe418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weight: 0
+  _weight: 10
   _endDuration: 1
   _damages: 10
   _finished:
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c204a83b337126a4fbf33803fadc1eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weight: 20
+  _weight: 0
   _endDuration: 1
   _damages: 10
   _finished:

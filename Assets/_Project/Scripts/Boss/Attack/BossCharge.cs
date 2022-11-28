@@ -10,10 +10,15 @@ public class BossCharge : BossAttack {
     [SerializeField] protected Force _bounceForce;
     [SerializeField] protected Force _bounceWallForce;
     protected bool _hitWall = false;
+    protected Vector3 _hitPosition;
     protected DamageHealth _damageHealth;
     protected Force _chargeForce;
     protected int _damagesMemory;
     protected Vector3 _bounceWallDirection;
+    protected float angleTopBotCharge = 44;
+    protected float angleSideCharge = 92;
+    protected float angleTopBotHit = 80;
+    protected float angleSideHit = 20;
 
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
@@ -34,16 +39,17 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator Charge(Vector3 targetPosition, float delay, float speed) {
-        _entityBoss.SetAnimationBool("HitWall", false);
         Vector3 direction = targetPosition - _transform.position;
-        if (Vector3.Dot(Vector3.right, direction) < 0) {
-            _entityBoss.FlipRight(false);
+        float angle = Vector2.Angle(Vector2.up, direction);
+        if (angle < angleTopBotCharge) {
+            _entityBoss.SetAnimationBool("ChargingTop", true);
+        } else if (angle < angleTopBotCharge + angleSideCharge) {
+            _entityBoss.SetAnimationBool(Vector3.Dot(Vector3.right, direction) < 0 ? "ChargingLeft" : "ChargingRight", true);
         } else {
-            _entityBoss.FlipRight(true);
+            _entityBoss.SetAnimationBool("ChargingBot", true);
         }
         Debug.DrawRay(transform.position, direction, Color.blue, _delayBeforeCharge);
         yield return new WaitForSeconds(delay);
-        _entityBoss.SetAnimationBool("Charging", true);
         _chargeForce = new Force(speed, direction, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
@@ -52,8 +58,23 @@ public class BossCharge : BossAttack {
         while (!_hitWall) {
             yield return null;
         }
-        _entityBoss.SetAnimationBool("HitWall", true);
-        _entityBoss.SetAnimationBool("Charging", false);
+        if (angle < angleTopBotCharge) {
+            _entityBoss.SetAnimationBool("ChargingTop", false);
+        } else if (angle < angleTopBotCharge + angleSideCharge) {
+            _entityBoss.SetAnimationBool(Vector3.Dot(Vector3.right, direction) < 0 ? "ChargingLeft" : "ChargingRight", false);
+        } else {
+            _entityBoss.SetAnimationBool("ChargingBot", false);
+        }
+        angle = Vector2.Angle(Vector2.up, _hitPosition);
+        //Debug.Log(angle);
+        //Debug.Log(_hitPosition);
+        if (angle < angleTopBotHit) {
+            _entityBoss.SetAnimationTrigger("HitTop");
+        } else if (angle < angleTopBotHit + angleSideHit) {
+            _entityBoss.SetAnimationTrigger(Vector3.Dot(Vector3.right, direction) < 0 ? "HitLeft" : "HitRight");
+        } else {
+            _entityBoss.SetAnimationTrigger("HitBot");
+        }
         _entityBoss.SetAnimationBool("CanCharge", false);
         _entityPhysics.Remove(_chargeForce);
         _bounceWallForce.Direction = _bounceWallDirection;
@@ -62,39 +83,49 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator ChargeDestination(Vector3 destination, float delay, float speed) {
-        yield return new WaitForSeconds(delay);
         Vector3 direction = destination - _transform.position;
-        if (Vector3.Dot(Vector3.right, direction) < 0) {
-            _entityBoss.FlipRight(false);
+        float angle = Vector2.Angle(Vector2.up, direction);
+        if (angle < angleTopBotCharge) {
+            _entityBoss.SetAnimationBool("ChargingTop", true);
+        } else if (angle < angleTopBotCharge + angleSideCharge) {
+            _entityBoss.SetAnimationBool(Vector3.Dot(Vector3.right, direction) < 0 ? "ChargingLeft" : "ChargingRight", true);
         } else {
-            _entityBoss.FlipRight(true);
+            _entityBoss.SetAnimationBool("ChargingBot", true);
         }
-        bool pass = false;
-        float lastDist = Vector3.Distance(destination, _transform.position);
-        _chargeForce = new Force(speed, direction, 1);
-        _entityBoss.SetAnimationBool("Charging", true);
+        Debug.DrawRay(transform.position, direction, Color.blue, _delayBeforeCharge);
+        yield return new WaitForSeconds(delay);
+        _chargeForce = new Force(speed, direction, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
         }
         _entityPhysics.Add(_chargeForce, 1);
+        bool pass = false;
+        float dot = 0;
         while (!pass) {
-            float dot = Vector3.Dot(direction, destination - _transform.position);
+            yield return null;
+            dot = Vector3.Dot(direction, destination - _transform.position);
             if (dot < 0) {
                 pass = true;
-                _transform.position = destination;
-                _entityBoss.SetAnimationBool("HitWall", false);
-                _entityBoss.SetAnimationBool("Charging", false);
-                _entityBoss.SetAnimationBool("CanCharge", false);
-                _entityPhysics.Remove(_chargeForce);
             }
-            yield return null;
         }
+
+        if (angle < angleTopBotCharge) {
+            _entityBoss.SetAnimationBool("ChargingTop", false);
+        } else if (angle < angleTopBotCharge + angleSideCharge) {
+            _entityBoss.SetAnimationBool(Vector3.Dot(Vector3.right, direction) < 0 ? "ChargingLeft" : "ChargingRight", false);
+        } else {
+            _entityBoss.SetAnimationBool("ChargingBot", false);
+        }
+        _entityBoss.SetAnimationBool("CanCharge", false);
+        _entityPhysics.Remove(_chargeForce);
+        _transform.position = destination;
     }
 
     protected void Hit(Collision2D collision) {
         if (collision.transform.CompareTag("Wall")) {
             _hitWall = true;
             _bounceWallDirection = collision.contacts[0].normal.normalized;
+            _hitPosition = (V.ToVector3(collision.contacts[0].point) - collision.otherCollider.transform.position).normalized;
         }
         if (collision.transform.CompareTag("Player")) {
             EntityAbilities eaPlayer = collision.gameObject.GetComponent<EntityAbilities>();
@@ -110,6 +141,11 @@ public class BossCharge : BossAttack {
             _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
+        }
+    }
+    public static class V {
+        public static Vector3 ToVector3(Vector2 v) {
+            return new Vector3(v.x, v.y, 0);
         }
     }
 }

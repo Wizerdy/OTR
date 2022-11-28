@@ -17,11 +17,16 @@ public class BossTrap : BossAttack {
 
 
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
+        _entityBoss.SetAnimationTrigger("Trapping");
+        while (!_entityBoss.GetAnimationBool("CanTrap")) {
+            yield return null;
+        }
         Physics2D.queriesHitTriggers = true;
         for (int i = 0; i < _trapNumber; i++) {
             PutTrap();
         }
         Physics2D.queriesHitTriggers = false;
+        _entityBoss.SetAnimationBool("CanTrap", false);
         yield break;
     }
 

@@ -42,7 +42,7 @@ public class ForAllerParasite : MonoBehaviour {
 
 
     private void Start() {
-        _sr = GetComponent<SpriteRenderer>();
+        _sr = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         StartCoroutine(Tools.Delay(() => Parasited(), _timeBeforeActivation));
     }
 
@@ -67,9 +67,9 @@ public class ForAllerParasite : MonoBehaviour {
     }
 
     public void DoDamage(int damages) {
+        transform.GetChild(0).gameObject.GetComponent<Animator>().SetTrigger("Spark");
         _sr.sprite = _damageSprite;
         _damageDone = true;
-        _host.TakeDamage(damages, gameObject);
-        StartCoroutine(Tools.Delay(() => Destroy(gameObject), _timeVisible)); 
+        _host.TakeDamage(damages, gameObject); 
     }
 }

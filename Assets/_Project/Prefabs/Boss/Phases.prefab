@@ -159,7 +159,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 0}
   _position: {x: 0, y: 0}
-  _size: {x: 5, y: 10}
+  _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 5
@@ -1163,7 +1163,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 0}
   _position: {x: 0, y: 0}
-  _size: {x: 5, y: 10}
+  _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 5
@@ -2019,7 +2019,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 0}
   _position: {x: 0, y: 0}
-  _size: {x: 5, y: 10}
+  _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 5

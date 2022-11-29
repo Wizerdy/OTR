@@ -61,9 +61,10 @@ public class BossBall : MonoBehaviour, IReflectable {
         if (collision.collider.tag == "Wall") {
             if (_mustDie) {
                 Die();
-            } else {
-                _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
             }
+            //else {
+            //    _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
+            //}
         }
 
         if (collision.transform.CompareTag("Player")) {

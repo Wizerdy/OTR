@@ -18,6 +18,6 @@ public class BossChargeTeleport : BossCharge {
         }
         _entityBoss.SetAnimationBool("CanTp1", false);
         _entityBoss.SetAnimationBool("CanTp2", false);
-        yield return Charge(target.position, _delayBeforeCharge, _speed);
+        yield return Charge(target.position, _speed);
     }
 }

@@ -5,7 +5,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BossCharge : BossAttack {
     [Header("Charge :")]
-    [SerializeField] protected float _delayBeforeCharge;
     [SerializeField] protected float _speed;
     [SerializeField] protected Force _bounceForce;
     [SerializeField] protected Force _bounceWallForce;
@@ -26,19 +25,21 @@ public class BossCharge : BossAttack {
         _damagesMemory = _damageHealth.Damage;
         _damageHealth.SetDamage(_damages);
         _entityColliders.MainEvent.OnCollisionEnter += Hit;
+        //_entityColliders.MainEvent.OnCollisionExit += HitExit;
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
-        yield return StartCoroutine(Charge(target.position, _delayBeforeCharge, _speed));
+        yield return StartCoroutine(Charge(target.position, _speed));
     }
 
     protected override IEnumerator AttackEnds(EntityAbilities ea, Transform target) {
         _damageHealth.SetDamage(_damagesMemory);
         _entityColliders.MainEvent.OnCollisionEnter -= Hit;
+        //_entityColliders.MainEvent.OnCollisionExit -= HitExit;
         yield break;
     }
 
-    protected IEnumerator Charge(Vector3 targetPosition, float delay, float speed) {
+    protected IEnumerator Charge(Vector3 targetPosition, float speed) {
         Vector3 direction = targetPosition - _transform.position;
         float angle = Vector2.Angle(Vector2.up, direction);
         if (angle < angleTopBotCharge) {
@@ -48,8 +49,6 @@ public class BossCharge : BossAttack {
         } else {
             _entityBoss.SetAnimationBool("ChargingBot", true);
         }
-        Debug.DrawRay(transform.position, direction, Color.blue, _delayBeforeCharge);
-        yield return new WaitForSeconds(delay);
         _chargeForce = new Force(speed, direction, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
@@ -58,6 +57,12 @@ public class BossCharge : BossAttack {
         while (!_hitWall) {
             yield return null;
         }
+
+        //yield return new WaitForSeconds(0.05f);
+        //do {
+        //    yield return null;
+        //} while (_entityPhysics.Velocity.magnitude > 0.01f);
+
         if (angle < angleTopBotCharge) {
             _entityBoss.SetAnimationBool("ChargingTop", false);
         } else if (angle < angleTopBotCharge + angleSideCharge) {
@@ -82,7 +87,7 @@ public class BossCharge : BossAttack {
         yield return new WaitForSeconds(_bounceWallForce.Duration);
     }
 
-    protected IEnumerator ChargeDestination(Vector3 destination, float delay, float speed) {
+    protected IEnumerator ChargeDestination(Vector3 destination, float speed) {
         Vector3 direction = destination - _transform.position;
         float angle = Vector2.Angle(Vector2.up, direction);
         if (angle < angleTopBotCharge) {
@@ -92,8 +97,6 @@ public class BossCharge : BossAttack {
         } else {
             _entityBoss.SetAnimationBool("ChargingBot", true);
         }
-        Debug.DrawRay(transform.position, direction, Color.blue, _delayBeforeCharge);
-        yield return new WaitForSeconds(delay);
         _chargeForce = new Force(speed, direction, 1, Force.ForceMode.INPUT, AnimationCurve.Linear(1f, 1f, 1f, 1f), 0.1f, AnimationCurve.Linear(0f, 0f, 0f, 0f), 0);
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
@@ -138,11 +141,16 @@ public class BossCharge : BossAttack {
             } else {
                 _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
             }
-            _bounceForce.Reset();
             eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
             epPlayer.Add(new Force(_bounceForce), 10);
         }
     }
+    protected void HitExit(Collision2D collision) {
+        if (collision.transform.CompareTag("Wall")) {
+            _hitWall = false;
+        }
+    }
+
     public static class V {
         public static Vector3 ToVector3(Vector2 v) {
             return new Vector3(v.x, v.y, 0);

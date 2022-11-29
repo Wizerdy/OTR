@@ -314,12 +314,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -366,9 +365,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -378,11 +377,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -552,12 +569,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -604,9 +620,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -616,11 +632,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -1267,12 +1301,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1319,9 +1352,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1331,11 +1364,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -1500,12 +1551,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1552,9 +1602,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1564,11 +1614,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -1633,12 +1701,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1685,9 +1752,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -1697,11 +1764,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -2016,12 +2101,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -2068,9 +2152,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -2080,11 +2164,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -2311,7 +2413,6 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
@@ -2363,9 +2464,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -2375,11 +2476,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -2933,12 +3052,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -2985,9 +3103,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -2997,11 +3115,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:
@@ -3650,12 +3786,11 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeCharge: 1
   _speed: 45
   _bounceForce:
     _strength: 35
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -3702,9 +3837,9 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _bounceWallForce:
-    _strength: 0
+    _strength: 10
     _direction: {x: 0, y: 0}
-    _weight: 0
+    _weight: 1
     _start:
       serializedVersion: 2
       m_Curve: []
@@ -3714,11 +3849,29 @@ MonoBehaviour:
     _startDuration: 0
     _end:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _endDuration: 0
+    _endDuration: 0.2
     _mode: 0
     _onStart:
       _event:

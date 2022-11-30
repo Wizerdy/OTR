@@ -859,6 +859,8 @@ MonoBehaviour:
     - MainCamera
     - GameController
     - Enemy
+    - Boss
+    - BossItem
     state: 1
   _destroyOnHit: 0
   _onlyDamageOnceEach: 1
@@ -895,7 +897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageHealth: {fileID: 7460772279012484888}
   _colliderDelegate:
-  - {fileID: 0}
   - {fileID: 1155849926}
   - {fileID: 6572940848056688857}
 --- !u!114 &629688000995482535
@@ -1503,7 +1504,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 38742
+  m_InstanceId: -2396
 --- !u!1 &5985431924503224253
 GameObject:
   m_ObjectHideFlags: 0

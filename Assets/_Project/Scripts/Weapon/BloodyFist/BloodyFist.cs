@@ -44,7 +44,7 @@ public class BloodyFist : Weapon {
 
     protected override void _OnStart() {
         _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_hitCooldown, _hitDamage, _hitThreatPoint, FistAttack));
-        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(_dashForce.Duration, 0, 0, BloodyDash));
+        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(0f, 0, 0, BloodyDash));
         _dash = new Force(_dashForce, Vector2.zero, _dashWeight, Force.ForceMode.TIMED);
         _cooldown = new Timer(CoroutinesManager.Instance, _hitCooldown, false);
     }
@@ -95,13 +95,13 @@ public class BloodyFist : Weapon {
         //_entityMovement?.CreateMovement(_duration, _speed, default, _accelerationCurve);
         _entityStorePoint.LosePoint(_storePointCost, true);
         yield return new WaitForSeconds(_dash.Duration);
-        _targetAnimator.SetBool("BloodFist_Dash", false);
+        _targetAnimator?.SetBool("BloodFist_Dash", false);
     }
 
     protected override void _OnAttackTrigger(Collider2D collider) {
         //Debug.Log(collider.transform.gameObject);
         if (collider.CompareTag("Boss") || collider.CompareTag("Enemy")) {
-            Debug.Log("touché");
+            //Debug.Log("touché");
             _entityStorePoint.GainPoint(_hitStorePoint);
         }
         if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject /*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {

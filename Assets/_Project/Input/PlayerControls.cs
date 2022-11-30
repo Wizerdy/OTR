@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Revive"",
+                    ""type"": ""Button"",
+                    ""id"": ""47e70dd3-b6a3-4240-8405-2a1da0b2fb35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5043f40-5f91-4077-8ae8-c7af3f89bd50"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Revive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3a71996-3313-44c1-b1ab-95cdba72db2c"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Revive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -664,6 +695,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
         m_Gameplay_SetupThrow = m_Gameplay.FindAction("SetupThrow", throwIfNotFound: true);
         m_Gameplay_Teleport = m_Gameplay.FindAction("Teleport", throwIfNotFound: true);
+        m_Gameplay_Revive = m_Gameplay.FindAction("Revive", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Navigate = m_Menu.FindAction("Navigate", throwIfNotFound: true);
@@ -741,6 +773,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Throw;
     private readonly InputAction m_Gameplay_SetupThrow;
     private readonly InputAction m_Gameplay_Teleport;
+    private readonly InputAction m_Gameplay_Revive;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -752,6 +785,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
         public InputAction @SetupThrow => m_Wrapper.m_Gameplay_SetupThrow;
         public InputAction @Teleport => m_Wrapper.m_Gameplay_Teleport;
+        public InputAction @Revive => m_Wrapper.m_Gameplay_Revive;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -782,6 +816,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Teleport.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
                 @Teleport.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
                 @Teleport.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
+                @Revive.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
+                @Revive.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
+                @Revive.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -807,6 +844,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Teleport.started += instance.OnTeleport;
                 @Teleport.performed += instance.OnTeleport;
                 @Teleport.canceled += instance.OnTeleport;
+                @Revive.started += instance.OnRevive;
+                @Revive.performed += instance.OnRevive;
+                @Revive.canceled += instance.OnRevive;
             }
         }
     }
@@ -944,6 +984,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnSetupThrow(InputAction.CallbackContext context);
         void OnTeleport(InputAction.CallbackContext context);
+        void OnRevive(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

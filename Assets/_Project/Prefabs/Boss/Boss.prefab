@@ -411,7 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618f8a14918955343842b09b2071363e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
 --- !u!1 &2949079976842064426
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +553,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  _onRevive:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
   _damageModifiers:
   - {fileID: 3780098475535578520}
   _onMaxHealthChange:
@@ -631,6 +634,7 @@ GameObject:
   - component: {fileID: 6842265518615937523}
   - component: {fileID: 6842265518615937516}
   - component: {fileID: 6842265518615937522}
+  - component: {fileID: 5595698917775893586}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Boss
@@ -707,6 +711,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 6842265518048862626}
+--- !u!114 &5595698917775893586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842265518615937519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852986636abe3e74bb7c22c246822aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 6842265518615937517}
+  target: {fileID: 11400000, guid: de0d0194f7dc89e42b51db02a94e850a, type: 2}
 --- !u!1 &6842265519080740268
 GameObject:
   m_ObjectHideFlags: 0

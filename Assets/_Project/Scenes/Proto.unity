@@ -313,7 +313,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 0.99949104
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -1419,13 +1419,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 177947325866758810, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 177947325866758810, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 177947325866758810, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 177947325866758810, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 177947325866758810, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 400048295426091731, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: m_Name
       value: BloodyFist
-      objectReference: {fileID: 0}
-    - target: {fileID: 400048295426091731, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348279467843787976, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
       propertyPath: m_RootOrder
@@ -1471,9 +1487,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4405827131507726571, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
-      propertyPath: _dashWeight
-      value: 0.2
+    - target: {fileID: 3886525988707616006, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb592a5c49844d4dbf8644860e20aa4, type: 3}
@@ -2026,10 +2042,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3858139240794617093, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 3858139240794617112, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2039,6 +2051,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3858139241189528245, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046625019131919583, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046625019131919583, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -2384,6 +2404,7 @@ MonoBehaviour:
   _throwPower: 50
   _movespeed: 1
   _showAim: 0
+  _minVelocityForOnFall: 0
   _onAttack:
     _event:
       m_PersistentCalls:
@@ -2401,6 +2422,10 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _onFall:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
+  _onPickUp:
     _event:
       m_PersistentCalls:
         m_Calls: []

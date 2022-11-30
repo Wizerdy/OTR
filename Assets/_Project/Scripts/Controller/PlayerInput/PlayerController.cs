@@ -27,6 +27,7 @@ namespace PlayerInputController {
             _playerInput.actions["Throw"].performed += _SetupThrow;
             _playerInput.actions["Throw"].canceled += _Throw;
             _playerInput.actions["Teleport"].performed += _Teleport;
+            _playerInput.actions["Revive"].performed += _Revive;
 
             _player.ShowAimLine(false);
             //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
@@ -87,6 +88,10 @@ namespace PlayerInputController {
                 _player.ShowAimLine(false);
                 _player.Throw(_player.Orientation);
             }
+        }
+
+        private void _Revive(InputAction.CallbackContext cc) {
+            _player.TryRevive();
         }
     }
 }

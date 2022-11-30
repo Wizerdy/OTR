@@ -29,12 +29,14 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     [SerializeField] protected float _throwPower = 50f;
     [SerializeField, Range(0f, 1f)] private float _movespeed = 1f;
     [SerializeField] bool _showAim = false;
+    [SerializeField] float _minVelocityForOnFall;
 
     [SerializeField] protected BetterEvent<AttackIndex, Vector2> _onAttack = new BetterEvent<AttackIndex, Vector2>();
     [SerializeField] protected BetterEvent<AttackIndex> _onAttackEnd = new BetterEvent<AttackIndex>();
     [SerializeField] protected BetterEvent<Collider2D> _onAttackTrigger = new BetterEvent<Collider2D>();
     [SerializeField] protected BetterEvent<AttackIndex, IHealth, int> _onAttackHit = new BetterEvent<AttackIndex, IHealth, int>();
     [SerializeField] protected BetterEvent _onFall = new BetterEvent();
+    [SerializeField] protected BetterEvent _onPickUp = new BetterEvent();
     [SerializeField, HideInInspector] protected BetterEvent<float> _onMovespeedSet = new BetterEvent<float>();
 
     protected Dictionary<AttackIndex, WeaponAttack> _attacks;
@@ -61,6 +63,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public event UnityAction<AttackIndex, IHealth, int> OnAttackHit { add => _onAttackHit.AddListener(value); remove => _onAttackHit.RemoveListener(value); }
 
     public event UnityAction OnFall { add => _onFall.AddListener(value); remove => _onFall.RemoveListener(value); }
+    public event UnityAction OnPickUp { add => _onPickUp.AddListener(value); remove => _onPickUp.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
 
     public bool IsAttacking => _attacking;
@@ -156,6 +159,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         transform.parent = holding.transform;
         transform.localPosition = Vector2.zero;
         gameObject.SetActive(false);
+        _onPickUp.Invoke();
         _OnPickup(holding);
     }
 
@@ -200,7 +204,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
 
     private IEnumerator CheckFalling() {
         if (_rb == null) { yield break; }
-        while (_rb.velocity.sqrMagnitude > 0.1f) {
+        while (_rb.velocity.sqrMagnitude > _minVelocityForOnFall * _minVelocityForOnFall) {
             yield return null;
         }
         _rb.velocity = Vector2.zero;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 using TMPro;
+using System;
 
 public class BossBall : MonoBehaviour, IReflectable {
     protected Rigidbody2D _rb;
@@ -12,10 +13,10 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected int _damages;
     [SerializeField] protected Vector2 _reminder;
     [SerializeField] protected Force _bounceForce;
-    [SerializeField] bool _destroyOnPlayerHit = false;
+    [SerializeField] protected bool _destroyOnPlayerHit = false;
     protected bool _mustDie = false;
-    Timer _deathTimer;
-    [SerializeField] BossBallParried parriedBossBallPrefab;
+    protected Timer _deathTimer;
+    [SerializeField] protected BossBallParried parriedBossBallPrefab;
 
     public BossBall ChangeSpeed(float speed) {
         _speed = speed;
@@ -43,7 +44,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     }
 
 
-    void Start() {
+    protected void Start() {
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = _startDirection.normalized * _speed;
         GetComponent<DamageHealth>().Damage = _damages;
@@ -60,9 +61,10 @@ public class BossBall : MonoBehaviour, IReflectable {
         if (collision.collider.tag == "Wall") {
             if (_mustDie) {
                 Die();
-            } else {
-                _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
             }
+            //else {
+            //    _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
+            //}
         }
 
         if (collision.transform.CompareTag("Player")) {
@@ -84,7 +86,7 @@ public class BossBall : MonoBehaviour, IReflectable {
         }
     }
 
-    void Die() {
+    protected void Die() {
         gameObject.SetActive(false);
         Destroy(gameObject);
     }

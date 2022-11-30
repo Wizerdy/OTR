@@ -4,9 +4,11 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using ToolsBoxEngine;
 
 public class Cage : MonoBehaviour {
-    [SerializeField] Material _material;
+    [SerializeField] GameObject _mask;
+    [SerializeField] GameObject _spike;
     Transform _topLeft;
     Transform _botRight;
     Vector2 _position;
@@ -63,6 +65,64 @@ public class Cage : MonoBehaviour {
 
     private void Start() {
         transform.position = _position;
+        MakeMesh();
+        _mask.transform.position = _position;
+        _mask.transform.localScale = new Vector3(_size.x, _size.y, 1);
+        _spike.transform.position = _position;
+        _spike.GetComponent<Animator>().SetTrigger("Up");
+        StartCoroutine(Tools.Delay(() => _spike.GetComponent<SpriteRenderer>().size = new Vector2(_botRight.transform.position.x - _topLeft.transform.position.x, _topLeft.transform.position.y - _botRight.transform.position.y), 0.1f));
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Player")) {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null) {
+                return;
+            }
+            if (!_hits.ContainsKey(found)) {
+                _hits.Add(found, Vector2.zero);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        // Debug.Log("Exit : " + collision.gameObject.GetRoot());
+        if (collision.CompareTag("Player")) {
+            IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
+            if (found == null) {
+                return;
+            }
+            if (_hits.ContainsKey(found)) {
+                _hits.Remove(found);
+            }
+        }
+    }
+
+    private void Update() {
+        if (_hits.Count != 0) {
+            foreach (KeyValuePair<IHealth, Vector2> keys in _hits.ToList()) {
+                Vector2 time = keys.Value;
+                time.x += Time.deltaTime;
+                if (time.x >= _tick) {
+                    time.x -= _tick;
+                    if (time.y == 0) {
+                        time.y += _damagesEveryTick;
+                    } else {
+                        time.y += _damagesBonusEveryTick;
+                    }
+                    keys.Key.TakeDamage((int)time.y, gameObject);
+                }
+                _hits[keys.Key] = time;
+            }
+        }
+    }
+
+    void Die() {
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+
+    void MakeMesh() {
         _mesh = new Mesh();
         _mesh.vertices = new Vector3[] {
              new Vector3(_topLeft.position.x,_topLeft.position.y,0),
@@ -90,7 +150,6 @@ public class Cage : MonoBehaviour {
         _filter.mesh = _mesh;
         _beforeDie = new Timer(this, _duration, false);
         _beforeDie.OnActivate += Die;
-        gameObject.GetComponent<Renderer>().material = _material;
         Vector2[] points = new Vector2[] {
              new Vector3(_topLeft.position.x,_topLeft.position.y,0),
             new Vector2( _botRight.position.x, _topLeft.position.y),
@@ -116,50 +175,5 @@ public class Cage : MonoBehaviour {
         boxCollider2D[2].gameObject.transform.position = new Vector2(0, (bigSize.y - _size.y) / 4 + _size.y / 2);
         boxCollider2D[3].size = new Vector2(_size.x, (bigSize.y - _size.y) / 2);
         boxCollider2D[3].gameObject.transform.position = new Vector2(0, -((bigSize.y - _size.y) / 4 + _size.y / 2));
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (!_hits.ContainsKey(found)) {
-            _hits.Add(found, Vector2.zero);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        // Debug.Log("Exit : " + collision.gameObject.GetRoot());
-        IHealth found = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (found == null) {
-            return;
-        }
-        if (_hits.ContainsKey(found)) {
-            _hits.Remove(found);
-        }
-    }
-
-    private void Update() {
-        if (_hits.Count != 0) {
-            foreach (KeyValuePair<IHealth, Vector2> keys in _hits.ToList()) {
-                Vector2 time = keys.Value;
-                time.x += Time.deltaTime;
-                if (time.x >= _tick) {
-                    time.x -= _tick;
-                    if (time.y == 0) {
-                        time.y += _damagesEveryTick;
-                    } else {
-                        time.y += _damagesBonusEveryTick;
-                    }
-                    keys.Key.TakeDamage((int)time.y, gameObject);
-                }
-                _hits[keys.Key] = time;
-            }
-        }
-    }
-
-    void Die() {
-        gameObject.SetActive(false);
-        Destroy(gameObject);
     }
 }

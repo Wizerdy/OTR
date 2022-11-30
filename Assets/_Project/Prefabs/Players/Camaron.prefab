@@ -883,7 +883,6 @@ MonoBehaviour:
   _damage: 5
   _damageables:
     tags:
-    - Untagged
     - Respawn
     - Finish
     - EditorOnly
@@ -2224,7 +2223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ab7d7f9db11e7459a6ff26bf3fea7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincibleLayer: 
+  _invincibleLayer: PlayerInAir
   _colliders:
   - {fileID: 4457475169470103257}
   _health: {fileID: 147940007823276091}

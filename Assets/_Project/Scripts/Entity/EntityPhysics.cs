@@ -13,14 +13,13 @@ public class EntityPhysics : MonoBehaviour, IEntityAbility {
     public Vector2 Velocity => _rb.velocity;
 
     private void FixedUpdate() {
+        _rb.velocity = ComputeForces();
         foreach (KeyValuePair<int, List<Force>> pair in _forces) {
             for (int i = 0; i < pair.Value.Count; i++) {
                 if (pair.Value[i].Ignored) { continue; }
                 pair.Value[i].Update(Time.fixedDeltaTime);
             }
         }
-
-        _rb.velocity = ComputeForces();
     }
 
     #region Get/Set

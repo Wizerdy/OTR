@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 //[RequireComponent(typeof(AudioSource))]
 public class PlaySound : MonoBehaviour {
@@ -13,9 +14,11 @@ public class PlaySound : MonoBehaviour {
     //    }
     //}
 
-    public void Init() {
+    public void Init(AudioMixerGroup _mixer) {
         if (!audioSource)
             audioSource = GetComponent<AudioSource>();
+
+        audioSource.outputAudioMixerGroup = _mixer;
     }
 
     public IEnumerator StartSound() {

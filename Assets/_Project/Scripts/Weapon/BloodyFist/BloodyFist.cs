@@ -101,6 +101,7 @@ public class BloodyFist : Weapon {
     protected override void _OnAttackTrigger(Collider2D collider) {
         //Debug.Log(collider.transform.gameObject);
         if (collider.CompareTag("Boss") || collider.CompareTag("Enemy")) {
+            Debug.Log("touché");
             _entityStorePoint.GainPoint(_hitStorePoint);
         }
         if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject /*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {

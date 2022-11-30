@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SoundManager : MonoBehaviour {
     public static SoundManager Instance { get; private set; }
@@ -17,6 +19,8 @@ public class SoundManager : MonoBehaviour {
     public bool activeMusic = true;
     [HideInInspector]
     public bool activeSfx = true;
+
+    [SerializeField] private AudioMixerGroup mixer;
 
     //[SerializeField]
     //private AudioMixer mainMixerAudio;
@@ -39,7 +43,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     private void Start() {
-
+        mixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 0.80f)) * 20);
     }
 
     private Sound FindSfx(AudioName audioName) {
@@ -83,7 +87,7 @@ public class SoundManager : MonoBehaviour {
         }
 
         source.sound = soundToPlay;
-        source.audioSource.clip = soundToPlay.audio[Random.Range(0,source.sound.audio.Length - 1)];
+        source.audioSource.clip = soundToPlay.audio[Random.Range(0, source.sound.audio.Length - 1)];
         source.audioSource.loop = soundToPlay.loop;
         source.audioSource.volume = soundToPlay.volume;
         //if (soundToPlay.playOnAwake) {
@@ -117,7 +121,7 @@ public class SoundManager : MonoBehaviour {
         source.audioSource.clip = soundToPlay.audio[Random.Range(0, source.sound.audio.Length - 1)];
         source.audioSource.loop = soundToPlay.loop;
         source.audioSource.volume = soundToPlay.volume;
-        
+
         //if (soundToPlay.playOnAwake) {
         obj.SetActive(true);
         StartCoroutine(source.StartSound());
@@ -173,7 +177,7 @@ public class SoundManager : MonoBehaviour {
         source.transform.parent = transform;
         source.AddComponent<AudioSource>();
         var play = source.AddComponent<PlaySound>();
-        play.Init();
+        play.Init(mixer);
 
         source.SetActive(false);
 

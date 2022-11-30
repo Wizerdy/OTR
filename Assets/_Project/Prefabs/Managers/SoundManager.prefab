@@ -97,3 +97,4 @@ MonoBehaviour:
     maxPitch: 1.1
   activeMusic: 1
   activeSfx: 1
+  mixer: {fileID: 24300002, guid: 556c684c93cd87a41884bf186bdd3925, type: 2}

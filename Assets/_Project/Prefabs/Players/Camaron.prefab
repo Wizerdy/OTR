@@ -859,6 +859,8 @@ MonoBehaviour:
     - MainCamera
     - GameController
     - Enemy
+    - Boss
+    - BossItem
     state: 1
   _destroyOnHit: 0
   _onlyDamageOnceEach: 1
@@ -1426,7 +1428,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 20
   m_Sprite: {fileID: -837968952, guid: 80e4fc654764c8a44b98e6bad12173a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

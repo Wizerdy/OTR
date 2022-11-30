@@ -200,7 +200,6 @@ MonoBehaviour:
   _damageables:
     tags:
     - Enemy
-    - Boss
     state: 1
   _destroyOnHit: 1
   _onlyDamageOnceEach: 1

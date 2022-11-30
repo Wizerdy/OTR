@@ -126,5 +126,9 @@ public class DamageHealth : MonoBehaviour {
     public void Hit(Collider2D collision) {
         Collide(collision.gameObject, !collision.isTrigger);
     }
+
+    public void IgnoreCollisionOnce(GameObject obj) {
+        _hitted.Add(obj);
+    }
 }
 

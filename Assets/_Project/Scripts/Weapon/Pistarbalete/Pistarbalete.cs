@@ -22,6 +22,8 @@ public class Pistarbalete : Weapon {
     [SerializeField] int _sbThreatPoint = 5;
 
     bool _aiming = false;
+    string _attackTriggerName = "Crossgun_Attack";
+    string _boostTriggerName = "Crossgun_Boost";
 
     protected override void _OnStart() {
         _type = WeaponType.CROSSGUN;
@@ -56,9 +58,10 @@ public class Pistarbalete : Weapon {
     #endregion
 
     protected IEnumerator INormalShoot(EntityAbilities entityAbilities, Vector2 direction) {
-        //if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+        if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
-        //_targetAnimator.SetTrigger(_triggerName);
+        _targetAnimator.SetTrigger(_attackTriggerName);
+
         GameObject go = Instantiate(_bolt, transform.position, Quaternion.LookRotation(Vector3.forward, direction));
         //go.GetComponent<Rigidbody2D>().velocity = direction * _boltSpeed;
         go.GetComponent<Bolt>()?.SetDamage(_boltDamages)?.SetSpeed(_boltSpeed)?.SetDirection(direction);
@@ -78,12 +81,16 @@ public class Pistarbalete : Weapon {
     }
 
     protected IEnumerator IBuffShoot(EntityAbilities entityAbilities, Vector2 direction) {
+        if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+
+        _targetAnimator.SetTrigger(_boostTriggerName);
+
         EntityPhysicMovement movements = entityAbilities.Get<EntityPhysicMovement>();
 
         if (_aiming || (movements?.Moving ?? false)) {
             GameObject go = Instantiate(specialBolt, transform.position, Quaternion.LookRotation(Vector3.forward, direction));
             go.GetComponent<Rigidbody2D>().velocity = direction * _sbSpeed;
-            go.GetComponent<DamageHealth>()?.Hitted.Add(entityAbilities.gameObject);
+            go.GetComponent<DamageHealth>()?.IgnoreCollisionOnce(entityAbilities.gameObject);
         } else {
             EntityPowerUp pu = entityAbilities.Get<EntityPowerUp>();
             if (pu != null) {

@@ -61,7 +61,7 @@ public class AxeShield : Weapon
     }
 
     protected override void _OnDrop(EntityHolding holding) {
-        _targetAnimator.SetBool(_boolName_aim, false);
+        //_targetAnimator.SetBool(_boolName_aim, false);
         _aiming = false;
         MoveSpeed = _baseSpeed;
     }

@@ -81,10 +81,9 @@ MonoBehaviour:
   _storePointMax: 50
   _hitDamage: 10
   _hitThreatPoint: 10
-  _hitCooldown: 0.5
+  _hitCooldown: 0.15
   _hitStorePoint: 10
   _hitStorePointCost: 30
-  _pushAttackTime: 0.2
   _bumpForce: {fileID: 11400000, guid: 41e3b62926bd9e143a6dfd62c210a4e5, type: 2}
   _storePointCost: 0
   _dashCooldown: 0

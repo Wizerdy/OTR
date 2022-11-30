@@ -82,6 +82,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     public void PressAttack(AttackIndex type, Vector2 direction) {
         if (_weaponry.HasWeapon) {
             _weaponry.PressAttack(type, _abilities, direction);
+            if (direction != Vector2.zero) { _animator?.SetFloat("x", direction.x); _animator?.SetFloat("y", direction.y); }
         }
     }
 

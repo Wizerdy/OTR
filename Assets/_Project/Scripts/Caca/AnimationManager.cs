@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour {
-    [SerializeField] Animator _animator;
+    Animator _animator;
 
     private void Start() {
         _animator = GetComponent<Animator>();
@@ -14,5 +14,13 @@ public class AnimationManager : MonoBehaviour {
 
     public void SetAnimationBoolFalse(string animation) {
         _animator.SetBool(animation, false);
+    }
+
+    public void DestroyGameObject() {
+        Destroy(gameObject);
+    }
+
+    public void DestroyParent() {
+        Destroy(transform.parent.gameObject);
     }
 }

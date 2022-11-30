@@ -4,15 +4,17 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class ForAllerParasite : MonoBehaviour {
-    [SerializeField] Sprite _damageSprite;
     [SerializeField] List<ForAllerParasite> _parasites;
-    [SerializeField] float _timeVisible = 0.5f;
+    [SerializeField] Sprite _arrowSprite;
+    [SerializeField] Sprite _checkSprite;
+    [SerializeField] GameObject _arrow;
+    [SerializeField] SpriteRenderer _arrowGraphics;
+    [SerializeField] Animator _animator;
     float _timeBeforeActivation;
     IHealth _host;
     Vector2 _distMinMax;
     Vector2 _damagesVector;
     bool _damageDone;
-    SpriteRenderer _sr;
 
     public ForAllerParasite ChangeTimeBeforeActivation(float newTime) {
         _timeBeforeActivation = newTime;
@@ -42,8 +44,31 @@ public class ForAllerParasite : MonoBehaviour {
 
 
     private void Start() {
-        _sr = GetComponent<SpriteRenderer>();
         StartCoroutine(Tools.Delay(() => Parasited(), _timeBeforeActivation));
+    }
+
+    private void Update() {
+        float dist = 10000f;
+        int parasite = 0;
+        for (int i = 0; i < _parasites.Count; i++) {
+            if (_parasites[i] != this && _distMinMax.x < Vector3.Distance(_parasites[i].transform.position, transform.position) && dist > Vector3.Distance(_parasites[i].transform.position, transform.position)) {
+                dist = Vector3.Distance(_parasites[i].transform.position, transform.position);
+                parasite = i;
+            }
+        }
+        Quaternion rotation;
+        if (dist == 10000f) {
+            _arrowGraphics.sprite = _checkSprite; 
+            rotation = Quaternion.Euler(0, 0, 180);
+        } else {
+            if (_parasites[parasite].gameObject.transform.position.x < _arrow.transform.position.x) {
+                rotation = Quaternion.Euler(0, 0, Vector3.Angle(Vector3.up, _parasites[parasite].gameObject.transform.position - _arrow.transform.position));
+            } else {
+                rotation = Quaternion.Euler(0, 0, -Vector3.Angle(Vector3.up, _parasites[parasite].gameObject.transform.position - _arrow.transform.position));
+            }
+            _arrowGraphics.sprite = _arrowSprite;
+        }
+        _arrow.transform.rotation = rotation;
     }
 
     void Parasited() {
@@ -53,7 +78,7 @@ public class ForAllerParasite : MonoBehaviour {
         for (int i = 0; i < _parasites.Count; i++) {
             if (_parasites.Count == 1) {
                 dist += _damagesVector.x;
-            } else if(i == 0){
+            } else if (i == 0) {
                 dist += Vector3.Distance(_parasites[i].transform.position, _parasites[_parasites.Count - 1].transform.position);
             } else {
                 dist += Vector3.Distance(_parasites[i - 1].transform.position, _parasites[i].transform.position);
@@ -67,9 +92,9 @@ public class ForAllerParasite : MonoBehaviour {
     }
 
     public void DoDamage(int damages) {
-        _sr.sprite = _damageSprite;
+        _arrowGraphics.gameObject.SetActive(false);
+        _animator.SetTrigger("Spark");
         _damageDone = true;
         _host.TakeDamage(damages, gameObject);
-        StartCoroutine(Tools.Delay(() => Destroy(gameObject), _timeVisible)); 
     }
 }

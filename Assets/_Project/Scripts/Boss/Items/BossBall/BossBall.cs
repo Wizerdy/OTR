@@ -12,6 +12,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected float _duration;
     [SerializeField] protected int _damages;
     [SerializeField] protected Vector2 _reminder;
+    [SerializeField] protected Vector2 _lastDir;
     [SerializeField] protected Force _bounceForce;
     [SerializeField] protected bool _destroyOnPlayerHit = false;
     protected bool _mustDie = false;
@@ -47,6 +48,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     protected void Start() {
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = _startDirection.normalized * _speed;
+        _lastDir = _rb.velocity;
         GetComponent<DamageHealth>().Damage = _damages;
         _deathTimer = new Timer(this, _duration, false);
         _deathTimer.OnActivate += () => _mustDie = true;
@@ -55,10 +57,14 @@ public class BossBall : MonoBehaviour, IReflectable {
     }
 
     private void Update() {
-        _reminder = _rb.velocity;
+        if(_rb.velocity.magnitude < 0.05f) {
+            _rb.velocity = _lastDir; ;
+        } 
+            _reminder = _rb.velocity;
     }
     public virtual void Hit(Collision2D collision) {
         if (collision.collider.tag == "Wall") {
+            _lastDir = _rb.velocity;
             if (_mustDie) {
                 Die();
             }

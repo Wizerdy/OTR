@@ -29,6 +29,7 @@ public class BarLinkerHealth : MonoBehaviour {
         _atomeBar.ChangeMinValue(0);
         _atomeBar.Add(_health.Instance.CurrentHealth);
         _atomeBar.UpdateSlider();
+        _atomeBar.ReduceNumberOfBar(1);
     }
 
     private void _OnHit(int value) {

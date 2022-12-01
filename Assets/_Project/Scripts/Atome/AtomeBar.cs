@@ -5,13 +5,17 @@ using UnityEngine.UI;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
+using TMPro;
 
 public class AtomeBar : MonoBehaviour {
     [SerializeField] Slider _slider;
+    [SerializeField] TMP_Text numBar;
     [SerializeField] float _maxValue;
     [SerializeField] float _minValue;
     [SerializeField] float _currentValue;
     [SerializeField, HideInInspector] BetterEvent<Slider> _onValueChanged = new BetterEvent<Slider>();
+    [SerializeField] private int maxNumberOfBar = 10;
+    private int numberOfBarLeft;
 
     public float Value { get => _currentValue; }
     public float MaxValue { get => _maxValue; }
@@ -33,6 +37,11 @@ public class AtomeBar : MonoBehaviour {
         _slider.minValue = _minValue;
         _slider.maxValue = _maxValue;
         _onValueChanged?.Invoke(_slider);
+
+        if (numBar) {
+            numberOfBarLeft = maxNumberOfBar + 1;
+            numBar.text = numberOfBarLeft.ToString();
+        }
     }
 
     public void Add(float value) {
@@ -81,5 +90,12 @@ public class AtomeBar : MonoBehaviour {
         }
         UpdateSlider();
         return _minValue;
+    }
+
+    public void ReduceNumberOfBar(int numberOfBarToRemove) {
+        if (numBar) {
+            numberOfBarLeft -= numberOfBarToRemove;
+            numBar.text = numberOfBarLeft.ToString();
+        }
     }
 }

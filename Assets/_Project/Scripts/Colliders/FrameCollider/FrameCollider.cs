@@ -30,7 +30,7 @@ public class FrameCollider : MonoBehaviour {
         }
 
         public Collider2D[] Overlap(Transform parent) {
-            return Physics2D.OverlapCircleAll(position + parent.Position2D(), radius);
+            return Physics2D.OverlapCircleAll(parent.localToWorldMatrix.MultiplyVector(position) + parent.position, radius);
         }
     }
 
@@ -74,6 +74,7 @@ public class FrameCollider : MonoBehaviour {
         List<Collider2D> output = new List<Collider2D>();
         Collider2D[] colliders;
 
+        //Debug.Log(transform.Position2D() + " .. " + transform.localToWorldMatrix);
         for (int i = 0; i < _overlapCircle.Count; i++) {
             if (_overlapCircle[i].index != _currentIndex) { continue; }
 
@@ -84,16 +85,16 @@ public class FrameCollider : MonoBehaviour {
                 }
             }
         }
-        for (int i = 0; i < _overlapRectangle.Count; i++) {
-            if (_overlapRectangle[i].index != _currentIndex) { continue; }
+        //for (int i = 0; i < _overlapRectangle.Count; i++) {
+        //    if (_overlapRectangle[i].index != _currentIndex) { continue; }
 
-            colliders = _overlapCircle[i].value.Overlap(transform);
-            for (int j = 0; j < colliders.Length; j++) {
-                if (!output.Contains(colliders[j])) {
-                    output.Add(colliders[j]);
-                }
-            }
-        }
+        //    colliders = _overlapCircle[i].value.Overlap(transform);
+        //    for (int j = 0; j < colliders.Length; j++) {
+        //        if (!output.Contains(colliders[j])) {
+        //            output.Add(colliders[j]);
+        //        }
+        //    }
+        //}
 
         return output.ToArray();
     }

@@ -20,6 +20,8 @@ public class PhysicForce : MonoBehaviour {
     Force _forceMovement;
     bool _inUse = false;
 
+    public bool InUse => _inUse;
+
     public event UnityAction OnStart { add => _onStart += value; remove => _onStart -= value; }
     public event UnityAction OnEnd { add => _onEnd += value; remove => _onEnd -= value; }
 

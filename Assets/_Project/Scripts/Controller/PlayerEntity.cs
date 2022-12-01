@@ -10,6 +10,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     //[SerializeField] EntityMovement _movements;
     [SerializeField] EntityAbilities _abilities;
     [SerializeField] PhysicForce _dashForce;
+    [SerializeField] Health _health;
     [Header("Abilities")]
     [SerializeField] EntityPhysicMovement _pMovements;
     [SerializeField] EntityOrientation _oriention;
@@ -18,15 +19,22 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     [SerializeField] EntityTryCatch _catch;
     [SerializeField] EntityDirectionnalSprite _directionnalSprite;
     [SerializeField] EntityInvincibility _invincibility;
+    [SerializeField] EntityRevive _revive;
     [SerializeField] ColliderDelegate _interactCollider;
     [Header("Graphics")]
     [SerializeField] Animator _animator;
     [SerializeField] TrajectoryLine _trajectoryLine;
+    [SerializeField] GameObject _aimingCircle;
+    [Header("Parameters")]
+    [SerializeField] float _heartMassageStopTime = 1f;
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
+    [SerializeField] BetterEvent _onDeath = new BetterEvent();
+    [SerializeField] BetterEvent _onRevive = new BetterEvent();
 
     Token _canLookAround = new Token();
     Token _showAimLine = new Token();
+    bool _dead = false;
 
     public bool HasWeapon => _weaponry.HasWeapon;
     public Weapon Weapon => _weaponry.Weapon;
@@ -34,6 +42,8 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }
 
     public event UnityAction<Vector2> OnAim { add => _onAim += value; remove => _onAim -= value; }
+    public event UnityAction OnDeath { add => _onDeath += value; remove => _onDeath -= value; }
+    public event UnityAction OnRevive { add => _onRevive += value; remove => _onRevive -= value; }
 
     private void OnEnable() {
         _interactCollider.OnCollisionEnter += _Pickup;
@@ -44,6 +54,9 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
 
         _weaponry.OnAttack += _OnAttackStart;
         _weaponry.OnAttackEnd += _OnAttackEnd;
+
+        _health.OnDeath += _InvokeDeath;
+        _health.OnRevive += _InvokeRevive;
     }
 
     public void Move(Vector2 direction) {
@@ -69,6 +82,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     public void PressAttack(AttackIndex type, Vector2 direction) {
         if (_weaponry.HasWeapon) {
             _weaponry.PressAttack(type, _abilities, direction);
+            if (direction != Vector2.zero) { _animator?.SetFloat("x", direction.x); _animator?.SetFloat("y", direction.y); }
         }
     }
 
@@ -79,6 +93,9 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     }
 
     public void Dash(Vector2 direction) {
+        if (_dead) { return; }
+        if (_dashForce.InUse) { return; }
+        _animator.SetTrigger("Dodge");
         _dashForce.Use(direction, (int)PhysicPriority.DASH);
     }
 
@@ -87,9 +104,43 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
         _trajectoryLine?.gameObject.SetActive(_showAimLine.HasToken);
     }
 
+    public bool TryRevive() {
+        bool revive = _revive.CheckRevive();
+        if (revive) {
+            _animator.SetFloat("y", 1f);
+            _animator.SetFloat("x", 0f);
+            _pMovements.CanMove = false;
+            _pMovements.Stop();
+            _root.position = _revive.Target?.gameObject.GetRoot().transform.Position2D() + new Vector2(0.45f, -0.01f) ?? _root.position;
+            StartCoroutine(Tools.Delay(() => _pMovements.CanMove = true, _heartMassageStopTime));
+        }
+        return revive;
+    }
+
+    private void Die() {
+        if (_dead) { return; }
+        _pMovements.CanMove = false;
+        CanLookAround = false;
+        ShowAimLine(false);
+        Throw(Random.insideUnitCircle.normalized);
+        _animator.SetBool("Dead", true);
+        _aimingCircle?.SetActive(false);
+        _dead = true;
+    }
+
+    private void Revive() {
+        if (!_dead) { return; }
+        _pMovements.CanMove = true;
+        CanLookAround = true;
+        _dead = false;
+        _aimingCircle?.SetActive(true);
+        _animator.SetBool("Dead", false);
+    }
+
     #region Item interaction
 
     public void Pickup(GameObject obj) {
+        if (_dead) { return; }
         _holding.Pickup(obj);
         Weapon weapon = obj.GetComponentInRoot<Weapon>();
         if (weapon != null) {
@@ -152,6 +203,16 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
             _pMovements.CanMove = true;
             CanLookAround = true;
         }
+    }
+
+    private void _InvokeDeath() {
+        Die();
+        _onDeath.Invoke();
+    }
+
+    private void _InvokeRevive() {
+        Revive();
+        _onRevive.Invoke();
     }
 
     #endregion

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8843390737220182632}
   - component: {fileID: 2833661871504775064}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: LeftFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1640642492881065170}
   - component: {fileID: 2200106324864427959}
   - component: {fileID: 512749505569021119}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5823343919441645803}
   - component: {fileID: 2426608826635249735}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7461312286733177496}
   - component: {fileID: 501702028225287390}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6971676425291232722}
   - component: {fileID: 872881122721283530}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: RightFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8233154455622905100}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 712202696041146636, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}
       propertyPath: m_Name
       value: Trail
+      objectReference: {fileID: 0}
+    - target: {fileID: 712202696041146636, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: 8e11317b02a46a545a167f370515e4e7, type: 3}
-  m_Color: {r: 0, g: 0.8087063, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   _duration: 0
   _damages: 0
   _reminder: {x: 0, y: 0}
+  _lastDir: {x: 0, y: 0}
   _bounceForce:
     _strength: 0
     _direction: {x: 0, y: 0}

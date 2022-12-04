@@ -3,6 +3,8 @@ using UnityEngine;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
+using static UnityEngine.GraphicsBuffer;
+using System.Collections;
 
 public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityAbilities _entityAbilities;
@@ -17,6 +19,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     BossAttack _nextAttack;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
+    bool died = false;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
     private void Start() {
@@ -40,6 +43,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     }
 
     void Attack() {
+        if(died) { return; }
         FlipRight(true);
         if (_currentAttack != null)
             _currentAttack.Finished -= Attack;
@@ -54,16 +58,41 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     }
 
     public void PhasePlusPlus() {
-        _currentPhase++;
-        TeleportCenter();
-        _entityAbilities.Get<EntityPhysics>().Purge();
-        _currentAttack.StopAllCoroutines();
-        StartCoroutine(Tools.Delay(() => Attack(), _delayAttackNewPhase));
+        if (died) { return; }
         _newPhase?.Invoke();
+        _entityAbilities.Get<EntityPhysics>().Purge();
+        StopAllCoroutines();
+        _currentAttack.StopAllCoroutines();
+        StartCoroutine(TeleportCenter());
+        _currentPhase++;
+        
+       // _animator.SetTrigger("NewPhase");
     }
 
-    void TeleportCenter() {
+    IEnumerator TeleportCenter() {
+        if (died) { yield break; }
+        foreach (AnimatorControllerParameter parameter in _animator.parameters) {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+                _animator.SetBool(parameter.name, false);
+            if(parameter.type == AnimatorControllerParameterType.Trigger)
+                _animator.ResetTrigger(parameter.name);
+        }
+        Health health = _entityAbilities.GetComponentInChildren<Health>();
+        health.CanTakeDamage = false;
+        SetAnimationTrigger("StartTp");
+        while (!GetAnimationBool("CanTp1")) {
+            yield return null;
+        }
         _entityAbilities.transform.position = _center.position;
+        SetAnimationTrigger("EndTp");
+        while (!GetAnimationBool("CanTp2")) {
+            yield return null;
+        }
+        SetAnimationBool("CanTp1", false);
+        SetAnimationBool("CanTp2", false);
+        health.CanTakeDamage = true;
+        yield return new WaitForSeconds(_delayAttackNewPhase);
+        Attack();
     }
 
     public void SetAnimationTrigger(string animation) {
@@ -92,5 +121,12 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         } else {
             _spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    public void Die() {
+        died = true;
+        StopAllCoroutines();
+        _currentAttack.StopAllCoroutines();
+        _animator.SetTrigger("Died");
     }
 }

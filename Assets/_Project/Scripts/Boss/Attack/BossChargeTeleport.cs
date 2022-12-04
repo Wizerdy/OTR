@@ -20,4 +20,8 @@ public class BossChargeTeleport : BossCharge {
         _entityBoss.SetAnimationBool("CanTp2", false);
         yield return Charge(target.position, _speed);
     }
+
+    IEnumerator cef() {
+        yield return null;
+    }
 }

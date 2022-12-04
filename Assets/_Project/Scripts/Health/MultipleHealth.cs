@@ -8,7 +8,8 @@ public class MultipleHealth : MonoBehaviour {
     Health _health;
     [SerializeField] List<int> _healths = new List<int>();
     [SerializeField] int _currentHealth = -1;
-
+    [SerializeField] BetterEvent _onRealDeath = new BetterEvent();
+    public event UnityAction OnRealDeath { add => _onRealDeath.AddListener(value); remove => _onRealDeath.RemoveListener(value); }
     private void Start() {
         _health = GetComponent<Health>();
         _currentHealth = -1;
@@ -26,6 +27,6 @@ public class MultipleHealth : MonoBehaviour {
     }
 
     void Die() {
-        Destroy(gameObject.transform.parent.gameObject);
+        _onRealDeath?.Invoke();
     }
 }

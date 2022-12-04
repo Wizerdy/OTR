@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 716290400826871089}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 09f0aa6a15906144da4747a59ef3b95f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 932e36b6ad8fc494b85cbfaab9a7091f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   _duration: 0
   _damages: 0
   _reminder: {x: 0, y: 0}
+  _lastDir: {x: 0, y: 0}
   _bounceForce:
     _strength: 30
     _direction: {x: 0, y: 0}

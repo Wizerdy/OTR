@@ -42,7 +42,6 @@ public class BossTrap : BossAttack {
             position = new Vector3(x, y, 0);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, _minimumDistBetween);
             foreach (Collider2D collider in colliders) {
-                Debug.Log(collider.gameObject);
                 if (collider.gameObject.GetComponent<Trap>() != null) {
                     placed = false;
                 }

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: 8e11317b02a46a545a167f370515e4e7, type: 3}
-  m_Color: {r: 0.22745085, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 2728441599799588046}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 09f0aa6a15906144da4747a59ef3b95f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6a8143f1ddcc53e4481b62fb4f213415, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 7664188759876081843}
   - component: {fileID: -3499688898107672776}
   - component: {fileID: 4263007696735338259}
+  - component: {fileID: -8345608687735923648}
   m_Layer: 15
   m_Name: ParriedBall
   m_TagString: BossItem
@@ -316,3 +317,15 @@ MonoBehaviour:
       _event:
         m_PersistentCalls:
           m_Calls: []
+--- !u!114 &-8345608687735923648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2960929105861941386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

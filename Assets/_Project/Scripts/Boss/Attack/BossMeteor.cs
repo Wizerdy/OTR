@@ -17,6 +17,7 @@ public class BossMeteor : BossAttack {
 
 
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
+        _entityBoss.SetAnimationTrigger("Meteor");
         Physics2D.queriesHitTriggers = true;
         for (int i = 0; i < _number; i++) {
             MeteorFall();

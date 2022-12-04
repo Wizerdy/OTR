@@ -40,7 +40,7 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator Charge(Vector3 targetPosition, float speed) {
-        Vector3 direction = targetPosition - _transform.position;
+        Vector3 direction = (targetPosition - _transform.position).normalized;
         float angle = Vector2.Angle(Vector2.up, direction);
         if (angle < angleTopBotCharge) {
             _entityBoss.SetAnimationBool("ChargingTop", true);
@@ -88,7 +88,7 @@ public class BossCharge : BossAttack {
     }
 
     protected IEnumerator ChargeDestination(Vector3 destination, float speed) {
-        Vector3 direction = destination - _transform.position;
+        Vector3 direction = (destination - _transform.position).normalized;
         float angle = Vector2.Angle(Vector2.up, direction);
         if (angle < angleTopBotCharge) {
             _entityBoss.SetAnimationBool("ChargingTop", true);

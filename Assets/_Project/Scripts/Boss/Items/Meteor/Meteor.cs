@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolsBoxEngine;
 
 public class Meteor : MonoBehaviour {
-    int _damages;
+    [SerializeField] int _damages;
     [SerializeField] float _timeBeforeFall;
     List<IHealth> _hit = new List<IHealth>();
     Animator _animator;
@@ -19,8 +20,8 @@ public class Meteor : MonoBehaviour {
 
     void Start() {
         _animator = GetComponent<Animator>();
-        GetComponent<Collider2D>().enabled = true;
-        _animator.SetTrigger("Spark");
+        StartCoroutine(Sparkkk());
+
     }
 
 
@@ -32,10 +33,17 @@ public class Meteor : MonoBehaviour {
     //    }
     //}
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerStay2D(Collider2D collision) {
         IHealth health = collision.gameObject.GetRoot().GetComponent<IHealth>();
-        if (health != null && collision.CompareTag("Player")) {
+        if (health != null && collision.CompareTag("Player") && !_hit.Contains(health)) {
             health.TakeDamage(_damages, gameObject);
+            _hit.Add(health);
         }
+    }
+
+    IEnumerator Sparkkk() {
+        yield return new WaitForSeconds(_timeBeforeFall);
+        GetComponent<Collider2D>().enabled = true;
+        _animator.SetTrigger("Spark");
     }
 }

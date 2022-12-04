@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7144915998696073961}
   - component: {fileID: 6351514795031369690}
   - component: {fileID: 3433317966079787282}
+  - component: {fileID: 4943870382881202609}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb24f8968ad4934db23b6e9ddc6dd58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damages: 0
+  _timeBeforeFall: 0
 --- !u!70 &7144915998696073961
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -95,6 +98,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 618f8a14918955343842b09b2071363e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4943870382881202609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900636882094439413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8736696915297966972
@@ -254,8 +269,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -685543418, guid: a079ed42fc8269742a98268311fb21a7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 395042154, guid: a079ed42fc8269742a98268311fb21a7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

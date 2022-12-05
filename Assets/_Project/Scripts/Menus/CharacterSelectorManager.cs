@@ -2,12 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using ToolsBoxEngine.BetterEvents;
 
 public class CharacterSelectorManager : MonoBehaviour {
+    [SerializeField] BetterEvent _onReady = new BetterEvent();
+
     CharacterSelectorController[] _controllers;
     CharacterSelectorCanvas[] _canvas;
+
+    public event UnityAction OnReady { add => _onReady += value; remove => _onReady -= value; }
 
     void Start() {
         UserCreator.OnChange += _OnChange;
@@ -37,7 +43,7 @@ public class CharacterSelectorManager : MonoBehaviour {
 
     private void Update() {
         if (Ready()) {
-
+            _onReady.Invoke();
         }
     }
 

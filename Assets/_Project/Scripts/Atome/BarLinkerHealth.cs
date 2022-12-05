@@ -6,6 +6,7 @@ using ToolsBoxEngine;
 public class BarLinkerHealth : MonoBehaviour {
     [SerializeField] AtomeBar _atomeBar;
     [SerializeField] HealthReference _health;
+    [SerializeField] private BossBar bossBar;
 
     private void Reset() {
         _atomeBar = GetComponent<AtomeBar>();
@@ -29,7 +30,7 @@ public class BarLinkerHealth : MonoBehaviour {
         _atomeBar.ChangeMinValue(0);
         _atomeBar.Add(_health.Instance.CurrentHealth);
         _atomeBar.UpdateSlider();
-        _atomeBar.ReduceNumberOfBar(1);
+        bossBar?.ReduceNumberOfBar(1);
     }
 
     private void _OnHit(int value) {

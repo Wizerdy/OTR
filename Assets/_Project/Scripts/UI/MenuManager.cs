@@ -6,6 +6,11 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainScreen;
     [SerializeField] private GameObject optionScreen;
+    [SerializeField] private Animator doorAnimator;
+
+    public void StartGame() {
+        doorAnimator.enabled = true;
+    }
 
     public void BackToMainScreen() {
         optionScreen.SetActive(false);

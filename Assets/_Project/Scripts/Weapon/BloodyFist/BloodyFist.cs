@@ -47,6 +47,7 @@ public class BloodyFist : Weapon {
         _attacks.Add(AttackIndex.SECOND, new WeaponAttack(0f, 0, 0, BloodyDash));
         _dash = new Force(_dashForce, Vector2.zero, _dashWeight, Force.ForceMode.TIMED);
         _cooldown = new Timer(CoroutinesManager.Instance, _hitCooldown, false);
+        _type = WeaponType.BLOODFIST;
     }
 
     protected override void _OnDrop(EntityWeaponry entityWeaponry) {

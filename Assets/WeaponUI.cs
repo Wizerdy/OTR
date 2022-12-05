@@ -11,7 +11,7 @@ public class WeaponUI : MonoBehaviour {
     [SerializeField] Sprite fist;
     [SerializeField] Sprite shield;
     [SerializeField] Sprite instrument;
-    [SerializeField] ArmorModifier armorModifier;
+    [SerializeField] EntityArmor entityArmor;
     [SerializeField] EntityStorePoint entityStorePoint;
     int dirty = 0;
     private void Start() {
@@ -25,7 +25,8 @@ public class WeaponUI : MonoBehaviour {
             slider.value = entityStorePoint.CurrentValue;
             slider.maxValue = entityStorePoint.MaxValue;
         } else if (dirty == 2) {
-            slider.value = armorModifier.Value;
+            //Debug.Log(entityArmor.CurrentArmor + " .. " + slider.value);
+            slider.value = entityArmor.CurrentArmor;
         }
     }
 
@@ -41,7 +42,7 @@ public class WeaponUI : MonoBehaviour {
                 slider.gameObject.SetActive(true);
                 weaponImage.sprite = shield;
                 dirty = 2;
-                slider.value = ((AxeShield)weapon).entityArmor.MaxArmor;
+                slider.maxValue = ((AxeShield)weapon).entityArmor.MaxArmor;
                 break;
             case WeaponType.CROSSGUN:
                 weaponImage.sprite = instrument;
@@ -49,12 +50,10 @@ public class WeaponUI : MonoBehaviour {
         }
     }
 
-    void NoWeapon(Weapon weapon) {
+    void NoWeapon(Weapon _) {
         weaponImage.sprite = null;
         weaponImage.gameObject.SetActive(false);
         slider.gameObject.SetActive(false);
         dirty = 0;
     }
-
-
 }

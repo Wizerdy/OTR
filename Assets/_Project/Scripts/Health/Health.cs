@@ -71,6 +71,7 @@ public class Health : MonoBehaviour, IHealth {
     }
 
     public void TakeDamage(int amount, GameObject source = null) {
+        if (IsDead) { return; }
         if (!CanTakeDamage) { return; }
         for (int i = 0; i < _damageModifiers.Count; i++) {
             if (!_damageModifiers[i].enabled) { continue; }

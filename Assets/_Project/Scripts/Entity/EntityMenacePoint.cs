@@ -31,4 +31,9 @@ public class EntityMenacePoint : MonoBehaviour, IEntityAbility {
         if (!_menacePointSystem.IsValid()) { return; }
         _menacePointSystem.Instance.Remove(_entityAbilities, count);
     }
+
+    public void Set(int count) {
+        if (!_menacePointSystem.IsValid()) { return; }
+        _menacePointSystem.Instance.Set(_entityAbilities, count);
+    }
 }

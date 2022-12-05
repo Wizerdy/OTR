@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuDoor : MonoBehaviour
 {
@@ -11,6 +12,6 @@ public class MenuDoor : MonoBehaviour
     }
 
     public void OnDoorOpen() {
-        Debug.Log("next scene");
+        SceneManager.LoadScene("TheOne");
     }
 }

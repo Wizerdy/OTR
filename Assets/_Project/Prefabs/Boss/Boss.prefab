@@ -122,7 +122,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   _phases: {fileID: 0}
-  _delayAttackNewPhase: 5
+  _delayAttackNewPhase: 0.5
   _currentAttack: {fileID: 0}
 --- !u!1 &594866396
 GameObject:
@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 7856438785959955155}
   - component: {fileID: 5118097500843322543}
   - component: {fileID: 2011552968}
+  - component: {fileID: 923720220}
   m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
@@ -320,7 +321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2865910487610663474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -411,6 +412,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618f8a14918955343842b09b2071363e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &923720220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865910487610663474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f713559c882a34086f2a2d3645f5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _positionOffset: {x: 0, y: 0}
 --- !u!1 &2949079976842064426
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,8 +601,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5756415d796254c4184abe0230422e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healths: 050000000500000005000000
+  _healths: c2010000580200002602000026020000580200008a02000058020000ee0200002003000084030000
   _currentHealth: 0
+  _onRealDeath:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 550918137}
+          m_TargetAssemblyTypeName: EntityBoss, Assembly-CSharp
+          m_MethodName: Die
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1927637910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +665,7 @@ GameObject:
   - component: {fileID: 6842265518615937516}
   - component: {fileID: 6842265518615937522}
   - component: {fileID: 5595698917775893586}
+  - component: {fileID: 104992292}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Boss
@@ -693,7 +724,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3432b16f05f3c9d47a313193a935476e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -725,6 +756,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 6842265518615937517}
   target: {fileID: 11400000, guid: de0d0194f7dc89e42b51db02a94e850a, type: 2}
+--- !u!114 &104992292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842265518615937519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc4bbe369db5fa4997517044964bf9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimHelperReference: {fileID: 11400000, guid: d347a1e1c65ceeb459c0fe71bf19da75, type: 2}
+  _target: {fileID: 6842265518615937517}
+  _angle: 40
 --- !u!1 &6842265519080740268
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6842265519318550370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.93, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

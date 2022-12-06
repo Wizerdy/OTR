@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96f2dab950752814abbd1303d5aee755
+guid: 60425b861deb46446bebfde70506d7c6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,6 +100,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -118,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6c01a49e78f6114bbf557a423e797db
-      internalID: 1733681832
+      spriteID: 574748019f76b4440a166303655d73b9
+      internalID: 414982654
       vertices: []
       indices: 
       edges: []
@@ -139,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5910bba42635f524dbb86333e96153eb
-      internalID: -737751428
+      spriteID: e0db17de93044aa4885ee9a44b11e3e4
+      internalID: -1285946373
       vertices: []
       indices: 
       edges: []
@@ -160,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38ce177d56c46bf4799eefff92ed8114
-      internalID: 1016756160
+      spriteID: a8f167b5d9fc58440a09aa34ccd8b93c
+      internalID: 1508884187
       vertices: []
       indices: 
       edges: []
@@ -181,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 906b8956c17ea0940897c687e98fa879
-      internalID: 979177167
+      spriteID: 3286e0a8321db63489befd95cf91af07
+      internalID: 1961849824
       vertices: []
       indices: 
       edges: []
@@ -198,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Anim_Boss_Attack01_speed_0: 1733681832
-      Anim_Boss_Attack01_speed_3: 979177167
-      Anim_Boss_Attack01_speed_1: -737751428
-      Anim_Boss_Attack01_speed_2: 1016756160
+      Anim_Boss_Attack01_speed_0: 414982654
+      Anim_Boss_Attack01_speed_3: 1961849824
+      Anim_Boss_Attack01_speed_1: -1285946373
+      Anim_Boss_Attack01_speed_2: 1508884187
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

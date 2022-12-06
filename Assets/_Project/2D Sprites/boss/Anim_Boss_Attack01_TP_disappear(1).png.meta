@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4882c36c108a0e04ab38ceb494f5bf06
+guid: cbc61f0649762d94a99f392a02fb8142
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,11 +100,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_0
+      name: Anim_Boss_Attack01_TP_disappear(1)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b2798f4ee9b4114a975646165d94637
-      internalID: 534354661
+      spriteID: 3a0d465d75494104dba505c1d9a22fab
+      internalID: 1665397268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_1
+      name: Anim_Boss_Attack01_TP_disappear(1)_1
       rect:
         serializedVersion: 2
         x: 260
@@ -139,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3b47567e9d80b44584fba2d78297a17
-      internalID: -1088240319
+      spriteID: 7cfe28a34dc934f4087bd0172e50a451
+      internalID: -1087082683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_2
+      name: Anim_Boss_Attack01_TP_disappear(1)_2
       rect:
         serializedVersion: 2
         x: 520
@@ -160,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d50583dc58e7ad4781d581b3ae701ae
-      internalID: 1445304575
+      spriteID: 4eca73b93484e0c4499abbf8be43ea1b
+      internalID: 1555325592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_3
+      name: Anim_Boss_Attack01_TP_disappear(1)_3
       rect:
         serializedVersion: 2
         x: 780
@@ -181,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 117b43470d40d0e4ba2ad8f60e2ba170
-      internalID: 1835276026
+      spriteID: 93a7169a31f97234f961de837e5c592f
+      internalID: 887944842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_4
+      name: Anim_Boss_Attack01_TP_disappear(1)_4
       rect:
         serializedVersion: 2
         x: 1040
@@ -202,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e17ff41fc9d86bc4f89fa9a84ba75464
-      internalID: -410878707
+      spriteID: 9bca7f10c179dba4d97e8e1df58d8bd0
+      internalID: 1714315527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_5
+      name: Anim_Boss_Attack01_TP_disappear(1)_5
       rect:
         serializedVersion: 2
         x: 1300
@@ -223,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a6b51d6bbc735d4894e59d13a8d7cea
-      internalID: 2076062311
+      spriteID: 2d77bf5bdec63f4449bc45b228233e54
+      internalID: -325457855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim_Boss_Attack01_TP_reappear_6
+      name: Anim_Boss_Attack01_TP_disappear(1)_6
       rect:
         serializedVersion: 2
         x: 1560
@@ -244,8 +256,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 431f510be0e8e174ebed9d66b7be0b7f
-      internalID: -2136166377
+      spriteID: c8d6ab2f451fdc6419fe4545a3abdb6d
+      internalID: -1714620577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim_Boss_Attack01_TP_disappear(1)_7
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 0
+        width: 260
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10c38051c82e29a4b9e4b6db9bb27dc3
+      internalID: 2013147047
       vertices: []
       indices: 
       edges: []
@@ -261,13 +294,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Anim_Boss_Attack01_TP_reappear_6: -2136166377
-      Anim_Boss_Attack01_TP_reappear_2: 1445304575
-      Anim_Boss_Attack01_TP_reappear_3: 1835276026
-      Anim_Boss_Attack01_TP_reappear_4: -410878707
-      Anim_Boss_Attack01_TP_reappear_5: 2076062311
-      Anim_Boss_Attack01_TP_reappear_1: -1088240319
-      Anim_Boss_Attack01_TP_reappear_0: 534354661
+      Anim_Boss_Attack01_TP_disappear(1)_6: -1714620577
+      Anim_Boss_Attack01_TP_disappear(1)_5: -325457855
+      Anim_Boss_Attack01_TP_disappear(1)_4: 1714315527
+      Anim_Boss_Attack01_TP_disappear(1)_1: -1087082683
+      Anim_Boss_Attack01_TP_disappear(1)_2: 1555325592
+      Anim_Boss_Attack01_TP_disappear(1)_7: 2013147047
+      Anim_Boss_Attack01_TP_disappear(1)_3: 887944842
+      Anim_Boss_Attack01_TP_disappear(1)_0: 1665397268
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

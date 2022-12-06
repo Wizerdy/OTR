@@ -63,7 +63,8 @@ public class UserCreator : MonoBehaviour {
     }
 
     public static void DeleteUser(InputUser user) {
-        Debug.Log("Removed User:" + user.index + " devices:" + Print(user.pairedDevices));
+        if (!user.valid) { return; }
+        //Debug.Log("Removed User:" + user.index + " devices:" + Print(user.pairedDevices));
         user.UnpairDevicesAndRemoveUser();
     }
 

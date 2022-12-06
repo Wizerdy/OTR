@@ -23,6 +23,10 @@ public class CharacterSelectorManager : MonoBehaviour {
         _canvas = GetComponentsInChildren<CharacterSelectorCanvas>();
     }
 
+    private void OnDisable() {
+        UserCreator.OnChange -= _OnChange;
+    }
+
     void _OnChange(InputUser user, InputUserChange change) {
         switch (change) {
             case InputUserChange.Added:
@@ -48,6 +52,7 @@ public class CharacterSelectorManager : MonoBehaviour {
     }
 
     public bool Ready() {
+        if (_controllers == null) { return false; }
         for (int i = 0; i < _controllers.Length; i++) {
             if (!_controllers[i].Locked || !_controllers[i].HasUser) {
                 return false;

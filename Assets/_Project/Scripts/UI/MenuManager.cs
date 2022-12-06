@@ -13,20 +13,27 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Animator doorAnimator;
 
     public void StartGame() {
+        optionScreen.SetActive(false);
+        mainScreen.SetActive(false);
+        characterSelection.SetActive(false);
         doorAnimator.enabled = true;
     }
     public void GoToOption(GameObject objToSelect) {
         optionScreen.SetActive(true);
-        eventSystem.SetSelectedGameObject(null);
+        characterSelection.SetActive(false);
+        mainScreen.SetActive(false);
 
-        eventSystem.SetSelectedGameObject(objToSelect);
+        //eventSystem.SetSelectedGameObject(null);
+        //eventSystem.SetSelectedGameObject(objToSelect);
     }
 
     public void GoToCharacterSelection(GameObject objToSelect) {
         characterSelection.SetActive(true);
-        eventSystem.SetSelectedGameObject(null);
+        optionScreen.SetActive(false);
+        mainScreen.SetActive(false);
 
-        eventSystem.SetSelectedGameObject(objToSelect);
+        //eventSystem.SetSelectedGameObject(null);
+        //eventSystem.SetSelectedGameObject(objToSelect);
     }
 
 
@@ -35,8 +42,8 @@ public class MenuManager : MonoBehaviour
         characterSelection.SetActive(false);
         mainScreen.SetActive(true);
 
-        eventSystem.SetSelectedGameObject(null);
-        eventSystem.SetSelectedGameObject(objToSelect);
+        //eventSystem.SetSelectedGameObject(null);
+        //eventSystem.SetSelectedGameObject(objToSelect);
     }
 
     public void QuitGame() {

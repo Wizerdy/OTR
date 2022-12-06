@@ -42,7 +42,7 @@ public abstract class DamageModifier : MonoBehaviour {
                 amount = _value;
                 break;
             case ResistanceType.RESISTANCE:
-                amount = Mathf.Min(0, amount - _value);
+                amount = Mathf.Max(0, amount - _value);
                 break;
             case ResistanceType.IMMUNITY:
                 amount = 0;

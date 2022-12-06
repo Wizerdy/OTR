@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1976139205, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976139205, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_InstanceId
+      value: -443204
+      objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -51,6 +59,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2831378648292543862, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: _datas
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c6a54ef42cbded4cbe21c579ea2011f, type: 2}
     - target: {fileID: 3645087357924411892, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: _sprites.Array.data[0].sprite
       value: 
@@ -71,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pollo
       objectReference: {fileID: 0}
+    - target: {fileID: 4634665781983161743, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d14f4803ded8954fb78d4b76d1d61f8, type: 2}
     - target: {fileID: 4812016295901184202, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: target
       value: 

@@ -14,6 +14,9 @@ public class Introduction : MonoBehaviour {
     private void Intro() {
     }
     private IEnumerator PlayIntroduction() {
+        studioLogo.gameObject.SetActive(true);
+        introBackground.gameObject.SetActive(true);
+
         StartCoroutine(FadeImage(studioLogo, false));
 
         yield return new WaitForSeconds(2f);

@@ -23,7 +23,7 @@ public class AxeShield : Weapon
     [SerializeField] private int armorPointOnPickUp = 5;
 
     Vector2 aimingDirection;
-    private EntityArmor entityArmor;
+    public EntityArmor entityArmor;
 
     float _baseSpeed = 1f;
     bool _aiming = false;
@@ -50,6 +50,7 @@ public class AxeShield : Weapon
 
         _attacks.Add(AttackIndex.FIRST, attackParry);
         _attacks.Add(AttackIndex.SECOND, attackSlash);
+        _type = WeaponType.SHIELDAXE;
     }
 
     protected override void _OnPickup(EntityWeaponry weaponry) {

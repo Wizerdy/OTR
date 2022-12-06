@@ -15,6 +15,6 @@ public class WeaponThreat : MonoBehaviour {
     }
 
     void _AddThreatPoint(Weapon weapon, AttackIndex index, IHealth health, int damage) {
-        _menacePoints.Add(weapon.GetAttack(index).threatPoint);
+        _menacePoints.Add(weapon?.GetAttack(index).threatPoint ?? 0);
     }
 }

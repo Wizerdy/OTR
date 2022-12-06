@@ -941,6 +941,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 4675876260014165904}
+  _datas:
+  - {fileID: 11400000, guid: e7301c3f1500009459735d9cd366e74d, type: 2}
+  - {fileID: 11400000, guid: cf11e766b20b2c74c8fd0e8e82f504a8, type: 2}
+  - {fileID: 11400000, guid: 4c6a54ef42cbded4cbe21c579ea2011f, type: 2}
 --- !u!114 &4675876260014165904
 MonoBehaviour:
   m_ObjectHideFlags: 0

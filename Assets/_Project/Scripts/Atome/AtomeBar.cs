@@ -31,7 +31,6 @@ public class AtomeBar : MonoBehaviour {
     public void UpdateSlider() {
         if (_slider == null) return;
         _slider.value = Value;
-        Debug.Log(Value);
         _slider.minValue = _minValue;
         _slider.maxValue = _maxValue;
         _onValueChanged?.Invoke(_slider);

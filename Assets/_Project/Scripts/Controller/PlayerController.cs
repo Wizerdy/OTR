@@ -8,17 +8,20 @@ using ToolsBoxEngine;
 
 namespace InputUserController {
     public class PlayerController : MonoBehaviour {
-        [SerializeField] InputUser _user;
+        [SerializeField] CharacterData _datas;
         [SerializeField] PlayerEntity _player;
         [SerializeField] AimHelperReference _aimHelperReference;
 
+        InputUser _user;
         InputActionAsset _inputs;
 
+        Vector2 _aimDirection;
         bool _aiming = false;
         bool _aimLine = false;
 
         void Start() {
-            AssignActions(_inputs);
+            Debug.Log(name + " has User:" + _datas.User.id + " (" + _datas.name + ")");
+            AssignUser(_datas.User);
             _player.ShowAimLine(false);
         }
 
@@ -27,6 +30,7 @@ namespace InputUserController {
             if (direction != Vector2.zero) { direction = direction.normalized; }
             _player.Move(direction);
             if (!_aiming) { _player.Aim(direction, false); }
+            else { Aim(_aimDirection); }
         }
 
         private void OnDestroy() {
@@ -37,6 +41,7 @@ namespace InputUserController {
             if (actions == null) { return; }
 
             actions.FindActionMap("Gameplay").Enable();
+
             actions["Aim"].performed += _Aim;
             actions["Aim"].canceled += _StopAim;
             actions["First Attack"].performed += _PressFirstAttack;
@@ -46,6 +51,7 @@ namespace InputUserController {
             actions["Throw"].performed += _SetupThrow;
             actions["Throw"].canceled += _Throw;
             actions["Teleport"].performed += _Teleport;
+            actions["Revive"].performed += _Revive;
 
             //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
             //_playerInput.actions["SetupThrow"].canceled += _SetupThrow;
@@ -80,15 +86,21 @@ namespace InputUserController {
 
         private void _Aim(InputAction.CallbackContext cc) {
             Vector2 direction = cc.ReadValue<Vector2>();
+            Aim(direction);
+        }
+
+        private void Aim(Vector2 direction) {
             if (!_aiming && _player.HasWeapon && _player.Weapon.ShowAim) { _player.ShowAimLine(true); _aimLine = true; }
             if (_aimHelperReference.Valid()) { direction = _aimHelperReference.Instance.Aim(transform.Position2D(), direction); }
             _player.Aim(direction, true);
+            _aimDirection = direction;
             _aiming = true;
         }
 
-        private void _StopAim(InputAction.CallbackContext cc) {
+        private void _StopAim(InputAction.CallbackContext _) {
             if (_aimLine) { _player.ShowAimLine(false); _aimLine = false; }
             _player.Aim(Vector2.zero, true);
+            _aimDirection = Vector2.zero;
             _aiming = false;
         }
 
@@ -125,6 +137,10 @@ namespace InputUserController {
                 _player.ShowAimLine(false);
                 _player.Throw(_player.Orientation);
             }
+        }
+
+        private void _Revive(InputAction.CallbackContext cc) {
+            _player.TryRevive();
         }
 
         #endregion

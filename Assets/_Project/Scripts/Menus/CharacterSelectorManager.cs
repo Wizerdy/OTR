@@ -15,7 +15,7 @@ public class CharacterSelectorManager : MonoBehaviour {
 
     public event UnityAction OnReady { add => _onReady += value; remove => _onReady -= value; }
 
-    void Start() {
+    void OnEnable() {
         UserCreator.OnChange += _OnChange;
         UserCreator.ClearUsers();
 
@@ -49,7 +49,7 @@ public class CharacterSelectorManager : MonoBehaviour {
 
     public bool Ready() {
         for (int i = 0; i < _controllers.Length; i++) {
-            if (!_controllers[i].Locked && !_controllers[i].HasUser) {
+            if (!_controllers[i].Locked || !_controllers[i].HasUser) {
                 return false;
             }
         }

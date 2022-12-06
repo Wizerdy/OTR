@@ -22,6 +22,7 @@ public class BossCharge : BossAttack {
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
         _damageHealth = _entityColliders.MainEvent.gameObject.GetComponent<DamageHealth>();
+        _damageHealth.ResetHitted();
         _damagesMemory = _damageHealth.Damage;
         _damageHealth.SetDamage(_damages);
         _entityColliders.MainEvent.OnCollisionEnter += Hit;

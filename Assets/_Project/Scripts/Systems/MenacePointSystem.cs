@@ -26,6 +26,10 @@ public class MenacePointSystem : MonoBehaviour {
         _menaces.Remove(target);
     }
 
+    public void Set(EntityAbilities target, int count) {
+        _menaces[target] = count;
+    }
+
     public int? Get(EntityAbilities target) {
         if (!_menaces.ContainsKey(target)) { return null; }
 

@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 5118097500843322543}
   - component: {fileID: 2011552968}
   - component: {fileID: 923720220}
+  - component: {fileID: 4424139826049735336}
   m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
@@ -348,7 +349,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 6e8e1689374185e438f25c52612621d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -425,6 +426,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionOffset: {x: 0, y: 0}
+--- !u!114 &4424139826049735336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865910487610663474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0392ccd7b76ee9e479dddb30bbe3f1a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 7856438785959955155}
+  _hitBlend: 0.6
 --- !u!1 &2949079976842064426
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +524,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6842265518048862621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.33, y: 0.12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,7 +549,19 @@ MonoBehaviour:
   _onHit:
     _event:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 4424139826049735336}
+          m_TargetAssemblyTypeName: BossHitFX, Assembly-CSharp
+          m_MethodName: HitMe
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _onHeal:
     _event:
       m_PersistentCalls:

@@ -9,6 +9,7 @@ using ToolsBoxEngine.BetterEvents;
 
 public class CharacterSelectorController : MonoBehaviour {
     [SerializeField] CharacterSelectorCanvas _canvas;
+    [SerializeField] List<CharacterData> _datas;
     //[SerializeField, HideInInspector] BetterEvent<int> _onConfirm = new BetterEvent<int>();
 
     static List<int> _taken = new List<int>();
@@ -24,11 +25,16 @@ public class CharacterSelectorController : MonoBehaviour {
         _canvas = GetComponent<CharacterSelectorCanvas>();
     }
 
+    private void OnDestroy() {
+        if (_inputs != null) {
+            UnassignActions(_inputs);
+        }
+    }
+
     public void UserJoin(InputUser user) {
         _user = user;
         _inputs = ((InputActionAsset)user.actions);
         AssignActions(_inputs);
-        _inputs.FindActionMap("Character Selection").Enable();
         Select(1);
     }
 
@@ -42,6 +48,7 @@ public class CharacterSelectorController : MonoBehaviour {
     private void AssignActions(InputActionAsset actions) {
         if (actions == null) { return; }
 
+        _inputs.FindActionMap("Character Selection").Enable();
         actions["Selection"].started += _OnSelection;
         actions["Confirm"].started += _OnConfirm;
         actions["Leave"].started += _OnLeave;
@@ -50,6 +57,7 @@ public class CharacterSelectorController : MonoBehaviour {
     private void UnassignActions(InputActionAsset actions) {
         if (actions == null) { return; }
 
+        _inputs.FindActionMap("Character Selection").Disable();
         actions["Selection"].started -= _OnSelection;
         actions["Confirm"].started -= _OnConfirm;
         actions["Leave"].started -= _OnLeave;
@@ -73,6 +81,7 @@ public class CharacterSelectorController : MonoBehaviour {
 
         _canvas.Selected(true);
         _taken.Add(_canvas.CurrentIndex);
+        _datas[_canvas.CurrentIndex - 1].User = _user;
         //_onConfirm.Invoke(_canvas.CurrentIndex);
     }
 
@@ -95,6 +104,7 @@ public class CharacterSelectorController : MonoBehaviour {
 
     private void Select(int index) {
         _canvas.Join(index);
+        _canvas.SetCharacterName(_datas[_canvas.CurrentIndex - 1].Name);
         _canvas.Taken(_taken.Contains(_canvas.CurrentIndex));
     }
 }

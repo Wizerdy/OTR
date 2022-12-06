@@ -6,7 +6,22 @@ public enum AudioName {
     ShieldSlashHit,
     ShieldParry,
     MusicTest,
-    CrossbowShooting,
+    LyreShooting,
+    BloodFistHit,
+    AxeShieldHit,
+    PlayerDeath,
+    PlayerTakeDamage,
+    PlayerGrabWeapon,
+    PlayerThrowWeapon,
+    PlayerWalk,
+    UI_Back,
+    UI_Select,
+    UI_Click,
+    UI_Validate,
+    UI_StartGame,
+    ShieldPerfectParry,
+    LyreBoost,
+    BloodFistHeal
 }
 
 [System.Serializable]

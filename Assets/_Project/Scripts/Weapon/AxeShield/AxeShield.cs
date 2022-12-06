@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ToolsBoxEngine;
+using UnityEngine.Events;
 
 public class AxeShield : Weapon
 {
     [Header("Slash")]
     [SerializeField] private int slashDamage = 10;
     [SerializeField] private int slashThreatGenerated = 1;
-    [SerializeField] float _attackTime = 0.2f;
+    [SerializeField] float _attackTime = 0.0f;
+    [SerializeField] float attackCooldown = 0.2f;
     [Header("Parry")]
     [SerializeField] private float parryCooldown = 0.5f;
     [SerializeField] private int parryThreatGenerated = 0;
     [SerializeField] private int parryDamageReduction = 1;
+    [SerializeField] private UnityEvent onParry = new UnityEvent();
     [Header("Armor")]
     [SerializeField] private float armorPointRegenerationRate = 1;
     [SerializeField] private int armorPointRegenerationValue = 1;
@@ -98,14 +102,21 @@ public class AxeShield : Weapon
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         
         _targetAnimator.SetTrigger(_triggerName_attack_slash);
-        yield return new WaitForSeconds(_attackTime);
+        CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, attackCooldown));
+
+        if (_attackTime > 0) {
+            yield return new WaitForSeconds(_attackTime);
+        }
     }
 
     protected IEnumerator IAttackParry(EntityAbilities caster, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
 
+        onParry?.Invoke();
         _targetAnimator.SetTrigger(_triggerName_attack_parry);
-        yield return new WaitForSeconds(parryCooldown);
+
+        CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, parryCooldown));
+
     }
 
     //public override float AttackTime(AttackIndex index) {

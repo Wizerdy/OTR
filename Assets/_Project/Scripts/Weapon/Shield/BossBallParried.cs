@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossBallParried : MonoBehaviour
 {
+    [SerializeField] private UnityEvent OnStart = new UnityEvent();
+
     protected Rigidbody2D _rb;
     [SerializeField] protected Vector2 _startDirection;
     [SerializeField] protected float _speed;
@@ -47,6 +50,7 @@ public class BossBallParried : MonoBehaviour
         _deathTimer = new Timer(this, _duration, false);
         _deathTimer.OnActivate += () => _mustDie = true;
         _deathTimer.Start(_duration);
+        OnStart?.Invoke();
     }
 
     private void Update() {

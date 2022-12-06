@@ -8,10 +8,10 @@ public class NavigationSelectorOnEnable : MonoBehaviour {
     [SerializeField] GameObject _disableTarget;
 
     private void OnEnable() {
-        EventSystem.current.SetSelectedGameObject(_enableTarget);
+        EventSystem.current?.SetSelectedGameObject(_enableTarget);
     }
 
     private void OnDisable() {
-        EventSystem.current.SetSelectedGameObject(_disableTarget);
+        EventSystem.current?.SetSelectedGameObject(_disableTarget);
     }
 }

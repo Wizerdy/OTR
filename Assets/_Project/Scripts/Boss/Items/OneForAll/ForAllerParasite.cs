@@ -59,7 +59,7 @@ public class ForAllerParasite : MonoBehaviour {
         Quaternion rotation;
         if (dist == 10000f) {
             _arrowGraphics.sprite = _checkSprite; 
-            rotation = Quaternion.Euler(0, 0, 180);
+            rotation = Quaternion.Euler(0f, 0f, -90f);
         } else {
             if (_parasites[parasite].gameObject.transform.position.x < _arrow.transform.position.x) {
                 rotation = Quaternion.Euler(0, 0, Vector3.Angle(Vector3.up, _parasites[parasite].gameObject.transform.position - _arrow.transform.position));

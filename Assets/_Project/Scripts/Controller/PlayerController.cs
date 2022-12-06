@@ -61,7 +61,7 @@ namespace InputUserController {
             actions["Second Attack"].canceled += _PressSecondAttackEnd;
             actions["Throw"].performed += _SetupThrow;
             actions["Throw"].canceled += _Throw;
-            actions["Teleport"].performed += _Teleport;
+            //actions["Teleport"].performed += _Teleport;
             actions["Revive"].performed += _Revive;
 
             //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
@@ -80,7 +80,8 @@ namespace InputUserController {
             actions["Second Attack"].canceled -= _PressSecondAttackEnd;
             actions["Throw"].performed -= _SetupThrow;
             actions["Throw"].canceled -= _Throw;
-            actions["Teleport"].performed -= _Teleport;
+            //actions["Teleport"].performed -= _Teleport;
+            actions["Revive"].performed -= _Revive;
 
             //_playerInput.actions["SetupThrow"].performed += _SetupThrow;
             //_playerInput.actions["SetupThrow"].canceled += _SetupThrow;

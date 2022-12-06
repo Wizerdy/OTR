@@ -105,6 +105,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     }
 
     public bool TryRevive() {
+        if (_health.IsDead) { return false; }
         bool revive = _revive.CheckRevive();
         if (revive) {
             _animator.SetFloat("y", 1f);

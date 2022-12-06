@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: e02e17cf78a5f8e4a8017c13e5883136, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parasites: []
-  _arrowSprite: {fileID: 21300000, guid: 2f4ee1c47b71cd44d87caeef217eef1b, type: 3}
+  _arrowSprite: {fileID: 21300000, guid: e02e17cf78a5f8e4a8017c13e5883136, type: 3}
   _checkSprite: {fileID: 21300000, guid: 270b3ad38e3c17e47b74acd19620b0f4, type: 3}
   _arrow: {fileID: 3949090341161089700}
   _arrowGraphics: {fileID: 3258617660091304032}

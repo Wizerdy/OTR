@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Teleport",
-                    "type": "Button",
-                    "id": "7393f116-9140-4203-b8f1-2b2b452d531e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Revive",
                     "type": "Button",
                     "id": "47e70dd3-b6a3-4240-8405-2a1da0b2fb35",
@@ -285,17 +276,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Second Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "24091d4f-86ce-4cff-8c1a-d23b8c2fa79e",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

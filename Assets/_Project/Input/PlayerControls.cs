@@ -82,15 +82,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Teleport"",
-                    ""type"": ""Button"",
-                    ""id"": ""7393f116-9140-4203-b8f1-2b2b452d531e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Revive"",
                     ""type"": ""Button"",
                     ""id"": ""47e70dd3-b6a3-4240-8405-2a1da0b2fb35"",
@@ -307,17 +298,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Second Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""24091d4f-86ce-4cff-8c1a-d23b8c2fa79e"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Teleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -694,7 +674,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
         m_Gameplay_SetupThrow = m_Gameplay.FindAction("SetupThrow", throwIfNotFound: true);
-        m_Gameplay_Teleport = m_Gameplay.FindAction("Teleport", throwIfNotFound: true);
         m_Gameplay_Revive = m_Gameplay.FindAction("Revive", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -772,7 +751,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Throw;
     private readonly InputAction m_Gameplay_SetupThrow;
-    private readonly InputAction m_Gameplay_Teleport;
     private readonly InputAction m_Gameplay_Revive;
     public struct GameplayActions
     {
@@ -784,7 +762,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
         public InputAction @SetupThrow => m_Wrapper.m_Gameplay_SetupThrow;
-        public InputAction @Teleport => m_Wrapper.m_Gameplay_Teleport;
         public InputAction @Revive => m_Wrapper.m_Gameplay_Revive;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -813,9 +790,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SetupThrow.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSetupThrow;
                 @SetupThrow.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSetupThrow;
                 @SetupThrow.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSetupThrow;
-                @Teleport.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
-                @Teleport.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
-                @Teleport.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
                 @Revive.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
                 @Revive.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
                 @Revive.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRevive;
@@ -841,9 +815,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SetupThrow.started += instance.OnSetupThrow;
                 @SetupThrow.performed += instance.OnSetupThrow;
                 @SetupThrow.canceled += instance.OnSetupThrow;
-                @Teleport.started += instance.OnTeleport;
-                @Teleport.performed += instance.OnTeleport;
-                @Teleport.canceled += instance.OnTeleport;
                 @Revive.started += instance.OnRevive;
                 @Revive.performed += instance.OnRevive;
                 @Revive.canceled += instance.OnRevive;
@@ -983,7 +954,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnSetupThrow(InputAction.CallbackContext context);
-        void OnTeleport(InputAction.CallbackContext context);
         void OnRevive(InputAction.CallbackContext context);
     }
     public interface IMenuActions

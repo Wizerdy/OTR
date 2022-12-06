@@ -11,7 +11,7 @@ public class BloodyFist : Weapon {
     EntityPhysics _entityPhysics;
 
     [Header("General")]
-    [SerializeField] float _healthPercentValueStorePoint;
+    [Range(0f, 1f)] float _healthPercentValueStorePoint;
     [SerializeField] float _storePointMax;
 
     [Header("Fist")]
@@ -110,9 +110,9 @@ public class BloodyFist : Weapon {
             _entityStorePoint.LosePoint(_hitStorePointCost, false);
             //collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushDuration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
             //Vector2 bumpDirection = (collider.gameObject.transform.position - transform.position).normalized;
-            collider.gameObject.GetComponentInRoot<EntityAbilities>()?
-                .Get<EntityPhysics>()?
-                .Add(new Force(_bumpForce, _lastFistDirection, 0.7f, Force.ForceMode.TIMED), (int)PhysicPriority.PROJECTION);
+            //collider.gameObject.GetComponentInRoot<EntityAbilities>()?
+            //    .Get<EntityPhysics>()?
+            //    .Add(new Force(_bumpForce, _lastFistDirection, 0.7f, Force.ForceMode.TIMED), (int)PhysicPriority.PROJECTION);
         }
     }
 }

@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 3
+  _damages: 1
   _finished:
     _event:
       m_PersistentCalls:
@@ -103,8 +103,8 @@ MonoBehaviour:
   _trapPrefab: {fileID: -8428476896400705614, guid: e786e04f9f1d327428d6d8ea4d42b3cc, type: 3}
   _minimumDistBetween: 3
   _minimumDistFromSide: 1
-  _trapNumber: 3
-  _visibleTime: 2
+  _trapNumber: 1
+  _visibleTime: 5
   _tick: 1
 --- !u!1 &498623600588429639
 GameObject:
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 3
+  _damages: 1
   _finished:
     _event:
       m_PersistentCalls:
@@ -935,7 +935,7 @@ MonoBehaviour:
   _minimumDistBetween: 3
   _minimumDistFromSide: 1
   _trapNumber: 3
-  _visibleTime: 2
+  _visibleTime: 5
   _tick: 1
 --- !u!1 &2349757768644349720
 GameObject:
@@ -2248,7 +2248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 3
+  _damages: 1
   _finished:
     _event:
       m_PersistentCalls:
@@ -2256,8 +2256,8 @@ MonoBehaviour:
   _trapPrefab: {fileID: -8428476896400705614, guid: e786e04f9f1d327428d6d8ea4d42b3cc, type: 3}
   _minimumDistBetween: 3
   _minimumDistFromSide: 1
-  _trapNumber: 3
-  _visibleTime: 2
+  _trapNumber: 2
+  _visibleTime: 4
   _tick: 1
 --- !u!1 &3617593352745851235
 GameObject:
@@ -2672,7 +2672,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 1710517374165527835, guid: 1fd92ecd6b97c6f4db2318cf71009460, type: 3}
   _position: {x: 0, y: 0}
-  _size: {x: 5, y: 10}
+  _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 5
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 3
+  _damages: 1
   _finished:
     _event:
       m_PersistentCalls:
@@ -2730,8 +2730,8 @@ MonoBehaviour:
   _trapPrefab: {fileID: -8428476896400705614, guid: e786e04f9f1d327428d6d8ea4d42b3cc, type: 3}
   _minimumDistBetween: 3
   _minimumDistFromSide: 1
-  _trapNumber: 5
-  _visibleTime: 2
+  _trapNumber: 2
+  _visibleTime: 5
   _tick: 1
 --- !u!1 &5120178155079321416
 GameObject:
@@ -3516,7 +3516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 3
+  _damages: 1
   _finished:
     _event:
       m_PersistentCalls:
@@ -3525,7 +3525,7 @@ MonoBehaviour:
   _minimumDistBetween: 3
   _minimumDistFromSide: 1
   _trapNumber: 3
-  _visibleTime: 2
+  _visibleTime: 4
   _tick: 1
 --- !u!1 &8222046230661241840
 GameObject:

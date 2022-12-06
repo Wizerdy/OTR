@@ -20,6 +20,7 @@ namespace InputUserController {
         bool _aimLine = false;
 
         void Start() {
+            if (_datas == null || !_datas.User.valid) { return; }
             Debug.Log(name + " has User:" + _datas.User.id + " (" + _datas.name + ")");
             AssignUser(_datas.User);
             _player.ShowAimLine(false);

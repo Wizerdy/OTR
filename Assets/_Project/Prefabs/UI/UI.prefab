@@ -1255,10 +1255,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VictoryScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 7549835405965270782, guid: 2a3457dafd429c744860c27e5990f66c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a3457dafd429c744860c27e5990f66c, type: 3}
 --- !u!224 &3076238116113096956 stripped
@@ -1389,10 +1385,6 @@ PrefabInstance:
     - target: {fileID: 1946524405676439742, guid: e0341d3d935864d46b93e8aaf967c14e, type: 3}
       propertyPath: m_Name
       value: DefeatScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1946524405676439742, guid: e0341d3d935864d46b93e8aaf967c14e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8487163468306996637, guid: e0341d3d935864d46b93e8aaf967c14e, type: 3}
       propertyPath: m_Pivot.x

@@ -64,8 +64,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     randomPitch: 0
-    minPitch: 0
-    maxPitch: 0
+    minPitch: 0.9
+    maxPitch: 1.1
   - audioName: 5
     audio:
     - {fileID: 8300000, guid: 09cd8bcaf246d1e42ae82cefe6801e15, type: 3}
@@ -213,6 +213,18 @@ MonoBehaviour:
   - audioName: 20
     audio:
     - {fileID: 8300000, guid: 19361e606b205664ca5710a320d96752, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 21
+    audio:
+    - {fileID: 8300000, guid: 48d897a85442ac743b4d5e5eb4c21518, type: 3}
+    - {fileID: 8300000, guid: 17645ecfd2f26d7439c8a5b0ef7bd2d9, type: 3}
+    - {fileID: 8300000, guid: caad1b6120015244abbc53cd75fb0a15, type: 3}
+    - {fileID: 8300000, guid: 0e7f2075d4d41de4eacd8ec0f8adbbdf, type: 3}
+    - {fileID: 8300000, guid: 1c74451499c72ae41baff3b0a33e739f, type: 3}
     volume: 1
     loop: 0
     randomPitch: 1

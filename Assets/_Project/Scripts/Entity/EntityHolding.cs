@@ -9,9 +9,9 @@ public class EntityHolding : MonoBehaviour, IEntityAbility {
     GameObject _holding;
     IHoldable _iholding;
 
-    [SerializeField, HideInInspector] BetterEvent<GameObject> _onPickup = new BetterEvent<GameObject>();
-    [SerializeField, HideInInspector] BetterEvent<GameObject> _onDrop = new BetterEvent<GameObject>();
-    [SerializeField, HideInInspector] BetterEvent<GameObject, Vector2> _onThrow = new BetterEvent<GameObject, Vector2>();
+    [SerializeField] BetterEvent<GameObject> _onPickup = new BetterEvent<GameObject>();
+    [SerializeField] BetterEvent<GameObject> _onDrop = new BetterEvent<GameObject>();
+    [SerializeField] BetterEvent<GameObject, Vector2> _onThrow = new BetterEvent<GameObject, Vector2>();
 
     #region Properties
 

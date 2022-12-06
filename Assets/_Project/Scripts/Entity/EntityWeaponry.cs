@@ -15,7 +15,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     Weapon _weapon;
     EntityMovement.SpeedModifier _movementSlow;
 
-    [SerializeField, HideInInspector] BetterEvent<Weapon> _onPickup = new BetterEvent<Weapon>();
+    [SerializeField] BetterEvent<Weapon> _onPickup = new BetterEvent<Weapon>();
     [SerializeField, HideInInspector] BetterEvent<Weapon> _onDrop = new BetterEvent<Weapon>();
     [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex, Vector2> _onAttack = new BetterEvent<Weapon, AttackIndex, Vector2>();
     [SerializeField, HideInInspector] BetterEvent<Weapon, AttackIndex> _onAttackEnd = new BetterEvent<Weapon, AttackIndex>();

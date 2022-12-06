@@ -23,7 +23,6 @@ public class EntityArmor : MonoBehaviour, IEntityAbility {
 
     private void Update() {
         if (isWieldingAxeShield) {
-            Debug.Log(CurrentArmor);
             time -= Time.deltaTime;
             if (time <= 0) {
                 if (armorCurrent < armorMax)

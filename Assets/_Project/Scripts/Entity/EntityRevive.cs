@@ -51,7 +51,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
 
     public bool CheckRevive() {
         if (_reviving == null) {
-            GameObject obj = _reviveArea.Nearest((KeyValuePair<GameObject, Token> pair) => pair.Key.CompareTag("Player") && pair.Key.GetComponentInRoot<IHealth>().IsDead);
+            GameObject obj = _reviveArea.Nearest((KeyValuePair<GameObject, Token> pair) => pair.Key.CompareTag("Player") && (pair.Key.GetComponentInRoot<IHealth>()?.IsDead ?? false));
             if (obj != null) {
                 StartRevive(obj.GetComponentInRoot<EntityAbilities>().Get<EntityRevive>());
             } else {

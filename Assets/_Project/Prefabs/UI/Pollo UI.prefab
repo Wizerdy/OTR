@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81b35fa9c703e24b8d2d12c75e371d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityWeaponryReference: {fileID: 11400000, guid: 844c9444653db9b4785099dfd0ebb3e3, type: 2}
+  _entityWeaponryReference: {fileID: 11400000, guid: 3d14f4803ded8954fb78d4b76d1d61f8, type: 2}
   slider: {fileID: 7696873313704071716}
   fist: {fileID: 492199194756587511}
   shield: {fileID: 5517803230759480947}

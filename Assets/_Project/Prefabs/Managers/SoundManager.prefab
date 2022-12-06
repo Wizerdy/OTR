@@ -45,8 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundsMusic:
-  - audioName: 3
-    audio: []
+  - audioName: 4
+    audio:
+    - {fileID: 8300000, guid: 1d2282aede832fb4c90d398a177a0144, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+  - audioName: 23
+    audio:
+    - {fileID: 8300000, guid: 2bab3390c2d0c2b48ab3ad661f39c058, type: 3}
     volume: 0.6
     loop: 1
     randomPitch: 0

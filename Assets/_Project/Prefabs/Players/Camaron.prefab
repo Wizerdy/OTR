@@ -1951,7 +1951,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 39468
+  m_InstanceId: 56414
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2059,7 +2059,19 @@ MonoBehaviour:
   _onPickup:
     _event:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3839653871625589696}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _onDrop:
     _event:
       m_PersistentCalls:
@@ -2067,7 +2079,19 @@ MonoBehaviour:
   _onThrow:
     _event:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3839653871625589696}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &3867635824926218261
 MonoBehaviour:
   m_ObjectHideFlags: 0

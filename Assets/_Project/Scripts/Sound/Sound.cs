@@ -5,7 +5,7 @@ public enum AudioName {
     ShieldSlash,
     ShieldSlashHit,
     ShieldParry,
-    MusicTest,
+    IntroMusic,
     LyreShooting,
     BloodFistHit,
     AxeShieldHit,
@@ -23,7 +23,8 @@ public enum AudioName {
     LyreBoost,
     BloodFistHeal,
     BossHit,
-    BossDeath
+    BossDeath,
+    LoopMusic
 }
 
 [System.Serializable]

@@ -160,6 +160,10 @@ public class SoundManager : MonoBehaviour {
 
     }
 
+    public Sound GetMusic(AudioName name) {
+        return FindMusic(name);
+    }
+
     //public void SwitchActiveMusique() {
     //    activeMusic = !activeMusic;
     //}

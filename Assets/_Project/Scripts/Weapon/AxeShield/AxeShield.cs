@@ -48,8 +48,8 @@ public class AxeShield : Weapon
         attackParry.attackTime = parryCooldown;
         attackParry.threatPoint = parryThreatGenerated;
 
-        _attacks.Add(AttackIndex.FIRST, attackParry);
-        _attacks.Add(AttackIndex.SECOND, attackSlash);
+        _attacks.Add(AttackIndex.SECOND, attackParry);
+        _attacks.Add(AttackIndex.FIRST, attackSlash);
         _type = WeaponType.SHIELDAXE;
     }
 

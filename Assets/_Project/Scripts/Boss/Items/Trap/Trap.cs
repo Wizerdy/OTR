@@ -12,6 +12,9 @@ public class Trap : MonoBehaviour {
     bool _open;
     Animator _animator;
 
+    EntityPhysics _target;
+    Force _force;
+
     public Trap ChangeDamages(int damages) {
         _damagesEveryTick = damages;
         return this;
@@ -51,19 +54,23 @@ public class Trap : MonoBehaviour {
         _open = true;
         ea.Get<PlayerEntity>().Throw(ea.Get<EntityPhysics>().Velocity.normalized);
         EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
-        EntityPhysics entityPhysics = ea.Get<EntityPhysics>();
+        _target = ea.Get<EntityPhysics>();
         IHealth health = ea.transform.GetComponent<IHealth>();
         timer.OnActivate += () => health.TakeDamage(_damagesEveryTick, gameObject);
         timer.Start();
-        Force force = new Force(0, Vector2.zero, 1, Force.ForceMode.INPUT);
-        entityPhysics.Add(force, (int)PhysicPriority.BLOCK);
+        _force = new Force(0, Vector2.zero, 1, Force.ForceMode.INPUT);
+        _target.Add(_force, (int)PhysicPriority.BLOCK);
         ea.transform.position = transform.position;
         _animator.SetBool("Trapped", true);
         while (entityWeaponry.Weapon == null) {
             yield return null;
         }
-        entityPhysics.Remove(force);
+        _target.Remove(_force);
         Die();
+    }
+
+    private void OnDestroy() {
+        _target?.Remove(_force);
     }
 
     void Die() {

@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour {
     public Sound[] soundsMusic;
     public Sound[] soundsSfx;
 
+    [SerializeField] int _audioSourceNumber = 20;
+
     List<GameObject> audioSourcesStandBy = new List<GameObject>();
     List<GameObject> audioSourcesActive = new List<GameObject>();
 
@@ -35,9 +37,11 @@ public class SoundManager : MonoBehaviour {
             Destroy(this);
         } else {
             Instance = this;
+            audioSourcesActive = new List<GameObject>();
+            audioSourcesStandBy = new List<GameObject>();
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < _audioSourceNumber; i++) {
             audioSourcesStandBy.Add(CreateNewAudioSource());
         }
     }

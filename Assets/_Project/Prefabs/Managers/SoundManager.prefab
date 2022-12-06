@@ -70,7 +70,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0822d488e5d47f54f93afcccf5c89382, type: 3}
     - {fileID: 8300000, guid: d6ddc05930e596e42abbd4c916e823c4, type: 3}
     - {fileID: 8300000, guid: 54a08a60240eb224e9468445e6fad359, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 0
     minPitch: 0.9
@@ -81,7 +81,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 03c96d960ca62014f970f6104ae7ab30, type: 3}
     - {fileID: 8300000, guid: cceb1b59e26fbe64aa39fce37d843797, type: 3}
     - {fileID: 8300000, guid: c0728c010c06448489bae0d0ad5311c9, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -93,7 +93,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7446350899f622b408d6c31c1e7dbff5, type: 3}
     - {fileID: 8300000, guid: 7d8f20e3551f3494880963100347cf45, type: 3}
     - {fileID: 8300000, guid: 24de5cbe6159ec7409be7a205521727a, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -102,7 +102,7 @@ MonoBehaviour:
     audio:
     - {fileID: 8300000, guid: a58df3cfc9463214d916eee0731dedd3, type: 3}
     - {fileID: 8300000, guid: 8733448f9c7c83f458cada3f743f8fed, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -110,7 +110,7 @@ MonoBehaviour:
   - audioName: 8
     audio:
     - {fileID: 8300000, guid: 5bf8ba64a784eb04482bfa0bded4c502, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -122,7 +122,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 71ac45c80f34a934e94de3ba6d1e5163, type: 3}
     - {fileID: 8300000, guid: 848e9ba812229b6488508223b3d6df36, type: 3}
     - {fileID: 8300000, guid: e367af330dbf8374d9ace1e56209b798, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -130,7 +130,7 @@ MonoBehaviour:
   - audioName: 10
     audio:
     - {fileID: 8300000, guid: 236c903f0e595174a8e4ee9425bb7b81, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -138,7 +138,7 @@ MonoBehaviour:
   - audioName: 11
     audio:
     - {fileID: 8300000, guid: c256ce029e3dc5948a77771901b3835f, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -153,7 +153,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c8bec0d768421b343a7d030ee143e61e, type: 3}
     - {fileID: 8300000, guid: 3537f48e2a4e00540b6ad13cd31900e3, type: 3}
     - {fileID: 8300000, guid: f8e367c14aafb114fa76dfc974e69937, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -193,7 +193,7 @@ MonoBehaviour:
   - audioName: 17
     audio:
     - {fileID: 8300000, guid: e16b6b28a3f5d7e4d9d02097b7999ecb, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -206,7 +206,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7d8f20e3551f3494880963100347cf45, type: 3}
     - {fileID: 8300000, guid: 24de5cbe6159ec7409be7a205521727a, type: 3}
     - {fileID: 8300000, guid: a2289085d1b4c0c4cad6c98eae1a5ce5, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -214,7 +214,7 @@ MonoBehaviour:
   - audioName: 19
     audio:
     - {fileID: 8300000, guid: 48819b3698d817448bf03d221d13c607, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -222,7 +222,7 @@ MonoBehaviour:
   - audioName: 20
     audio:
     - {fileID: 8300000, guid: 19361e606b205664ca5710a320d96752, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
@@ -234,11 +234,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: caad1b6120015244abbc53cd75fb0a15, type: 3}
     - {fileID: 8300000, guid: 0e7f2075d4d41de4eacd8ec0f8adbbdf, type: 3}
     - {fileID: 8300000, guid: 1c74451499c72ae41baff3b0a33e739f, type: 3}
-    volume: 1
+    volume: 0.6
     loop: 0
     randomPitch: 1
     minPitch: 0.9
     maxPitch: 1.1
+  _audioSourceNumber: 100
   activeMusic: 1
   activeSfx: 1
   mixer: {fileID: 24300002, guid: 556c684c93cd87a41884bf186bdd3925, type: 2}

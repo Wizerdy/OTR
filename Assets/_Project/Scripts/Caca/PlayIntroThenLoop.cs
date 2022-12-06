@@ -36,6 +36,5 @@ public class PlayIntroThenLoop : MonoBehaviour
         } else if (looping == false) {
             duration += Time.deltaTime;
         }
-        Debug.Log(introDuration + " . " + duration);
     }
 }

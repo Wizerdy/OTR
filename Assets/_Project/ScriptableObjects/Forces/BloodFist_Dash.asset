@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26edaf98514955240901762b395206a9, type: 3}
   m_Name: BloodFist_Dash
   m_EditorClassIdentifier: 
-  _strength: 20
+  _strength: 40
   _acceleration:
     serializedVersion: 2
     m_Curve:
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _accelerationTime: 0.1
+  _accelerationTime: 0.2
   _deceleration:
     serializedVersion: 2
     m_Curve:

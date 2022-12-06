@@ -488,7 +488,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   armorPointRegenerationRate: 5
-  armorPointRegenerationValue: 1
+  armorPointRegenerationValue: 2
   armorPointMax: 10
   armorPointOnPickUp: 5
   entityArmor: {fileID: 0}

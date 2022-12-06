@@ -11,7 +11,7 @@ public class BloodyFist : Weapon {
     EntityPhysics _entityPhysics;
 
     [Header("General")]
-    [Range(0f, 1f)] float _healthPercentValueStorePoint;
+    [SerializeField, Range(0f, 1f)] float _healthPercentValueStorePoint;
     [SerializeField] float _storePointMax;
 
     [Header("Fist")]
@@ -44,6 +44,10 @@ public class BloodyFist : Weapon {
 
     public float BloodPointsOnHit { get => _hitStorePoint; set => _hitStorePoint = value; }
 
+    protected override void _OnPickup(EntityWeaponry weaponry) {
+        weaponry.DamageHealth.OnDamage += GainBloodPoint;
+    }
+
     protected override void _OnStart() {
         _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_hitDuration, _hitDamage, _hitThreatPoint, FistAttack));
         _attacks.Add(AttackIndex.SECOND, new WeaponAttack(0f, 0, 0, BloodyDash));
@@ -59,6 +63,7 @@ public class BloodyFist : Weapon {
         _entityStorePoint = null;
         _entityPhysics = null;
         _comboIndex = 1;
+        entityWeaponry.DamageHealth.OnDamage -= GainBloodPoint;
     }
 
     protected IEnumerator FistAttack(EntityAbilities ea, Vector2 direction) {
@@ -107,11 +112,11 @@ public class BloodyFist : Weapon {
 
     protected override void _OnAttackTrigger(Collider2D collider) {
         //Debug.Log(collider.transform.gameObject);
-        if (collider.CompareTag("Boss") || collider.CompareTag("Enemy")) {
-            //Debug.Log("touché");
-            _entityStorePoint.GainPoint(_hitStorePoint);
-        }
-        if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject /*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {
+        //if (collider.CompareTag("Boss") || collider.CompareTag("Enemy")) {
+        //    //Debug.Log("touché");
+        //    _entityStorePoint.GainPoint(_hitStorePoint);
+        //}
+        if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject && !collider.gameObject.GetComponentInRoot<IHealth>().IsDead/*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
             _entityStorePoint.LosePoint(_hitStorePointCost, false);
             //collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushDuration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
@@ -120,5 +125,9 @@ public class BloodyFist : Weapon {
             //    .Get<EntityPhysics>()?
             //    .Add(new Force(_bumpForce, _lastFistDirection, 0.7f, Force.ForceMode.TIMED), (int)PhysicPriority.PROJECTION);
         }
+    }
+
+    private void GainBloodPoint(IHealth health, int damage) {
+        _entityStorePoint.GainPoint(_hitStorePoint);
     }
 }

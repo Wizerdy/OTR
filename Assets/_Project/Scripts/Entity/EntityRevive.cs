@@ -51,17 +51,20 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
 
     public bool CheckRevive() {
         if (_reviving == null) {
-            GameObject obj = _reviveArea.Nearest((KeyValuePair<GameObject, Token> pair) => pair.Key.CompareTag("Player") && (pair.Key.GetComponentInRoot<IHealth>()?.IsDead ?? false));
+            GameObject obj = _reviveArea?.Nearest((KeyValuePair<GameObject, Token> pair) => { if (pair.Key == null) { return false; } return pair.Key?.CompareTag("Player") ?? false && (pair.Key?.GetComponentInRoot<IHealth>()?.IsDead ?? false); } );
             if (obj != null) {
                 StartRevive(obj.GetComponentInRoot<EntityAbilities>().Get<EntityRevive>());
             } else {
                 return false;
             }
         }
+
         if (_reviving.HeartMassage()) {
             StopRevive();
             return false;
         }
+
+        if (!_reviving._health.IsDead) { StopRevive(); }
         return true;
     }
 

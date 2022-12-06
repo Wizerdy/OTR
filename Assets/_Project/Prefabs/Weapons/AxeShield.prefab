@@ -466,7 +466,8 @@ MonoBehaviour:
         m_Calls: []
   slashDamage: 10
   slashThreatGenerated: 1
-  _attackTime: 0.2
+  _attackTime: 0
+  attackCooldown: 0.2
   parryCooldown: 0.5
   parryThreatGenerated: 0
   parryDamageReduction: 1

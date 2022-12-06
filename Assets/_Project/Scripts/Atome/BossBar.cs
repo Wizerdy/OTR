@@ -16,7 +16,7 @@ public class BossBar : MonoBehaviour
     void Start()
     {
         if (numBar && fillTransition && currentFill) {
-            numberOfBarLeft = maxNumberOfBar;
+            numberOfBarLeft = maxNumberOfBar + 1;
             numBar.text = "X" + numberOfBarLeft.ToString();
         }
     }

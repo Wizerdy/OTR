@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityPowerUp : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityAbilities _abilities;
+    [SerializeField] bool _stackable = false;
 
     List<PowerUp> _powerUps = new List<PowerUp>();
 
@@ -11,6 +12,9 @@ public class EntityPowerUp : MonoBehaviour, IEntityAbility {
 
     public PowerUp Add(PowerUp powerUp) {
         PowerUp up = powerUp.SetTarget(_abilities);
+        if (!_stackable) {
+            _powerUps.Find((PowerUp pu) => { return pu.GetType() == up.GetType(); } )?.Disable();
+        }
         _powerUps.Add(up);
         up.Enable();
         up.OnDisable += _Remove;

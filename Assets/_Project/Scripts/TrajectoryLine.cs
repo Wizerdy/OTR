@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TrajectoryLine : MonoBehaviour {
+    [SerializeField] int _precision = 10;
     [SerializeField] private float length = 3.0f;
     [SerializeField] private float width = 1.0f;
     [SerializeField] private AnimationCurve _curve = new AnimationCurve();
@@ -19,6 +20,7 @@ public class TrajectoryLine : MonoBehaviour {
     void Start() {
         //lineRenderer.startWidth = startThiccness;
         //lineRenderer.endWidth = endThiccness;
+        ResetLine();
         lineRenderer.widthMultiplier = width;
         lineRenderer.widthCurve = _curve;
         Physics2D.queriesHitTriggers = false;
@@ -42,7 +44,7 @@ public class TrajectoryLine : MonoBehaviour {
 
     private void ResetLine() {
         originalDir = playerDir;
-        lineRenderer.positionCount = 1;
+        lineRenderer.positionCount = _precision;
         lineRenderer.SetPosition(0, transform.position);
     }
 

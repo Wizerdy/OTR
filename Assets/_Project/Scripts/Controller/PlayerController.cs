@@ -19,6 +19,9 @@ namespace InputUserController {
         bool _aiming = false;
         bool _aimLine = false;
 
+        bool _firstAttack = false;
+        bool _secondAttack = false;
+
         void Start() {
             if (_datas == null || !_datas.User.valid) { return; }
             Debug.Log(name + " has User:" + _datas.User.id + " (" + _datas.name + ")");
@@ -32,6 +35,13 @@ namespace InputUserController {
             _player.Move(direction);
             if (!_aiming) { _player.Aim(direction, false); }
             else { Aim(_aimDirection); }
+
+            if (_firstAttack) {
+                _player.PressAttack(AttackIndex.FIRST, _player.Orientation);
+            }
+            if (_secondAttack) {
+                _player.PressAttack(AttackIndex.SECOND, _player.Orientation);
+            }
         }
 
         private void OnDestroy() {
@@ -106,18 +116,22 @@ namespace InputUserController {
         }
 
         private void _PressFirstAttack(InputAction.CallbackContext cc) {
+            _firstAttack = true;
             _player.PressAttack(AttackIndex.FIRST, _player.Orientation);
         }
 
         private void _PressFirstAttackEnd(InputAction.CallbackContext cc) {
+            _firstAttack = false;
             _player.PressAttackEnd(AttackIndex.FIRST);
         }
 
         private void _PressSecondAttack(InputAction.CallbackContext cc) {
+            _secondAttack = true;
             _player.PressAttack(AttackIndex.SECOND, _player.Orientation);
         }
 
         private void _PressSecondAttackEnd(InputAction.CallbackContext cc) {
+            _secondAttack = false;
             _player.PressAttackEnd(AttackIndex.SECOND);
         }
 
@@ -135,6 +149,8 @@ namespace InputUserController {
 
         private void _Throw(InputAction.CallbackContext cc) {
             if (_player.HasWeapon) {
+                _firstAttack = false;
+                _secondAttack = false;
                 _player.ShowAimLine(false);
                 _player.Throw(_player.Orientation);
             }

@@ -131,6 +131,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void PlaySfxByIndex(int index) {
+        if (index >= soundsSfx.Length) { Debug.LogError("Sound index overflow"); return; }
         if (soundsSfx[index] != null)
             PlaySfx(soundsSfx[index].audioName);
         else

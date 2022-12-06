@@ -74,7 +74,7 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
 
     public void PressAttack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
         if (!HasWeapon || !_weapon.CanAttack) { return; }
-        _damageHealth.ResetHitted();
+        //_damageHealth.ResetHitted();
         StartCoroutine(_weapon.Attack(type, caster, direction));
     }
 

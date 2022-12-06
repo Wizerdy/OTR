@@ -18,6 +18,7 @@ public class BloodyFist : Weapon {
     [SerializeField] int _hitDamage = 10;
     [SerializeField] int _hitThreatPoint = 10;
     [SerializeField] float _hitCooldown = 0.15f;
+    [SerializeField] float _hitDuration = 0.15f;
     [SerializeField] float _hitStorePoint = 1f;
     [SerializeField] float _hitStorePointCost = 5f;
     //[SerializeField] float _pushDuration;
@@ -38,15 +39,19 @@ public class BloodyFist : Weapon {
     //[SerializeField] float _duration;
     //[SerializeField] AnimationCurve _accelerationCurve;
 
-    Timer _cooldown;
+    Timer _fistTimer;
+    Timer _dashTimer;
 
     public float BloodPointsOnHit { get => _hitStorePoint; set => _hitStorePoint = value; }
 
     protected override void _OnStart() {
-        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_hitCooldown, _hitDamage, _hitThreatPoint, FistAttack));
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_hitDuration, _hitDamage, _hitThreatPoint, FistAttack));
         _attacks.Add(AttackIndex.SECOND, new WeaponAttack(0f, 0, 0, BloodyDash));
         _dash = new Force(_dashForce, Vector2.zero, _dashWeight, Force.ForceMode.TIMED);
-        _cooldown = new Timer(CoroutinesManager.Instance, _hitCooldown, false);
+        _fistTimer = new Timer(CoroutinesManager.Instance, _hitCooldown, false);
+        _fistTimer.OnEnd += (() => { _attacks[AttackIndex.FIRST].canAttack = true; });
+        _dashTimer = new Timer(CoroutinesManager.Instance, _dashCooldown, false);
+        _dashTimer.OnEnd += (() => { _attacks[AttackIndex.SECOND].canAttack = true; });
         _type = WeaponType.BLOODFIST;
     }
 
@@ -58,7 +63,7 @@ public class BloodyFist : Weapon {
 
     protected IEnumerator FistAttack(EntityAbilities ea, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
-        if (_cooldown.IsWorking) { yield break; }
+        if (_fistTimer.IsWorking) { yield break; }
         if (_entityStorePoint == null) {
             _entityStorePoint = ea.Get<EntityStorePoint>();
             _entityStorePoint.ChangeMinValue(0f);
@@ -67,17 +72,17 @@ public class BloodyFist : Weapon {
 
         if (direction != Vector2.zero) { _targetAnimator?.SetFloat("x", direction.x); _targetAnimator?.SetFloat("y", direction.y); }
         _lastFistDirection = direction;
-        _cooldown.Duration = _hitCooldown;
-        _cooldown.Start();
+        _attacks[AttackIndex.FIRST].canAttack = false;
+        _fistTimer.Start();
         _targetAnimator.SetTrigger(_triggerName[_comboIndex]);
         ++_comboIndex;
         _comboIndex %= _triggerName.Length;
-        yield return new WaitForSeconds(_hitCooldown);
+        yield return new WaitForSeconds(_hitDuration);
     }
 
     protected IEnumerator BloodyDash(EntityAbilities ea, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
-        if (_cooldown.IsWorking) { yield break; }
+        if (_dashTimer.IsWorking) { yield break; }
         if (_entityPhysics == null) {
             _entityPhysics = ea.Get<EntityPhysics>();
         }
@@ -87,12 +92,13 @@ public class BloodyFist : Weapon {
             _entityStorePoint.ChangeMaxValue(_storePointMax);
         }
         _targetAnimator.SetBool("BloodFist_Dash", true);
-        _cooldown.Duration = _dashCooldown;
-        _cooldown.Start();
+        _attacks[AttackIndex.SECOND].canAttack = false;
+        _dashTimer.Start();
 
         _dash.Reset();
         _dash.Direction = direction;
         _entityPhysics.Add(_dash, (int)PhysicPriority.DASH);
+        _attacks[AttackIndex.SECOND].canAttack = false;
         //_entityMovement?.CreateMovement(_duration, _speed, default, _accelerationCurve);
         _entityStorePoint.LosePoint(_storePointCost, true);
         yield return new WaitForSeconds(_dash.Duration);

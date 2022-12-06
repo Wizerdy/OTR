@@ -32,24 +32,12 @@ public class AxeShield : Weapon
 
     string _triggerName_attack_slash = "AxeShield_Slash";
     string _triggerName_attack_parry = "AxeShield_Parry";
-    private WeaponAttack attackSlash;
-    private WeaponAttack attackParry;
 
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
 
-        attackSlash.attack = IAttackSlash;
-        attackSlash.damage = slashDamage;
-        attackSlash.attackTime = _attackTime;
-        attackSlash.threatPoint = slashThreatGenerated;
-
-        attackParry.attack = IAttackParry;
-        attackParry.damage = 0;
-        attackParry.attackTime = parryCooldown;
-        attackParry.threatPoint = parryThreatGenerated;
-
-        _attacks.Add(AttackIndex.SECOND, attackParry);
-        _attacks.Add(AttackIndex.FIRST, attackSlash);
+        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(parryCooldown, 0, parryThreatGenerated, IAttackParry));
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, slashThreatGenerated, slashDamage, IAttackSlash));
         _type = WeaponType.SHIELDAXE;
     }
 
@@ -102,7 +90,8 @@ public class AxeShield : Weapon
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
         
         _targetAnimator.SetTrigger(_triggerName_attack_slash);
-        CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, attackCooldown));
+        _attacks[AttackIndex.FIRST].canAttack = false;
+        CoroutinesManager.Start(Tools.Delay(() => _attacks[AttackIndex.FIRST].canAttack = true, attackCooldown));
 
         if (_attackTime > 0) {
             yield return new WaitForSeconds(_attackTime);
@@ -115,7 +104,8 @@ public class AxeShield : Weapon
         onParry?.Invoke();
         _targetAnimator.SetTrigger(_triggerName_attack_parry);
 
-        CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, parryCooldown));
+        _attacks[AttackIndex.SECOND].canAttack = false;
+        CoroutinesManager.Start(Tools.Delay(() => _attacks[AttackIndex.SECOND].canAttack = true, parryCooldown));
 
     }
 

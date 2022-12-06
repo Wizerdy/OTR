@@ -36,6 +36,7 @@ public class PowerUpByWeapon : PowerUp {
 
         _powerUp = Find(weaponry.Weapon);
 
+        Debug.Log((weaponry.Weapon?.name ?? "Unhanded") + " .. " + _powerUp.name);
         if (_powerUp == null) { return false; }
 
         _powerUp = _powerUp.SetTarget(_target);

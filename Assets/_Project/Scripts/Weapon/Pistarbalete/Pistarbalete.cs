@@ -25,10 +25,18 @@ public class Pistarbalete : Weapon {
     string _attackTriggerName = "Crossgun_Attack";
     string _boostTriggerName = "Crossgun_Boost";
 
+    Timer _attackCooldown;
+    Timer _specialAttackCooldown;
+
     protected override void _OnStart() {
         _type = WeaponType.CROSSGUN;
         _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, _boltDamages, _threatPoint, INormalShoot));
         _attacks.Add(AttackIndex.SECOND, new WeaponAttack(_sbAttackTime, 0, _sbThreatPoint, IBuffShoot));
+
+        _attackCooldown = new Timer(CoroutinesManager.Instance, _boltCooldown, false);
+        _attackCooldown.OnEnd += (() => { _attacks[AttackIndex.FIRST].canAttack = true; });
+        _specialAttackCooldown = new Timer(CoroutinesManager.Instance, _sbCooldown, false);
+        _specialAttackCooldown.OnEnd += (() => { _attacks[AttackIndex.SECOND].canAttack = true; });
     }
 
     protected override void _OnAim(Vector2 direction) {
@@ -59,6 +67,7 @@ public class Pistarbalete : Weapon {
 
     protected IEnumerator INormalShoot(EntityAbilities entityAbilities, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+        if (_attackCooldown.IsWorking) { yield break; }
 
         _targetAnimator.SetTrigger(_attackTriggerName);
 
@@ -72,8 +81,10 @@ public class Pistarbalete : Weapon {
             dh.OnDamage += _InvokeFirstAttackHit;
         }
 
-        _canAttack = false;
-        CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, _boltCooldown));
+        _attacks[AttackIndex.FIRST].canAttack = false;
+        _attackCooldown.Start();
+        //_canAttack = false;
+        //CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, _boltCooldown));
 
         if (_attackTime > 0) {
             yield return new WaitForSeconds(_attackTime);
@@ -82,6 +93,7 @@ public class Pistarbalete : Weapon {
 
     protected IEnumerator IBuffShoot(EntityAbilities entityAbilities, Vector2 direction) {
         if (_targetAnimator == null) { Debug.LogError(gameObject.name + " : Animator not set"); yield break; }
+        if (_specialAttackCooldown.IsWorking) { yield break; }
 
         _targetAnimator.SetTrigger(_boostTriggerName);
 
@@ -99,6 +111,9 @@ public class Pistarbalete : Weapon {
                 Debug.LogError("No Entity Power Up, can't Power Up");
             }
         }
+
+        _attacks[AttackIndex.SECOND].canAttack = false;
+        _specialAttackCooldown.Start();
 
         if (_attackTime > 0) {
             yield return new WaitForSeconds(_sbAttackTime);

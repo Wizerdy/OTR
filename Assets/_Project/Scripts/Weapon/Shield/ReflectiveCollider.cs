@@ -81,7 +81,6 @@ public class ReflectiveCollider : MonoBehaviour {
         if (_launchIt) {
             reflectable.Launch(_force, _aimingDirection);
         } else {
-            Debug.Log("Reflect : " + collision.gameObject.name);
             reflectable.Reflect(collision.GetContact(0));
         }
     }

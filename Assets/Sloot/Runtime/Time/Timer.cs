@@ -17,12 +17,15 @@ public class Timer {
     public bool IsWorking => _isWorking;
 
     [SerializeField] UnityEvent _onActivate;
+    [SerializeField] UnityEvent _onEnd;
 
     public event UnityAction OnActivate { add => _onActivate.AddListener(value); remove => _onActivate.RemoveListener(value); }
+    public event UnityAction OnEnd { add => _onEnd.AddListener(value); remove => _onEnd.RemoveListener(value); }
 
     public Timer(MonoBehaviour instigator, float duration, bool loop = true) {
         _instigator = instigator;
         _onActivate = new UnityEvent();
+        _onEnd = new UnityEvent();
         _duration = duration;
         _loop = loop;
     }
@@ -51,6 +54,9 @@ public class Timer {
     }
 
     public void End() {
+        if (IsWorking) {
+            _onEnd?.Invoke();
+        }
         if (coroutine != null)
             _instigator.StopCoroutine(coroutine);
         _isWorking = false;
@@ -66,7 +72,7 @@ public class Timer {
                 if (!_pause)
                     _currentDuration += Time.deltaTime;
             }
-            _onActivate.Invoke();
+            _onActivate?.Invoke();
         } while (true && _loop);
         End();
     }

@@ -8,17 +8,20 @@ using ToolsBoxEngine.BetterEvents;
 public enum AttackIndex { FIRST, SECOND }
 public enum WeaponType { UNDEFINED, SWORD, SHIELD, BOW, BLOODFIST, CROSSGUN, SHIELDAXE }
 
-public struct WeaponAttack {
+public class WeaponAttack {
     public float attackTime;
     public int damage;
     public int threatPoint;
     public System.Func<EntityAbilities, Vector2, IEnumerator> attack;
+
+    public bool canAttack;
 
     public WeaponAttack(float attackTime, int damage, int threatPoint, System.Func<EntityAbilities, Vector2, IEnumerator> attack) {
         this.attackTime = attackTime;
         this.damage = damage;
         this.threatPoint = threatPoint;
         this.attack = attack;
+        this.canAttack = true;
     }
 }
 
@@ -126,11 +129,13 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     }
 
     public IEnumerator Attack(AttackIndex type, EntityAbilities caster, Vector2 direction) {
-        if (!CanAttack) { yield break; }
+        //if (!CanAttack) { yield break; }
         if (!_attacks.ContainsKey(type)) { yield break; }
+        if (!_attacks[type].canAttack) { yield break; }
         _attacking = true;
         _onAttack.Invoke(type, direction);
         _currentIndex = type;
+        _weaponry.DamageHealth.ResetHitted();
         _weaponry.DamageHealth.Damage = _attacks[type].damage;
         yield return _attacks[type].attack(caster, direction);
         _attacking = false;

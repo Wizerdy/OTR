@@ -6,15 +6,19 @@ using ToolsBoxEngine;
 
 public class WeaponUI : MonoBehaviour {
     [SerializeField] EntityWeaponryReference _entityWeaponryReference;
-    [SerializeField] Image weaponImage;
     [SerializeField] Slider slider;
-    [SerializeField] Sprite fist;
-    [SerializeField] Sprite shield;
-    [SerializeField] Sprite instrument;
-    [SerializeField] EntityArmor entityArmor;
-    [SerializeField] EntityStorePoint entityStorePoint;
+    [SerializeField] GameObject fist;
+    [SerializeField] GameObject shield;
+    [SerializeField] GameObject lyre;
+    [SerializeField] GameObject trapped;
+    [SerializeField] EntityAbilities ability;
+    EntityArmor entityArmor;
+    EntityStorePoint entityStorePoint;
     int dirty = 0;
     private void Start() {
+        entityArmor = ability.Get<EntityArmor>();
+        entityStorePoint = ability.Get<EntityStorePoint>();
+        trapped.gameObject.SetActive(false);
         NoWeapon(null);
         StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnPickup += ChangeWeapon));
         StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnDrop += NoWeapon));
@@ -31,28 +35,34 @@ public class WeaponUI : MonoBehaviour {
     }
 
     void ChangeWeapon(Weapon weapon) {
-        weaponImage.gameObject.SetActive(true);
         switch (weapon.Type) {
             case WeaponType.BLOODFIST:
                 slider.gameObject.SetActive(true);
                 dirty = 1;
-                weaponImage.sprite = fist;
+                fist.SetActive(true);
+                shield.SetActive(false);
+                lyre.SetActive(false);
                 break;
             case WeaponType.SHIELDAXE:
                 slider.gameObject.SetActive(true);
-                weaponImage.sprite = shield;
+                fist.SetActive(false);
+                shield.SetActive(true);
+                lyre.SetActive(false);
                 dirty = 2;
                 slider.maxValue = ((AxeShield)weapon).entityArmor.MaxArmor;
                 break;
             case WeaponType.CROSSGUN:
-                weaponImage.sprite = instrument;
+                fist.SetActive(false);
+                shield.SetActive(false);
+                lyre.SetActive(true);
                 break;
         }
     }
 
     void NoWeapon(Weapon _) {
-        weaponImage.sprite = null;
-        weaponImage.gameObject.SetActive(false);
+        fist.SetActive(false);
+        shield.SetActive(false);
+        lyre.SetActive(false);
         slider.gameObject.SetActive(false);
         dirty = 0;
     }

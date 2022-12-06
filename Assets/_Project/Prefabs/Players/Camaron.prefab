@@ -1241,6 +1241,7 @@ GameObject:
   - component: {fileID: 2062017968}
   - component: {fileID: 4459767335104591702}
   - component: {fileID: 2392539094772173345}
+  - component: {fileID: 2130607038}
   m_Layer: 0
   m_Name: Camaron
   m_TagString: Player
@@ -1353,6 +1354,20 @@ MonoBehaviour:
   _aimHelperReference: {fileID: 11400000, guid: d347a1e1c65ceeb459c0fe71bf19da75, type: 2}
   _target: {fileID: 887048020161268641}
   _angle: 20
+--- !u!114 &2130607038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf0e6075a16004eaa304a0b321ba52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 7815873619314827620}
+  target: {fileID: 11400000, guid: 959446a279141eb42af647656c141ff6, type: 2}
 --- !u!1 &3929031521333435715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,7 +1914,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 80448
+  m_InstanceId: -832276
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

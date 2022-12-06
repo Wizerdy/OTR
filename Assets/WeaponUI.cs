@@ -7,18 +7,19 @@ using ToolsBoxEngine;
 public class WeaponUI : MonoBehaviour {
     [SerializeField] EntityWeaponryReference _entityWeaponryReference;
     [SerializeField] Slider slider;
+    [SerializeField] Image Banner;
     [SerializeField] GameObject fist;
     [SerializeField] GameObject shield;
     [SerializeField] GameObject lyre;
     [SerializeField] GameObject trapped;
-    [SerializeField] EntityAbilities ability;
+    [SerializeField] EntityAbilitiesReference ability;
     EntityArmor entityArmor;
     EntityStorePoint entityStorePoint;
     int dirty = 0;
     private void Start() {
-        entityArmor = ability.Get<EntityArmor>();
-        entityStorePoint = ability.Get<EntityStorePoint>();
-        trapped.gameObject.SetActive(false);
+        entityArmor = ability.Instance.Get<EntityArmor>();
+        entityStorePoint = ability.Instance.Get<EntityStorePoint>();
+        trapped.SetActive(false);
         NoWeapon(null);
         StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnPickup += ChangeWeapon));
         StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnDrop += NoWeapon));
@@ -37,6 +38,7 @@ public class WeaponUI : MonoBehaviour {
     void ChangeWeapon(Weapon weapon) {
         switch (weapon.Type) {
             case WeaponType.BLOODFIST:
+                Banner.color = new Color(1, 1, 1, 1);
                 slider.gameObject.SetActive(true);
                 dirty = 1;
                 fist.SetActive(true);
@@ -44,6 +46,7 @@ public class WeaponUI : MonoBehaviour {
                 lyre.SetActive(false);
                 break;
             case WeaponType.SHIELDAXE:
+                Banner.color = new Color(1, 1, 1, 1);
                 slider.gameObject.SetActive(true);
                 fist.SetActive(false);
                 shield.SetActive(true);
@@ -52,6 +55,7 @@ public class WeaponUI : MonoBehaviour {
                 slider.maxValue = ((AxeShield)weapon).entityArmor.MaxArmor;
                 break;
             case WeaponType.CROSSGUN:
+                Banner.color = new Color(1, 1, 1, 1);
                 fist.SetActive(false);
                 shield.SetActive(false);
                 lyre.SetActive(true);
@@ -63,6 +67,7 @@ public class WeaponUI : MonoBehaviour {
         fist.SetActive(false);
         shield.SetActive(false);
         lyre.SetActive(false);
+        Banner.color = new Color(1, 1, 1, 0);
         slider.gameObject.SetActive(false);
         dirty = 0;
     }

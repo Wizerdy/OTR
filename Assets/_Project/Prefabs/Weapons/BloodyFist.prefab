@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348279467843787976}
   - component: {fileID: 4405827131507726571}
+  - component: {fileID: 6974214287170370748}
   - component: {fileID: 8770567618907815269}
   - component: {fileID: 1016631887059481575}
   m_Layer: 0
@@ -169,7 +170,19 @@ MonoBehaviour:
   _onAttack:
     _event:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 6974214287170370748}
+          m_TargetAssemblyTypeName: JouerSonParAttaque, Assembly-CSharp
+          m_MethodName: JouerSonByAttaqueType
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _onAttackEnd:
     _event:
       m_PersistentCalls:
@@ -267,6 +280,20 @@ MonoBehaviour:
   _dashCooldown: 0
   _dashForce: {fileID: 11400000, guid: 671b60fbb24a06b4999b9ccb638564b4, type: 2}
   _dashWeight: 0.8
+--- !u!114 &6974214287170370748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400048295426091731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59409bde4b221df4780bb8bed2ccb04f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstAttack: 3
+  _secondAttack: 16
 --- !u!50 &8770567618907815269
 Rigidbody2D:
   serializedVersion: 4

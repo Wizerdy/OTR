@@ -21,7 +21,9 @@ public enum AudioName {
     UI_StartGame,
     ShieldPerfectParry,
     LyreBoost,
-    BloodFistHeal
+    BloodFistHeal,
+    BossHit,
+    BossDeath
 }
 
 [System.Serializable]

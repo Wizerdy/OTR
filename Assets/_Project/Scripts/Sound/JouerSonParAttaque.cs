@@ -9,7 +9,7 @@ public class JouerSonParAttaque : MonoBehaviour {
     [SerializeField] int _firstAttack;
     [SerializeField] int _secondAttack;
 
-    public void JouerSonByAttaqueType(AttackIndex type) {
+    public void JouerSonByAttaqueType(AttackIndex type, Vector2 dir) {
         switch (type) {
             case AttackIndex.FIRST:
                 SoundManager.Instance.PlaySfxByIndex(_firstAttack);

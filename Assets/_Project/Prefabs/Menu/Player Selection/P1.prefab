@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 3310036511448026314}
   - component: {fileID: 2673060021372518912}
   - component: {fileID: 4675876260014165904}
+  - component: {fileID: 6250067963917267153}
   m_Layer: 5
   m_Name: P1
   m_TagString: Untagged
@@ -959,6 +960,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 3310036511448026314}
   _characterName: {fileID: 4838707256278681137}
+  _onConfirm:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6250067963917267153}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &6250067963917267153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851663960908483485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a9faffc2b39a446a9c79e61ff8b12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8100894660473529556
 GameObject:
   m_ObjectHideFlags: 0

@@ -523,6 +523,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 3839653871625589696}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _onHeal:
     _event:
       m_PersistentCalls:
@@ -551,6 +563,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3839653871625589696}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -1242,6 +1266,7 @@ GameObject:
   - component: {fileID: 4459767335104591702}
   - component: {fileID: 2392539094772173345}
   - component: {fileID: 2130607038}
+  - component: {fileID: 3839653871625589696}
   m_Layer: 0
   m_Name: Camaron
   m_TagString: Player
@@ -1368,6 +1393,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 7815873619314827620}
   target: {fileID: 11400000, guid: 959446a279141eb42af647656c141ff6, type: 2}
+--- !u!114 &3839653871625589696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a9faffc2b39a446a9c79e61ff8b12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3929031521333435715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,7 +1951,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -832276
+  m_InstanceId: 39468
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

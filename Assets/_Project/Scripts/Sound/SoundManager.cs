@@ -86,6 +86,7 @@ public class SoundManager : MonoBehaviour {
         PlaySound source = obj.GetComponent<PlaySound>();
         Sound soundToPlay = FindSfx(audioName);
 
+        source.audioSource.pitch = 1f;
         if (soundToPlay.randomPitch) {
             source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
         }
@@ -116,7 +117,7 @@ public class SoundManager : MonoBehaviour {
         //AudioSource source = obj.GetComponent<AudioSource>();
         PlaySound source = obj.GetComponent<PlaySound>();
         Sound soundToPlay = FindMusic(audioName);
-
+        source.audioSource.pitch = 1f;
         if (soundToPlay.randomPitch) {
             source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
         }

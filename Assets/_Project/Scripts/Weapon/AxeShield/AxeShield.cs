@@ -33,6 +33,8 @@ public class AxeShield : Weapon
     string _triggerName_attack_slash = "AxeShield_Slash";
     string _triggerName_attack_parry = "AxeShield_Parry";
 
+    public int ArmorRegeneration { get => armorPointRegenerationValue; set { armorPointRegenerationValue = value; entityArmor.RegenValueArmor = armorPointRegenerationValue; } }
+
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
 

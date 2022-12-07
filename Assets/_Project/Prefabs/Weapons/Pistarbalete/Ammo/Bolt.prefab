@@ -181,8 +181,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _damage: 20
-  _perfectDamage: 15
+  _damage: 7
+  _perfectDamage: 0
 --- !u!114 &5882125061950032962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3093617, y: 0.9018268}
+  m_Size: {x: 0.3093617, y: 0.5126575}
   m_EdgeRadius: 0
 --- !u!1 &4065707504571672749
 GameObject:

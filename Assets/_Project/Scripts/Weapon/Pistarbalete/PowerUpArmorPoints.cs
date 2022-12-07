@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PU_ArmorPoints", menuName = "Scriptable Object/Power Up/Armor Points")]
 public class PowerUpArmorPoints : PowerUp
 {
-    [SerializeField] int _additionalArmorPoint = 5;
+    [SerializeField] int _additionalArmorPoint = 1;
     [SerializeField] bool _lostOnDrop = true;
 
     EntityWeaponry _targetWeaponry;
@@ -28,6 +28,7 @@ public class PowerUpArmorPoints : PowerUp
         if (_targetWeaponry == null) { return false; }
         if (_targetWeaponry.HasWeapon && _targetWeaponry.Weapon is AxeShield shield) {
             _targetWeapon = shield;
+            _target.Get<EntityArmor>().CurrentArmor += _additionalArmorPoint;
             //shield.BloodPointsOnHit += _additionalArmorPoint;
             _targetWeaponry.OnDrop += _Disable;
             return true;
@@ -39,6 +40,8 @@ public class PowerUpArmorPoints : PowerUp
         if (!Enabled) { return false; }
         if (_targetWeaponry != null) { _targetWeaponry.OnDrop -= _Disable; }
         //shield.BloodPointsOnHit -= _additionalArmorPoint;
+        //_targetWeapon.ArmorRegeneration /= 2;
+
 
         _targetWeapon = null;
         _targetWeaponry = null;

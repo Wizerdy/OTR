@@ -111,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7881652080676257308
 Transform:
   m_ObjectHideFlags: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa37a3fc3e3e5442af91c026ae732aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 3
   _value: 0
   _onUse:
     _event:
@@ -1111,11 +1111,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _overlapCircle:
   - value:
-      position: {x: -1.3, y: -0.2}
+      position: {x: -1.6, y: -0.2}
       radius: 0.5
     index: 0
   - value:
-      position: {x: -1.3, y: 0.2}
+      position: {x: -1.6, y: 0.2}
       radius: 0.5
     index: 1
   - value:
@@ -1127,7 +1127,7 @@ MonoBehaviour:
       radius: 0.4
     index: 1
   _overlapRectangle: []
-  _currentIndex: -1
+  _currentIndex: 0
 --- !u!114 &3482465609085986733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   _animator: {fileID: 2062017968}
   _trajectoryLine: {fileID: 4158273122409191761}
   _aimingCircle: {fileID: 3889456311327422371}
-  _heartMassageStopTime: 1
+  _heartMassageStopTime: 0.5
   _onAim:
     _event:
       m_PersistentCalls:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 98450
+  m_InstanceId: 80156
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

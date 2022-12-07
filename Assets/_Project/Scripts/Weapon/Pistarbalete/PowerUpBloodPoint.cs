@@ -28,7 +28,7 @@ public class PowerUpBloodPoint : PowerUp
         if (_targetWeaponry == null) { return false; }
         if (_targetWeaponry.HasWeapon && _targetWeaponry.Weapon is BloodyFist fists) {
             _targetWeapon = fists;
-            fists.BloodPointsOnHit += _additionalBloodPoint;
+            //fists.BloodPointsOnHit += _additionalBloodPoint;
             _targetWeaponry.OnDrop += _Disable;
             return true;
         }

@@ -116,6 +116,7 @@ public class BloodyFist : Weapon {
         //    //Debug.Log("touché");
         //    _entityStorePoint.GainPoint(_hitStorePoint);
         //}
+        if (_entityStorePoint.CurrentValue <= 0f) { return; }
         if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject && !collider.gameObject.GetComponentInRoot<IHealth>().IsDead/*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {
             collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
             _entityStorePoint.LosePoint(_hitStorePointCost, false);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PU_CrossGunDamageBuff
   m_EditorClassIdentifier: 
   _powerUp: {fileID: 11400000, guid: 6a02b50249f2e8c4b817080346cdbc19, type: 2}
-  _time: 3
+  _time: 10

@@ -25,8 +25,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     [SerializeField] Animator _animator;
     [SerializeField] TrajectoryLine _trajectoryLine;
     [SerializeField] GameObject _aimingCircle;
-    [Header("Parameters")]
-    [SerializeField] float _heartMassageStopTime = 1f;
+    //[Header("Parameters")]
 
     [SerializeField] BetterEvent<Vector2> _onAim = new BetterEvent<Vector2>();
     [SerializeField] BetterEvent _onDeath = new BetterEvent();
@@ -106,14 +105,15 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
 
     public bool TryRevive() {
         if (_health.IsDead) { return false; }
-        bool revive = _revive.CheckRevive();
+        bool revive = _revive.CheckRevive(out EntityRevive target);
         if (revive) {
-            _animator.SetFloat("y", 1f);
-            _animator.SetFloat("x", 0f);
+            //_animator.SetFloat("y", 1f);
+            //_animator.SetFloat("x", 0f);
+            _animator.SetTrigger("HeartMassage");
             _pMovements.CanMove = false;
             _pMovements.Stop();
-            _root.position = _revive.Target?.gameObject.GetRoot().transform.Position2D() + new Vector2(0.45f, -0.01f) ?? _root.position;
-            StartCoroutine(Tools.Delay(() => _pMovements.CanMove = true, _heartMassageStopTime));
+            _root.position = target.gameObject.GetRoot().transform.Position2D() + new Vector2(0.45f, -0.01f);
+            StartCoroutine(Tools.Delay(() => _pMovements.CanMove = true, _revive.ReviveTime));
         }
         return revive;
     }

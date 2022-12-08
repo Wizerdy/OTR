@@ -6,11 +6,12 @@ using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 
 public class EntityRevive : MonoBehaviour, IEntityAbility {
-    [SerializeField] EntityCollisionArea _reviveArea;
     [SerializeField] Health _health;
     [SerializeField] Collider2D _collider;
 
     [Header("System")]
+    [SerializeField] float _reviveTime = 0.2f;
+    [SerializeField] float _radius = 5f;
     [SerializeField] int _pressCount = 10;
     [SerializeField, Range(0f, 1f)] float _healthPercentage = 0.5f;
 
@@ -18,10 +19,9 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     [SerializeField, HideInInspector] BetterEvent<EntityRevive> _onStopRevive = new BetterEvent<EntityRevive>();
 
     int _currentPress;
-    EntityRevive _reviving = null;
+    bool _revivingSomeone = false;
 
-    public bool Reviving => _reviving != null;
-    public EntityRevive Target => _reviving;
+    public float ReviveTime => _reviveTime;
 
     public event UnityAction<EntityRevive> OnStartRevive { add => _onStartRevive += value; remove => _onStartRevive -= value; }
     public event UnityAction<EntityRevive> OnStopRevive { add => _onStopRevive += value; remove => _onStopRevive -= value; }
@@ -31,6 +31,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     }
 
     void _Death() {
+        _currentPress = 0;
         _collider.isTrigger = true;
     }
 
@@ -49,32 +50,38 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
         _health.TakeHeal(_healthPercentage);
     }
 
-    public bool CheckRevive() {
-        if (_reviving == null) {
-            GameObject obj = _reviveArea?.Nearest((KeyValuePair<GameObject, Token> pair) => { if (pair.Key == null) { return false; } return pair.Key?.CompareTag("Player") ?? false && (pair.Key?.GetComponentInRoot<IHealth>()?.IsDead ?? false); } );
-            if (obj != null) {
-                StartRevive(obj.GetComponentInRoot<EntityAbilities>().Get<EntityRevive>());
-            } else {
-                return false;
-            }
-        }
-
-        if (_reviving.HeartMassage()) {
-            StopRevive();
-            return false;
-        }
-
-        if (!_reviving._health.IsDead) { StopRevive(); }
+    public bool CheckRevive(out EntityRevive target) {
+        target = OverlapNearestRevive();
+        if (target == null) { return false; }
+        if (_revivingSomeone) { return false; }
+        target.HeartMassage();
+        _revivingSomeone = true;
+        StartCoroutine(Tools.Delay(() => _revivingSomeone = false, _reviveTime));
         return true;
     }
 
-    public void StartRevive(EntityRevive revive) {
-        _reviving = revive;
-        _onStartRevive.Invoke(revive);
+    private EntityRevive OverlapNearestRevive() {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
+        if (colliders == null || colliders.Length == 0) { return null; }
+
+        EntityRevive output = null;
+        float nearest = _radius * _radius + 1f;
+        for (int i = 0; i < colliders.Length; i++) {
+            if (colliders[i] == _collider) { continue; }
+            if (!colliders[i].CompareTag("Player")) { continue; }
+            EntityRevive other = colliders[i].gameObject.GetRoot().GetComponent<EntityAbilities>()?.Get<EntityRevive>() ?? null;
+            if (other == null) { continue; }
+            float sqrDistance = Vector2.SqrMagnitude(other.transform.Position2D() - transform.Position2D());
+            if (nearest > sqrDistance) {
+                output = other;
+                nearest = sqrDistance;
+            }
+        }
+        return output;
     }
 
-    public void StopRevive() {
-        _onStopRevive.Invoke(_reviving);
-        _reviving = null;
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 }

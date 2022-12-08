@@ -1704,6 +1704,7 @@ GameObject:
   - component: {fileID: 1367052518068913686}
   - component: {fileID: 2229309786140465989}
   - component: {fileID: 2831378648292543862}
+  - component: {fileID: 9170316774577679094}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -1754,7 +1755,6 @@ MonoBehaviour:
   _animator: {fileID: 2062017968}
   _trajectoryLine: {fileID: 4158273122409191761}
   _aimingCircle: {fileID: 3889456311327422371}
-  _heartMassageStopTime: 0.5
   _onAim:
     _event:
       m_PersistentCalls:
@@ -1793,9 +1793,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29de31fa9322cfd429e35b743ec8f0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _datas: {fileID: 11400000, guid: cf11e766b20b2c74c8fd0e8e82f504a8, type: 2}
   _player: {fileID: 1367052518068913686}
   _aimHelperReference: {fileID: 11400000, guid: d347a1e1c65ceeb459c0fe71bf19da75, type: 2}
+--- !u!114 &9170316774577679094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5379457625388238793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5f7e401412b0e4580f12f2f8e9408a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 2831378648292543862}
+  _characterData: {fileID: 11400000, guid: cf11e766b20b2c74c8fd0e8e82f504a8, type: 2}
 --- !u!1 &5529016899354803162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1976,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 80156
+  m_InstanceId: 40508
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2420,9 +2433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bb5b178d67a2940b6becc04e52daee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reviveArea: {fileID: 2630652131641736123}
   _health: {fileID: 147940007823276091}
   _collider: {fileID: 4457475169470103257}
+  _reviveTime: 0.2
+  _radius: 1
   _pressCount: 10
   _healthPercentage: 0.5
   _onStartRevive:

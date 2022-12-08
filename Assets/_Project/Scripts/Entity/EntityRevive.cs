@@ -69,9 +69,11 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
         for (int i = 0; i < colliders.Length; i++) {
             if (colliders[i] == _collider) { continue; }
             if (!colliders[i].CompareTag("Player")) { continue; }
-            EntityRevive other = colliders[i].gameObject.GetRoot().GetComponent<EntityAbilities>()?.Get<EntityRevive>() ?? null;
+            GameObject root = colliders[i].gameObject.GetRoot();
+            if (!root.GetComponent<IHealth>().IsDead) { continue; }
+            EntityRevive other = root.GetComponent<EntityAbilities>()?.Get<EntityRevive>() ?? null;
             if (other == null) { continue; }
-            float sqrDistance = Vector2.SqrMagnitude(other.transform.Position2D() - transform.Position2D());
+            float sqrDistance = Vector2.SqrMagnitude(root.transform.Position2D() - transform.Position2D());
             if (nearest > sqrDistance) {
                 output = other;
                 nearest = sqrDistance;

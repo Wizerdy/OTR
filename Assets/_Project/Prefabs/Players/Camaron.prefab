@@ -1976,7 +1976,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 40508
+  m_InstanceId: -114514
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,7 +2437,7 @@ MonoBehaviour:
   _collider: {fileID: 4457475169470103257}
   _reviveTime: 0.2
   _radius: 1
-  _pressCount: 10
+  _pressCount: 6
   _healthPercentage: 0.5
   _onStartRevive:
     _event:
@@ -2618,8 +2618,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0.83413935, a: 1}
-      key1: {r: 1, g: 0, b: 0.83413935, a: 1}
+      key0: {r: 0.09019608, g: 0.7176471, b: 0.9960785, a: 1}
+      key1: {r: 0.09019608, g: 0.7137255, b: 0.9960785, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

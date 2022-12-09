@@ -7,6 +7,7 @@ using ToolsBoxEngine.BetterEvents;
 
 public class EntityRevive : MonoBehaviour, IEntityAbility {
     [SerializeField] Health _health;
+    [SerializeField] EntityPhysics _physics;
     [SerializeField] Collider2D _collider;
 
     [Header("System")]
@@ -33,6 +34,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     void _Death() {
         _currentPress = 0;
         _collider.isTrigger = true;
+        _physics.Terminate();
     }
 
     public bool HeartMassage() {
@@ -61,7 +63,10 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     }
 
     private EntityRevive OverlapNearestRevive() {
+        bool querryTrigger = Physics2D.queriesHitTriggers;
+        Physics2D.queriesHitTriggers = true;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
+        Physics2D.queriesHitTriggers = querryTrigger;
         if (colliders == null || colliders.Length == 0) { return null; }
 
         EntityRevive output = null;

@@ -131,4 +131,18 @@ public class EntityPhysics : MonoBehaviour, IEntityAbility {
         _forcesDisplay.Clear();
         _forces.Clear();
     }
+
+    public void Terminate() {
+        try {
+            foreach (KeyValuePair<int, List<Force>> key in _forces) {
+                for (int i = 0; i < key.Value.Count; i++) {
+                    key.Value[i].End();
+                }
+            }
+        } catch(KeyNotFoundException k) {
+            if (_debug) { Debug.LogWarning("Happen : " + k); }
+        } catch (System.Exception e) {
+            Debug.LogError(e);
+        }
+    }
 }

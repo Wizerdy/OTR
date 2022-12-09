@@ -2434,6 +2434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 147940007823276091}
+  _physics: {fileID: 1094344770189593231}
   _collider: {fileID: 4457475169470103257}
   _reviveTime: 0.2
   _radius: 1

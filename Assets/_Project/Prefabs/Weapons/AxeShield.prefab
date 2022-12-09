@@ -477,20 +477,20 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  slashDamage: 10
-  slashThreatGenerated: 1
+  slashDamage: 25
+  slashThreatGenerated: 10
   _attackTime: 0
-  attackCooldown: 0.2
-  parryCooldown: 0.5
-  parryThreatGenerated: 0
-  parryDamageReduction: 1
+  attackCooldown: 0.8
+  parryCooldown: 0.25
+  parryThreatGenerated: 5
+  parryDamageReduction: 100
   onParry:
     m_PersistentCalls:
       m_Calls: []
-  armorPointRegenerationRate: 5
-  armorPointRegenerationValue: 2
-  armorPointMax: 10
-  armorPointOnPickUp: 5
+  armorPointRegenerationRate: 10
+  armorPointRegenerationValue: 5
+  armorPointMax: 50
+  armorPointOnPickUp: 20
   entityArmor: {fileID: 0}
 --- !u!114 &5591567690811419354
 MonoBehaviour:

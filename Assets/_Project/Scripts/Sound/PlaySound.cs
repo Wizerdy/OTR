@@ -1,12 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Audio;
+using ToolsBoxEngine.BetterEvents;
 
 //[RequireComponent(typeof(AudioSource))]
 public class PlaySound : MonoBehaviour {
-
     public AudioSource audioSource;
     public Sound sound;
+    [SerializeField, HideInInspector] BetterEvent<PlaySound> _onStart = new BetterEvent<PlaySound>();
+    [SerializeField, HideInInspector] BetterEvent<PlaySound> _onEnd = new BetterEvent<PlaySound>();
+
+    Coroutine _soundRoutine = null;
+    bool _playing = false;
+
+    public bool Playing => _playing;
+    public event UnityAction<PlaySound> OnStart { add => _onStart += value; remove => _onStart -= value; }
+    public event UnityAction<PlaySound> OnEnd { add => _onEnd += value; remove => _onEnd -= value; }
 
     //private void LateUpdate() {
     //    if (audioSource.isPlaying && !sound.loop) {
@@ -14,20 +24,36 @@ public class PlaySound : MonoBehaviour {
     //    }
     //}
 
-    public void Init(AudioMixerGroup _mixer) {
+    public void Init(AudioMixerGroup mixer) {
         if (!audioSource)
             audioSource = GetComponent<AudioSource>();
 
-        audioSource.outputAudioMixerGroup = _mixer;
+        audioSource.outputAudioMixerGroup = mixer;
     }
 
-    public IEnumerator StartSound() {
+    public void StartSound() {
+        if (_playing) { StopSound(); }
+        _soundRoutine = StartCoroutine(IStartSound());
+    }
+
+    public void StopSound() {
+        if (_soundRoutine != null) { StopCoroutine(_soundRoutine); }
+
+        audioSource.Stop();
+        _playing = false;
+        _onEnd.Invoke(this);
+        _onEnd.ClearListener();
+        _onStart.ClearListener();
+    }
+
+    public IEnumerator IStartSound() {
         audioSource.Play();
+        _onStart.Invoke(this);
+        _playing = true;
         yield return new WaitWhile(() => audioSource.isPlaying);
-        SoundManager.Instance.BackToPool(gameObject);
-
-        //do something
+        StopSound();
     }
+
     //[HideInInspector]
     //public bool declencherAudio = false;
 

@@ -271,16 +271,16 @@ MonoBehaviour:
   _healthPercentValueStorePoint: 0.2
   _storePointMax: 50
   _hitDamage: 10
-  _hitThreatPoint: 10
-  _hitCooldown: 0.15
-  _hitDuration: 0.15
+  _hitThreatPoint: 1
+  _hitCooldown: 0.2
+  _hitDuration: 0
   _hitStorePoint: 10
-  _hitStorePointCost: 30
+  _hitStorePointCost: 5
   _bumpForce: {fileID: 11400000, guid: 41e3b62926bd9e143a6dfd62c210a4e5, type: 2}
-  _storePointCost: 0
-  _dashCooldown: 0
+  _storePointCost: 20
+  _dashCooldown: 3
   _dashForce: {fileID: 11400000, guid: 671b60fbb24a06b4999b9ccb638564b4, type: 2}
-  _dashWeight: 0.8
+  _dashWeight: 1
 --- !u!114 &6974214287170370748
 MonoBehaviour:
   m_ObjectHideFlags: 0

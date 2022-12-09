@@ -72,82 +72,59 @@ public class SoundManager : MonoBehaviour {
         return null;
     }
 
-    public void PlaySfx(AudioName audioName) {
+    public PlaySound PlaySfx(AudioName audioName) {
+        return PlaySound(FindSfx(audioName));
+    }
+
+    public PlaySound PlayMusic(AudioName audioName) {
+        return PlaySound(FindMusic(audioName));
+    }
+
+    private PlaySound PlaySound(Sound sound) {
         GameObject obj;
-        if (audioSourcesStandBy[0] != null) {
+        if (audioSourcesStandBy.Count > 0) {
             obj = audioSourcesStandBy[0];
-            audioSourcesStandBy.Remove(audioSourcesStandBy[0]);
         } else {
             obj = CreateNewAudioSource();
         }
 
-        audioSourcesActive.Add(obj);
-
         PlaySound source = obj.GetComponent<PlaySound>();
-        Sound soundToPlay = FindSfx(audioName);
 
         source.audioSource.pitch = 1f;
-        if (soundToPlay.randomPitch) {
-            source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
+        if (sound.randomPitch) {
+            source.audioSource.pitch = Random.Range(sound.minPitch, sound.maxPitch);
         }
 
-        source.sound = soundToPlay;
-        source.audioSource.clip = soundToPlay.audio[Random.Range(0, source.sound.audio.Length - 1)];
-        source.audioSource.loop = soundToPlay.loop;
-        source.audioSource.volume = soundToPlay.volume;
-        //if (soundToPlay.playOnAwake) {
+        source.sound = sound;
+        source.audioSource.clip = sound.audio[Random.Range(0, source.sound.audio.Length - 1)];
+        source.audioSource.loop = sound.loop;
+        source.audioSource.volume = sound.volume;
+
         obj.SetActive(true);
-        StartCoroutine(source.StartSound());
-
-        //source.audioSource.Play();
-        //}
-    }
-
-    public void PlayMusic(AudioName audioName) {
-        GameObject obj;
-        if (audioSourcesStandBy[0] != null) {
-            obj = audioSourcesStandBy[0];
-            audioSourcesStandBy.Remove(audioSourcesStandBy[0]);
-        } else {
-            obj = CreateNewAudioSource();
-        }
-
+        source.StartSound();
         audioSourcesActive.Add(obj);
+        audioSourcesStandBy.Remove(obj);
+        source.OnEnd += (PlaySound component) => BackToPool(component.gameObject);
 
-        //AudioSource source = obj.GetComponent<AudioSource>();
-        PlaySound source = obj.GetComponent<PlaySound>();
-        Sound soundToPlay = FindMusic(audioName);
-        source.audioSource.pitch = 1f;
-        if (soundToPlay.randomPitch) {
-            source.audioSource.pitch = Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
-        }
-
-        source.sound = soundToPlay;
-        source.audioSource.clip = soundToPlay.audio[Random.Range(0, source.sound.audio.Length - 1)];
-        source.audioSource.loop = soundToPlay.loop;
-        source.audioSource.volume = soundToPlay.volume;
-
-        //if (soundToPlay.playOnAwake) {
-        obj.SetActive(true);
-        StartCoroutine(source.StartSound());
-
-        //source.audioSource.Play();
-        //}
+        return source;
     }
 
-    public void PlaySfxByIndex(int index) {
-        if (index >= soundsSfx.Length) { Debug.LogError("Sound index overflow"); return; }
+    public PlaySound PlaySfxByIndex(int index) {
+        if (index >= soundsSfx.Length) { Debug.LogError("SFX index overflow"); return null; }
         if (soundsSfx[index] != null)
-            PlaySfx(soundsSfx[index].audioName);
+            return PlaySfx(soundsSfx[index].audioName);
         else
             Debug.LogError("NO SFX FROM THIS INDEX");
+        return null;
     }
 
-    public void PlayMusicByIndex(int index) {
+    public PlaySound PlayMusicByIndex(int index) {
+        if (index >= soundsSfx.Length) { Debug.LogError("Music index overflow"); return null; }
         if (soundsMusic[index] != null)
             PlayMusic(soundsMusic[index].audioName);
         else
             Debug.LogError("NO MUSIC FROM THIS INDEX");
+        return null;
     }
 
     public void StopAudio(AudioName audioName) {

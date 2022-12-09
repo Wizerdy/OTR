@@ -34,8 +34,8 @@ public class Force {
     public float Strength { get => _strength; set => _strength = value; }
     public Vector2 Direction { get => _direction; set => _direction = value; }
     public float Weight { get => _weight; set => _weight = value; }
-    public AnimationCurve Start => _start;
-    public AnimationCurve End => _end;
+    public AnimationCurve StartCurve => _start;
+    public AnimationCurve EndCurve => _end;
     public float StartDuration => _startDuration;
     public float EndDuration => _endDuration;
     public float Duration => _startDuration + _endDuration;
@@ -136,7 +136,9 @@ public class Force {
                 if (_currentPercent > 0f) {
                     _currentPercent -= deltaTime / _endDuration;
                     _currentPercent = Mathf.Max(0f, _currentPercent);
-                    _onEnd.Invoke(this);
+                    if (_currentPercent == 0f) {
+                        End();
+                    }
                 }
                 break;
             case ForceState.STAGNATION:
@@ -150,7 +152,14 @@ public class Force {
         ChangeState(ForceState.ACCELERATION);
     }
 
+    public void End() {
+        _currentPercent = 0f;
+        ChangeState(ForceState.DECELERATION);
+        _onEnd.Invoke(this);
+    }
+
     public void ChangeState(ForceState state) {
+        if (state == _state) { return; }
         _state = state;
         _onChangeState.Invoke(this, state);
     }

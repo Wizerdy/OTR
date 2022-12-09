@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1976139205, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_InstanceId
-      value: -28496
+      value: -114198
       objectReference: {fileID: 0}
     - target: {fileID: 2062017968, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Controller
@@ -29,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.17
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.6
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.z
@@ -131,6 +131,22 @@ PrefabInstance:
       propertyPath: _datas
       value: 
       objectReference: {fileID: 11400000, guid: e7301c3f1500009459735d9cd366e74d, type: 2}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.20392159
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.20000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
     - target: {fileID: 3690235229799450623, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_IsActive
       value: 0

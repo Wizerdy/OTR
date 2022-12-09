@@ -33,6 +33,10 @@ namespace ToolsBoxEngine {
                 _event.RemoveListener(action);
             }
 
+            public void ClearListener() {
+                _event.RemoveAllListeners();
+            }
+
             public static BetterEvent<T1, T2, T3, T4> operator +(BetterEvent<T1, T2, T3, T4> e, UnityAction<T1, T2, T3, T4> action) {
                 e.AddListener(action);
                 return e;
@@ -79,6 +83,10 @@ namespace ToolsBoxEngine {
 
             public void RemoveListener(UnityAction<T1, T2, T3> action) {
                 _event.RemoveListener(action);
+            }
+
+            public void ClearListener() {
+                _event.RemoveAllListeners();
             }
 
             public static BetterEvent<T1, T2, T3> operator +(BetterEvent<T1, T2, T3> e, UnityAction<T1, T2, T3> action) {
@@ -129,6 +137,10 @@ namespace ToolsBoxEngine {
                 _event.RemoveListener(action);
             }
 
+            public void ClearListener() {
+                _event.RemoveAllListeners();
+            }
+
             public static BetterEvent<T1, T2> operator +(BetterEvent<T1, T2> e, UnityAction<T1, T2> action) {
                 e.AddListener(action);
                 return e;
@@ -177,6 +189,10 @@ namespace ToolsBoxEngine {
                 _event.RemoveListener(action);
             }
 
+            public void ClearListener() {
+                _event.RemoveAllListeners();
+            }
+
             public static BetterEvent<T> operator +(BetterEvent<T> e, UnityAction<T> action) {
                 e.AddListener(action);
                 return e;
@@ -223,6 +239,10 @@ namespace ToolsBoxEngine {
 
             public void RemoveListener(UnityAction action) {
                 _event.RemoveListener(action);
+            }
+
+            public void ClearListener() {
+                _event.RemoveAllListeners();
             }
 
             public static BetterEvent operator +(BetterEvent e, UnityAction action) {

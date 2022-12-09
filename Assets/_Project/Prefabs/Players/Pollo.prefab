@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1976139205, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_InstanceId
-      value: -24344
+      value: -114922
       objectReference: {fileID: 0}
     - target: {fileID: 2130607038, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: target
@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.57
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.69
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 887048020161268641, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67,6 +67,30 @@ PrefabInstance:
       propertyPath: _datas
       value: 
       objectReference: {fileID: 11400000, guid: 4c6a54ef42cbded4cbe21c579ea2011f, type: 2}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.24313727
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.24313727
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3645087357924411892, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: _sprites.Array.data[0].sprite
       value: 

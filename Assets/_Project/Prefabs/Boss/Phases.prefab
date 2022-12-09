@@ -105,7 +105,7 @@ MonoBehaviour:
   _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
-  _bonusDamageEveryTick: 5
+  _bonusDamageEveryTick: 1
 --- !u!1 &571184972408395388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
-  _bonusDamageEveryTick: 5
+  _bonusDamageEveryTick: 1
 --- !u!1 &2594603326471472909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,7 +2500,7 @@ MonoBehaviour:
   _size: {x: 20, y: 10}
   _tick: 1
   _cageDuration: 10
-  _bonusDamageEveryTick: 5
+  _bonusDamageEveryTick: 1
 --- !u!1 &5120178155079321416
 GameObject:
   m_ObjectHideFlags: 0

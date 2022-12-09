@@ -1976,7 +1976,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -114514
+  m_InstanceId: 62760
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,7 +2437,7 @@ MonoBehaviour:
   _physics: {fileID: 1094344770189593231}
   _collider: {fileID: 4457475169470103257}
   _reviveTime: 0.2
-  _radius: 1
+  _radius: 0.7
   _pressCount: 6
   _healthPercentage: 0.5
   _onStartRevive:

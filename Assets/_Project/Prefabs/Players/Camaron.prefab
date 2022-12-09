@@ -111,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7881652080676257308
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,6 +1743,7 @@ MonoBehaviour:
   _abilities: {fileID: 7815873619314827620}
   _dashForce: {fileID: 6708155632029178962}
   _health: {fileID: 147940007823276091}
+  _physics: {fileID: 1094344770189593231}
   _pMovements: {fileID: 4072202642788751678}
   _oriention: {fileID: 7488032526107593726}
   _holding: {fileID: 4819328008194156798}
@@ -1976,7 +1977,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 62760
+  m_InstanceId: 108672
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2052,6 +2053,10 @@ MonoBehaviour:
   _rb: {fileID: 8205320720882076262}
   _forcesDisplay: []
   _debug: 0
+  _onMove:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &7488032526107593726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2436,7 +2441,8 @@ MonoBehaviour:
   _health: {fileID: 147940007823276091}
   _physics: {fileID: 1094344770189593231}
   _collider: {fileID: 4457475169470103257}
-  _reviveTime: 0.2
+  _reviveTime: 1
+  _heartMassageTime: 0.2
   _radius: 0.7
   _pressCount: 6
   _healthPercentage: 0.5

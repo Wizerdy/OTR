@@ -12,13 +12,14 @@ public class BossPhase : MonoBehaviour {
     }
 
     private void Start() {
-        for (int i = 0; i < transform.childCount; i++) {
-            BossAttack attack = transform.GetChild(i).GetComponent<BossAttack>();
-            if (null != attack && !_attacks.Contains(attack)){
-                _attacks.Add(attack);
+        BossAttack[] bossAttacks = GetComponentsInChildren<BossAttack>();
+        for (int i = 0; i < bossAttacks.Length; i++) {
+            if (null != bossAttacks[i] && !_attacks.Contains(bossAttacks[i])){
+                _attacks.Add(bossAttacks[i]);
             }
         }
     }
+
     public BossAttack Get(string attackName) {
         for (int i = 0; i < _attacks.Count; i++) {
             if (_attacks[i].GetType().Name == attackName) {

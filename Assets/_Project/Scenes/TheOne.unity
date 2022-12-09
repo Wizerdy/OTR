@@ -2240,6 +2240,18 @@ PrefabInstance:
       value: Character Selection/Leave[/Keyboard/q,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
       objectReference: {fileID: 0}
     - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
       value: 0.9960785
       objectReference: {fileID: 0}
@@ -2252,6 +2264,10 @@ PrefabInstance:
       value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
       value: 0.9960785
       objectReference: {fileID: 0}
@@ -2262,6 +2278,10 @@ PrefabInstance:
     - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.09019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150322644942064179, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3905317884828674427, guid: e40c9d8fa86c96f4d90a8e5fd6770394, type: 3}
       propertyPath: m_Name
@@ -3762,8 +3782,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.9996956
-    height: 1
+    width: 1
+    height: 0.99992645
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4098,6 +4118,10 @@ PrefabInstance:
       propertyPath: _damages
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349757768644349720, guid: c7b300d3b456a674fb89b2d9f5890b22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3144262011072415778, guid: c7b300d3b456a674fb89b2d9f5890b22, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -4145,6 +4169,10 @@ PrefabInstance:
     - target: {fileID: 3144262011072415781, guid: c7b300d3b456a674fb89b2d9f5890b22, type: 3}
       propertyPath: m_Name
       value: Phases
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687223520315821446, guid: c7b300d3b456a674fb89b2d9f5890b22, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3736342585031990193, guid: c7b300d3b456a674fb89b2d9f5890b22, type: 3}
       propertyPath: _damages
@@ -4687,6 +4715,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3628082758306395442, guid: 96613efa7a2da2245827ce6d2dee615c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3628082758581390660, guid: 96613efa7a2da2245827ce6d2dee615c, type: 3}
       propertyPath: m_Name
       value: Arena

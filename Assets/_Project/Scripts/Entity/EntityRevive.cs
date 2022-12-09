@@ -11,7 +11,8 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     [SerializeField] Collider2D _collider;
 
     [Header("System")]
-    [SerializeField] float _reviveTime = 0.2f;
+    [SerializeField] float _reviveTime = 0.5f;
+    [SerializeField] float _heartMassageTime = 0.2f;
     [SerializeField] float _radius = 5f;
     [SerializeField] int _pressCount = 10;
     [SerializeField, Range(0f, 1f)] float _healthPercentage = 0.5f;
@@ -22,7 +23,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     int _currentPress;
     bool _revivingSomeone = false;
 
-    public float ReviveTime => _reviveTime;
+    public float HeartMassageTime => _heartMassageTime;
 
     public event UnityAction<EntityRevive> OnStartRevive { add => _onStartRevive += value; remove => _onStartRevive -= value; }
     public event UnityAction<EntityRevive> OnStopRevive { add => _onStopRevive += value; remove => _onStopRevive -= value; }
@@ -41,7 +42,8 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
         ++_currentPress;
         if (_currentPress >= _pressCount) {
             _currentPress = 0;
-            Revive();
+            _onStartRevive.Invoke(this);
+            StartCoroutine(Tools.Delay(Revive, _reviveTime));
             return true;
         }
         return false;
@@ -50,6 +52,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     public void Revive() {
         _collider.isTrigger = false;
         _health.TakeHeal(_healthPercentage);
+        _onStopRevive.Invoke(this);
     }
 
     public bool CheckRevive(out EntityRevive target) {
@@ -58,7 +61,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
         if (_revivingSomeone) { return false; }
         target.HeartMassage();
         _revivingSomeone = true;
-        StartCoroutine(Tools.Delay(() => _revivingSomeone = false, _reviveTime));
+        StartCoroutine(Tools.Delay(() => _revivingSomeone = false, _heartMassageTime));
         return true;
     }
 

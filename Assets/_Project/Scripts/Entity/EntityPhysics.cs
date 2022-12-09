@@ -1,19 +1,25 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
 
 public class EntityPhysics : MonoBehaviour, IEntityAbility {
     [SerializeField] Rigidbody2D _rb;
     [ReadOnly, SerializeField] List<Force> _forcesDisplay = new List<Force>();
     [SerializeField] bool _debug = false;
+    [SerializeField, HideInInspector] BetterEvent<Vector2> _onMove = new BetterEvent<Vector2>();
 
     SortedDictionary<int, List<Force>> _forces = new SortedDictionary<int, List<Force>>();
 
     public Vector2 Velocity => _rb.velocity;
+    public event UnityAction<Vector2> OnMove { add => _onMove += value; remove => _onMove -= value; }
 
     private void FixedUpdate() {
-        _rb.velocity = ComputeForces();
+        Vector2 velocity = ComputeForces();
+        if (velocity != Vector2.zero) { _onMove.Invoke(velocity); }
+        _rb.velocity = velocity;
         foreach (KeyValuePair<int, List<Force>> pair in _forces) {
             for (int i = 0; i < pair.Value.Count; i++) {
                 if (pair.Value[i].Ignored) { continue; }

@@ -56,12 +56,13 @@ public class BossBall : MonoBehaviour, IReflectable {
 
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         if(_rb.velocity.magnitude < 0.05f) {
-            _rb.velocity = _lastDir; ;
+            _rb.velocity = _lastDir;
         } 
-            _reminder = _rb.velocity;
+        _reminder = _rb.velocity;
     }
+
     public virtual void Hit(Collision2D collision) {
         if (collision.collider.tag == "Wall") {
             _lastDir = _rb.velocity;
@@ -76,7 +77,8 @@ public class BossBall : MonoBehaviour, IReflectable {
         if (collision.transform.CompareTag("Player")) {
             EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
             EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
-            Vector2 direction = _rb.velocity.normalized;
+            //Vector2 direction = _rb.velocity.normalized;
+            Vector2 direction = _reminder;
             float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
             if (dot > 0) {
                 _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;

@@ -12,6 +12,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     [SerializeField] PhysicForce _dashForce;
     [SerializeField] Health _health;
     [Header("Abilities")]
+    [SerializeField] EntityPhysics _physics;
     [SerializeField] EntityPhysicMovement _pMovements;
     [SerializeField] EntityOrientation _oriention;
     [SerializeField] EntityHolding _holding;
@@ -56,6 +57,10 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
 
         _health.OnDeath += _InvokeDeath;
         _health.OnRevive += _InvokeRevive;
+
+        _revive.OnStartRevive += _StartReviving;
+
+        _physics.OnMove += _OnMove;
     }
 
     public void Move(Vector2 direction) {
@@ -103,19 +108,19 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
         _trajectoryLine?.gameObject.SetActive(_showAimLine.HasToken);
     }
 
-    public bool TryRevive() {
-        if (_health.IsDead) { return false; }
+    public void TryRevive() {
+        if (_health.IsDead) { return; }
         bool revive = _revive.CheckRevive(out EntityRevive target);
         if (revive) {
             //_animator.SetFloat("y", 1f);
             //_animator.SetFloat("x", 0f);
+            _animator.ResetTrigger("Moved");
             _animator.SetTrigger("HeartMassage");
             _pMovements.CanMove = false;
             _pMovements.Stop();
             _root.position = target.gameObject.GetRoot().transform.Position2D() + new Vector2(0.45f, -0.01f);
-            StartCoroutine(Tools.Delay(() => _pMovements.CanMove = true, _revive.ReviveTime));
+            StartCoroutine(Tools.Delay(() => _pMovements.CanMove = true, _revive.HeartMassageTime));
         }
-        return revive;
     }
 
     private void Die() {
@@ -214,6 +219,14 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     private void _InvokeRevive() {
         Revive();
         _onRevive.Invoke();
+    }
+
+    private void _StartReviving(EntityRevive _) {
+        _animator.SetBool("Dead", false);
+    }
+
+    private void _OnMove(Vector2 _) {
+        _animator.SetTrigger("Moved");
     }
 
     #endregion

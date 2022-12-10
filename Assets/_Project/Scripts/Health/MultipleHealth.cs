@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MultipleHealth : MonoBehaviour {
-    Health _health;
     [SerializeField] List<int> _healths = new List<int>();
-    [SerializeField] int _currentHealth = -1;
+    [SerializeField, ReadOnly] int _currentHealth = -1;
     [SerializeField] BetterEvent _onRealDeath = new BetterEvent();
+
+    Health _health;
+
+    public int CurrentIndex => _currentHealth;
     public event UnityAction OnRealDeath { add => _onRealDeath.AddListener(value); remove => _onRealDeath.RemoveListener(value); }
+
     private void Start() {
         _health = GetComponent<Health>();
         _currentHealth = -1;

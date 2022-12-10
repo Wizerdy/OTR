@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7a9420dcb4acb4bbe1308f51960dd6, type: 3}
   m_Name: PU_ArmorPoints
   m_EditorClassIdentifier: 
-  _additionalArmorPoint: 2
+  _additionalArmorPoint: 10
   _lostOnDrop: 1

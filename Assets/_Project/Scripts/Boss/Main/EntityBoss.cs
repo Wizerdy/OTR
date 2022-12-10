@@ -53,7 +53,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         } else {
             _currentAttack = _bossPhases[_currentPhase].GetAnAttack();
             _currentAttack.Finished += Attack;
-            _currentAttack.Activate(_entityAbilities, _threatSystem.Instance.Threatening().transform);
+            _currentAttack.Activate(_entityAbilities, _threatSystem.Instance.Threatening()?.transform);
         }
     }
 

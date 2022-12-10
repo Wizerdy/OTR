@@ -91,4 +91,8 @@ public class EntityPhysicMovement : MonoBehaviour, IEntityAbility {
         }
         return _maxSpeed * modifier;
     }
+
+    public void ClearCantMoveToken() {
+        _cantMoveToken.Reset();
+    }
 }

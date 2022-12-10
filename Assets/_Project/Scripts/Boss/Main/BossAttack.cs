@@ -8,7 +8,7 @@ public abstract class BossAttack : MonoBehaviour {
     [SerializeField] protected float _weight;
     [SerializeField] protected float _endDuration;
     [SerializeField] protected int _damages;
-    [SerializeField, HideInInspector] BetterEvent _finished;
+    [SerializeField, HideInInspector] BetterEvent _finished = new BetterEvent();
     BetterEvent _begining;
     BetterEvent _middle;
     BetterEvent _end;

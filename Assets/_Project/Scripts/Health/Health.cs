@@ -19,7 +19,6 @@ public class Health : MonoBehaviour, IHealth {
     [SerializeField, HideInInspector] BetterEvent<int> _onMaxHealthChange = new BetterEvent<int>();
     [SerializeField, HideInInspector] BetterEvent _onInvicible = new BetterEvent();
     [SerializeField, HideInInspector] BetterEvent _onVulnerable = new BetterEvent();
-    [SerializeField, HideInInspector] BetterEvent _onLateStart = new BetterEvent();
 
     Token _invicibilityToken = new Token();
 
@@ -27,7 +26,7 @@ public class Health : MonoBehaviour, IHealth {
 
     public int MaxHealth { get => _maxHealth; set => SetMaxHealth(value); }
     public int CurrentHealth { get { return _currentHealth; } }
-    public float Percentage { get { return MaxHealth == 0 ? _currentHealth / MaxHealth : 1f; } }
+    public float Percentage { get { return MaxHealth > 0 ? ((float)_currentHealth / (float)MaxHealth) : 1f; } }
     public bool CanTakeDamage {
         get { return !_invicibilityToken.HasToken; }
         set { _invicibilityToken.AddToken(!value); }
@@ -42,7 +41,6 @@ public class Health : MonoBehaviour, IHealth {
     public event UnityAction OnDeath { add => _onDeath.AddListener(value); remove => _onDeath.RemoveListener(value); }
     public event UnityAction OnRevive { add => _onRevive.AddListener(value); remove => _onRevive.RemoveListener(value); }
     public event UnityAction<int> OnMaxHealthChange { add => _onMaxHealthChange.AddListener(value); remove => _onMaxHealthChange.RemoveListener(value); }
-    public event UnityAction OnLateStart { add => _onLateStart.AddListener(value); remove => _onLateStart.RemoveListener(value); }
 
     #endregion
 
@@ -51,11 +49,7 @@ public class Health : MonoBehaviour, IHealth {
     private void Awake() {
         _invicibilityToken.OnFill += () => _onInvicible?.Invoke();
         _invicibilityToken.OnEmpty += () => _onVulnerable?.Invoke();
-    }
-
-    private void Start() {
         _currentHealth = _maxHealth;
-        _onLateStart?.Invoke();
     }
 
     #endregion
@@ -68,6 +62,7 @@ public class Health : MonoBehaviour, IHealth {
         if (data == null) { return; }
         _currentHealth = data.currentHealth;
         _maxHealth = data.maxHealth;
+        _onMaxHealthChange.Invoke(_maxHealth);
     }
 
     public void TakeDamage(int amount, GameObject source = null) {

@@ -42,11 +42,13 @@ public class EntityHolding : MonoBehaviour, IEntityAbility {
         if (_iholding == null) { Debug.LogWarning("Trying to pickup a not holdable item; " + target.name); return; }
         _iholding.Pickup(this);
         _holding = target;
+        _onPickup.Invoke(target);
     }
 
     public void Drop() {
         if (!IsHolding) { return; }
         _iholding.Drop(this, transform.position);
+        _onDrop.Invoke(_holding);
         _holding = null;
         _iholding = null;
     }
@@ -54,6 +56,7 @@ public class EntityHolding : MonoBehaviour, IEntityAbility {
     public void Throw(Vector2 direction, Collider2D thrower = null) {
         if (!IsHolding) { return; }
         IHoldable item = _iholding;
+        _onThrow.Invoke(_holding, direction);
         Drop();
         item.Throw(this, direction, thrower);
     }
@@ -61,6 +64,7 @@ public class EntityHolding : MonoBehaviour, IEntityAbility {
     public void Throw(Vector2 direction, GameObject thrower) {
         if (!IsHolding) { return; }
         IHoldable item = _iholding;
+        _onThrow.Invoke(_holding, direction);
         Drop();
         item.Throw(this, direction, thrower);
     }

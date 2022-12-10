@@ -268,14 +268,14 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _comboIndex: 0
-  _healthPercentValueStorePoint: 0.2
-  _storePointMax: 50
+  _healthPercentValueStorePoint: 0.7
+  _storePointMax: 60
   _hitDamage: 10
   _hitThreatPoint: 1
   _hitCooldown: 0.2
   _hitDuration: 0
   _hitStorePoint: 10
-  _hitStorePointCost: 5
+  _hitStorePointCost: 30
   _bumpForce: {fileID: 11400000, guid: 41e3b62926bd9e143a6dfd62c210a4e5, type: 2}
   _storePointCost: 20
   _dashCooldown: 3

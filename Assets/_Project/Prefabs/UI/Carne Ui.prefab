@@ -9,8 +9,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 335874254160471363, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
       propertyPath: m_Name
-      value: Carne UI
+      value: Carne Ui
       objectReference: {fileID: 0}
+    - target: {fileID: 1381475527122603507, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8bd4228a3439344e8611cc331312e88, type: 3}
     - target: {fileID: 2312989912228946932, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -55,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5646255607530748164, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
+      propertyPath: _health
+      value: 
+      objectReference: {fileID: 11400000, guid: dc270c72ca0805c4c8c5b0211eca7db5, type: 2}
     - target: {fileID: 6254142389993613644, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -140,6 +148,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6745693056447615349, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
+      propertyPath: _health
+      value: 
+      objectReference: {fileID: 11400000, guid: dc270c72ca0805c4c8c5b0211eca7db5, type: 2}
+    - target: {fileID: 7131140337210386674, guid: c3f8fcbd4ff09ad4489380f7b285ebd2, type: 3}
       propertyPath: _health
       value: 
       objectReference: {fileID: 11400000, guid: dc270c72ca0805c4c8c5b0211eca7db5, type: 2}

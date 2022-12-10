@@ -293,6 +293,10 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _debug: 0
+  _onMove:
+    _event:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2865910487610663474
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5756415d796254c4184abe0230422e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healths: c2010000580200002602000026020000580200008a02000058020000ee0200002003000084030000
+  _healths: 5e0100005e010000c2010000c20100005e010000c2010000c2010000f401000026020000ee020000
   _currentHealth: 0
   _onRealDeath:
     _event:

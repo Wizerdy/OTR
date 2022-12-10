@@ -141,6 +141,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
         _dead = false;
         _aimingCircle?.SetActive(true);
         _animator.SetBool("Dead", false);
+        _pMovements.ClearCantMoveToken();
     }
 
     #region Item interaction

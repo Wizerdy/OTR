@@ -713,7 +713,7 @@ Transform:
   m_GameObject: {fileID: 949365904648483943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4040391063802034691}
@@ -727,7 +727,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949365904648483943}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: afedaf2807c856644b84040a9f01dd63, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: b49ec14ec1d0cf74ebee51c106579f60, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -2084,7 +2084,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 71520
+  m_InstanceId: 63658
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

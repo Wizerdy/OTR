@@ -62,6 +62,22 @@ MonoBehaviour:
     randomPitch: 0
     minPitch: 0
     maxPitch: 0
+  - audioName: 24
+    audio:
+    - {fileID: 8300000, guid: e53ec413524c8444883254a240d172c5, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+  - audioName: 25
+    audio:
+    - {fileID: 8300000, guid: 4f20eb4f2198f2646b76e63041e75c3b, type: 3}
+    volume: 1
+    loop: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
   soundsSfx:
   - audioName: 2
     audio:

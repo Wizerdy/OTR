@@ -24,7 +24,9 @@ public enum AudioName {
     BloodFistHeal,
     BossHit,
     BossDeath,
-    LoopMusic
+    LoopMusic,
+    IntroMusicLow,
+    LoopMusicLow
 }
 
 [System.Serializable]

@@ -14,11 +14,11 @@ public class PlayIntroThenLoop : MonoBehaviour {
     //bool looping;
 
     public PlaySound PlayIntro() {
-        return SoundManager.Instance.PlayMusic(AudioName.IntroMusic);
+        return SoundManager.Instance.PlayMusic(_intro);
     }
 
     public PlaySound PlayLoop() {
-        return SoundManager.Instance.PlayMusic(AudioName.LoopMusic);
+        return SoundManager.Instance.PlayMusic(_loop);
     }
 
     private void Start() {

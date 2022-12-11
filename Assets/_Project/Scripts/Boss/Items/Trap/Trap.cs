@@ -54,6 +54,8 @@ public class Trap : MonoBehaviour {
         _open = true;
         ea.Get<PlayerEntity>().Throw(ea.Get<EntityPhysics>().Velocity.normalized);
         EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
+        EntityIcon entityIcon = ea.Get<EntityIcon>();
+        entityIcon.ShowCrossHighlight();
         _target = ea.Get<EntityPhysics>();
         IHealth health = ea.transform.GetComponent<IHealth>();
         timer.OnActivate += () => health.TakeDamage(_damagesEveryTick, gameObject);
@@ -65,6 +67,8 @@ public class Trap : MonoBehaviour {
         while (entityWeaponry.Weapon == null) {
             yield return null;
         }
+        entityIcon.HideCrossHighlight();
+
         _target.Remove(_force);
         Die();
     }

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityIcon : MonoBehaviour, IEntityAbility {
-    [SerializeField] private SpriteRenderer cross;
-    [SerializeField] private SpriteRenderer crossHighlight;
+    [SerializeField] private GameObject cross;
+    [SerializeField] private GameObject crossHighlight;
 
     public void ShowCross() {
-        cross.enabled = true;
+        cross.SetActive(true);
     }
 
     public void ShowCrossHighlight() {
-        crossHighlight.enabled = true;
+        crossHighlight.SetActive(true);
     }
 
     public void HideCross() {
-        cross.enabled = false;
+        cross.SetActive(false);
     }
 
     public void HideCrossHighlight() {
-        crossHighlight.enabled = false;
+        crossHighlight.SetActive(false);
     }
 
 }

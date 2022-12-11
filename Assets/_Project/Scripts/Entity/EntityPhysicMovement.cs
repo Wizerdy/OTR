@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public enum PhysicPriority {
     PLAYER_INPUT = 0, DASH = 5, PROJECTION = 10, BLOCK = 20,  HIGH_PRIORITY = 50
@@ -17,7 +18,18 @@ public class EntityPhysicMovement : MonoBehaviour, IEntityAbility {
     [SerializeField] float _accelerationTime = 1f;
     [SerializeField] AnimationCurve _deceleration = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     [SerializeField] float _decelerationTime = 1f;
+    [SerializeField, HideInInspector] BetterEvent _trapped = new BetterEvent();
+    [SerializeField, HideInInspector] BetterEvent _untrapped = new BetterEvent();
 
+    public event UnityAction Trapped { add => _trapped += value; remove => _trapped -= value; }
+    public event UnityAction UnTrapped { add => _untrapped += value; remove => _untrapped -= value; }
+    public void InTrap() {
+        _trapped?.Invoke();
+    }
+
+    public void OutTrap() {
+        _untrapped?.Invoke();
+    }
     Token _cantMoveToken = new Token();
     List<float> _speedModifiers = new List<float>();
 

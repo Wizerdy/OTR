@@ -13,6 +13,7 @@ public class BossTrap : BossAttack {
     [SerializeField] float _minimumDistFromSide;
     [SerializeField] float _trapNumber;
     [SerializeField] float _visibleTime;
+    [SerializeField] float _effectivityTime;
     [SerializeField] float _tick;
 
 
@@ -31,7 +32,7 @@ public class BossTrap : BossAttack {
     }
 
     void PutTrap() {
-        Trap trap = Instantiate(_trapPrefab).ChangeVisibility(_visibleTime).ChangeDamages(_damages).ChangeTick(_tick);
+        Trap trap = Instantiate(_trapPrefab).ChangeVisibility(_visibleTime).ChangeDamages(_damages).ChangeTick(_tick).ChangeEffectivity(_effectivityTime);
         bool placed = false;
         Vector3 position = Vector3.zero;
         int protection = 0;

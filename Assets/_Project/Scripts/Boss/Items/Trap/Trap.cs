@@ -4,14 +4,16 @@ using UnityEngine;
 using ToolsBoxEngine;
 
 public class Trap : MonoBehaviour {
-    [SerializeField] Sprite closeSprite;
-    SpriteRenderer _sr;
-    float _visibility;
-    int _damagesEveryTick;
-    float _tick;
-    bool _open;
-    Animator _animator;
 
+    float _visibility = 3;
+    float _effectivity = 1;
+    float _tick = 1;
+    int _damagesEveryTick = 1;
+    bool _open = false;
+
+    SpriteRenderer _sr;
+    Animator _animator;
+    EntityAbilities _playerTrapped;
     EntityPhysics _target;
     Force _force;
 
@@ -25,6 +27,11 @@ public class Trap : MonoBehaviour {
         return this;
     }
 
+    public Trap ChangeEffectivity(float effectivity) {
+        _effectivity = effectivity;
+        return this;
+    }
+
     public Trap ChangeTick(float tick) {
         _tick = tick;
         return this;
@@ -32,16 +39,21 @@ public class Trap : MonoBehaviour {
 
     private void Start() {
         _animator = GetComponentInChildren<Animator>();
-        _open = true;
+        _open = false;
         _sr = GetComponentInChildren<SpriteRenderer>();
-        StartCoroutine(Tools.Delay(() => {
-            _sr.enabled = false;
-            _open = false;
-        }, _visibility));
+        StartCoroutine(Tools.Delay(() => { _open = true; }, _effectivity));
+        StartCoroutine(Tools.Delay(() => { _sr.enabled = false; }, _visibility));
     }
 
+    private void Update() {
+        if (_playerTrapped != null) {
+            _playerTrapped.transform.position = transform.position;
+        }
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Player") && !_open) {
+        if (collision.CompareTag("Player") && _open) {
             StartCoroutine(Trapped(collision.gameObject.GetRoot().GetComponent<EntityAbilities>()));
         }
     }
@@ -49,26 +61,26 @@ public class Trap : MonoBehaviour {
     IEnumerator Trapped(EntityAbilities ea) {
         _open = false;
         _sr.enabled = true;
-        _sr.sprite = closeSprite;
-        Timer timer = new Timer(this, _tick);
-        _open = true;
+        _playerTrapped = ea;
         ea.Get<PlayerEntity>().Throw(ea.Get<EntityPhysics>().Velocity.normalized);
-        EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
+        ea.Get<EntityPhysicMovement>().InTrap();
+        IHealth health = ea.transform.GetComponent<IHealth>();
+        Timer timer = new Timer(this, _tick);
+        timer.OnActivate += () => health.TakeDamage(_damagesEveryTick, gameObject);
+        timer.Start();
         EntityIcon entityIcon = ea.Get<EntityIcon>();
         entityIcon.ShowCrossHighlight();
         _target = ea.Get<EntityPhysics>();
-        IHealth health = ea.transform.GetComponent<IHealth>();
-        timer.OnActivate += () => health.TakeDamage(_damagesEveryTick, gameObject);
-        timer.Start();
         _force = new Force(0, Vector2.zero, 1, Force.ForceMode.INPUT);
         _target.Add(_force, (int)PhysicPriority.BLOCK);
-        ea.transform.position = transform.position;
         _animator.SetBool("Trapped", true);
+        ea.transform.position = transform.position;
+        EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
         while (entityWeaponry.Weapon == null) {
             yield return null;
         }
+        ea.Get<EntityPhysicMovement>().OutTrap();
         entityIcon.HideCrossHighlight();
-
         _target.Remove(_force);
         Die();
     }

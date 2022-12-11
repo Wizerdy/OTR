@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using ToolsBoxEngine;
 
 public class WeaponUI : MonoBehaviour {
-    [SerializeField] EntityWeaponryReference _entityWeaponryReference;
     [SerializeField] Slider slider;
     [SerializeField] Image Banner;
     [SerializeField] GameObject fist;
@@ -21,8 +20,10 @@ public class WeaponUI : MonoBehaviour {
         entityStorePoint = ability.Instance.Get<EntityStorePoint>();
         trapped.SetActive(false);
         NoWeapon(null);
-        StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnPickup += ChangeWeapon));
-        StartCoroutine(Tools.DelayOneFrame(() => _entityWeaponryReference.Instance.OnDrop += NoWeapon));
+        StartCoroutine(Tools.DelayOneFrame(() => ability.Instance.Get<EntityWeaponry>().OnPickup += ChangeWeapon));
+        StartCoroutine(Tools.DelayOneFrame(() => ability.Instance.Get<EntityWeaponry>().OnDrop += NoWeapon));
+        StartCoroutine(Tools.DelayOneFrame(() => ability.Instance.Get<EntityPhysicMovement>().Trapped += Trapped));
+        StartCoroutine(Tools.DelayOneFrame(() => ability.Instance.Get<EntityPhysicMovement>().UnTrapped += UnTrapped));
     }
 
     private void Update() {
@@ -70,5 +71,13 @@ public class WeaponUI : MonoBehaviour {
         Banner.color = new Color(1, 1, 1, 0);
         slider.gameObject.SetActive(false);
         dirty = 0;
+    }
+
+    void Trapped() {
+        trapped.SetActive(true);
+    }
+
+    void UnTrapped() {
+        trapped.SetActive(false);
     }
 }

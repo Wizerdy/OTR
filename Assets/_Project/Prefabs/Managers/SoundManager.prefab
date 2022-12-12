@@ -256,6 +256,86 @@ MonoBehaviour:
     randomPitch: 1
     minPitch: 0.9
     maxPitch: 1.1
+  - audioName: 26
+    audio:
+    - {fileID: 8300000, guid: 6b1e9ca9a89f1ef43ac0c817b3f2cbd1, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 27
+    audio:
+    - {fileID: 8300000, guid: 5e0573e209858d9498c9f87b0a19599a, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 28
+    audio:
+    - {fileID: 8300000, guid: a0496ff95135bb346bb6f39645835098, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 29
+    audio:
+    - {fileID: 8300000, guid: 6692d2045c2989c4d81fd0611181710f, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 30
+    audio:
+    - {fileID: 8300000, guid: a7be24bcf083ece4c91473c82b79c525, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 31
+    audio:
+    - {fileID: 8300000, guid: 002f04dd38136c24ca0adf13efa3f7e1, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 32
+    audio:
+    - {fileID: 8300000, guid: cb8817bf9b9b01d4b97e0b77f05d932d, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 33
+    audio:
+    - {fileID: 8300000, guid: 8b8993a16227ee94aa50bd5e4159c601, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 34
+    audio:
+    - {fileID: 8300000, guid: e94731fcd127ddd4ba10c3050eaa4ce9, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 35
+    audio:
+    - {fileID: 8300000, guid: 25d1b961fb3058c44b0098f1ebbe1d14, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
   _audioSourceNumber: 100
   activeMusic: 1
   activeSfx: 1

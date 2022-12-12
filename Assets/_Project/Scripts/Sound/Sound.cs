@@ -26,7 +26,17 @@ public enum AudioName {
     BossDeath,
     LoopMusic,
     IntroMusicLow,
-    LoopMusicLow
+    LoopMusicLow,
+    BossCharge,
+    BossChargeReturn,
+    BossActivateTrap,
+    BossLayTrapDown,
+    BossMagicBall,
+    BossCage,
+    BossCageDamage,
+    BossOneForAllCharge,
+    BossOneForAllDamage,
+    BossMeteor
 }
 
 [System.Serializable]

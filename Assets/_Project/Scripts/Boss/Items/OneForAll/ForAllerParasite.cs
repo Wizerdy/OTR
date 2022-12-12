@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public class ForAllerParasite : MonoBehaviour {
     [SerializeField] List<ForAllerParasite> _parasites;
@@ -15,6 +17,8 @@ public class ForAllerParasite : MonoBehaviour {
     Vector2 _distMinMax;
     Vector2 _damagesVector;
     bool _damageDone;
+    [SerializeField] BetterEvent _onSpark = new BetterEvent();
+    public event UnityAction OnSpark { add => _onSpark += value; remove => _onSpark -= value; }
 
     public ForAllerParasite ChangeTimeBeforeActivation(float newTime) {
         _timeBeforeActivation = newTime;
@@ -92,6 +96,7 @@ public class ForAllerParasite : MonoBehaviour {
     }
 
     public void DoDamage(int damages) {
+        _onSpark?.Invoke();
         _arrowGraphics.gameObject.SetActive(false);
         _animator.SetTrigger("Spark");
         _damageDone = true;

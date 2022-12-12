@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public class Cage : MonoBehaviour {
     [SerializeField] GameObject _mask;
@@ -19,6 +21,10 @@ public class Cage : MonoBehaviour {
     MeshFilter _filter;
     PolygonCollider2D _polygonCollider;
     Dictionary<IHealth, Vector2> _hits;
+    [SerializeField] BetterEvent _onCageStart = new BetterEvent();
+    public event UnityAction OnCageStart { add => _onCageStart += value; remove => _onCageStart -= value; }
+    [SerializeField] BetterEvent _onCageDamage = new BetterEvent();
+    public event UnityAction OnCageDamage { add => _onCageDamage += value; remove => _onCageDamage -= value; }
 
     public Cage ChangeTopLeft(Transform topLeft) {
         _topLeft = topLeft;
@@ -68,6 +74,7 @@ public class Cage : MonoBehaviour {
         _spike.transform.position = _position;
         _spike.GetComponent<Animator>().SetTrigger("Up");
         StartCoroutine(Tools.Delay(() => _spike.GetComponent<SpriteRenderer>().size = new Vector2(_botRight.transform.position.x - _topLeft.transform.position.x, _topLeft.transform.position.y - _botRight.transform.position.y), 0.1f));
+        _onCageStart?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -108,6 +115,7 @@ public class Cage : MonoBehaviour {
                         time.y += _damagesBonusEveryTick;
                     }
                     keys.Key.TakeDamage((int)time.y, gameObject);
+                    _onCageDamage?.Invoke();
                 }
                 _hits[keys.Key] = time;
             }

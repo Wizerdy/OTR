@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.Events;
+using ToolsBoxEngine.BetterEvents;
 
 public class BossCharge : BossAttack {
     [Header("Charge :")]
@@ -18,7 +18,11 @@ public class BossCharge : BossAttack {
     protected float angleSideCharge = 92;
     protected float angleTopBotHit = 80;
     protected float angleSideHit = 20;
+    [SerializeField] BetterEvent _onCharge = new BetterEvent();
+    [SerializeField] BetterEvent _onChargeBack = new BetterEvent();
 
+    public event UnityAction OnCharge { add => _onCharge += value; remove => _onCharge -= value; }
+    public event UnityAction OnChargeBack { add => _onChargeBack += value; remove => _onChargeBack -= value; }
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
         _damageHealth = _entityColliders.MainEvent.gameObject.GetComponent<DamageHealth>();
@@ -55,6 +59,7 @@ public class BossCharge : BossAttack {
             yield return null;
         }
         _entityPhysics.Add(_chargeForce, 1);
+        _onCharge?.Invoke();
         while (!_hitWall) {
             yield return null;
         }
@@ -105,6 +110,7 @@ public class BossCharge : BossAttack {
         _entityPhysics.Add(_chargeForce, 1);
         bool pass = false;
         float dot = 0;
+        _onChargeBack?.Invoke();
         while (!pass) {
             yield return null;
             dot = Vector3.Dot(direction, destination - _transform.position);

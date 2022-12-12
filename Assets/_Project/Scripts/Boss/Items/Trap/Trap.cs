@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public class Trap : MonoBehaviour {
 
@@ -16,6 +18,9 @@ public class Trap : MonoBehaviour {
     EntityAbilities _playerTrapped;
     EntityPhysics _target;
     Force _force;
+
+    [SerializeField] BetterEvent _onTrapActivation = new BetterEvent();
+    public event UnityAction OnTrapActivation { add => _onTrapActivation += value; remove => _onTrapActivation -= value; }
 
     public Trap ChangeDamages(int damages) {
         _damagesEveryTick = damages;
@@ -74,6 +79,7 @@ public class Trap : MonoBehaviour {
         _force = new Force(0, Vector2.zero, 1, Force.ForceMode.INPUT);
         _target.Add(_force, (int)PhysicPriority.BLOCK);
         _animator.SetBool("Trapped", true);
+        _onTrapActivation?.Invoke();
         ea.transform.position = transform.position;
         EntityWeaponry entityWeaponry = ea.Get<EntityWeaponry>();
         while (entityWeaponry.Weapon == null) {

@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using ToolsBoxEngine.BetterEvents;
 
 public class BossOneForAll : BossAttack {
     [SerializeField] float _timeBeforeActivation = 2f;
     [SerializeField] Vector2 _distMinMax = new Vector2(2,10);
     [SerializeField] Vector2 _damagesVector = new Vector2(0, 10);
     [SerializeField] ForAllerParasite _forAllerPrefab;
+    [SerializeField] BetterEvent _onOneForAllStart = new BetterEvent();
+    public event UnityAction OnOneForAllStart { add => _onOneForAllStart += value; remove => _onOneForAllStart -= value; }
     EntityAbilities[] _playersEA;
     ForAllerParasite[] _forAllersParasite;
 
@@ -34,6 +38,7 @@ public class BossOneForAll : BossAttack {
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
+        _onOneForAllStart?.Invoke();
         yield return new WaitForSeconds(_timeBeforeActivation);
     }
 }

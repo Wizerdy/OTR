@@ -336,6 +336,14 @@ MonoBehaviour:
     randomPitch: 1
     minPitch: 0.9
     maxPitch: 1.1
+  - audioName: 36
+    audio:
+    - {fileID: 8300000, guid: 8e316218987f69d4d98f07a8bfc83ff3, type: 3}
+    volume: 0.6
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
   _audioSourceNumber: 100
   activeMusic: 1
   activeSfx: 1

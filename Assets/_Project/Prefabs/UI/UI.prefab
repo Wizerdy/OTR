@@ -959,6 +959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 11400000, guid: 10d7226d3d2838247832c9378df8a881, type: 2}
   _image: {fileID: 5757978221305525821}
+  _text: {fileID: 1564228796}
   _index: 0
   _colors:
   - {r: 0, g: 1, b: 1, a: 1}

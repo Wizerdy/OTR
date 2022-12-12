@@ -4,9 +4,12 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "PU_Speed", menuName = "Scriptable Object/Power Up/Speed")]
 public class PowerUpSpeed : PowerUp {
+    [SerializeField] protected bool _playParticles = false;
     [SerializeField] float _speedFactor = 1f;
 
     EntityPhysicMovement _movements;
+
+    public override bool PlayParticles => _playParticles;
 
     public override PowerUp Clone() {
         PowerUpSpeed output = CreateInstance<PowerUpSpeed>();
@@ -14,6 +17,7 @@ public class PowerUpSpeed : PowerUp {
         output._target = _target;
         output.SetEnable(false);
         output._cloned = true;
+        output._playParticles = _playParticles;
         return output;
     }
 

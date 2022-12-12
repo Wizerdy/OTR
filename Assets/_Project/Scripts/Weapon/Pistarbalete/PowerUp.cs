@@ -13,6 +13,7 @@ public abstract class PowerUp : ScriptableObject {
     private bool _enabled = false;
 
     public bool Enabled => _enabled;
+    public abstract bool PlayParticles { get; }
 
     public event UnityAction<PowerUp> OnEnable { add => _onEnable += value; remove => _onEnable -= value; }
     public event UnityAction<PowerUp> OnDisable { add => _onDisable += value; remove => _onDisable -= value; }

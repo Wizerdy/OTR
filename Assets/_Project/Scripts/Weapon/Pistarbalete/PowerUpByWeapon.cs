@@ -14,6 +14,8 @@ public class PowerUpByWeapon : PowerUp {
 
     PowerUp _powerUp;
 
+    public override bool PlayParticles => _powerUp.PlayParticles;
+
     public override PowerUp Clone() {
         PowerUpByWeapon output = CreateInstance<PowerUpByWeapon>();
         output._powerUps = new List<Weapon_PU>(_powerUps);
@@ -41,6 +43,7 @@ public class PowerUpByWeapon : PowerUp {
 
         _powerUp = _powerUp.SetTarget(_target);
         _powerUp.Enable();
+        _powerUp.OnDisable += _DisableMe;
 
         return _powerUp.Enabled;
     }
@@ -52,6 +55,10 @@ public class PowerUpByWeapon : PowerUp {
         _powerUp = null;
 
         return true;
+    }
+
+    private void _DisableMe(PowerUp _) {
+        _Disable();
     }
 
     PowerUp Find(Weapon weapon) {

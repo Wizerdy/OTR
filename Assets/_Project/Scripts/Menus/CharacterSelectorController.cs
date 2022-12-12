@@ -20,7 +20,9 @@ public class CharacterSelectorController : MonoBehaviour {
     public bool HasUser => _inputs != null;
     public bool Locked => _canvas.Locked;
     //public event UnityAction<int> OnConfirm { add => _onConfirm += value; remove => _onConfirm -= value; }
-
+    private void Update() {
+        Debug.Log(HasUser);
+    }
     private void Reset() {
         _canvas = GetComponent<CharacterSelectorCanvas>();
     }

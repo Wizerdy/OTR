@@ -643,11 +643,11 @@ PrefabInstance:
       propertyPath: _newPhase._event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3780098475535578520, guid: f1b4466c2dc81d2488b768ebefb8c10e, type: 3}
+    - target: {fileID: 0}
       propertyPath: _radiuses.w
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 3780098475535578520, guid: f1b4466c2dc81d2488b768ebefb8c10e, type: 3}
+    - target: {fileID: 0}
       propertyPath: _radiuses.z
       value: 10
       objectReference: {fileID: 0}
@@ -1289,6 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetsList: []
+  _debug: 0
 --- !u!4 &505344488
 Transform:
   m_ObjectHideFlags: 0
@@ -3565,7 +3566,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 0.9997006
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4235,10 +4236,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1826266792179689785, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2298343262602498281, guid: 4510f387be59ac94c96f6c8b0deaa5a9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

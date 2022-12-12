@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5882125061950032962}
   - component: {fileID: 1640642492881065170}
   - component: {fileID: 2200106324864427959}
-  - component: {fileID: 512749505569021119}
+  - component: {fileID: 1537429921316956978}
   m_Layer: 16
   m_Name: Bolt
   m_TagString: Untagged
@@ -145,6 +145,9 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
+  _sprite: {fileID: 4962862222384338440}
+  _minColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _maxColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &-2269585454242116737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +155,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3347002109676334983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d364d56fe22ce14e9970394e9c44805, type: 3}
   m_Name: 
@@ -258,8 +261,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &512749505569021119
-BoxCollider2D:
+--- !u!70 &1537429921316956978
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -268,22 +271,12 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0034499243, y: 0.04312423}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3093617, y: 0.5126575}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2442914, y: 0.474105}
+  m_Direction: 0
 --- !u!1 &4065707504571672749
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +608,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1262996147, guid: 1565d0ffd431cc841b43e1aab64d6497, type: 3}
-  m_Color: {r: 0.8679245, g: 0.061284684, b: 0.05322181, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -8,10 +8,16 @@ public class Pistarbalete : Weapon {
     [SerializeField] GameObject _bolt;
     [SerializeField] float _attackTime = 0.2f;
     [SerializeField] int _boltDamages = 5;
-    //[SerializeField] int _boltDamageBonus = 2;
     [SerializeField] float _boltCooldown = 1f;
     [SerializeField] float _boltSpeed = 5f;
     [SerializeField] int _threatPoint = 5;
+
+    [Header("Distance damage")]
+    [SerializeField] TransformReference _bossPosition;
+    [SerializeField] AnimationCurve _damageByDistance = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    [SerializeField] int _maxDamage = 7;
+    [SerializeField] int _perfectDamage = 0;
+    [SerializeField] Vector4 _radiuses = new Vector4(1f, 3f, 5f, 7f);
 
     [Header("Secondary Attack")]
     [SerializeField] GameObject specialBolt;
@@ -72,9 +78,16 @@ public class Pistarbalete : Weapon {
         _targetAnimator.SetTrigger(_attackTriggerName);
 
         GameObject go = Instantiate(_bolt, transform.position, Quaternion.LookRotation(Vector3.forward, direction));
-        //go.GetComponent<Rigidbody2D>().velocity = direction * _boltSpeed;
-        go.GetComponent<Bolt>()?.SetDamage(_boltDamages)?.SetSpeed(_boltSpeed)?.SetDirection(direction);
-        //go.GetComponent<AditionalDamageByDistance>().PerfectDamage = _boltDamageBonus;
+
+        float percentage = ComputePercentage(_bossPosition.IsValid() ? _bossPosition.Instance.Position2D() : Vector2.zero);
+        int damage = ComputeDamage(percentage);
+
+        go.GetComponent<Bolt>()?
+            .SetDamage(_boltDamages + damage)?
+            .SetSpeed(_boltSpeed)?
+            .SetDirection(direction)?
+            .SetPercentage(percentage);
+
         DamageHealth dh = go.GetComponent<DamageHealth>();
         if (dh != null) {
             dh.DamageModifier.CopyReference(entityAbilities.Get<EntityWeaponry>().DamageHealth.DamageModifier);
@@ -83,12 +96,31 @@ public class Pistarbalete : Weapon {
 
         _attacks[AttackIndex.FIRST].canAttack = false;
         _attackCooldown.Start();
-        //_canAttack = false;
-        //CoroutinesManager.Start(Tools.Delay(() => _canAttack = true, _boltCooldown));
 
         if (_attackTime > 0) {
             yield return new WaitForSeconds(_attackTime);
         }
+    }
+
+    private float ComputePercentage(Vector2 target) {
+        float distance = (target - transform.Position2D()).magnitude;
+        float percentage;
+
+        if (distance > _radiuses.y && distance < _radiuses.z) {
+            percentage = 1f;
+        } else {
+            percentage = (distance - _radiuses.x) / (_radiuses.y - _radiuses.x);
+            if (percentage > 1f) {
+                percentage = 1f - ((distance - _radiuses.z) / (_radiuses.w - _radiuses.z));
+            }
+        }
+
+        percentage = Mathf.Max(0f, Mathf.Min(1f, percentage));
+        return percentage;
+    }
+
+    private int ComputeDamage(float percentage) {
+        return Mathf.CeilToInt(_maxDamage * _damageByDistance.Evaluate(percentage)) + (percentage >= 1f ? _perfectDamage : 0);
     }
 
     protected IEnumerator IBuffShoot(EntityAbilities entityAbilities, Vector2 direction) {
@@ -122,5 +154,14 @@ public class Pistarbalete : Weapon {
 
     private void _InvokeFirstAttackHit(IHealth health, int damage) {
         _onAttackHit.Invoke(AttackIndex.FIRST, health, damage);
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, _radiuses.x);
+        Gizmos.DrawWireSphere(transform.position, _radiuses.w);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _radiuses.y);
+        Gizmos.DrawWireSphere(transform.position, _radiuses.z);
     }
 }

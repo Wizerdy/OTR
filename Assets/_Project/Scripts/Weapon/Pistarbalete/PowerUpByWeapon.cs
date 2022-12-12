@@ -42,8 +42,8 @@ public class PowerUpByWeapon : PowerUp {
         if (_powerUp == null) { return false; }
 
         _powerUp = _powerUp.SetTarget(_target);
-        _powerUp.Enable();
         _powerUp.OnDisable += _DisableMe;
+        _powerUp.Enable();
 
         return _powerUp.Enabled;
     }
@@ -52,13 +52,8 @@ public class PowerUpByWeapon : PowerUp {
         if (_powerUp == null) { return false; }
 
         _powerUp.Disable();
-        _powerUp = null;
 
         return true;
-    }
-
-    private void _DisableMe(PowerUp _) {
-        _Disable();
     }
 
     PowerUp Find(Weapon weapon) {

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001da422c29fe174c8d5fa33d8340736, type: 3}
   m_Name: PU_UnarmedSpeed
   m_EditorClassIdentifier: 
+  _playParticles: 1
   _speedFactor: 1.5

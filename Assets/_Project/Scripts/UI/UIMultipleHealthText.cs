@@ -1,30 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using ToolsBoxEngine;
 using TMPro;
 
-public class UIMultipleHealth : MonoBehaviour {
+public class UIMultipleHealthText : MonoBehaviour {
     [SerializeField] HealthReference _health;
-    [SerializeField] Image _image = null;
+    [SerializeField] TextMeshProUGUI _text = null;
 
     [Header("Value")]
     [SerializeField] int _index = 0;
-    [SerializeField] List<Color> _colors;
+    [SerializeField] int _maxIndex = 10;
 
     void Start() {
-        ChangeColor(_index);
+        ChangeText(_maxIndex - _index);
         if (!_health.IsValid()) { return; }
         _health.Instance.OnDeath += _ChangeUI;
     }
 
     void _ChangeUI() {
         ++_index;
-        ChangeColor(_index);
+        ChangeText(_maxIndex - _index);
     }
 
-    void ChangeColor(int index) {
-        _image.color = index < _colors.Count ? _colors[Mathf.Max(index, 0)] : Color.white;
+    void ChangeText(int index) {
+        if (_text == null) { return; }
+        _text.text = "x" + index;
     }
 }

@@ -42,6 +42,10 @@ public abstract class PowerUp : ScriptableObject {
 
     public abstract PowerUp Clone();
 
+    protected void _DisableMe(PowerUp _) {
+        Disable();
+    }
+
     protected void SetEnable(bool state) {
         _enabled = state;
     }

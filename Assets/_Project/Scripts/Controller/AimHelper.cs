@@ -20,6 +20,7 @@ public class AimHelper : MonoBehaviour {
     }
 
     [SerializeField] List<AimableTarget> _targetsList;
+    [SerializeField] bool _debug = false;
 
     public Vector2 Aim(Vector2 position, Vector2 direction) {
         if (_targetsList.Count == 0) { return direction; }
@@ -44,7 +45,7 @@ public class AimHelper : MonoBehaviour {
     }
 
     public void Add(Transform transform, float angle) {
-        if (Contains(transform)) { Debug.LogWarning("Already contained : " + transform.name); return; }
+        if (_debug && Contains(transform)) { Debug.LogWarning("Already contained : " + transform.name); return; }
         _targetsList.Add(new AimableTarget(transform, angle));
     }
 
@@ -63,7 +64,7 @@ public class AimHelper : MonoBehaviour {
 
     public void Remove(Transform transform) {
         AimableTarget target = Find(transform);
-        if (target == null) { Debug.LogWarning("Transform not found : " + transform.name); return; }
+        if (_debug && target == null) { Debug.LogWarning("Transform not found : " + transform.name); return; }
 
         _targetsList.Remove(target);
     }

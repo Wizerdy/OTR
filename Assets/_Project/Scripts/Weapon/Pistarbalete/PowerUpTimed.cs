@@ -28,6 +28,7 @@ public class PowerUpTimed : PowerUp {
         if (_target == null) { return false; }
 
         _powerUpInstancied = _powerUp.SetTarget(_target);
+        _powerUpInstancied.OnDisable += _DisableMe;
         _powerUpInstancied.Enable();
 
         _routine_timer = CoroutinesManager.Start(
@@ -36,7 +37,6 @@ public class PowerUpTimed : PowerUp {
                 this,
                 _time));
 
-        Debug.Log("YAY " + _powerUpInstancied.name);
         return _powerUpInstancied.Enabled;
     }
 
@@ -48,7 +48,6 @@ public class PowerUpTimed : PowerUp {
         if (!Enabled) { return false; }
         if (_routine_timer != null) { CoroutinesManager.Stop(_routine_timer); }
         _powerUpInstancied?.Disable();
-        Debug.Log("NO " + _powerUpInstancied.name);
 
         return true;
     }

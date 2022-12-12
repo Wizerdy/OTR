@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PU_ShieldAxe
   m_EditorClassIdentifier: 
   _powerUp: {fileID: 11400000, guid: 53b9c3788be6ad14aab7fd38ce1664e9, type: 2}
-  _time: 10
+  _time: 5

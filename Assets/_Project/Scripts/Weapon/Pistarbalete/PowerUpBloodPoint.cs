@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PU_BloodPoints", menuName = "Scriptable Object/Power Up/Blood Points")]
-public class PowerUpBloodPoint : PowerUp
-{
+public class PowerUpBloodPoint : PowerUp {
+    [SerializeField] protected bool _playParticles = false;
     [SerializeField] int _additionalBloodPoint = 5;
     [SerializeField] bool _lostOnDrop = true;
 
     EntityWeaponry _targetWeaponry;
     BloodyFist _targetWeapon;
+
+    public override bool PlayParticles => throw new System.NotImplementedException();
 
     public override PowerUp Clone() {
         PowerUpBloodPoint output = CreateInstance<PowerUpBloodPoint>();
@@ -17,6 +19,7 @@ public class PowerUpBloodPoint : PowerUp
         output._additionalBloodPoint = _additionalBloodPoint;
         output.SetEnable(false);
         output._cloned = true;
+        output._playParticles = _playParticles;
         return output;
     }
 

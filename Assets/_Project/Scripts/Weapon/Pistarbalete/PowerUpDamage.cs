@@ -4,10 +4,13 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "PU_Damage", menuName = "Scriptable Object/Power Up/Damage")]
 public class PowerUpDamage : PowerUp {
+    [SerializeField] protected bool _playParticles = false;
     [SerializeField] int _additionalDamage = 5;
     [SerializeField] bool _lostOnDrop = true;
 
     EntityWeaponry _targetWeaponry;
+
+    public override bool PlayParticles => _playParticles;
 
     public override PowerUp Clone() {
         PowerUpDamage output = CreateInstance<PowerUpDamage>();
@@ -15,6 +18,7 @@ public class PowerUpDamage : PowerUp {
         output._additionalDamage = _additionalDamage;
         output.SetEnable(false);
         output._cloned = true;
+        output._playParticles = _playParticles;
         return output;
     }
 

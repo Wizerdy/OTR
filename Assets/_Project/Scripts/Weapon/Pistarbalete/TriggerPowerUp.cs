@@ -13,6 +13,7 @@ public class TriggerPowerUp : MonoBehaviour {
     void PowerUp(IHealth health, int damage) {
         try {
             GameObject root = health.GameObject.GetRoot();
+            Debug.Log(root + " .. " + health.GameObject);
             if (root.CompareTag("Player")) {
                 root.GetComponentInRoot<EntityAbilities>().Get<EntityPowerUp>().Add(_powerUp);
             }

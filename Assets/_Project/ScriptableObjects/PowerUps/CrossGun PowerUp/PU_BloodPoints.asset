@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f912e5f20c848458f4faeef55aead0, type: 3}
   m_Name: PU_BloodPoints
   m_EditorClassIdentifier: 
+  _playParticles: 1
   _additionalBloodPoint: 5
   _lostOnDrop: 1

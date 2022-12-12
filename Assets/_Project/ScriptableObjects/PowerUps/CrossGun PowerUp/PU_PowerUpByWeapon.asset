@@ -18,6 +18,6 @@ MonoBehaviour:
   - weapon: 4
     powerUp: {fileID: 11400000, guid: 8acbcbe1532841c41aa248c7ab881465, type: 2}
   - weapon: 6
-    powerUp: {fileID: 11400000, guid: 53b9c3788be6ad14aab7fd38ce1664e9, type: 2}
+    powerUp: {fileID: 11400000, guid: 927086ec4f2e51248a60b4dc22fad808, type: 2}
   - weapon: 0
     powerUp: {fileID: 11400000, guid: 8ab1ff867bd4a1e4688b7850309270f3, type: 2}

@@ -6104,7 +6104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7914695897134719047
 Transform:
   m_ObjectHideFlags: 0
@@ -6128,16 +6128,16 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2364114287455170374}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 0.5
   simulationSpeed: 1
-  stopAction: 1
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -11146,6 +11146,7 @@ GameObject:
   - component: {fileID: 2392539094772173345}
   - component: {fileID: 2130607038}
   - component: {fileID: 3839653871625589696}
+  - component: {fileID: 2130907090503975419}
   m_Layer: 0
   m_Name: Camaron
   m_TagString: Player
@@ -11284,6 +11285,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a9faffc2b39a446a9c79e61ff8b12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2130907090503975419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905317884828674427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69b9b72f9602ee4a97ab614e725aaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodDashParticle: {fileID: 6181288136429918191}
 --- !u!1 &3929031521333435715
 GameObject:
   m_ObjectHideFlags: 0
@@ -11847,7 +11861,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -39130
+  m_InstanceId: -3274
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

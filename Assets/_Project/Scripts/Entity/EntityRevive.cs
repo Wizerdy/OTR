@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
@@ -9,6 +10,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     [SerializeField] Health _health;
     [SerializeField] EntityPhysics _physics;
     [SerializeField] Collider2D _collider;
+    [SerializeField] Slider _reviveSlider;
 
     [Header("System")]
     [SerializeField] float _reviveTime = 0.5f;
@@ -36,17 +38,25 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
         _currentPress = 0;
         _collider.isTrigger = true;
         _physics.Terminate();
+        _reviveSlider.gameObject.SetActive(true);
+        UpdateSlider();
     }
 
     public bool HeartMassage() {
         ++_currentPress;
+        UpdateSlider();
         if (_currentPress >= _pressCount) {
             _currentPress = 0;
+            _reviveSlider.gameObject.SetActive(false);
             _onStartRevive.Invoke(this);
             StartCoroutine(Tools.Delay(Revive, _reviveTime));
             return true;
         }
         return false;
+    }
+
+    private void UpdateSlider() {
+        _reviveSlider.value = (float)_currentPress / (float)_pressCount;
     }
 
     public void Revive() {

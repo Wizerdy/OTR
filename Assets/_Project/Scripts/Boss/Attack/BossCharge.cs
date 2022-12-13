@@ -140,7 +140,6 @@ public class BossCharge : BossAttack {
     }
 
     protected void Hit(Collision2D collision) {
-        Debug.Log("hit!!");
         if (collision.transform.CompareTag("Wall")) {
             _hitWall = true;
             _bounceWallDirection = collision.contacts[0].normal.normalized;

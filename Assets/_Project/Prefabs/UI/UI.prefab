@@ -1003,7 +1003,7 @@ MonoBehaviour:
   _health: {fileID: 11400000, guid: 10d7226d3d2838247832c9378df8a881, type: 2}
   _text: {fileID: 1564228796}
   _index: 0
-  _maxIndex: 10
+  _maxIndex: 9
 --- !u!114 &1560885790426985023
 MonoBehaviour:
   m_ObjectHideFlags: 0

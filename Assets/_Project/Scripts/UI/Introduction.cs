@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class Introduction : MonoBehaviour {
@@ -9,8 +12,10 @@ public class Introduction : MonoBehaviour {
     [SerializeField] private Image firstBackGround;
     [SerializeField] private Image studioLogo;
     [SerializeField] private Image studioBackGround;
+    [SerializeField] private InputSystemUIInputModule inputSystem;
     // Start is called before the first frame update
     void Start() {
+        inputSystem.enabled = false;
         StartCoroutine(PlayIntroduction());
     }
 
@@ -39,6 +44,7 @@ public class Introduction : MonoBehaviour {
 
         StartCoroutine(FadeImage(studioBackGround, true));
 
+        inputSystem.enabled = true;
 
         yield return null;
     }

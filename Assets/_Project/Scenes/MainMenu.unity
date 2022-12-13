@@ -1130,6 +1130,7 @@ MonoBehaviour:
   firstBackGround: {fileID: 1559073996}
   studioLogo: {fileID: 2086445288}
   studioBackGround: {fileID: 879520142}
+  inputSystem: {fileID: 1690850392}
 --- !u!1 &576006320
 GameObject:
   m_ObjectHideFlags: 0

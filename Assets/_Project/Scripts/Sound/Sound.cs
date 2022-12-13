@@ -37,7 +37,9 @@ public enum AudioName {
     BossOneForAllCharge,
     BossOneForAllDamage,
     BossMeteor,
-    BloodFistDash
+    BloodFistDash,
+    MusicMainMenu,
+    MusicMainMenuLoop
 }
 
 [System.Serializable]

@@ -2201,6 +2201,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1009697917987868197, guid: 7fc797c67653d5c4b8d587f922d38730, type: 3}
   m_PrefabInstance: {fileID: 1134126748}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1282134077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1282134079}
+  - component: {fileID: 1282134078}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1282134078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282134077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae28a279ce26e664fb6d67d52d748d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intro: 37
+  _loop: 38
+--- !u!4 &1282134079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282134077}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1284873728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,18 +2627,6 @@ PrefabInstance:
     - target: {fileID: 7901520996464060844, guid: 817ec5adeaa74934496b43e3767c4fd6, type: 3}
       propertyPath: m_Name
       value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8405328859207561198, guid: 817ec5adeaa74934496b43e3767c4fd6, type: 3}
-      propertyPath: _loop
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8405328859207561198, guid: 817ec5adeaa74934496b43e3767c4fd6, type: 3}
-      propertyPath: _intro
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8405328859207561198, guid: 817ec5adeaa74934496b43e3767c4fd6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 817ec5adeaa74934496b43e3767c4fd6, type: 3}

@@ -78,6 +78,22 @@ MonoBehaviour:
     randomPitch: 0
     minPitch: 0
     maxPitch: 0
+  - audioName: 37
+    audio:
+    - {fileID: 8300000, guid: 353f3348e689cc54e8003116b823f2ef, type: 3}
+    volume: 1
+    loop: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+  - audioName: 38
+    audio:
+    - {fileID: 8300000, guid: d7d8ade22303a964ba06e55685130bac, type: 3}
+    volume: 1
+    loop: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
   soundsSfx:
   - audioName: 2
     audio:
@@ -360,5 +376,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae28a279ce26e664fb6d67d52d748d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intro: 4
-  _loop: 23
+  _intro: 24
+  _loop: 25

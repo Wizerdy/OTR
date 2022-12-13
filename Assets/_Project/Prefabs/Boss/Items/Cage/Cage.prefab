@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8544991626006888801}
   - component: {fileID: 8049114199460104521}
   - component: {fileID: 7847308795946595493}
+  - component: {fileID: 4934287215546449980}
   m_Layer: 10
   m_Name: Cage
   m_TagString: Untagged
@@ -56,6 +57,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mask: {fileID: 9022080775520159475}
   _spike: {fileID: 2440783207260226746}
+  _onCageStart:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4934287215546449980}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 23
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _onCageDamage:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4934287215546449980}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 24
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!33 &5117681326994506578
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -141,6 +174,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4934287215546449980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872102813351540383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a9faffc2b39a446a9c79e61ff8b12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2440783207260226746

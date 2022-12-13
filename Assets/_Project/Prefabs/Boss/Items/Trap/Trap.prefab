@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 2260073458273628604}
   - component: {fileID: -8428476896400705614}
   - component: {fileID: 581437941808125931}
+  - component: {fileID: 4887055426517783299}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Untagged
@@ -168,7 +169,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abe5fc42be5fa445ae765707335a09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeSprite: {fileID: 21300000, guid: d2835744d10e3ff4b9c64ac3015432f2, type: 3}
+  _onTrapActivation:
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4887055426517783299}
+          m_TargetAssemblyTypeName: JouerSon, Assembly-CSharp
+          m_MethodName: JouerSonByIndex
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 20
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &581437941808125931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,5 +195,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b36994f342e99244899a3894ec9aefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4887055426517783299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2260073458273628579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a9faffc2b39a446a9c79e61ff8b12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

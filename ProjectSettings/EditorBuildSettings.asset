@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/MainMenu.unity
     guid: ca6a32b0768bd114ab35f7e551d584e3
   - enabled: 1
-    path: Assets/_Project/Scenes/Menus/SelectionScreen.unity
-    guid: 135a9a72bdc61fa488602b03fe2a57fd
+    path: Assets/_Project/Scenes/HubAnim.unity
+    guid: f731aff87a51bfe48be00b715468cf39
+  - enabled: 1
+    path: Assets/_Project/Scenes/TheHUB.unity
+    guid: e25c948022c6f2345abb6e8c09d06506
   - enabled: 1
     path: Assets/_Project/Scenes/TheOne.unity
     guid: f35ff1e0f154f9f43952c0946626a14b

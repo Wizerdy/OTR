@@ -481,7 +481,7 @@ MonoBehaviour:
   slashThreatGenerated: 10
   _attackTime: 0
   attackCooldown: 0.8
-  parryCooldown: 0.25
+  parryCooldown: 1
   parryThreatGenerated: 5
   parryDamageReduction: 100
   onParry:

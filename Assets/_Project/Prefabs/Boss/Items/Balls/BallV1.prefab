@@ -280,6 +280,7 @@ MonoBehaviour:
           m_Calls: []
   _destroyOnPlayerHit: 1
   parriedBossBallPrefab: {fileID: 4263007696735338259, guid: dde48b06819888a4594bc52d4c8499fa, type: 3}
+  _damageHealth: {fileID: -3499688898107672776}
 --- !u!114 &-3499688898107672776
 MonoBehaviour:
   m_ObjectHideFlags: 0

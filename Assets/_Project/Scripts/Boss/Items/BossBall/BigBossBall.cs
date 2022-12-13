@@ -10,18 +10,18 @@ public class BigBossBall : BossBall {
         if (collision.collider.tag == "Wall")
             Multiply(Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal));
         if (collision.transform.CompareTag("Player")) {
-            EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
-            EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
-            Vector2 direction = _rb.velocity.normalized;
-            float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
-            if (dot > 0) {
-                _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
-            } else {
-                _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
-            }
-            _bounceForce.Reset();
-            eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
-            epPlayer.Add(new Force(_bounceForce), 10);
+            //EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
+            //EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
+            //Vector2 direction = _rb.velocity.normalized;
+            //float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
+            //if (dot > 0) {
+            //    _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
+            //} else {
+            //    _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
+            //}
+            //_bounceForce.Reset();
+            //eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
+            //epPlayer.Add(new Force(_bounceForce), 10);
             if (_destroyOnPlayerHit) {
                 Die();
             }

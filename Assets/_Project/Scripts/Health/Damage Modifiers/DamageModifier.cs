@@ -14,8 +14,8 @@ public abstract class DamageModifier : MonoBehaviour {
         NOMODIFIER
     }
 
-    [SerializeField] ResistanceType _type;
-    [SerializeField] int _value;
+    [SerializeField] protected ResistanceType _type;
+    [SerializeField] protected int _value;
 
     [Space]
     [SerializeField, HideInInspector] BetterEvent<int, GameObject> _onUse = new BetterEvent<int, GameObject>();

@@ -65,15 +65,15 @@ public class Health : MonoBehaviour, IHealth {
         _onMaxHealthChange.Invoke(_maxHealth);
     }
 
-    public void TakeDamage(int amount, GameObject source = null) {
-        if (IsDead) { return; }
-        if (!CanTakeDamage) { return; }
+    public int TakeDamage(int amount, GameObject source = null) {
+        if (IsDead) { return 0; }
+        if (!CanTakeDamage) { return 0; }
         for (int i = 0; i < _damageModifiers.Count; i++) {
             if (!_damageModifiers[i].enabled) { continue; }
             amount = _damageModifiers[i].Use(amount, source);
         }
 
-        if (amount <= 0) { return; }
+        if (amount <= 0) { return 0; }
 
         _currentHealth -= amount;
         _currentHealth = Mathf.Max(0, _currentHealth);
@@ -82,13 +82,15 @@ public class Health : MonoBehaviour, IHealth {
         if (_currentHealth <= 0) {
             Die();
         }
+
+        return amount;
     }
 
 
-    public void TakeDamage(int amount) {
-        if (!CanTakeDamage) { return; }
+    public int TakeDamage(int amount) {
+        if (!CanTakeDamage) { return 0; }
 
-        if (amount <= 0) { return; }
+        if (amount <= 0) { return 0; }
 
         _currentHealth -= amount;
         _currentHealth = Mathf.Max(0, _currentHealth);
@@ -97,6 +99,8 @@ public class Health : MonoBehaviour, IHealth {
         if (_currentHealth <= 0) {
             Die();
         }
+
+        return amount;
     }
 
     public void TakeHeal(int amount) {

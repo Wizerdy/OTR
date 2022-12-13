@@ -18,6 +18,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     protected bool _mustDie = false;
     protected Timer _deathTimer;
     [SerializeField] protected BossBallParried parriedBossBallPrefab;
+    [SerializeField] protected DamageHealth _damageHealth;
 
     public BossBall ChangeSpeed(float speed) {
         _speed = speed;
@@ -49,7 +50,8 @@ public class BossBall : MonoBehaviour, IReflectable {
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = _startDirection.normalized * _speed;
         _lastDir = _rb.velocity;
-        GetComponent<DamageHealth>().Damage = _damages;
+        _damageHealth.Damage = _damages;
+        _damageHealth.OnDamage += _OnDamage;
         _deathTimer = new Timer(this, _duration, false);
         _deathTimer.OnActivate += () => _mustDie = true;
         _deathTimer.Start(_duration);
@@ -69,29 +71,47 @@ public class BossBall : MonoBehaviour, IReflectable {
             if (_mustDie) {
                 Die();
             }
-            //else {
-            //    _rb.velocity = Vector2.Reflect(_reminder.normalized, collision.GetContact(0).normal) * _speed;
-            //}
         }
 
         if (collision.transform.CompareTag("Player")) {
-            EntityPhysics epPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityPhysics>();
-            EntityInvincibility eiPlayer = collision.gameObject.GetComponent<EntityAbilities>().Get<EntityInvincibility>();
-            //Vector2 direction = _rb.velocity.normalized;
-            Vector2 direction = _reminder;
-            float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
-            if (dot > 0) {
-                _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
-            } else {
-                _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
-            }
-            _bounceForce.Reset();
-            eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
-            epPlayer.Add(new Force(_bounceForce), 10);
+            //EntityAbilities ea = collision.gameObject.GetComponent<EntityAbilities>();
+            //EntityPhysics epPlayer = ea.Get<EntityPhysics>();
+            //EntityInvincibility eiPlayer = ea.Get<EntityInvincibility>();
+
+            //Vector2 direction = _reminder;
+            //float dot = Vector2.Dot(direction, collision.transform.position - transform.position);
+            //if (dot > 0) {
+            //    _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
+            //} else {
+            //    _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
+            //}
+            //_bounceForce.Reset();
+            //eiPlayer.ChangeCollisionLayer(_bounceForce.Duration);
+            //epPlayer.Add(new Force(_bounceForce), 10);
             if (_destroyOnPlayerHit) {
                 Die();
             }
         }
+    }
+
+    protected void _OnDamage(IHealth target, int damages) {
+        if (damages <= 0) { return; }
+        EntityAbilities abilities = target.GameObject.GetComponentInRoot<EntityAbilities>();
+        if (abilities == null) { return; }
+        EntityPhysics entityPhysics = abilities.Get<EntityPhysics>();
+        if (entityPhysics == null) { return; }
+
+        Vector2 direction = _reminder;
+        float dot = Vector2.Dot(direction, abilities.transform.position - transform.position);
+        if (dot > 0) {
+            _bounceForce.Direction = Quaternion.Euler(0, 0, -90) * direction;
+        } else {
+            _bounceForce.Direction = Quaternion.Euler(0, 0, 90) * direction;
+        }
+        _bounceForce.Reset();
+        entityPhysics.Add(new Force(_bounceForce), 10);
+
+        abilities.Get<EntityInvincibility>()?.ChangeCollisionLayer(_bounceForce.Duration);
     }
 
     protected void Die() {

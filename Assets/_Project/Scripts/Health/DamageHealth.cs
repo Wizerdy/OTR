@@ -73,7 +73,7 @@ public class DamageHealth : MonoBehaviour {
             IHealth health = root.GetComponent<IHealth>();
             if (health != null && health.CanTakeDamage) {
                 int damages = _damageModifier.Use(_damage);
-                health.TakeDamage(damages, gameObject);
+                damages = health.TakeDamage(damages, gameObject);
                 _onDamage?.Invoke(health, damages);
             }
 

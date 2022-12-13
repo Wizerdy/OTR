@@ -137,7 +137,6 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         _currentIndex = type;
         _weaponry.DamageHealth.ResetHitted();
         _weaponry.DamageHealth.Damage = _attacks[type].damage;
-        Debug.Log(_attacks[type].damage + " .. " + type);
         yield return _attacks[type].attack(caster, direction);
         _attacking = false;
         _onAttackEnd.Invoke(type);

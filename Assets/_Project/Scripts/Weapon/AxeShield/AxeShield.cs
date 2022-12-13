@@ -23,7 +23,7 @@ public class AxeShield : Weapon
     [SerializeField] private int armorPointOnPickUp = 5;
 
     Vector2 aimingDirection;
-    public EntityArmor entityArmor;
+    [HideInInspector] public EntityArmor entityArmor;
 
     float _baseSpeed = 1f;
     bool _aiming = false;
@@ -108,7 +108,6 @@ public class AxeShield : Weapon
 
         _attacks[AttackIndex.SECOND].canAttack = false;
         CoroutinesManager.Start(Tools.Delay(() => _attacks[AttackIndex.SECOND].canAttack = true, parryCooldown));
-
     }
 
     //public override float AttackTime(AttackIndex index) {

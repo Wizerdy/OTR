@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldUpModifier : DamageModifier {
-    [SerializeField] private EntityArmor entityArmor;
+    //[SerializeField] private EntityArmor entityArmor;
     private int damageToReduce;
 
     protected override bool Usable(int value, GameObject source) {
@@ -18,8 +18,6 @@ public class ShieldUpModifier : DamageModifier {
         //    return true;
         //}
         //return false;
-        return value > 0;
+        return _value > 0;
     }
-
-
 }

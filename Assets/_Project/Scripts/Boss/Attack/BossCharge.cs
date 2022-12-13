@@ -32,24 +32,8 @@ public class BossCharge : BossAttack {
             _entityColliders.MainEvent.OnCollisionEnter -= Hit;
         }
     }
-    protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
-        _hitWall = false;
-        _damageHealth = _entityColliders.MainEvent.gameObject.GetComponent<DamageHealth>();
-        _damageHealth.ResetHitted();
-        _damagesMemory = _damageHealth.Damage;
-        _damageHealth.SetDamage(_damages);
-        _entityColliders.MainEvent.OnCollisionEnter += Hit;
-        didbegin = true;
-        yield break;
-    }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         yield return StartCoroutine(Charge(target.position, _speed));
-    }
-
-    protected override IEnumerator AttackEnds(EntityAbilities ea, Transform target) {
-        _damageHealth.SetDamage(_damagesMemory);
-        _entityColliders.MainEvent.OnCollisionEnter -= Hit;
-        yield break;
     }
 
     protected IEnumerator Charge(Vector3 targetPosition, float speed) {
@@ -66,12 +50,13 @@ public class BossCharge : BossAttack {
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
         }
+        begin();
         _entityPhysics.Add(_chargeForce, 1);
         _onCharge?.Invoke();
         while (!_hitWall) {
             yield return null;
         }
-
+        end();
         //yield return new WaitForSeconds(0.05f);
         //do {
         //    yield return null;
@@ -115,6 +100,7 @@ public class BossCharge : BossAttack {
         while (!_entityBoss.GetAnimationBool("CanCharge")) {
             yield return null;
         }
+        begin();
         _entityPhysics.Add(_chargeForce, 1);
         bool pass = false;
         float dot = 0;
@@ -126,6 +112,7 @@ public class BossCharge : BossAttack {
                 pass = true;
             }
         }
+        end();
 
         if (angle < angleTopBotCharge) {
             _entityBoss.SetAnimationBool("ChargingTop", false);
@@ -160,15 +147,24 @@ public class BossCharge : BossAttack {
             epPlayer.Add(new Force(_bounceForce), 10);
         }
     }
-    protected void HitExit(Collision2D collision) {
-        if (collision.transform.CompareTag("Wall")) {
-            _hitWall = false;
-        }
-    }
 
     public static class V {
         public static Vector3 ToVector3(Vector2 v) {
             return new Vector3(v.x, v.y, 0);
         }
+    }
+
+    void begin() {
+        _hitWall = false;
+        _damageHealth = _entityColliders.MainEvent.gameObject.GetComponent<DamageHealth>();
+        _damageHealth.ResetHitted();
+        _damagesMemory = _damageHealth.Damage;
+        _damageHealth.SetDamage(_damages);
+        _entityColliders.MainEvent.OnCollisionEnter += Hit;
+        didbegin = true;
+    }
+    void end() {
+        _damageHealth.SetDamage(_damagesMemory);
+        _entityColliders.MainEvent.OnCollisionEnter -= Hit;
     }
 }

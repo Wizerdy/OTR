@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -44,6 +45,12 @@ public class MenuManager : MonoBehaviour
 
         //eventSystem.SetSelectedGameObject(null);
         //eventSystem.SetSelectedGameObject(objToSelect);
+    }
+
+    public void BackToMainScreen(InputAction.CallbackContext obj) {
+        optionScreen.SetActive(false);
+        characterSelection.SetActive(false);
+        mainScreen.SetActive(true);
     }
 
     public void QuitGame() {

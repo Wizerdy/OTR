@@ -19,6 +19,8 @@ public class CharacterSelectorController : MonoBehaviour {
 
     public bool HasUser => _inputs != null;
     public bool Locked => _canvas.Locked;
+
+    private bool hasSelected = false;
     //public event UnityAction<int> OnConfirm { add => _onConfirm += value; remove => _onConfirm -= value; }
 
     private void Reset() {
@@ -34,6 +36,7 @@ public class CharacterSelectorController : MonoBehaviour {
     public void UserJoin(InputUser user) {
         _user = user;
         _inputs = ((InputActionAsset)user.actions);
+        hasSelected = true;
         AssignActions(_inputs);
         Select(1);
     }
@@ -67,6 +70,7 @@ public class CharacterSelectorController : MonoBehaviour {
         if (Locked) {
             _canvas.Selected(false);
             _taken.Remove(_canvas.CurrentIndex);
+            hasSelected = false;
             return;
         }
 

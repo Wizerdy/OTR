@@ -11,6 +11,8 @@ public class PowerUpTimed : PowerUp {
     Coroutine _routine_timer;
     PowerUp _powerUpInstancied;
 
+    public override bool PlayParticles => _powerUp.PlayParticles;
+
     public override PowerUp Clone() {
         PowerUpTimed output = CreateInstance<PowerUpTimed>();
         output._target = _target;
@@ -26,6 +28,7 @@ public class PowerUpTimed : PowerUp {
         if (_target == null) { return false; }
 
         _powerUpInstancied = _powerUp.SetTarget(_target);
+        _powerUpInstancied.OnDisable += _DisableMe;
         _powerUpInstancied.Enable();
 
         _routine_timer = CoroutinesManager.Start(

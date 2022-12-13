@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4454330215633273674}
   - component: {fileID: 4454330215633273677}
   - component: {fileID: 4454330215633273676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 4454330215775435738}
   - component: {fileID: 5591567690811419354}
   - component: {fileID: 7050634863395366556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AxeShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

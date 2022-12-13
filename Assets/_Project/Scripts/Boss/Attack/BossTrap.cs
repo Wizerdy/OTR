@@ -4,6 +4,8 @@ using System.Net.Security;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public class BossTrap : BossAttack {
     [Header("Prog")]
@@ -15,6 +17,8 @@ public class BossTrap : BossAttack {
     [SerializeField] float _visibleTime;
     [SerializeField] float _effectivityTime;
     [SerializeField] float _tick;
+    [SerializeField] BetterEvent _onTrapPosed = new BetterEvent();
+    public event UnityAction OnTrapPosed { add => _onTrapPosed += value; remove => _onTrapPosed -= value; }
 
 
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
@@ -22,6 +26,7 @@ public class BossTrap : BossAttack {
         while (!_entityBoss.GetAnimationBool("CanTrap")) {
             yield return null;
         }
+        _onTrapPosed?.Invoke();
         Physics2D.queriesHitTriggers = true;
         for (int i = 0; i < _trapNumber; i++) {
             PutTrap();

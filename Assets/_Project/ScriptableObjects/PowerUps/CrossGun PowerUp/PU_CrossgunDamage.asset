@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccc017164685034aa9774506affc0bf, type: 3}
   m_Name: PU_CrossgunDamage
   m_EditorClassIdentifier: 
+  _playParticles: 1
   _additionalDamage: 5
   _lostOnDrop: 1

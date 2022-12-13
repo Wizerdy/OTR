@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6974214287170370748}
   - component: {fileID: 8770567618907815269}
   - component: {fileID: 1016631887059481575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BloodyFist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstAttack: 3
-  _secondAttack: 16
+  _secondAttack: 28
 --- !u!50 &8770567618907815269
 Rigidbody2D:
   serializedVersion: 4
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 6047054753032229315}
   - component: {fileID: 5165688652931911951}
   - component: {fileID: 8251970426206779451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

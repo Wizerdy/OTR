@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 2349233607301444472}
   - component: {fileID: 2200106324864427959}
   - component: {fileID: 8781043769232216514}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: SpecialBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

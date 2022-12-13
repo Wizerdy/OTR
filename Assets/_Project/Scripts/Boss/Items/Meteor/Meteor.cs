@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ToolsBoxEngine;
+using ToolsBoxEngine.BetterEvents;
+using UnityEngine.Events;
 
 public class Meteor : MonoBehaviour {
     [SerializeField] int _damages;
     [SerializeField] float _timeBeforeFall;
     List<IHealth> _hit = new List<IHealth>();
     Animator _animator;
+    [SerializeField] BetterEvent _onSpark = new BetterEvent();
+    public event UnityAction OnSpark { add => _onSpark += value; remove => _onSpark -= value; }
     public Meteor ChangeDamages(int damages) {
         _damages = damages;
         return this;
@@ -45,5 +48,6 @@ public class Meteor : MonoBehaviour {
         yield return new WaitForSeconds(_timeBeforeFall);
         GetComponent<Collider2D>().enabled = true;
         _animator.SetTrigger("Spark");
+        _onSpark?.Invoke();
     }
 }

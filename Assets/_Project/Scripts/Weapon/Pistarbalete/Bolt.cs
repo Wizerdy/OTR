@@ -11,6 +11,12 @@ public class Bolt : MonoBehaviour {
     [SerializeField] BetterEvent<Collision2D> _onCollide;
     [SerializeField] BetterEvent<IHealth, int> _onHit;
 
+    [Header("Feedback")]
+    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] ParticleSystem _particles;
+    [SerializeField] Color _minColor = Color.yellow;
+    [SerializeField] Color _maxColor = Color.red;
+
     float _speed = 5f;
     int _damage = 5;
     Vector2 _direction = Vector2.up;
@@ -33,6 +39,11 @@ public class Bolt : MonoBehaviour {
     public Bolt SetDamage(int damage) {
         _damage = damage;
         _damageHealth?.SetDamage(_damage);
+        return this;
+    }
+
+    public Bolt SetPercentage(float percentage) {
+        _sprite.color = Color.Lerp(_minColor, _maxColor, percentage);
         return this;
     }
 

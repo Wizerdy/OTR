@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ToolsBoxEngine;
+using TMPro;
 
 public class UIMultipleHealth : MonoBehaviour {
     [SerializeField] HealthReference _health;
@@ -15,15 +16,15 @@ public class UIMultipleHealth : MonoBehaviour {
     void Start() {
         ChangeColor(_index);
         if (!_health.IsValid()) { return; }
-        _health.Instance.OnDeath += _ChangeColor;
+        _health.Instance.OnDeath += _ChangeUI;
     }
 
-    void _ChangeColor() {
+    void _ChangeUI() {
         ++_index;
         ChangeColor(_index);
     }
 
     void ChangeColor(int index) {
-        _image.color = index < _colors.Count ? _colors[index] : Color.white;
+        _image.color = index < _colors.Count ? _colors[Mathf.Max(index, 0)] : Color.white;
     }
 }

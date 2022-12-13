@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using ToolsBoxEngine.BetterEvents;
 using static UnityEngine.GraphicsBuffer;
 
 public class BossShootBall : BossAttack {
@@ -12,6 +14,8 @@ public class BossShootBall : BossAttack {
     [SerializeField] float _ballSpeed;
     [SerializeField] float _ballDuration;
     [SerializeField] Force _bounceForce;
+    [SerializeField] BetterEvent _ballLaunched = new BetterEvent();
+    public event UnityAction BallLaunched { add => _ballLaunched += value; remove => _ballLaunched -= value; }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         _entityBoss.SetAnimationTrigger("Projectiling");
         Vector3 direction = (target.position - ea.transform.position).normalized;
@@ -26,6 +30,7 @@ public class BossShootBall : BossAttack {
         while (!_entityBoss.GetAnimationBool("CanShoot")) {
             yield return null;
         }
+        _ballLaunched?.Invoke();
         LaunchBall(spawn.position, target.position);
         _entityBoss.SetAnimationBool("CanShoot", false);
     }

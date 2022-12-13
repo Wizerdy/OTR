@@ -14,4 +14,8 @@ public class DebugEvent : MonoBehaviour {
     public void PrintError(string debugText) {
         Debug.LogError(debugText);
     }
+
+    public void Break() {
+        Debug.Break();
+    }
 }

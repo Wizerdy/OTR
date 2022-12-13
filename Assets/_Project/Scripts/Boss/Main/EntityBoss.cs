@@ -61,8 +61,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         if (died) { return; }
         _newPhase?.Invoke();
         _entityAbilities.Get<EntityPhysics>().Purge();
-        StopAllCoroutines();
-        _currentAttack.StopAllCoroutines();
+        _currentAttack.Disable();
         StartCoroutine(TeleportCenter());
         _currentPhase++;
         

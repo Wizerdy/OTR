@@ -146,6 +146,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _sprite: {fileID: 4962862222384338440}
+  _particles: {fileID: 592021749951483977}
   _minColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _maxColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &-2269585454242116737
@@ -720,6 +721,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}
+--- !u!198 &592021749951483977 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8730869158319623993, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}
+  m_PrefabInstance: {fileID: 8150688049662517104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8173701346498900416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 32613204296543920, guid: 60a2b2b150ac7514b950b63cba3756fc, type: 3}

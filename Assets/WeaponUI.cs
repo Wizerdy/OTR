@@ -28,8 +28,8 @@ public class WeaponUI : MonoBehaviour {
 
     private void Update() {
         if (dirty == 1) {
-            slider.value = entityStorePoint.CurrentValue;
-            slider.maxValue = entityStorePoint.MaxValue;
+            //slider.value = entityStorePoint.CurrentValue;
+            //slider.maxValue = entityStorePoint.MaxValue;
         } else if (dirty == 2) {
             //Debug.Log(entityArmor.CurrentArmor + " .. " + slider.value);
             slider.value = entityArmor.CurrentArmor;
@@ -40,7 +40,7 @@ public class WeaponUI : MonoBehaviour {
         switch (weapon.Type) {
             case WeaponType.BLOODFIST:
                 Banner.color = new Color(1, 1, 1, 1);
-                slider.gameObject.SetActive(true);
+                //slider.gameObject.SetActive(true);
                 dirty = 1;
                 fist.SetActive(true);
                 shield.SetActive(false);

@@ -44,6 +44,8 @@ public class Bolt : MonoBehaviour {
 
     public Bolt SetPercentage(float percentage) {
         _sprite.color = Color.Lerp(_minColor, _maxColor, percentage);
+        ParticleSystem.ColorOverLifetimeModule main = _particles.colorOverLifetime;
+        main.color = new ParticleSystem.MinMaxGradient(_sprite.color, Color.clear);
         return this;
     }
 

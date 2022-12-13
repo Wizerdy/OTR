@@ -39,7 +39,7 @@ public class AxeShield : Weapon
         _baseSpeed = MoveSpeed;
 
         _attacks.Add(AttackIndex.SECOND, new WeaponAttack(parryCooldown, 0, parryThreatGenerated, IAttackParry));
-        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, slashThreatGenerated, slashDamage, IAttackSlash));
+        _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, slashDamage, slashThreatGenerated, IAttackSlash));
         _type = WeaponType.SHIELDAXE;
     }
 

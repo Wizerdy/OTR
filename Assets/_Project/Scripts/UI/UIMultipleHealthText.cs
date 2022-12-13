@@ -25,6 +25,7 @@ public class UIMultipleHealthText : MonoBehaviour {
 
     void ChangeText(int index) {
         if (_text == null) { return; }
+        _text.gameObject.SetActive(index > 0);
         _text.text = "x" + index;
     }
 }

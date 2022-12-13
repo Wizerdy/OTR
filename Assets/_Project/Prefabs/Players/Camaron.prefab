@@ -255,7 +255,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 76ebd6e69d4dcd348a5dcd09d8b3dc70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6d378a61a9f20441abf7d6a6b150c90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1210,14 +1210,14 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.49930954
+          value: 0.10187354
           inSlope: 0.9602149
           outSlope: 0.9602149
           tangentMode: 0
@@ -11861,7 +11861,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 175194
+  m_InstanceId: -5894
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0

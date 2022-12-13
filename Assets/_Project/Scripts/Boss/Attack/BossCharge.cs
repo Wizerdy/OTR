@@ -18,6 +18,7 @@ public class BossCharge : BossAttack {
     protected float angleSideCharge = 92;
     protected float angleTopBotHit = 80;
     protected float angleSideHit = 20;
+    protected bool didbegin = false;
     [SerializeField] BetterEvent _onCharge = new BetterEvent();
     [SerializeField] BetterEvent _onChargeBack = new BetterEvent();
 
@@ -26,8 +27,10 @@ public class BossCharge : BossAttack {
 
     public override void Disable() {
         base.Disable();
-        _damageHealth.SetDamage(_damagesMemory);
-        _entityColliders.MainEvent.OnCollisionEnter -= Hit;
+        if (didbegin) {
+            _damageHealth.SetDamage(_damagesMemory);
+            _entityColliders.MainEvent.OnCollisionEnter -= Hit;
+        }
     }
     protected override IEnumerator AttackBegins(EntityAbilities ea, Transform target) {
         _hitWall = false;
@@ -36,6 +39,7 @@ public class BossCharge : BossAttack {
         _damagesMemory = _damageHealth.Damage;
         _damageHealth.SetDamage(_damages);
         _entityColliders.MainEvent.OnCollisionEnter += Hit;
+        didbegin = true;
         yield break;
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {

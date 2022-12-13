@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using ToolsBoxEngine;
 using ToolsBoxEngine.BetterEvents;
+using System;
 
 public class EntityWeaponry : MonoBehaviour, IEntityAbility {
+    [SerializeField] EntityHolding _holding;
+
+    [Header("To share")]
     [SerializeField] EntityAbilities _entityAbilities;
-    [SerializeField] EntityMovement _entityMovement;
     [SerializeField] Animator _attackAnimator;
     [SerializeField] DamageHealth _damageHealth;
     [SerializeField] Health _health;
@@ -40,7 +43,18 @@ public class EntityWeaponry : MonoBehaviour, IEntityAbility {
     #endregion
 
     private void Start() {
-        //_movementSlow = _entityMovement.Slow(1f, 0f);
+        _holding.OnPickup += _OnPickup;
+        _holding.OnDrop += _OnDrop;
+    }
+
+    private void _OnDrop(GameObject _) {
+        Drop();
+    }
+
+    private void _OnPickup(GameObject item) {
+        Weapon weapon = item.GetComponentInRoot<Weapon>();
+        if (weapon == null) { return; }
+        Pickup(weapon);
     }
 
     private void Update() {

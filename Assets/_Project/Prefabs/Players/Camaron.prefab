@@ -12142,7 +12142,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54608
+  m_InstanceId: 152848
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12484,8 +12484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb6334d3e0b06742bec9608319f4021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holding: {fileID: 4819328008194156798}
   _entityAbilities: {fileID: 7815873619314827620}
-  _entityMovement: {fileID: 0}
   _attackAnimator: {fileID: 2062017968}
   _damageHealth: {fileID: 7460772279012484888}
   _health: {fileID: 147940007823276091}

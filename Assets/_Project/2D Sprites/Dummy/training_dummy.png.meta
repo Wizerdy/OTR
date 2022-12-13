@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3657a7d9e48604b4d9ee17d324cd0313
+guid: 418f07dcd40984f4085d92006007886f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,14 +119,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: a48bdd64a55ae054cbdedc9e8138f74f, type: 3}
-      name: _NormalMap
+    secondaryTextures: []
     nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0

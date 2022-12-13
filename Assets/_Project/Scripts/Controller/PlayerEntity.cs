@@ -149,20 +149,20 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     public void Pickup(GameObject obj) {
         if (_dead) { return; }
         _holding.Pickup(obj);
-        Weapon weapon = obj.GetComponentInRoot<Weapon>();
-        if (weapon != null) {
-            _weaponry.Pickup(weapon);
-        }
+        //Weapon weapon = obj.GetComponentInRoot<Weapon>();
+        //if (weapon != null) {
+        //    _weaponry.Pickup(weapon);
+        //}
     }
 
     public void Drop() {
         _holding.Drop();
-        _weaponry.Drop();
+        //_weaponry.Drop();
     }
 
     public void Throw(Vector2 direction) {
         _holding.Throw(direction, _root.gameObject);
-        _weaponry.Drop();
+        //_weaponry.Drop();
     }
 
     public void TryCatch() {

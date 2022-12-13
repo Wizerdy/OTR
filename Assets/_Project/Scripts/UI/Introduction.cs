@@ -27,8 +27,8 @@ public class Introduction : MonoBehaviour {
 
         StartCoroutine(FadeImage(iimLogo, true));
         StartCoroutine(FadeImage(audioWorkshopLogo, true));
-        yield return new WaitForSeconds(1f);
         StartCoroutine(FadeImage(firstBackGround, true));
+        yield return new WaitForSeconds(1f);
 
 
         StartCoroutine(FadeImage(studioLogo, false));

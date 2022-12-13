@@ -44,6 +44,10 @@ public abstract class BossAttack : MonoBehaviour {
         StartCoroutine(Launch(_ea, _target));
     }
 
+    public virtual void Disable() {
+        StopAllCoroutines();
+    }
+
     IEnumerator Launch(EntityAbilities ea, Transform target) {
         _isActive = true;
         yield return Attack(ea, target);

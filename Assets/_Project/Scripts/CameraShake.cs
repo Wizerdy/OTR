@@ -7,14 +7,18 @@ public class CameraShake : MonoBehaviour
     private Camera camera;
     [SerializeField] private float shakeDuration = 0.5f;
     [SerializeField] private float shakeMagnitude = 1.5f;
-    // Start is called before the first frame update
+
+    Coroutine _routine_shake = null;
+    Vector3 _startPos = Vector3.zero;
+
     void Start()
     {
         camera = GetComponent<Camera>();
+        _startPos = camera.transform.position;
     }
 
-    public IEnumerator Shake(float duration, float magnitude) {
-        Vector3 startPos = transform.position;
+    public IEnumerator IShake(float duration, float magnitude) {
+        //Vector3 startPos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < duration) {
@@ -25,11 +29,11 @@ public class CameraShake : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        camera.transform.position = startPos;
+        camera.transform.position = _startPos;
     }
 
-    public IEnumerator Shake() {
-        Vector3 startPos = transform.position;
+    public IEnumerator IShake() {
+        //Vector3 startPos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < shakeDuration) {
@@ -40,6 +44,11 @@ public class CameraShake : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        camera.transform.position = startPos;
+        camera.transform.position = _startPos;
+    }
+
+    public void Shake() {
+        if (_routine_shake != null) { StopCoroutine(_routine_shake); }
+        _routine_shake = StartCoroutine(IShake());
     }
 }

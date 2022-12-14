@@ -4,8 +4,8 @@ using UnityEngine.Events;
 using ToolsBoxEngine.BetterEvents;
 
 public class BossCharge : BossAttack {
-    [SerializeField] static BetterEvent<Vector2> _wallHit = new BetterEvent<Vector2>();
-    public event UnityAction<Vector2> WallHit { add => _wallHit += value; remove => _wallHit -= value; }
+    [SerializeField] static BetterEvent<Vector2> _onWallHit = new BetterEvent<Vector2>();
+    public static event UnityAction<Vector2> OnWallHit { add => _onWallHit += value; remove => _onWallHit -= value; }
     [Header("Charge :")]
     [SerializeField] protected float _speed;
     [SerializeField] protected Force _bounceForce;
@@ -133,7 +133,7 @@ public class BossCharge : BossAttack {
         if (collision.transform.CompareTag("Wall")) {
             _hitWall = true;
             if(collision.contacts.Length != 0)
-            _wallHit?.Invoke(collision.contacts[0].point);
+            _onWallHit?.Invoke(collision.contacts[0].point);
             _bounceWallDirection = collision.contacts[0].normal.normalized;
             _hitPosition = (V.ToVector3(collision.contacts[0].point) - collision.otherCollider.transform.position).normalized;
         }

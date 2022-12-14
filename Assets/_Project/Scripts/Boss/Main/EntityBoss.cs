@@ -25,6 +25,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     bool died = false;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
+
     private void Awake() {
         _animator = _entityAbilities.GetComponentInChildren<Animator>();
         _spriteRenderer = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
@@ -46,7 +47,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
 
     private void Start() {
         if (_startAttack) {
-            StartAttack();
+            StartAttack(0f);
         }
     }
 
@@ -91,9 +92,11 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
             yield return null;
         }
         _entityAbilities.transform.position = _center.position;
+        StartCoroutine(PhaseTextBlendIn(0.2f));
         _phaseText.text = "Phase " + (_currentPhase + 1);
         _phaseText.gameObject.SetActive(true);
         yield return new WaitForSeconds(_delayAttackNewPhase);
+        yield return StartCoroutine(PhaseTextBlendOut(0.2f)); 
         _phaseText.gameObject.SetActive(false);
         SetAnimationTrigger("EndTp");
         while (!GetAnimationBool("CanTp2")) {
@@ -103,6 +106,28 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         SetAnimationBool("CanTp2", false);
         health.CanTakeDamage = true;
         Attack();
+    }
+
+    private IEnumerator PhaseTextBlendIn(float time) {
+        float timer = 0f;
+        while (timer < time) {
+            Color color = _phaseText.color;
+            color.a = timer / time;
+            _phaseText.color = color;
+            yield return null;
+            timer += Time.deltaTime;
+        }
+    }
+
+    private IEnumerator PhaseTextBlendOut(float time) {
+        float timer = 0f;
+        while (timer < time) {
+            Color color = _phaseText.color;
+            color.a = 1f - (timer / time);
+            _phaseText.color = color;
+            yield return null;
+            timer += Time.deltaTime;
+        }
     }
 
     public void SetAnimationTrigger(string animation) {
@@ -144,7 +169,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         _animator.SetTrigger("Coming");
     }
 
-    public void StartAttack() {
-        StartCoroutine(Tools.DelayOneFrame(() => Attack()));
+    public void StartAttack(float time) {
+        StartCoroutine(Tools.Delay(() => Attack(), time));
     }
 }

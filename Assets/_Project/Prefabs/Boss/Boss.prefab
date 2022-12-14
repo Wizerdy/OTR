@@ -54,6 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 550918136}
   - component: {fileID: 550918137}
+  - component: {fileID: 5260802867650326760}
+  - component: {fileID: 2740404356438179703}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -127,6 +129,64 @@ MonoBehaviour:
   _delayAttackNewPhase: 3
   _currentAttack: {fileID: 0}
   _phaseText: {fileID: 1450107488}
+--- !u!114 &5260802867650326760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550918135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a75191f31626c41af984bbc680a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback: 2
+  _delay: 2
+  _action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 550918137}
+        m_TargetAssemblyTypeName: EntityBoss, Assembly-CSharp
+        m_MethodName: ComingAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2740404356438179703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550918135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a75191f31626c41af984bbc680a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback: 2
+  _delay: 0
+  _action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6842265518048862626}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: set_CanTakeDamage
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &594866396
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.16}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1450107489
@@ -277,7 +337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8443455040298573053, guid: f7bbac41761b72a44b134916ee78d5de, type: 2}
+  - {fileID: 6435582550839684385, guid: 600213f5d177d8642802cb9f6802a3a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -321,8 +381,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Phase 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f7bbac41761b72a44b134916ee78d5de, type: 2}
-  m_sharedMaterial: {fileID: 8443455040298573053, guid: f7bbac41761b72a44b134916ee78d5de, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 600213f5d177d8642802cb9f6802a3a4, type: 2}
+  m_sharedMaterial: {fileID: 6435582550839684385, guid: 600213f5d177d8642802cb9f6802a3a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -484,13 +544,10 @@ GameObject:
   - component: {fileID: 7856438785959955155}
   - component: {fileID: 5118097500843322543}
   - component: {fileID: 2011552968}
-  - component: {fileID: 923720220}
   - component: {fileID: 4424139826049735336}
-  - component: {fileID: 1949603298709403453}
   - component: {fileID: 923720221}
   - component: {fileID: 2679939277700332912}
   - component: {fileID: 1058589179199341142}
-  - component: {fileID: 1462244853086896403}
   m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
@@ -597,19 +654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618f8a14918955343842b09b2071363e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &923720220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865910487610663474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f713559c882a34086f2a2d3645f5e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _positionOffset: {x: 0, y: 0}
 --- !u!114 &4424139826049735336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,19 +668,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 7856438785959955155}
   _hitBlend: 0.6
---- !u!114 &1949603298709403453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865910487610663474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f713559c882a34086f2a2d3645f5e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _positionOffset: {x: 0, y: 0}
 --- !u!114 &923720221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +698,7 @@ MonoBehaviour:
   - {x: 0.007721798, y: 1.2123228, z: 0}
   m_ShapePathHash: -159082687
   m_Mesh: {fileID: 0}
-  m_InstanceId: -52332
+  m_InstanceId: -829108
 --- !u!114 &2679939277700332912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,14 +718,26 @@ MonoBehaviour:
         - m_Target: {fileID: 550918137}
           m_TargetAssemblyTypeName: EntityBoss, Assembly-CSharp
           m_MethodName: StartAttack
-          m_Mode: 1
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6842265518048862626}
+          m_TargetAssemblyTypeName: Health, Assembly-CSharp
+          m_MethodName: set_CanTakeDamage
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!114 &1058589179199341142
 MonoBehaviour:
@@ -709,37 +752,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionOffset: {x: 0, y: 0}
---- !u!114 &1462244853086896403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865910487610663474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_ComponentVersion: 1
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 00000000
-  m_ShapePath:
-  - {x: -0.9201931, y: 1.4699371, z: 0}
-  - {x: -1.119661, y: 1.9381721, z: 0}
-  - {x: -0.8738628, y: 2.437294, z: 0}
-  - {x: -0.0077218004, y: 2.6794648, z: 0}
-  - {x: 0.858419, y: 2.4218504, z: 0}
-  - {x: 1.1659918, y: 1.9536158, z: 0}
-  - {x: 0.88930607, y: 1.4390497, z: 0}
-  - {x: 0.007721798, y: 1.2123228, z: 0}
-  m_ShapePathHash: -159082687
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 56378
 --- !u!1 &2949079976842064426
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +1007,7 @@ GameObject:
   - component: {fileID: 1430112084821707074}
   - component: {fileID: 2341203470857177260}
   - component: {fileID: 3290310145345985323}
+  - component: {fileID: 8699802507130315863}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Boss
@@ -1128,6 +1141,21 @@ MonoBehaviour:
   _target: {fileID: 6842265518615937517}
   _angle: 40
 --- !u!114 &3290310145345985323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842265518615937519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc4bbe369db5fa4997517044964bf9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimHelperReference: {fileID: 11400000, guid: d347a1e1c65ceeb459c0fe71bf19da75, type: 2}
+  _target: {fileID: 6842265518615937517}
+  _angle: 40
+--- !u!114 &8699802507130315863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

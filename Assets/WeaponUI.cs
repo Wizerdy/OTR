@@ -42,24 +42,24 @@ public class WeaponUI : MonoBehaviour {
                 Banner.color = new Color(1, 1, 1, 1);
                 //slider.gameObject.SetActive(true);
                 dirty = 1;
-                fist.SetActive(true);
-                shield.SetActive(false);
-                lyre.SetActive(false);
+                fist?.SetActive(true);
+                shield?.SetActive(false);
+                lyre?.SetActive(false);
                 break;
             case WeaponType.SHIELDAXE:
                 Banner.color = new Color(1, 1, 1, 1);
                 slider.gameObject.SetActive(true);
-                fist.SetActive(false);
-                shield.SetActive(true);
-                lyre.SetActive(false);
+                fist?.SetActive(false);
+                shield?.SetActive(true);
+                lyre?.SetActive(false);
                 dirty = 2;
                 slider.maxValue = ((AxeShield)weapon).entityArmor.MaxArmor;
                 break;
             case WeaponType.CROSSGUN:
                 Banner.color = new Color(1, 1, 1, 1);
-                fist.SetActive(false);
-                shield.SetActive(false);
-                lyre.SetActive(true);
+                fist?.SetActive(false);
+                shield?.SetActive(false);
+                lyre?.SetActive(true);
                 break;
         }
     }

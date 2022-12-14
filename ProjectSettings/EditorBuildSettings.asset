@@ -17,7 +17,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/TheOne.unity
     guid: f35ff1e0f154f9f43952c0946626a14b
-  - enabled: 1
-    path: Assets/_Project/Scenes/ShaderScene.unity
-    guid: 59bed0efea285664dad80ef3ae8403de
   m_configObjects: {}

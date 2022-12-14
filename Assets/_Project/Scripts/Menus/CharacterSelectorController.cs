@@ -78,14 +78,14 @@ public class CharacterSelectorController : MonoBehaviour {
     }
 
     private void _OnConfirm(InputAction.CallbackContext obj) {
-        Debug.Log("- Input:" + _user.index);
         if (_canvas.CurrentIndex == 0) { return; }
         if (_canvas.Locked) { return; }
         if (_taken.Contains(_canvas.CurrentIndex)) { return; }
 
-        _canvas.Selected(true);
         _taken.Add(_canvas.CurrentIndex);
         _datas[_canvas.CurrentIndex - 1].User = _user;
+        Debug.Log("- Input:" + _datas[_canvas.CurrentIndex - 1].User.id + " .. " + _datas[_canvas.CurrentIndex - 1].UserId);
+        _canvas.Selected(true);
         //_onConfirm.Invoke(_canvas.CurrentIndex);
     }
 

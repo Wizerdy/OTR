@@ -1113,7 +1113,7 @@ MonoBehaviour:
   optionScreen: {fileID: 2032609523}
   characterSelection: {fileID: 50726900}
   doorAnimator: {fileID: 703125563}
-  SceneToLoad: TheOne
+  SceneToLoad: HubAnim
 --- !u!114 &403149948
 MonoBehaviour:
   m_ObjectHideFlags: 0

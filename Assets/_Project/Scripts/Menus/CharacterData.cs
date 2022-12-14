@@ -14,12 +14,14 @@ public class CharacterData : ScriptableObject {
     [SerializeField, HideInInspector] BetterEvent<InputUser> _onNewUser = new BetterEvent<InputUser>();
 
     InputUser _user;
+    uint? _userId = null;
 
     public string Name => _name;
     public Texture2D Skin => _skin;
     public Color Color => _color;
 
-    public InputUser User { get => _user; set { _user = value; _onNewUser.Invoke(_user); } }
+    public InputUser User { get => _user; set { _user = value; _userId = _user.id; _onNewUser.Invoke(_user); } }
+    public uint? UserId { get => _userId; }
 
     public event UnityAction<InputUser> OnNewUser { add => _onNewUser += value; remove => _onNewUser -= value; }
 }

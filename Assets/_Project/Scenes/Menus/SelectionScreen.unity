@@ -235,7 +235,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: TheOne
+            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &476631087
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68421be5e237f9f47a240b6e399baccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneName: TheOne
+  loadSceneName: HubAnim
 --- !u!1 &489984776
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,9 +530,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.018773466
     width: 1
-    height: 1
+    height: 0.9616709
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

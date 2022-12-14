@@ -39,7 +39,9 @@ public enum AudioName {
     BossMeteor,
     BloodFistDash,
     MusicMainMenu,
-    MusicMainMenuLoop
+    MusicMainMenuLoop,
+    UI_Fire,
+    UI_Bird
 }
 
 [System.Serializable]

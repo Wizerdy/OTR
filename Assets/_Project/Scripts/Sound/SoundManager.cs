@@ -140,7 +140,24 @@ public class SoundManager : MonoBehaviour {
         } else {
             Debug.LogError("NO AUDIO SOURCE ACTIVE");
         }
+    }
 
+    public void StopAudioWithReduceVolume(AudioName audioName) {
+        if (audioSourcesActive.Count > 0) {
+            foreach (var obj in audioSourcesActive) {
+                var playedSounce = obj.GetComponent<PlaySound>();
+                if (playedSounce.sound.audioName == audioName) {
+                    while (playedSounce.audioSource.volume > 0.1f)
+                        playedSounce.audioSource.volume -= Time.deltaTime;
+                    
+                    playedSounce.audioSource.Stop();
+                    BackToPool(obj);
+                    return;
+                }
+            }
+        } else {
+            Debug.LogError("NO AUDIO SOURCE ACTIVE");
+        }
     }
 
     public Sound GetMusic(AudioName name) {

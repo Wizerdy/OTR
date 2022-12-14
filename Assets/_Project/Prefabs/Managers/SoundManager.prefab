@@ -360,7 +360,31 @@ MonoBehaviour:
     randomPitch: 1
     minPitch: 0.9
     maxPitch: 1.1
-  _audioSourceNumber: 100
+  - audioName: 39
+    audio:
+    - {fileID: 8300000, guid: c8ff760a6cb572641bc112d1f806cb44, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 39
+    audio:
+    - {fileID: 8300000, guid: c8ff760a6cb572641bc112d1f806cb44, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  - audioName: 40
+    audio:
+    - {fileID: 8300000, guid: 2a3e6b8226182f74d917a24db07c3c28, type: 3}
+    volume: 1
+    loop: 0
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+  _audioSourceNumber: 50
   activeMusic: 1
   activeSfx: 1
   mixer: {fileID: 24300002, guid: 556c684c93cd87a41884bf186bdd3925, type: 2}

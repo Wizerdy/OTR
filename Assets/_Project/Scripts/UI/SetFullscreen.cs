@@ -7,11 +7,9 @@ public class SetFullscreen : MonoBehaviour
 {
     [SerializeField] private Toggle toggle;
 
-    public void ToggleFullScreen() {
-        if (toggle.isOn)
-            Screen.fullScreen = Screen.fullScreen;
-        else
-            Screen.fullScreen = !Screen.fullScreen;
+    public void SetScreen(bool isFullscreen) {
+        Screen.fullScreen = isFullscreen;
+        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
     }
 
 }

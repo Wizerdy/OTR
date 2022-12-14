@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject optionScreen;
     [SerializeField] private GameObject characterSelection;
     [SerializeField] private Animator doorAnimator;
+    public string SceneToLoad = "TheOne";
 
     public void StartGame() {
         optionScreen.SetActive(false);

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuDoor : MonoBehaviour {
-    [SerializeField] private string levelToLoad = "TheOne";
+    [SerializeField] private MenuManager menuManager;
+    //[SerializeField] private string levelToLoad = "TheOne";
     [SerializeField] private Animator animator;
 
     AsyncOperation _loadScene;
@@ -18,7 +19,7 @@ public class MenuDoor : MonoBehaviour {
     }
 
     public void OnAnimationStart() {
-        _loadScene = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
+        _loadScene = SceneManager.LoadSceneAsync(menuManager.SceneToLoad, LoadSceneMode.Single);
         _loadScene.allowSceneActivation = false;
     }
 }

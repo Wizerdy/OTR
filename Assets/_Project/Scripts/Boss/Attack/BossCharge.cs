@@ -4,6 +4,8 @@ using UnityEngine.Events;
 using ToolsBoxEngine.BetterEvents;
 
 public class BossCharge : BossAttack {
+    [SerializeField] static BetterEvent<Vector2> _wallHit = new BetterEvent<Vector2>();
+    public event UnityAction<Vector2> WallHit { add => _wallHit += value; remove => _wallHit -= value; }
     [Header("Charge :")]
     [SerializeField] protected float _speed;
     [SerializeField] protected Force _bounceForce;
@@ -31,6 +33,7 @@ public class BossCharge : BossAttack {
             _damageHealth.SetDamage(_damagesMemory);
             _entityColliders.MainEvent.OnCollisionEnter -= Hit;
         }
+
     }
     protected override IEnumerator AttackMiddle(EntityAbilities ea, Transform target) {
         yield return StartCoroutine(Charge(target.position, _speed));
@@ -129,6 +132,8 @@ public class BossCharge : BossAttack {
     protected void Hit(Collision2D collision) {
         if (collision.transform.CompareTag("Wall")) {
             _hitWall = true;
+            if(collision.contacts.Length != 0)
+            _wallHit?.Invoke(collision.contacts[0].point);
             _bounceWallDirection = collision.contacts[0].normal.normalized;
             _hitPosition = (V.ToVector3(collision.contacts[0].point) - collision.otherCollider.transform.position).normalized;
         }
@@ -163,6 +168,7 @@ public class BossCharge : BossAttack {
         _entityColliders.MainEvent.OnCollisionEnter += Hit;
         didbegin = true;
     }
+
     void end() {
         _damageHealth.SetDamage(_damagesMemory);
         _entityColliders.MainEvent.OnCollisionEnter -= Hit;

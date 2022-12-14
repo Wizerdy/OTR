@@ -5,6 +5,7 @@ using ToolsBoxEngine.BetterEvents;
 using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 using System.Collections;
+using TMPro;
 
 public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] EntityAbilities _entityAbilities;
@@ -14,15 +15,17 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
     [SerializeField] List<BossPhase> _bossPhases;
     [SerializeField] BetterEvent _newPhase;
     [SerializeField] GameObject _phases;
+    [SerializeField] bool _startAttack = false;
     [SerializeField] float _delayAttackNewPhase;
     [SerializeField] BossAttack _currentAttack;
+    [SerializeField] TMP_Text _phaseText;
     BossAttack _nextAttack;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
     bool died = false;
 
     public event UnityAction NewPhase { add => _newPhase.AddListener(value); remove => _newPhase.RemoveListener(value); }
-    private void Start() {
+    private void Awake() {
         _animator = _entityAbilities.GetComponentInChildren<Animator>();
         _spriteRenderer = _entityAbilities.GetComponentInChildren<SpriteRenderer>();
         if (_phases != null) {
@@ -39,7 +42,12 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
                 i--;
             }
         }
-        StartCoroutine(Tools.DelayOneFrame(() => Attack()));
+    }
+
+    private void Start() {
+        if (_startAttack) {
+            StartAttack();
+        }
     }
 
     void Attack() {
@@ -83,6 +91,10 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
             yield return null;
         }
         _entityAbilities.transform.position = _center.position;
+        _phaseText.text = "Phase " + (_currentPhase + 1);
+        _phaseText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_delayAttackNewPhase);
+        _phaseText.gameObject.SetActive(false);
         SetAnimationTrigger("EndTp");
         while (!GetAnimationBool("CanTp2")) {
             yield return null;
@@ -90,7 +102,6 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         SetAnimationBool("CanTp1", false);
         SetAnimationBool("CanTp2", false);
         health.CanTakeDamage = true;
-        yield return new WaitForSeconds(_delayAttackNewPhase);
         Attack();
     }
 
@@ -127,5 +138,13 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         StopAllCoroutines();
         _currentAttack.StopAllCoroutines();
         _animator.SetTrigger("Died");
+    }
+
+    public void ComingAnimation() {
+        _animator.SetTrigger("Coming");
+    }
+
+    public void StartAttack() {
+        StartCoroutine(Tools.DelayOneFrame(() => Attack()));
     }
 }

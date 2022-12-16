@@ -37,6 +37,7 @@ public class PlayerEntity : MonoBehaviour , IEntityAbility {
     bool _dead = false;
 
     public bool HasWeapon => _weaponry.HasWeapon;
+    public bool IsAttacking => _weaponry.Weapon?.IsAttacking ?? false;
     public Weapon Weapon => _weaponry.Weapon;
     public Vector2 Orientation => _oriention.Orientation;
     public bool CanLookAround { get => !_canLookAround.HasToken; set => _canLookAround.AddToken(!value); }

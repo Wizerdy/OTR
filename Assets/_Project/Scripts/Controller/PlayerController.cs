@@ -149,7 +149,7 @@ namespace InputUserController {
         }
 
         private void _Throw(InputAction.CallbackContext cc) {
-            if (_player.HasWeapon) {
+            if (_player.HasWeapon && !_player.IsAttacking) {
                 _firstAttack = false;
                 _secondAttack = false;
                 _player.ShowAimLine(false);

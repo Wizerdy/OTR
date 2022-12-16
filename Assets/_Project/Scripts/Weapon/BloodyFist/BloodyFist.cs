@@ -62,6 +62,7 @@ public class BloodyFist : Weapon {
     }
 
     protected override void _OnDrop(EntityWeaponry entityWeaponry) {
+        _targetAnimator?.SetBool("BloodFist_Dash", false);
         _entityStorePoint = null;
         _entityPhysics = null;
         _comboIndex = 1;

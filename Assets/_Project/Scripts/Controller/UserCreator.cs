@@ -57,7 +57,8 @@ public class UserCreator : MonoBehaviour {
 
     public static void ClearUsers() {
         ReadOnlyArray<InputUser> users = InputUser.all;
-        for (int i = 0; i < users.Count; i++) {
+        for (int i = users.Count - 1; i >= 0; --i) {
+            Debug.Log("Deleted : " + users[i].id);
             DeleteUser(users[i]);
         }
     }

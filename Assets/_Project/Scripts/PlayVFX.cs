@@ -10,3 +10,7 @@ public class PlayVFX : MonoBehaviour
         bloodDashParticle.Play();
     }
 }
+
+
+
+

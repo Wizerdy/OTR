@@ -92,6 +92,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
             yield return null;
         }
         _entityAbilities.transform.position = _center.position;
+        _entityAbilities.Get<EntityColliders>().Main.enabled = false;
         StartCoroutine(PhaseTextBlendIn(0.2f));
         string text = "Remaining " + (10 - (_currentPhase));
         if (_currentPhase >= 9) {
@@ -109,6 +110,7 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         SetAnimationBool("CanTp1", false);
         SetAnimationBool("CanTp2", false);
         health.CanTakeDamage = true;
+        _entityAbilities.Get<EntityColliders>().Main.enabled = true;
         Attack();
     }
 

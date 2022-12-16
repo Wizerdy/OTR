@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int deadPlayersIndex;
     public GameObject defeatScreen;
+    public GameObject winScreen;
+    float _timer = 0f;
 
     private void Awake() {
         if (Instance != null && Instance != this) {
@@ -21,12 +23,22 @@ public class GameManager : MonoBehaviour
         deadPlayersIndex = 0;
     }
 
+    private void Update() {
+        if (Time.deltaTime > 0.5f) { return; }
+        _timer += Time.deltaTime;
+    }
+
     public void OnPlayerDeath() {
         deadPlayersIndex++;
         if (deadPlayersIndex >= 3) {
             defeatScreen.SetActive(true);
             deadPlayersIndex = 0;
         }
+    }
+
+    public void Win() {
+        winScreen.SetActive(true);
+        winScreen.GetComponent<UITimer>()?.SetTimer(_timer);
     }
 
     public void OnPlayerRevive() {

@@ -55,6 +55,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     protected WeaponType _type = WeaponType.UNDEFINED;
 
     protected Vector2 _lastVelocity = Vector2.zero;
+    protected EntityHolding _landmaster = null;
 
     AttackIndex _currentIndex;
 
@@ -69,6 +70,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
     public event UnityAction OnPickUp { add => _onPickUp.AddListener(value); remove => _onPickUp.RemoveListener(value); }
     public event UnityAction<float> OnMovespeedSet { add => _onMovespeedSet.AddListener(value); remove => _onMovespeedSet.RemoveListener(value); }
 
+    public EntityHolding Landmaster => _landmaster;
     public bool IsAttacking => _attacking;
     public bool CanAttack => !IsAttacking && _canAttack;
     public bool IsOnFloor => _isOnFloor;
@@ -157,6 +159,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         transform.parent = null;
         _targetAnimator = null;
         transform.position = position;
+        _landmaster = null;
         gameObject.SetActive(true);
     }
 
@@ -164,6 +167,7 @@ public abstract class Weapon : MonoBehaviour, IHoldable, IReflectable {
         transform.parent = holding.transform;
         transform.localPosition = Vector2.zero;
         gameObject.SetActive(false);
+        _landmaster = holding;
         _onPickUp.Invoke();
         _OnPickup(holding);
     }

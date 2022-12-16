@@ -37,9 +37,10 @@ public class EntityHolding : MonoBehaviour, IEntityAbility {
 
     public void Pickup(GameObject target) {
         if (target == _holding) { return; }
-        Drop();
         _iholding = target.GetComponent<IHoldable>();
         if (_iholding == null) { Debug.LogWarning("Trying to pickup a not holdable item; " + target.name); return; }
+        if (_iholding.Landmaster != null) { _iholding = null; return; }
+        Drop();
         _iholding.Pickup(this);
         _holding = target;
         _onPickup.Invoke(target);

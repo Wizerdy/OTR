@@ -19,7 +19,7 @@ public class EntityRevive : MonoBehaviour, IEntityAbility {
     [SerializeField] int _pressCount = 10;
     [SerializeField, Range(0f, 1f)] float _healthPercentage = 0.5f;
 
-    [SerializeField, HideInInspector] BetterEvent<EntityRevive> _onStartRevive = new BetterEvent<EntityRevive>();
+    [SerializeField] BetterEvent<EntityRevive> _onStartRevive = new BetterEvent<EntityRevive>();
     [SerializeField, HideInInspector] BetterEvent<EntityRevive> _onStopRevive = new BetterEvent<EntityRevive>();
 
     int _currentPress;

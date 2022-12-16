@@ -134,11 +134,13 @@ public class EntityPhysics : MonoBehaviour, IEntityAbility {
     }
 
     public void Purge() {
+        _rb.velocity = Vector2.zero;
         _forcesDisplay.Clear();
         _forces.Clear();
     }
 
     public void Terminate() {
+        _rb.velocity = Vector2.zero;
         try {
             foreach (KeyValuePair<int, List<Force>> key in _forces) {
                 for (int i = 0; i < key.Value.Count; i++) {

@@ -62,7 +62,8 @@ public class PiedestalBrain : MonoBehaviour {
         GameObject root = collider.gameObject.GetRoot();
         if (root == _lastDropped) { return; }
         if (!_holding.IsHolding) {
-            if (root.GetComponent<IHoldable>() != null) {
+            Debug.Log(root.GetComponent<IHoldable>() + " .. " + root.GetComponent<IHoldable>()?.Landmaster + " .. " + (root.GetComponent<IHoldable>()?.Landmaster == null));
+            if (root.GetComponent<IHoldable>()?.Landmaster == null) {
                 Pickup(root);
                 return;
             }

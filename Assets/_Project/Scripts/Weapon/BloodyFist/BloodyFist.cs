@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ToolsBoxEngine;
+using TMPro;
 
 public class BloodyFist : Weapon {
 
@@ -100,6 +101,7 @@ public class BloodyFist : Weapon {
             _entityStorePoint.ChangeMinValue(0f);
             _entityStorePoint.ChangeMaxValue(_storePointMax);
         }
+        ea.Get<EntityInvincibility>()?.ChangeCollisionLayer(_dash.Duration);
         _targetAnimator.SetBool("BloodFist_Dash", true);
         _attacks[AttackIndex.SECOND].canAttack = false;
         _dashTimer.Start();

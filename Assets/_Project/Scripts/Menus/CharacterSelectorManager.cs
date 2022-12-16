@@ -16,6 +16,9 @@ public class CharacterSelectorManager : MonoBehaviour {
     public event UnityAction OnReady { add => _onReady += value; remove => _onReady -= value; }
 
     void OnEnable() {
+        _taken.Clear();
+        _onConfirm.ClearListener();
+
         UserCreator.OnChange += _OnChange;
         UserCreator.ClearUsers();
 

@@ -124,4 +124,9 @@ public class CharacterSelectorController : MonoBehaviour {
         _canvas.SetCharacterName(_datas[_canvas.CurrentIndex - 1].Name);
         _canvas.Taken(_taken.Contains(_canvas.CurrentIndex));
     }
+
+    public static void Clear() {
+        _taken.Clear();
+        _onConfirm.ClearListener();
+    }
 }

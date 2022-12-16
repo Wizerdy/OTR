@@ -14,17 +14,11 @@ public class UserCreator : MonoBehaviour {
 
     [SerializeField, HideInInspector] static BetterEvent<InputUser, InputUserChange> _onChange = new BetterEvent<InputUser, InputUserChange>();
 
-    //List<InputUser> _users = new List<InputUser>();
-
     public static event UnityAction<InputUser, InputUserChange> OnChange { add => _onChange += value; remove => _onChange -= value; }
 
     private void Start() {
-        //LoadUsers(out _users);
-
         InputUser.listenForUnpairedDeviceActivity = 1;
         InputUser.onUnpairedDeviceUsed += _OnUnpairedDeviceUsed;
-
-        //InputUser.onChange += _OnChange;
     }
 
     private void OnDestroy() {
@@ -36,15 +30,6 @@ public class UserCreator : MonoBehaviour {
 
         CreateUser(control.device, _actions);
     }
-
-    //private void _OnChange(InputUser user, InputUserChange change, InputDevice device) {
-    //    switch (change) {
-    //        case InputUserChange.Added:
-    //        case InputUserChange.Removed:
-    //            LoadUsers(out _users);
-    //            break;
-    //    }
-    //}
 
     public static InputUser CreateUser(InputDevice device, InputActionAsset actions) {
         InputUser newUser = InputUser.CreateUserWithoutPairedDevices();
@@ -65,7 +50,6 @@ public class UserCreator : MonoBehaviour {
 
     public static void DeleteUser(InputUser user) {
         if (!user.valid) { return; }
-        //Debug.Log("Removed User:" + user.index + " devices:" + Print(user.pairedDevices));
         user.UnpairDevicesAndRemoveUser();
     }
 
@@ -91,12 +75,6 @@ public class UserCreator : MonoBehaviour {
             userList.Add(users[i]);
         }
     }
-
-    //void DebugUsers() {
-    //    for (int i = 0; i < _users.Count; i++) {
-    //        Debug.Log(_users[i].id + " " + _users[i].index + " d:" + _users[i].pairedDevices[0]);
-    //    }
-    //}
 
     public static string Print<T>(ReadOnlyArray<T> array) {
         string output = "";

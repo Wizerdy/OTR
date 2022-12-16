@@ -11,7 +11,7 @@ public class BloodyFist : Weapon {
     EntityPhysics _entityPhysics;
 
     [Header("General")]
-    [SerializeField, Range(0f, 1f)] float _healthPercentValueStorePoint;
+    [SerializeField, Range(0f, 1f)] float _healthPercentRegen;
     [SerializeField] float _storePointMax;
 
     [Header("Fist")]
@@ -41,6 +41,8 @@ public class BloodyFist : Weapon {
 
     Timer _fistTimer;
     Timer _dashTimer;
+
+    List<Collider2D> _healedColliders = new List<Collider2D>();
 
     public float BloodPointsOnHit { get => _hitStorePoint; set => _hitStorePoint = value; }
 
@@ -75,6 +77,7 @@ public class BloodyFist : Weapon {
             _entityStorePoint.ChangeMaxValue(_storePointMax);
         }
 
+        _healedColliders.Clear();
         if (direction != Vector2.zero) { _targetAnimator?.SetFloat("x", direction.x); _targetAnimator?.SetFloat("y", direction.y); }
         _lastFistDirection = direction;
         _attacks[AttackIndex.FIRST].canAttack = false;
@@ -116,10 +119,12 @@ public class BloodyFist : Weapon {
         //    //Debug.Log("touché");
         //    _entityStorePoint.GainPoint(_hitStorePoint);
         //}
-        if (_entityStorePoint.CurrentValue <= 0f) { return; }
+        //if (_entityStorePoint.CurrentValue <= 0f) { return; }
+        if (_healedColliders.Contains(collider)) { return; }
         if (collider.CompareTag("Player") && collider.gameObject.GetRoot() != User.gameObject && !collider.gameObject.GetComponentInRoot<IHealth>().IsDead/*&& !collider.gameObject.GetRoot().transform.IsChildOf(User.gameObject.transform)*/) {
-            collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal((int)(_hitStorePointCost * _healthPercentValueStorePoint));
-            _entityStorePoint.LosePoint(_hitStorePointCost, false);
+            collider.gameObject.GetComponentInRoot<IHealth>()?.TakeHeal(_healthPercentRegen);
+            _healedColliders.Add(collider);
+            //_entityStorePoint.LosePoint(_hitStorePointCost, false);
             //collider.gameObject.GetRoot().GetComponentInChildren<EntityMovement>()?.CreateMovement(_pushDuration, _pushStrenght, collider.gameObject.transform.position - transform.position, _pushCurve);
             //Vector2 bumpDirection = (collider.gameObject.transform.position - transform.position).normalized;
             //collider.gameObject.GetComponentInRoot<EntityAbilities>()?

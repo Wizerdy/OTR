@@ -93,7 +93,11 @@ public class EntityBoss : MonoBehaviour, IEntityAbility {
         }
         _entityAbilities.transform.position = _center.position;
         StartCoroutine(PhaseTextBlendIn(0.2f));
-        _phaseText.text = "Phase " + (_currentPhase + 1);
+        string text = "Remaining " + (10 - (_currentPhase));
+        if (_currentPhase >= 9) {
+            text = "Last Phase !";
+        }
+        _phaseText.text = text;
         _phaseText.gameObject.SetActive(true);
         yield return new WaitForSeconds(_delayAttackNewPhase);
         yield return StartCoroutine(PhaseTextBlendOut(0.2f)); 

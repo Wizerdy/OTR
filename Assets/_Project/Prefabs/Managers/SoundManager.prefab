@@ -384,6 +384,14 @@ MonoBehaviour:
     randomPitch: 1
     minPitch: 0.9
     maxPitch: 1.1
+  - audioName: 41
+    audio:
+    - {fileID: 8300000, guid: 900fae7c126c5d04da56a8e929204fee, type: 3}
+    volume: 1
+    loop: 1
+    randomPitch: 0
+    minPitch: 0.9
+    maxPitch: 1.1
   _audioSourceNumber: 50
   activeMusic: 1
   activeSfx: 1
@@ -400,5 +408,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae28a279ce26e664fb6d67d52d748d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intro: 24
-  _loop: 25
+  _intro: 4
+  _loop: 23

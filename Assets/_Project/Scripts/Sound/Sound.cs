@@ -41,7 +41,8 @@ public enum AudioName {
     MusicMainMenu,
     MusicMainMenuLoop,
     UI_Fire,
-    UI_Bird
+    UI_Bird,
+    Menu_StoneDoor
 }
 
 [System.Serializable]

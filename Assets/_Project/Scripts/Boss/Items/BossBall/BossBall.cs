@@ -15,6 +15,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     [SerializeField] protected Vector2 _lastDir;
     [SerializeField] protected Force _bounceForce;
     [SerializeField] protected bool _destroyOnPlayerHit = false;
+    [SerializeField] protected int _damageReflect = 30;
     protected bool _mustDie = false;
     protected Timer _deathTimer;
     [SerializeField] protected BossBallParried parriedBossBallPrefab;
@@ -126,7 +127,7 @@ public class BossBall : MonoBehaviour, IReflectable {
     public void Launch(float force, Vector2 direction) {
         //_rb.velocity = force * direction;
         //newBall.transform.position = transform + (targetPosition - ourPosition).normalized;
-        BossBallParried newBall = Instantiate(parriedBossBallPrefab).ChangeDamages(_damages).ChangeDuration(_duration).ChangeSpeed(force).ChangeForce(_bounceForce);
+        BossBallParried newBall = Instantiate(parriedBossBallPrefab).ChangeDamages(_damageReflect).ChangeDuration(_duration).ChangeSpeed(force).ChangeForce(_bounceForce);
         newBall.transform.position = transform.position;
         if (direction != Vector2.zero) {
             newBall.ChangeStartDirection(direction);

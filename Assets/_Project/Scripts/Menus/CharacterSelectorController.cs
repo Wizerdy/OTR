@@ -22,15 +22,21 @@ public class CharacterSelectorController : MonoBehaviour {
 
     private bool hasSelected = false;
     //public event UnityAction<int> OnConfirm { add => _onConfirm += value; remove => _onConfirm -= value; }
+    [SerializeField] static BetterEvent _onConfirm = new BetterEvent();
 
     private void Reset() {
         _canvas = GetComponent<CharacterSelectorCanvas>();
     }
 
     private void OnDestroy() {
+        _onConfirm -= _Refresh;
         if (_inputs != null) {
             UnassignActions(_inputs);
         }
+    }
+
+    private void Start() {
+        _onConfirm += _Refresh;
     }
 
     public void UserJoin(InputUser user) {
@@ -71,10 +77,16 @@ public class CharacterSelectorController : MonoBehaviour {
             _canvas.Selected(false);
             _taken.Remove(_canvas.CurrentIndex);
             hasSelected = false;
+            _onConfirm.Invoke();
             return;
         }
 
         UserLeave();
+    }
+    
+    private void _Refresh() {
+        if (_canvas.Locked) { return; }
+        _canvas.Taken(_taken.Contains(_canvas.CurrentIndex));
     }
 
     private void _OnConfirm(InputAction.CallbackContext obj) {
@@ -86,6 +98,7 @@ public class CharacterSelectorController : MonoBehaviour {
         _datas[_canvas.CurrentIndex - 1].User = _user;
         Debug.Log("- Input:" + _datas[_canvas.CurrentIndex - 1].User.id + " .. " + _datas[_canvas.CurrentIndex - 1].UserId);
         _canvas.Selected(true);
+        _onConfirm.Invoke();
         //_onConfirm.Invoke(_canvas.CurrentIndex);
     }
 

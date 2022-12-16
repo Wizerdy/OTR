@@ -5136,7 +5136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7881652080676257308
 Transform:
   m_ObjectHideFlags: 0
@@ -12142,7 +12142,7 @@ MonoBehaviour:
   - {x: -0.28043747, y: -0.29065907, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 152848
+  m_InstanceId: 224434
 --- !u!114 &4294833825488367425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13535,7 +13535,7 @@ GameObject:
   - component: {fileID: 9045096297075060414}
   - component: {fileID: 688195700584301401}
   - component: {fileID: 693674688782312490}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: ParryCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

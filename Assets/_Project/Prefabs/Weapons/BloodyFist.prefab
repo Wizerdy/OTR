@@ -268,7 +268,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _comboIndex: 0
-  _healthPercentValueStorePoint: 0.7
+  _healthPercentRegen: 0.1
   _storePointMax: 60
   _hitDamage: 10
   _hitThreatPoint: 1

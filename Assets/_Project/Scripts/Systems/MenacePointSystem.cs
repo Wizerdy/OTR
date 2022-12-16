@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class MenacePointSystem : MonoBehaviour {
     }
 
     Dictionary<EntityAbilities, int> _menaces = new Dictionary<EntityAbilities, int>();
+    [SerializeField, Range(0f, 1f)] float _randomTarget = 0.2f;
     [SerializeField] List<DebugStruct> _debug = new List<DebugStruct>();
 
     public void Add(EntityAbilities target, int count = 0) {
@@ -52,6 +54,10 @@ public class MenacePointSystem : MonoBehaviour {
 
     public EntityAbilities Threatening() {
         if (_menaces.Count == 0) { return null; }
+        if (Random.Range(0f, 1f) < _randomTarget) {
+            int random = Random.Range(0, _menaces.Count);
+            return _menaces.ElementAt(random).Key;
+        }
 
         EntityAbilities output = null;
         int max = -1;

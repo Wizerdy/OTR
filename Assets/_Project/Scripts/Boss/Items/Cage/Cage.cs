@@ -74,6 +74,7 @@ public class Cage : MonoBehaviour {
         _spike.transform.position = _position;
         _spike.GetComponent<Animator>().SetTrigger("Up");
         StartCoroutine(Tools.Delay(() => _spike.GetComponent<SpriteRenderer>().size = new Vector2(_botRight.transform.position.x - _topLeft.transform.position.x, _topLeft.transform.position.y - _botRight.transform.position.y), 0.1f));
+        StartCoroutine(Tools.Delay(() => Die(), _duration));
         _onCageStart?.Invoke();
     }
 
@@ -106,6 +107,7 @@ public class Cage : MonoBehaviour {
         if (_hits.Count != 0) {
             foreach (KeyValuePair<IHealth, Vector2> keys in _hits.ToList()) {
                 Vector2 time = keys.Value;
+                if (keys.Key.IsDead) { keys.Value.Set(keys.Value.x, 0f); continue; }
                 time.x += Time.deltaTime;
                 if (time.x >= _tick) {
                     time.x -= _tick;

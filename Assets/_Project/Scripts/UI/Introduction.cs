@@ -61,12 +61,14 @@ public class Introduction : MonoBehaviour {
                 img.color = new Color(img.color.r, img.color.g, img.color.b, i);
                 yield return null;
             }
+            img.color = new Color(img.color.r, img.color.g, img.color.b, 0f);
         }
         else {
-            for (float i = 0; i <= 1; i += Time.deltaTime) {
+            for (float i = 0; i <= 1f; i += Time.deltaTime) {
                 img.color = new Color(img.color.r, img.color.g, img.color.b, i);
                 yield return null;
             }
+            img.color = new Color(img.color.r, img.color.g, img.color.b, 1f);
         }
     }
     IEnumerator FadeSprite(SpriteRenderer renderer, bool fadeAway) {
@@ -75,11 +77,13 @@ public class Introduction : MonoBehaviour {
                 renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, i);
                 yield return null;
             }
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
         } else {
             for (float i = 0; i <= 1; i += Time.deltaTime) {
                 renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, i);
                 yield return null;
             }
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
         }
     }
 }

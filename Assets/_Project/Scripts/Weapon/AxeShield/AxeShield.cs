@@ -12,6 +12,7 @@ public class AxeShield : Weapon
     [SerializeField] float _attackTime = 0.0f;
     [SerializeField] float attackCooldown = 0.2f;
     [Header("Parry")]
+    [SerializeField] private float parryTime = 0.5f;
     [SerializeField] private float parryCooldown = 0.5f;
     [SerializeField] private int parryThreatGenerated = 0;
     [SerializeField] private int parryDamageReduction = 1;
@@ -38,7 +39,7 @@ public class AxeShield : Weapon
     protected override void _OnStart() {
         _baseSpeed = MoveSpeed;
 
-        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(parryCooldown, 0, parryThreatGenerated, IAttackParry));
+        _attacks.Add(AttackIndex.SECOND, new WeaponAttack(parryTime, 0, parryThreatGenerated, IAttackParry));
         _attacks.Add(AttackIndex.FIRST, new WeaponAttack(_attackTime, slashDamage, slashThreatGenerated, IAttackSlash));
         _type = WeaponType.SHIELDAXE;
     }
@@ -108,6 +109,7 @@ public class AxeShield : Weapon
 
         _attacks[AttackIndex.SECOND].canAttack = false;
         CoroutinesManager.Start(Tools.Delay(() => _attacks[AttackIndex.SECOND].canAttack = true, parryCooldown));
+        yield return new WaitForSeconds(parryTime);
     }
 
     //public override float AttackTime(AttackIndex index) {

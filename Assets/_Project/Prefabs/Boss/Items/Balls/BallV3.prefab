@@ -279,6 +279,7 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
   _destroyOnPlayerHit: 1
+  _damageReflect: 30
   parriedBossBallPrefab: {fileID: 4263007696735338259, guid: dde48b06819888a4594bc52d4c8499fa, type: 3}
   _damageHealth: {fileID: -1024161514461283400}
   _angle: 45

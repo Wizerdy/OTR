@@ -25,6 +25,6 @@ public class UIMultipleHealth : MonoBehaviour {
     }
 
     void ChangeColor(int index) {
-        _image.color = index < _colors.Count ? _colors[Mathf.Max(index, 0)] : Color.white;
+        _image.color = index < _colors.Count ? _colors[Mathf.Max(index, 0)] : Color.clear;
     }
 }

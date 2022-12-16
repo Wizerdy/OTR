@@ -26,4 +26,8 @@ public class HealthProxy : MonoBehaviour, IHealth {
     public void TakeHeal(int damage) {
         health.TakeHeal(damage);
     }
+
+    public void TakeHeal(float percent) {
+        health.TakeHeal(percent);
+    }
 }

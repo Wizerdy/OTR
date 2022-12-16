@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
         characterSelection.SetActive(false);
         doorAnimator.enabled = true;
     }
+
     public void GoToOption(GameObject objToSelect) {
         optionScreen.SetActive(true);
         characterSelection.SetActive(false);

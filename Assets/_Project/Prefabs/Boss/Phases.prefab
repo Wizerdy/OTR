@@ -102,7 +102,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 1710517374165527835, guid: 1fd92ecd6b97c6f4db2318cf71009460, type: 3}
   _position: {x: 0, y: 0}
-  _size: {x: 20, y: 10}
+  _size: {x: 17, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 1
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -960,7 +960,7 @@ MonoBehaviour:
   _ballSpeed: 10
   _ballDuration: 5
   _bounceForce:
-    _strength: 15
+    _strength: 18
     _direction: {x: 0, y: 0}
     _weight: 1
     _start:
@@ -1196,7 +1196,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 1710517374165527835, guid: 1fd92ecd6b97c6f4db2318cf71009460, type: 3}
   _position: {x: 0, y: 0}
-  _size: {x: 20, y: 10}
+  _size: {x: 17, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 1
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -2320,7 +2320,7 @@ MonoBehaviour:
     _event:
       m_PersistentCalls:
         m_Calls: []
-  _delayBeforeTeleport: 0.5
+  _delayBeforeTeleport: 0.1
   _distFromPlayer: 3
 --- !u!1 &3617593352745851235
 GameObject:
@@ -2366,9 +2366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba39dc6b30672d348b4f07db67e61c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weight: 1
-  _endDuration: 1
-  _damages: 5
+  _weight: 2
+  _endDuration: 0.5
+  _damages: 10
   _finished:
     _event:
       m_PersistentCalls:
@@ -2487,14 +2487,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _speed: 45
   _bounceForce:
-    _strength: 35
+    _strength: 40
     _direction: {x: 0, y: 0}
     _weight: 1
     _start:
@@ -2510,20 +2510,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
-        weightedMode: 0
+        inSlope: -0.0054102247
+        outSlope: -0.0054102247
+        tangentMode: 0
+        weightedMode: 1
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0.43593314
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
+        inSlope: -2.7382576
+        outSlope: -2.7382576
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06545961
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -2770,7 +2770,7 @@ MonoBehaviour:
         m_Calls: []
   _cagePrefab: {fileID: 1710517374165527835, guid: 1fd92ecd6b97c6f4db2318cf71009460, type: 3}
   _position: {x: 0, y: 0}
-  _size: {x: 20, y: 10}
+  _size: {x: 17, y: 10}
   _tick: 1
   _cageDuration: 10
   _bonusDamageEveryTick: 1
@@ -3088,7 +3088,7 @@ MonoBehaviour:
         m_Calls: []
   _timeBeforeActivation: 2
   _distMinMax: {x: 2, y: 10}
-  _damagesVector: {x: 0, y: 10}
+  _damagesVector: {x: 0, y: 25}
   _forAllerPrefab: {fileID: 6483637891520603473, guid: 31e9dad14aca9c443a73e7e1ffe7fd04, type: 3}
   _onOneForAllStart:
     _event:
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:
@@ -3451,16 +3451,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 2
   _endDuration: 1
-  _damages: 5
+  _damages: 10
   _finished:
     _event:
       m_PersistentCalls:
         m_Calls: []
   _bossBallprefab: {fileID: 7596212308714034114, guid: 1eb56dbb8ae81cc49b74cbbf52a6f6a3, type: 3}
-  _ballSpeed: 10
+  _ballSpeed: 15
   _ballDuration: 5
   _bounceForce:
-    _strength: 15
+    _strength: 18
     _direction: {x: 0, y: 0}
     _weight: 1
     _start:
@@ -3912,7 +3912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weight: 1
   _endDuration: 1
-  _damages: 10
+  _damages: 20
   _finished:
     _event:
       m_PersistentCalls:

@@ -15,5 +15,6 @@ public interface IHealth {
 
     int TakeDamage(int damage, GameObject source);
     void TakeHeal(int damage);
+    void TakeHeal(float amount);
     void Die();
 }
